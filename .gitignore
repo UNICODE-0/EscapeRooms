@@ -74,3 +74,6 @@ crashlytics-build.properties
 
 /.utmp/*
 /.idea/*
+
+# Mac
+.DS_Store
