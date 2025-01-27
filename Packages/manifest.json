@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.codewriter.morpeh.events": "https://github.com/codewriter-packages/Morpeh.Events.git",
     "com.scellecs.morpeh": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh",
     "com.unity.addressables": "2.2.2",
     "com.unity.ai.navigation": "2.0.5",

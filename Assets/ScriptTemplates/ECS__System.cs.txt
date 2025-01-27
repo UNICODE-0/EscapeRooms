@@ -1,19 +1,28 @@
-﻿using Scellecs.Morpeh.Systems;
+﻿using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public sealed class #SCRIPTNAME# : ISystem {
+public sealed class #SCRIPTNAME# : ISystem 
+{
     public World World { get; set; }
     
-    public override void OnAwake()
+    private Filter _filter;
+    private Stash<{COMPONENT_NAME}> _{COMPONENT}Stash;
+    
+    public void OnAwake()
     {
+        _filter = World.Filter.With<{COMPONENT_NAME}>().Build();
+        _{COMPONENT}Stash = World.GetStash<{COMPONENT_NAME}>();
     }
 
-    public override void OnUpdate(float deltaTime)
+    public void OnUpdate(float deltaTime)
     {
+        foreach (var entity in _filter) {
+            ref var {COMPONENT}Component = ref _{COMPONENT}Stash.Get(entity);
+        }
     }
     
     public void Dispose()
