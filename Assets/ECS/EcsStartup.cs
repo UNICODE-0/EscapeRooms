@@ -1,7 +1,7 @@
 using Scellecs.Morpeh;
 using UnityEngine;
 
-public class Startup : MonoBehaviour 
+public class EcsStartup : MonoBehaviour 
 {
     private World _world;
     
