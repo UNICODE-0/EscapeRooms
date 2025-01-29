@@ -5,14 +5,14 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public sealed class PlayerRotationSystem : ISystem 
+public sealed class PlayerBodyRotationSystem : ISystem 
 {
     public World World { get; set; }
     
     private Filter _filter;
     private Stash<TransformComponent> _transformStash;
     private Stash<InputComponent> _inputStash;
-    private Stash<PlayerRotationComponent> _playerRotationStash;
+    private Stash<BodyRotationComponent> _bodyRotationStash;
 
     private float _yRotation = 0;
 
@@ -21,12 +21,13 @@ public sealed class PlayerRotationSystem : ISystem
         _filter = World.Filter
             .With<TransformComponent>()
             .With<InputComponent>()
-            .With<PlayerRotationComponent>() 
+            .With<BodyRotationComponent>() 
+            .With<PlayerComponent>()
             .Build();
         
         _transformStash = World.GetStash<TransformComponent>();
         _inputStash = World.GetStash<InputComponent>();
-        _playerRotationStash = World.GetStash<PlayerRotationComponent>();
+        _bodyRotationStash = World.GetStash<BodyRotationComponent>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -35,10 +36,10 @@ public sealed class PlayerRotationSystem : ISystem
         {
             ref var transformComponent = ref _transformStash.Get(entity);
             ref var inputComponent = ref _inputStash.Get(entity);
-            ref var playerRotationComponent = ref _playerRotationStash.Get(entity);
+            ref var bodyRotationComponent = ref _bodyRotationStash.Get(entity);
 
             Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
-            float mouseX = mouseDelta.x * playerRotationComponent.RotationSensitivity;
+            float mouseX = mouseDelta.x * bodyRotationComponent.RotationSpeed;
             _yRotation += mouseX;
             
             transformComponent.Transform.rotation = Quaternion.Euler(0, _yRotation, 0f);

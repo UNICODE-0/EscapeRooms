@@ -7,9 +7,7 @@ using UnityEngine.Serialization;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct PlayerCameraComponent : IComponent
+public struct BodyRotationComponent : IComponent
 {
-    public float VerticalSensitivity;
-    public float MinXRotation;
-    public float MaxXRotation;
+    public float RotationSpeed;
 }

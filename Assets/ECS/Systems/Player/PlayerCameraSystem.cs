@@ -11,7 +11,7 @@ public sealed class PlayerCameraSystem : ISystem
     
     private Filter _filter;
     private Stash<TransformComponent> _transformStash;
-    private Stash<PlayerCameraComponent> _playerCameraStash;
+    private Stash<CameraComponent> _cameraStash;
     private Stash<InputComponent> _inputStash;
     
     private float _xRotation = 0;
@@ -20,12 +20,13 @@ public sealed class PlayerCameraSystem : ISystem
     {
         _filter = World.Filter
             .With<TransformComponent>()
-            .With<PlayerCameraComponent>()
+            .With<CameraComponent>()
             .With<InputComponent>()
+            .With<PlayerCameraComponent>()
             .Build();
         
         _transformStash = World.GetStash<TransformComponent>();
-        _playerCameraStash = World.GetStash<PlayerCameraComponent>();
+        _cameraStash = World.GetStash<CameraComponent>();
         _inputStash = World.GetStash<InputComponent>();
     }
 
@@ -34,7 +35,7 @@ public sealed class PlayerCameraSystem : ISystem
         foreach (var entity in _filter) 
         {
             ref var transformComponent = ref _transformStash.Get(entity);
-            ref var cameraComponent = ref _playerCameraStash.Get(entity);
+            ref var cameraComponent = ref _cameraStash.Get(entity);
             ref var inputComponent = ref _inputStash.Get(entity);
 
             Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
