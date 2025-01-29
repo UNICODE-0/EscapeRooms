@@ -13,6 +13,7 @@ public sealed class MovementSystem : ISystem
     private Stash<TransformComponent> _transformStash;
     private Stash<CharacterControllerComponent> _characterControllerStash;
     private Stash<InputComponent> _playerInputStash;
+    private Stash<MovementComponent> _movementStash;
 
     public void OnAwake()
     {
@@ -20,11 +21,13 @@ public sealed class MovementSystem : ISystem
             .With<TransformComponent>()
             .With<CharacterControllerComponent>()
             .With<InputComponent>()
+            .With<MovementComponent>()
             .Build();
         
         _transformStash = World.GetStash<TransformComponent>();
         _characterControllerStash = World.GetStash<CharacterControllerComponent>();
         _playerInputStash = World.GetStash<InputComponent>();
+        _movementStash = World.GetStash<MovementComponent>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -34,13 +37,14 @@ public sealed class MovementSystem : ISystem
             ref var transformComponent = ref _transformStash.Get(entity);
             ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
             ref var playerInputComponent = ref _playerInputStash.Get(entity);
+            ref var movementComponent = ref _movementStash.Get(entity);
 
             Vector2 moveVector = playerInputComponent.MoveAction.ReadValue<Vector2>();
             
             Vector3 moveDirection = (transformComponent.Transform.right * moveVector.x +
                                      transformComponent.Transform.forward * moveVector.y).normalized;
             
-            Vector3 fullDirection = moveDirection * (1f * Time.deltaTime);
+            Vector3 fullDirection = moveDirection * (movementComponent.Speed * Time.deltaTime);
             
             characterControllerComponent.CharacterController.Move(fullDirection);
         }
