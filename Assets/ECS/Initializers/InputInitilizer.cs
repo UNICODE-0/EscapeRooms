@@ -19,18 +19,22 @@ public sealed class InputInitializer : IInitializer
             .With<InputComponent>()
             .Build();
         
-        _playerInputStash = World.GetStash<InputComponent>().AsDisposable();
+        _playerInputStash = World.GetStash<InputComponent>();
 
         SetInputActions();
     }
 
     public void SetInputActions()
     {
+        InputAction moveAction = InputSystem.actions.FindAction("Move");
+        InputAction lookAction = InputSystem.actions.FindAction("Look");
+
         foreach (var entity in _filter) 
         {
             ref var playerInputComponent = ref _playerInputStash.Get(entity);
             
-            playerInputComponent.MoveAction = InputSystem.actions.FindAction("Move");
+            playerInputComponent.MoveAction = moveAction;
+            playerInputComponent.LookAction = lookAction;
         }
     }
     

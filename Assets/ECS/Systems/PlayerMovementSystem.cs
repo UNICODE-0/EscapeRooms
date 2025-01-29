@@ -5,15 +5,15 @@ using Unity.IL2CPP.CompilerServices;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public sealed class MovementSystem : ISystem 
+public sealed class PlayerMovementSystem : ISystem 
 {
     public World World { get; set; }
     
     private Filter _filter;
     private Stash<TransformComponent> _transformStash;
     private Stash<CharacterControllerComponent> _characterControllerStash;
-    private Stash<InputComponent> _playerInputStash;
-    private Stash<MovementComponent> _movementStash;
+    private Stash<InputComponent> _inputStash;
+    private Stash<PlayerMovementComponent> _playerMovementStash;
 
     public void OnAwake()
     {
@@ -21,13 +21,13 @@ public sealed class MovementSystem : ISystem
             .With<TransformComponent>()
             .With<CharacterControllerComponent>()
             .With<InputComponent>()
-            .With<MovementComponent>()
+            .With<PlayerMovementComponent>()
             .Build();
         
         _transformStash = World.GetStash<TransformComponent>();
         _characterControllerStash = World.GetStash<CharacterControllerComponent>();
-        _playerInputStash = World.GetStash<InputComponent>();
-        _movementStash = World.GetStash<MovementComponent>();
+        _inputStash = World.GetStash<InputComponent>();
+        _playerMovementStash = World.GetStash<PlayerMovementComponent>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -36,10 +36,10 @@ public sealed class MovementSystem : ISystem
         {
             ref var transformComponent = ref _transformStash.Get(entity);
             ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
-            ref var playerInputComponent = ref _playerInputStash.Get(entity);
-            ref var movementComponent = ref _movementStash.Get(entity);
+            ref var inputComponent = ref _inputStash.Get(entity);
+            ref var movementComponent = ref _playerMovementStash.Get(entity);
 
-            Vector2 moveVector = playerInputComponent.MoveAction.ReadValue<Vector2>();
+            Vector2 moveVector = inputComponent.MoveAction.ReadValue<Vector2>();
             
             Vector3 moveDirection = (transformComponent.Transform.right * moveVector.x +
                                      transformComponent.Transform.forward * moveVector.y).normalized;

@@ -296,7 +296,9 @@ GameObject:
   - component: {fileID: 63797420}
   - component: {fileID: 63797419}
   - component: {fileID: 63797422}
+  - component: {fileID: 63797424}
   - component: {fileID: 63797421}
+  - component: {fileID: 63797423}
   m_Layer: 0
   m_Name: Providers
   m_TagString: Untagged
@@ -373,6 +375,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     Speed: 5
+--- !u!114 &63797423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14072be1a4e547e3ab60eefa0870addc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &63797424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064ca31c06a44eaeb1aaece8af97adb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    RotationSensitivity: 0.3
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -837,7 +865,7 @@ GameObject:
   - component: {fileID: 323524072}
   - component: {fileID: 323524075}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -914,7 +942,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.728, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 687237167}
   m_Father: {fileID: 1891703203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &323524075
@@ -3276,6 +3305,82 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1641135539}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 90}
+--- !u!1 &687237166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 687237167}
+  - component: {fileID: 687237169}
+  - component: {fileID: 687237168}
+  - component: {fileID: 687237170}
+  m_Layer: 0
+  m_Name: Providers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &687237167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 323524074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &687237168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf623976c3cd5047a04f1c67170602a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    Transform: {fileID: 323524074}
+--- !u!114 &687237169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd0a1e57ef64b62aa07761bd5ee63f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    VerticalSensitivity: 0.3
+    MinXRotation: -80
+    MaxXRotation: 80
+--- !u!114 &687237170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9096d86107a4d46489be79735bd38d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &690567702
 Mesh:
   m_ObjectHideFlags: 0

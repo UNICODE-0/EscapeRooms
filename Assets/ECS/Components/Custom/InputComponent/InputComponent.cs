@@ -8,12 +8,8 @@ using UnityEngine.InputSystem;
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct InputComponent : IComponent, IDisposable
+public struct InputComponent : IComponent
 {
     [NonSerialized] public InputAction MoveAction;
-
-    public void Dispose()
-    {
-        MoveAction.Dispose();
-    }
+    [NonSerialized] public InputAction LookAction;
 }
