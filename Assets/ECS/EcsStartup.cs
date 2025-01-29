@@ -10,6 +10,12 @@ public class EcsStartup : MonoBehaviour
         _world = World.Default;
         
         var systemsGroup = _world.CreateSystemsGroup();
+        AddSystems(systemsGroup);
         _world.AddSystemsGroup(order: 0, systemsGroup);
+    }
+
+    private void AddSystems(SystemsGroup group)
+    {
+        group.AddSystem(new MovementSystem());
     }
 }

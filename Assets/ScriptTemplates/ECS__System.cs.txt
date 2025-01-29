@@ -14,14 +14,17 @@ public sealed class #SCRIPTNAME# : ISystem
     
     public void OnAwake()
     {
-        _filter = World.Filter.With<{COMPONENT_NAME}>().Build();
+        _filter = World.Filter
+            .With<{COMPONENT_NAME}>()
+            .Build();
         _{COMPONENT}Stash = World.GetStash<{COMPONENT_NAME}>();
     }
 
     public void OnUpdate(float deltaTime)
     {
-        foreach (var entity in _filter) {
-            ref var {COMPONENT}Component = ref _{COMPONENT}Stash.Get(entity);
+        foreach (var entity in _filter) 
+        {
+            ref var {COMPONENT} = ref _{COMPONENT}Stash.Get(entity);
         }
     }
     
