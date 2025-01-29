@@ -295,8 +295,8 @@ GameObject:
   - component: {fileID: 63797418}
   - component: {fileID: 63797420}
   - component: {fileID: 63797419}
-  - component: {fileID: 63797421}
   - component: {fileID: 63797422}
+  - component: {fileID: 63797421}
   m_Layer: 0
   m_Name: Providers
   m_TagString: Untagged
