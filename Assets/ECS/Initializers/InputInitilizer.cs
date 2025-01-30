@@ -28,6 +28,7 @@ public sealed class InputInitializer : IInitializer
     {
         InputAction moveAction = InputSystem.actions.FindAction("Move");
         InputAction lookAction = InputSystem.actions.FindAction("Look");
+        InputAction jumpAction = InputSystem.actions.FindAction("Jump");
 
         foreach (var entity in _filter) 
         {
@@ -35,6 +36,7 @@ public sealed class InputInitializer : IInitializer
             
             playerInputComponent.MoveAction = moveAction;
             playerInputComponent.LookAction = lookAction;
+            playerInputComponent.JumpAction = jumpAction;
         }
     }
     

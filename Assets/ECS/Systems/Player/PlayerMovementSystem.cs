@@ -15,6 +15,7 @@ public sealed class PlayerMovementSystem : ISystem
     private Stash<InputComponent> _inputStash;
     private Stash<MovementComponent> _movementStash;
     private Stash<GravityComponent> _gravityStash;
+    private Stash<JumpComponent> _jumpStash;
 
     public void OnAwake()
     {
@@ -24,6 +25,7 @@ public sealed class PlayerMovementSystem : ISystem
             .With<InputComponent>()
             .With<MovementComponent>()
             .With<GravityComponent>()
+            .With<JumpComponent>()
             .With<PlayerComponent>()
             .Build();
         
@@ -32,6 +34,7 @@ public sealed class PlayerMovementSystem : ISystem
         _inputStash = World.GetStash<InputComponent>();
         _movementStash = World.GetStash<MovementComponent>();
         _gravityStash = World.GetStash<GravityComponent>();
+        _jumpStash = World.GetStash<JumpComponent>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -43,13 +46,14 @@ public sealed class PlayerMovementSystem : ISystem
             ref var inputComponent = ref _inputStash.Get(entity);
             ref var movementComponent = ref _movementStash.Get(entity);
             ref var gravityComponent = ref _gravityStash.Get(entity);
+            ref var jumpComponent = ref _jumpStash.Get(entity);
 
             Vector2 moveVector = inputComponent.MoveAction.ReadValue<Vector2>();
             
             Vector3 moveDirection = (transformComponent.Transform.right * moveVector.x +
                                      transformComponent.Transform.forward * moveVector.y).normalized;
             
-            Vector3 fullDirection = gravityComponent.CurrentForce + 
+            Vector3 fullDirection = jumpComponent.CurrentForce + gravityComponent.CurrentForce + 
                                     moveDirection * (movementComponent.Speed * Time.deltaTime);
             
             characterControllerComponent.CharacterController.Move(fullDirection);

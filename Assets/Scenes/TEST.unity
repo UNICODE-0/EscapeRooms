@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 63797422}
   - component: {fileID: 63797424}
   - component: {fileID: 63797425}
+  - component: {fileID: 63797426}
   - component: {fileID: 63797421}
   - component: {fileID: 63797423}
   m_Layer: 0
@@ -418,6 +419,21 @@ MonoBehaviour:
   serializedData:
     GravitationalAttraction: -0.2
     GroundedAttraction: -0.05
+    CurrentForce: {x: 0, y: 0, z: 0}
+--- !u!114 &63797426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b98e73221da4f07895efb30cf698a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    JumpStrength: 0.07
     CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!43 &171974159
 Mesh:
@@ -46339,7 +46355,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.4
+  m_StepOffset: 0.45
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}

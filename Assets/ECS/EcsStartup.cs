@@ -26,6 +26,7 @@ public class EcsStartup : MonoBehaviour
     {
         group.AddSystem(new GravitySystem());
         group.AddSystem(new PlayerMovementSystem());
+        group.AddSystem(new PlayerJumpSystem());
         group.AddSystem(new PlayerCameraSystem());
         group.AddSystem(new PlayerBodyRotationSystem());
     }
