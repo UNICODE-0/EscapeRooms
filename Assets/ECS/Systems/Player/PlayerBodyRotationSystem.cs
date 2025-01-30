@@ -14,8 +14,6 @@ public sealed class PlayerBodyRotationSystem : ISystem
     private Stash<InputComponent> _inputStash;
     private Stash<BodyRotationComponent> _bodyRotationStash;
 
-    private float _yRotation = 0;
-
     public void OnAwake()
     {
         _filter = World.Filter
@@ -40,14 +38,13 @@ public sealed class PlayerBodyRotationSystem : ISystem
 
             Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
             float mouseX = mouseDelta.x * bodyRotationComponent.RotationSpeed;
-            _yRotation += mouseX;
+            bodyRotationComponent.CurrentYRotation += mouseX;
             
-            transformComponent.Transform.rotation = Quaternion.Euler(0, _yRotation, 0f);
+            transformComponent.Transform.rotation = Quaternion.Euler(0, bodyRotationComponent.CurrentYRotation, 0f);
         }
     }
     
     public void Dispose()
     {
-        _yRotation = 0;
     }
 }

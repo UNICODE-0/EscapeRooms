@@ -13,8 +13,6 @@ public sealed class PlayerCameraSystem : ISystem
     private Stash<TransformComponent> _transformStash;
     private Stash<CameraComponent> _cameraStash;
     private Stash<InputComponent> _inputStash;
-    
-    private float _xRotation = 0;
 
     public void OnAwake()
     {
@@ -41,15 +39,16 @@ public sealed class PlayerCameraSystem : ISystem
             Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
             float mouseY = mouseDelta.y * cameraComponent.VerticalSensitivity;
                 
-            _xRotation -= mouseY;
-            _xRotation = Mathf.Clamp(_xRotation, cameraComponent.MinXRotation, cameraComponent.MaxXRotation);
+            cameraComponent.CurrentXRotation -= mouseY;
             
-            transformComponent.Transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
+            cameraComponent.CurrentXRotation = 
+                Mathf.Clamp(cameraComponent.CurrentXRotation, cameraComponent.MinXRotation, cameraComponent.MaxXRotation);
+            
+            transformComponent.Transform.localRotation = Quaternion.Euler(cameraComponent.CurrentXRotation, 0f, 0f);
         }
     }
     
     public void Dispose()
     {
-        _xRotation = 0;
     }
 }

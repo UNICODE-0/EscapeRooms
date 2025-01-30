@@ -1,14 +1,16 @@
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 [Il2CppSetOption(Option.NullChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-public struct BodyRotationComponent : IComponent
+public struct GravityComponent : IComponent
 {
-    public float RotationSpeed;
-    
-    [ReadOnly] public float CurrentYRotation;
+    public float GravitationalAttraction;
+
+    [ReadOnly] public Vector3 CurrentForce;
 }

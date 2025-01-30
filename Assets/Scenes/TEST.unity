@@ -297,6 +297,7 @@ GameObject:
   - component: {fileID: 63797419}
   - component: {fileID: 63797422}
   - component: {fileID: 63797424}
+  - component: {fileID: 63797425}
   - component: {fileID: 63797421}
   - component: {fileID: 63797423}
   m_Layer: 0
@@ -400,7 +401,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    RotationSensitivity: 0.3
+    RotationSpeed: 0.3
+--- !u!114 &63797425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d322d51cf8ba422c9d966c996ccd0c63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    GravitationalAttraction: -1
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
