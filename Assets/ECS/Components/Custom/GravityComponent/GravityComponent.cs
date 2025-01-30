@@ -11,6 +11,7 @@ using UnityEngine.Serialization;
 public struct GravityComponent : IComponent
 {
     public float GravitationalAttraction;
+    public float GroundedAttraction;
 
     [ReadOnly] public Vector3 CurrentForce;
 }

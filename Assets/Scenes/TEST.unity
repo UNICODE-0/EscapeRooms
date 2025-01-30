@@ -402,6 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     RotationSpeed: 0.3
+    CurrentYRotation: 0
 --- !u!114 &63797425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +416,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    GravitationalAttraction: -1
+    GravitationalAttraction: -0.2
+    GroundedAttraction: -0.05
+    CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -926,7 +929,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60.000004
   orthographic: 0
   orthographic size: 5
@@ -3385,6 +3388,7 @@ MonoBehaviour:
     VerticalSensitivity: 0.3
     MinXRotation: -80
     MaxXRotation: 80
+    CurrentXRotation: 0
 --- !u!114 &687237170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46333,10 +46337,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.49999994
+  m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.01
+  m_StepOffset: 0.4
+  m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &1898629463

@@ -14,6 +14,7 @@ public sealed class PlayerMovementSystem : ISystem
     private Stash<CharacterControllerComponent> _characterControllerStash;
     private Stash<InputComponent> _inputStash;
     private Stash<MovementComponent> _movementStash;
+    private Stash<GravityComponent> _gravityStash;
 
     public void OnAwake()
     {
@@ -22,6 +23,7 @@ public sealed class PlayerMovementSystem : ISystem
             .With<CharacterControllerComponent>()
             .With<InputComponent>()
             .With<MovementComponent>()
+            .With<GravityComponent>()
             .With<PlayerComponent>()
             .Build();
         
@@ -29,6 +31,7 @@ public sealed class PlayerMovementSystem : ISystem
         _characterControllerStash = World.GetStash<CharacterControllerComponent>();
         _inputStash = World.GetStash<InputComponent>();
         _movementStash = World.GetStash<MovementComponent>();
+        _gravityStash = World.GetStash<GravityComponent>();
     }
 
     public void OnUpdate(float deltaTime)
@@ -39,13 +42,15 @@ public sealed class PlayerMovementSystem : ISystem
             ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
             ref var inputComponent = ref _inputStash.Get(entity);
             ref var movementComponent = ref _movementStash.Get(entity);
+            ref var gravityComponent = ref _gravityStash.Get(entity);
 
             Vector2 moveVector = inputComponent.MoveAction.ReadValue<Vector2>();
             
             Vector3 moveDirection = (transformComponent.Transform.right * moveVector.x +
                                      transformComponent.Transform.forward * moveVector.y).normalized;
             
-            Vector3 fullDirection = moveDirection * (movementComponent.Speed * Time.deltaTime);
+            Vector3 fullDirection = gravityComponent.CurrentForce + 
+                                    moveDirection * (movementComponent.Speed * Time.deltaTime);
             
             characterControllerComponent.CharacterController.Move(fullDirection);
         }

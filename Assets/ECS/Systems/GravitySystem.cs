@@ -31,12 +31,11 @@ public sealed class GravitySystem : ISystem
             ref var gravityComponent = ref _gravityStash.Get(entity);
             ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
             CharacterController charCon = characterControllerComponent.CharacterController;
-            if(charCon.isGrounded && gravityComponent.CurrentForce.y < 0) 
-                gravityComponent.CurrentForce.y = 0f;
 
-            gravityComponent.CurrentForce.y += gravityComponent.GravitationalAttraction * Time.deltaTime;
-
-            charCon.Move(gravityComponent.CurrentForce);
+            if (charCon.isGrounded)
+                gravityComponent.CurrentForce.y = gravityComponent.GroundedAttraction;
+            else
+                gravityComponent.CurrentForce.y += gravityComponent.GravitationalAttraction * Time.deltaTime;
         }
     }
     
