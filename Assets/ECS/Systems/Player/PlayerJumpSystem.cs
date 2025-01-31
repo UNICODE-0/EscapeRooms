@@ -45,10 +45,21 @@ public sealed class PlayerJumpSystem : ISystem
             if (characterControllerComponent.CharacterController.isGrounded)
             {
                 if (jumpingInputState > 0f)
+                {
+                    gravityComponent.IgnoreAttraction = true;
                     jumpComponent.CurrentForce.y = 
-                        Mathf.Sqrt(jumpComponent.JumpStrength * -gravityComponent.GravitationalAttraction);
-                else
-                    jumpComponent.CurrentForce.y = 0;
+                        Mathf.Sqrt(jumpComponent.JumpStrength * -2f * gravityComponent.GravitationalAttraction);
+                }
+            }
+            
+            if (jumpComponent.CurrentForce.y > 0f)
+            {
+                jumpComponent.CurrentForce.y += gravityComponent.GravitationalAttraction * deltaTime;
+            }
+            else
+            {
+                gravityComponent.IgnoreAttraction = false;
+                jumpComponent.CurrentForce.y = 0f;
             }
         }
     }

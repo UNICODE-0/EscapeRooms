@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
@@ -9,4 +10,6 @@ using Unity.IL2CPP.CompilerServices;
 public struct MovementComponent : IComponent
 {
     public float Speed;
+
+    [ReadOnly] public Vector3 CurrentVelocity;
 }

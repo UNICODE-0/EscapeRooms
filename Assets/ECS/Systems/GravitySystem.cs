@@ -29,13 +29,22 @@ public sealed class GravitySystem : ISystem
         foreach (var entity in _filter) 
         {
             ref var gravityComponent = ref _gravityStash.Get(entity);
+
+            if (gravityComponent.IgnoreAttraction)
+            {
+                gravityComponent.CurrentAttraction.y = 0f;
+                continue;
+            }
+            
             ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
             CharacterController charCon = characterControllerComponent.CharacterController;
-
+            
             if (charCon.isGrounded)
-                gravityComponent.CurrentForce.y = gravityComponent.GroundedAttraction;
+                gravityComponent.CurrentAttraction.y = gravityComponent.GroundedAttraction;
             else
-                gravityComponent.CurrentForce.y += gravityComponent.GravitationalAttraction * Time.deltaTime;
+            {
+                gravityComponent.CurrentAttraction.y += gravityComponent.GravitationalAttraction * deltaTime;
+            }
         }
     }
     

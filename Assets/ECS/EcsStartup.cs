@@ -13,6 +13,7 @@ public class EcsStartup : MonoBehaviour
         
         AddInitializers(systemsGroup);
         AddSystems(systemsGroup);
+        AddLateSystems(systemsGroup);
         
         _world.AddSystemsGroup(order: 0, systemsGroup);
     }
@@ -29,5 +30,12 @@ public class EcsStartup : MonoBehaviour
         group.AddSystem(new PlayerJumpSystem());
         group.AddSystem(new PlayerCameraSystem());
         group.AddSystem(new PlayerBodyRotationSystem());
+        
+        group.AddSystem(new PlayerMotionApplySystem());
+    }
+    
+    private void AddLateSystems(SystemsGroup group)
+    {
+        
     }
 }

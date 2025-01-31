@@ -13,5 +13,6 @@ public struct GravityComponent : IComponent
     public float GravitationalAttraction;
     public float GroundedAttraction;
 
-    [ReadOnly] public Vector3 CurrentForce;
+    [ReadOnly] public Vector3 CurrentAttraction;
+    [ReadOnly] public bool IgnoreAttraction;
 }
