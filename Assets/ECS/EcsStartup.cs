@@ -21,6 +21,7 @@ public class EcsStartup : MonoBehaviour
     private void AddInitializers(SystemsGroup group)
     {
         group.AddInitializer(new InputInitializer());
+        group.AddInitializer(new SettingsInitializer());
     }
     
     private void AddSystems(SystemsGroup group)
