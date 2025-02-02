@@ -296,10 +296,11 @@ GameObject:
   - component: {fileID: 63797420}
   - component: {fileID: 63797419}
   - component: {fileID: 63797422}
-  - component: {fileID: 63797424}
   - component: {fileID: 63797425}
   - component: {fileID: 63797426}
+  - component: {fileID: 63797428}
   - component: {fileID: 63797421}
+  - component: {fileID: 63797427}
   - component: {fileID: 63797423}
   m_Layer: 0
   m_Name: Providers
@@ -390,21 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14072be1a4e547e3ab60eefa0870addc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &63797424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63797417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 064ca31c06a44eaeb1aaece8af97adb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedData:
-    RotationSpeed: 0.1
-    CurrentYRotation: 0
 --- !u!114 &63797425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +423,32 @@ MonoBehaviour:
   serializedData:
     JumpStrength: 1
     CurrentForce: {x: 0, y: 0, z: 0}
+--- !u!114 &63797427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0674d57b67664521a7aae89dde885cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &63797428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064ca31c06a44eaeb1aaece8af97adb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    CurrentYRotation: 0
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -3353,6 +3365,7 @@ GameObject:
   - component: {fileID: 687237169}
   - component: {fileID: 687237168}
   - component: {fileID: 687237170}
+  - component: {fileID: 687237172}
   - component: {fileID: 687237171}
   m_Layer: 0
   m_Name: Providers
@@ -3403,7 +3416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    VerticalSensitivity: 0.1
     MinXRotation: -80
     MaxXRotation: 80
     CurrentXRotation: 0
@@ -3429,6 +3441,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46696d0f2f99431a9d308806a0534c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &687237172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0674d57b67664521a7aae89dde885cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &690567702

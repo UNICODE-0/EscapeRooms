@@ -16,6 +16,7 @@ namespace EscapeRooms.Systems
         private Stash<TransformComponent> _transformStash;
         private Stash<CameraComponent> _cameraStash;
         private Stash<InputComponent> _inputStash;
+        private Stash<SettingsComponent> _settingsStash;
 
         public void OnAwake()
         {
@@ -23,12 +24,14 @@ namespace EscapeRooms.Systems
                 .With<TransformComponent>()
                 .With<CameraComponent>()
                 .With<InputComponent>()
+                .With<SettingsComponent>()
                 .With<PlayerCameraComponent>()
                 .Build();
 
             _transformStash = World.GetStash<TransformComponent>();
             _cameraStash = World.GetStash<CameraComponent>();
             _inputStash = World.GetStash<InputComponent>();
+            _settingsStash = World.GetStash<SettingsComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -38,9 +41,10 @@ namespace EscapeRooms.Systems
                 ref var transformComponent = ref _transformStash.Get(entity);
                 ref var cameraComponent = ref _cameraStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
+                ref var settingsComponent = ref _settingsStash.Get(entity);
 
                 Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
-                float mouseY = mouseDelta.y * cameraComponent.VerticalSensitivity;
+                float mouseY = mouseDelta.y * settingsComponent.GameSettings.Sensitivity;
 
                 cameraComponent.CurrentXRotation -= mouseY;
 
