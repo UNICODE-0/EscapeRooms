@@ -31,7 +31,7 @@ namespace EscapeRooms.Initializers
             InputAction moveAction = InputSystem.actions.FindAction("Move");
             InputAction lookAction = InputSystem.actions.FindAction("Look");
             InputAction jumpAction = InputSystem.actions.FindAction("Jump");
-
+            
             foreach (var entity in _filter)
             {
                 ref var playerInputComponent = ref _playerInputStash.Get(entity);

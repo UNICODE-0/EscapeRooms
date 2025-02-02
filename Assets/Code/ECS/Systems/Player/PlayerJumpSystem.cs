@@ -2,6 +2,7 @@ using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Systems
 {
@@ -45,13 +46,18 @@ namespace EscapeRooms.Systems
 
                 float jumpingInputState = inputComponent.JumpAction.ReadValue<float>();
 
+                if (!jumpComponent.IsJumpAllowed && jumpingInputState <= 0f)
+                    jumpComponent.IsJumpAllowed = true;
+
                 if (characterControllerComponent.CharacterController.isGrounded)
                 {
-                    if (jumpingInputState > 0f)
+                    if (jumpingInputState > 0f && jumpComponent.IsJumpAllowed)
                     {
                         gravityComponent.IgnoreAttraction = true;
                         jumpComponent.CurrentForce.y =
                             Mathf.Sqrt(jumpComponent.JumpStrength * -2f * gravityComponent.GravitationalAttraction);
+
+                        jumpComponent.IsJumpAllowed = false;
                     }
                 }
 

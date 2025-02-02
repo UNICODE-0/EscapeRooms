@@ -13,7 +13,8 @@ namespace EscapeRooms.Components
     public struct JumpComponent : IComponent
     {
         public float JumpStrength;
-
+    
+        [ReadOnly] public bool IsJumpAllowed;
         [ReadOnly] public Vector3 CurrentForce;
     }
 }
