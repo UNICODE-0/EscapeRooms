@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 63797422}
   - component: {fileID: 63797425}
   - component: {fileID: 63797426}
+  - component: {fileID: 63797429}
   - component: {fileID: 63797428}
   - component: {fileID: 63797421}
   - component: {fileID: 63797427}
@@ -338,6 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     CharacterController: {fileID: 1891703207}
+    HitHolder: {fileID: 1891703208}
 --- !u!114 &63797420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     JumpStrength: 1
+    IsJumpAllowed: 0
     CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!114 &63797427
 MonoBehaviour:
@@ -449,6 +452,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     CurrentYRotation: 0
+--- !u!114 &63797429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d11572254b4d08bf4c1cf378f6cb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -46537,6 +46554,7 @@ GameObject:
   - component: {fileID: 1891703206}
   - component: {fileID: 1891703205}
   - component: {fileID: 1891703207}
+  - component: {fileID: 1891703208}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -46639,6 +46657,18 @@ CharacterController:
   m_SkinWidth: 0.01
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1891703208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891703202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddfc6c58808fca04887f323694da39a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1898629463
 Mesh:
   m_ObjectHideFlags: 0

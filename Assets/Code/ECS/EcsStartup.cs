@@ -34,6 +34,7 @@ namespace EscapeRooms.Mono
         {
             group.AddSystem(new GravitySystem());
             group.AddSystem(new PlayerMovementSystem());
+            group.AddSystem(new PlayerSlideSystem());
             group.AddSystem(new PlayerJumpSystem());
             group.AddSystem(new PlayerCameraSystem());
             group.AddSystem(new PlayerBodyRotationSystem());

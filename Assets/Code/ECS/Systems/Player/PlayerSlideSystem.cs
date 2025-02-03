@@ -8,7 +8,7 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerMotionApplySystem : ISystem
+    public sealed class PlayerSlideSystem : ISystem
     {
         public World World { get; set; }
 
@@ -46,11 +46,25 @@ namespace EscapeRooms.Systems
                 ref var gravityComponent = ref _gravityStash.Get(entity);
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var slideComponent = ref _slideStash.Get(entity);
-                
-                Vector3 motion = (jumpComponent.CurrentForce + gravityComponent.CurrentAttraction +
-                                  movementComponent.CurrentVelocity + slideComponent.CurrentVelocity) * deltaTime;
 
-                characterControllerComponent.CharacterController.Move(motion);
+                Vector3 normal = characterControllerComponent.HitHolder.Hit.normal;
+                bool needSlide = (Vector3.Angle (Vector3.up, normal)) > slideComponent.SlideStartAngle && movementComponent.CurrentVelocity == Vector3.zero;
+                if (needSlide && characterControllerComponent.CharacterController.isGrounded) {
+                    slideComponent.CurrentVelocity.x += (1f - normal.y) * normal.x * slideComponent.SlideSpeed;
+                    slideComponent.CurrentVelocity.z += (1f - normal.y) * normal.z * slideComponent.SlideSpeed;
+                }
+                else
+                {
+                    if (Vector3.Angle(Vector3.up, normal) < slideComponent.SlideStopAngle)
+                    {
+                        slideComponent.CurrentVelocity.x = 0;
+                        slideComponent.CurrentVelocity.z = 0;
+                    }
+                    else
+                    {
+                        slideComponent.CurrentVelocity = Vector3.Lerp(slideComponent.CurrentVelocity, Vector3.zero, deltaTime * 1f);
+                    }
+                }
             }
         }
 
