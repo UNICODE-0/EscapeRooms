@@ -12,9 +12,17 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct SlideComponent : IComponent
     {
+        [MinValue(0f)]
         public float SlideStartAngle;
+        
+        [MinValue(0f)]
         public float SlideStopAngle;
+        
+        [MinValue(0.001f)]
         public float SlideSpeed;
+        
+        [MinValue(0f)]
+        public float SpeedReduction;
         
         [ReadOnly] public Vector3 CurrentVelocity;
     }

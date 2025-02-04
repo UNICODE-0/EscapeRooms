@@ -48,23 +48,20 @@ namespace EscapeRooms.Systems
                 ref var slideComponent = ref _slideStash.Get(entity);
 
                 Vector3 normal = characterControllerComponent.HitHolder.Hit.normal;
-                bool needSlide = (Vector3.Angle (Vector3.up, normal)) > slideComponent.SlideStartAngle && movementComponent.CurrentVelocity == Vector3.zero;
-                if (needSlide && characterControllerComponent.CharacterController.isGrounded) {
+                float slopeAngle = Vector3.Angle(Vector3.up, normal);
+                bool isGrounded = characterControllerComponent.CharacterController.isGrounded;
+                bool isSliding = slopeAngle > slideComponent.SlideStartAngle && movementComponent.CurrentVelocity == Vector3.zero;
+
+                if (isSliding && isGrounded)
+                {
                     slideComponent.CurrentVelocity.x += (1f - normal.y) * normal.x * slideComponent.SlideSpeed;
                     slideComponent.CurrentVelocity.z += (1f - normal.y) * normal.z * slideComponent.SlideSpeed;
                 }
+                
+                else if (slopeAngle < slideComponent.SlideStopAngle)
+                    slideComponent.CurrentVelocity = Vector3.zero;
                 else
-                {
-                    if (Vector3.Angle(Vector3.up, normal) < slideComponent.SlideStopAngle)
-                    {
-                        slideComponent.CurrentVelocity.x = 0;
-                        slideComponent.CurrentVelocity.z = 0;
-                    }
-                    else
-                    {
-                        slideComponent.CurrentVelocity = Vector3.Lerp(slideComponent.CurrentVelocity, Vector3.zero, deltaTime * 1f);
-                    }
-                }
+                    slideComponent.CurrentVelocity = Vector3.Lerp(slideComponent.CurrentVelocity, Vector3.zero, deltaTime * 1f);
             }
         }
 

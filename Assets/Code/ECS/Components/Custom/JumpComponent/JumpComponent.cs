@@ -12,6 +12,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct JumpComponent : IComponent
     {
+        [MinValue(0.001f)]
         public float JumpStrength;
     
         [ReadOnly] public bool IsJumpAllowed;

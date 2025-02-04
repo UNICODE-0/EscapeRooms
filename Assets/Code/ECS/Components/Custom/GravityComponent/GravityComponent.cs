@@ -12,7 +12,10 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct GravityComponent : IComponent
     {
+        [MaxValue(-0.001f)]
         public float GravitationalAttraction;
+        
+        [MaxValue(-0.001f)]
         public float GroundedAttraction;
 
         [ReadOnly] public Vector3 CurrentAttraction;

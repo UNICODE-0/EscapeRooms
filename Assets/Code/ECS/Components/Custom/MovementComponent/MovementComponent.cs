@@ -11,6 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct MovementComponent : IComponent
     {
+        [MinValue(0.001f)]
         public float Speed;
 
         [ReadOnly] public Vector3 CurrentVelocity;
