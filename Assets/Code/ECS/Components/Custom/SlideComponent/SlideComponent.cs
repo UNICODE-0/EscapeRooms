@@ -21,8 +21,8 @@ namespace EscapeRooms.Components
         [MinValue(0.001f)]
         public float SlideSpeed;
         
-        [MinValue(0f)]
-        public float SpeedReduction;
+        [FormerlySerializedAs("SpeedReduction")] [MinValue(0f)]
+        public float SlideSpeedReduction;
         
         [ReadOnly] public Vector3 CurrentVelocity;
     }

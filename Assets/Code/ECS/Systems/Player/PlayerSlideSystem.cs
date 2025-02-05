@@ -19,6 +19,8 @@ namespace EscapeRooms.Systems
         private Stash<JumpComponent> _jumpStash;
         private Stash<SlideComponent> _slideStash;
 
+        private Vector3 pp;
+
         public void OnAwake()
         {
             _filter = World.Filter
@@ -50,18 +52,38 @@ namespace EscapeRooms.Systems
                 Vector3 normal = characterControllerComponent.HitHolder.Hit.normal;
                 float slopeAngle = Vector3.Angle(Vector3.up, normal);
                 bool isGrounded = characterControllerComponent.CharacterController.isGrounded;
-                bool isSliding = slopeAngle > slideComponent.SlideStartAngle && movementComponent.CurrentVelocity == Vector3.zero;
+                bool isSliding = slopeAngle > slideComponent.SlideStartAngle;
 
+                slideComponent.CurrentVelocity.y = 0f;
                 if (isSliding && isGrounded)
                 {
-                    slideComponent.CurrentVelocity.x += (1f - normal.y) * normal.x * slideComponent.SlideSpeed;
-                    slideComponent.CurrentVelocity.z += (1f - normal.y) * normal.z * slideComponent.SlideSpeed;
+                    Vector3 slideDirection = Vector3.zero;
+                    slideDirection.x = (1f - normal.y) * normal.x;
+                    slideDirection.z = (1f - normal.y) * normal.z;
+
+                    // Vector3 dif = pp - characterControllerComponent.CharacterController.transform.position;
+                    // if (slopeAngle > 70 && dif.y < 0.05f && dif.y >= 0f)
+                    // {
+                    //     // float angle = Vector3.Angle(-normal, characterControllerComponent.CharacterController.transform.rotation * movementComponent.CurrentVelocity);
+                    //     // float factor = 90f - (angle / 90f);
+                    //     // Debug.LogError(slopeAngle);
+                    //     // movementComponent.CurrentVelocity = Vector3.Lerp(movementComponent.CurrentVelocity, Vector3.zero, factor);
+                    //     slideComponent.CurrentVelocity.y += 10f;
+                    // }
+                    //
+                    // pp = characterControllerComponent.CharacterController.transform.position;
+
+                    if (movementComponent.CurrentVelocity == Vector3.zero)
+                    {
+                        slideComponent.CurrentVelocity.x += slideDirection.x * slideComponent.SlideSpeed;
+                        slideComponent.CurrentVelocity.z += slideDirection.z * slideComponent.SlideSpeed;
+                    }
                 }
-                
                 else if (slopeAngle < slideComponent.SlideStopAngle)
                     slideComponent.CurrentVelocity = Vector3.zero;
                 else
-                    slideComponent.CurrentVelocity = Vector3.Lerp(slideComponent.CurrentVelocity, Vector3.zero, deltaTime * 1f);
+                    slideComponent.CurrentVelocity = 
+                        Vector3.Lerp(slideComponent.CurrentVelocity, Vector3.zero, deltaTime * slideComponent.SlideSpeedReduction);
             }
         }
 

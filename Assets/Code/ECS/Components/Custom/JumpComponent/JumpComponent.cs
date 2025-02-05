@@ -14,6 +14,8 @@ namespace EscapeRooms.Components
     {
         [MinValue(0.001f)]
         public float JumpStrength;
+
+        public float FrameTimeCorrection;
     
         [ReadOnly] public bool IsJumpAllowed;
         [ReadOnly] public Vector3 CurrentForce;

@@ -32,7 +32,7 @@ namespace EscapeRooms.Initializers
         {
             return new GameSettings()
             {
-                TargetFrameRate = 0,
+                TargetFrameRate = 100,
                 Sensitivity = 0.1f
             };
         }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace EscapeRooms.Systems
         private Stash<InputComponent> _inputStash;
         private Stash<GravityComponent> _gravityStash;
         private Stash<CharacterControllerComponent> _characterControllerStash;
+        List<int> tt = new List<int>(){15,30,60,100,144};
+        private int i = 0;
 
         public void OnAwake()
         {
@@ -37,6 +40,13 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                Application.targetFrameRate = tt[i];
+                i++;
+                if (i >= tt.Count) i = 0;
+            }
+            
             foreach (var entity in _filter)
             {
                 ref var jumpComponent = ref _jumpStash.Get(entity);
@@ -54,8 +64,13 @@ namespace EscapeRooms.Systems
                     if (jumpingInputState > 0f && jumpComponent.IsJumpAllowed)
                     {
                         gravityComponent.IgnoreAttraction = true;
+
+                        float frameTimeDif = 0.016667f - deltaTime;
+                        float ScaledDif = -1 * frameTimeDif * jumpComponent.FrameTimeCorrection;
+                        float frameRateCorrection = 1 + ScaledDif;
+
                         jumpComponent.CurrentForce.y =
-                            Mathf.Sqrt(jumpComponent.JumpStrength * -2f * gravityComponent.GravitationalAttraction);
+                            Mathf.Sqrt((jumpComponent.JumpStrength * frameRateCorrection) * -2f * gravityComponent.GravitationalAttraction);
 
                         jumpComponent.IsJumpAllowed = false;
                     }

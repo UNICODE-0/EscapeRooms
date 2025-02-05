@@ -424,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     JumpStrength: 1
+    FrameTimeCorrection: 7
     IsJumpAllowed: 0
     CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!114 &63797427
@@ -465,10 +466,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    SlideStartAngle: 40
+    SlideStartAngle: 30
     SlideStopAngle: 10
     SlideSpeed: 0.1
-    SpeedReduction: 1
+    SlideSpeedReduction: 1
     CurrentVelocity: {x: 0, y: 0, z: 0}
 --- !u!43 &171974159
 Mesh:
@@ -47167,7 +47168,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
