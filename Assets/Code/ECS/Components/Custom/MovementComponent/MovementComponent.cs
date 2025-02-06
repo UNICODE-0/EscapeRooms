@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace EscapeRooms.Components
     {
         [MinValue(0.001f)]
         public float Speed;
-
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector3 CurrentVelocity;
     }
 }

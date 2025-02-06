@@ -11,18 +11,9 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct GravityComponent : IComponent
+    public struct GroundedComponent : IComponent
     {
-        [MaxValue(-0.001f)]
-        public float GravitationalAttraction;
-        
-        [MaxValue(-0.001f)]
-        public float GroundedAttraction;
-        
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Vector3 CurrentAttraction;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IgnoreAttraction;
+        [ReadOnly] public bool IsGrounded;
     }
 }

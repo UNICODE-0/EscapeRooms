@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -14,7 +15,8 @@ namespace EscapeRooms.Components
     {
         public float MinXRotation;
         public float MaxXRotation;
-
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public float CurrentXRotation;
     }
 }

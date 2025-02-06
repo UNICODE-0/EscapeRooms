@@ -18,7 +18,8 @@ namespace EscapeRooms.Systems
         private Stash<JumpComponent> _jumpStash;
         private Stash<InputComponent> _inputStash;
         private Stash<GravityComponent> _gravityStash;
-        private Stash<CharacterControllerComponent> _characterControllerStash;
+        private Stash<GroundedComponent> _groundedStash;
+        
         List<int> tt = new List<int>(){15,30,60,100,144};
         private int i = 0;
 
@@ -28,14 +29,13 @@ namespace EscapeRooms.Systems
                 .With<JumpComponent>()
                 .With<GravityComponent>()
                 .With<InputComponent>()
-                .With<CharacterControllerComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _jumpStash = World.GetStash<JumpComponent>();
             _inputStash = World.GetStash<InputComponent>();
             _gravityStash = World.GetStash<GravityComponent>();
-            _characterControllerStash = World.GetStash<CharacterControllerComponent>();
+            _groundedStash = World.GetStash<GroundedComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -52,14 +52,14 @@ namespace EscapeRooms.Systems
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var gravityComponent = ref _gravityStash.Get(entity);
-                ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
+                ref var groundedComponent = ref _groundedStash.Get(entity);
 
                 float jumpingInputState = inputComponent.JumpAction.ReadValue<float>();
 
                 if (!jumpComponent.IsJumpAllowed && jumpingInputState <= 0f)
                     jumpComponent.IsJumpAllowed = true;
 
-                if (characterControllerComponent.CharacterController.isGrounded)
+                if (groundedComponent.IsGrounded)
                 {
                     if (jumpingInputState > 0f && jumpComponent.IsJumpAllowed)
                     {

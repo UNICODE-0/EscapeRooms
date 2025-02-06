@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
@@ -10,6 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct BodyRotationComponent : IComponent
     {
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public float CurrentYRotation;
     }
 }

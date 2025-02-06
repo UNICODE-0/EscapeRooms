@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -16,8 +17,11 @@ namespace EscapeRooms.Components
         public float JumpStrength;
 
         public float FrameTimeCorrection;
-    
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsJumpAllowed;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector3 CurrentForce;
     }
 }
