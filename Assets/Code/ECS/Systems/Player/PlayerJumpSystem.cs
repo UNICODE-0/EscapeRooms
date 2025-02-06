@@ -29,6 +29,7 @@ namespace EscapeRooms.Systems
                 .With<JumpComponent>()
                 .With<GravityComponent>()
                 .With<InputComponent>()
+                .With<GroundedComponent>()
                 .With<PlayerComponent>()
                 .Build();
 

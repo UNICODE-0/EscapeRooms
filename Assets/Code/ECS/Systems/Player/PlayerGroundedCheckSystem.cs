@@ -19,7 +19,7 @@ namespace EscapeRooms.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<GravityComponent>()
+                .With<GroundedComponent>()
                 .With<CharacterControllerComponent>()
                 .With<PlayerComponent>()
                 .Build();
