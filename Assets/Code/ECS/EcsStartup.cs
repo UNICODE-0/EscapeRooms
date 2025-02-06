@@ -19,6 +19,9 @@ namespace EscapeRooms.Mono
             AddInitializers(systemsGroup);
             AddSystems(systemsGroup);
             AddLateSystems(systemsGroup);
+            #if UNITY_EDITOR || DEBUG
+            AddDebugSystems(systemsGroup);
+            #endif
 
             _world.AddSystemsGroup(order: 0, systemsGroup);
 
@@ -47,6 +50,11 @@ namespace EscapeRooms.Mono
         private void AddLateSystems(SystemsGroup group)
         {
 
+        }
+        
+        private void AddDebugSystems(SystemsGroup group)
+        {
+            group.AddSystem(new FrameRateChangeSystem());
         }
     }
 }

@@ -15,8 +15,12 @@ namespace EscapeRooms.Components
     {
         [MinValue(0.001f)]
         public float JumpStrength;
-
+        
+        [MinValue(0f)]
         public float FrameTimeCorrection;
+        
+        [MinValue(0f)]
+        public float ReferenceFrameTime;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsJumpAllowed;

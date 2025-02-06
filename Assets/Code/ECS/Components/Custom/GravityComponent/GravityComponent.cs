@@ -13,6 +13,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct GravityComponent : IComponent
     {
+        public const float GRAVITY_ACCELERATION_FACTOR = -2f;
+        
         [MaxValue(-0.001f)]
         public float GravitationalAttraction;
         

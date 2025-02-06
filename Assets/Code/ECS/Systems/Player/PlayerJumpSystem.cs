@@ -19,9 +19,6 @@ namespace EscapeRooms.Systems
         private Stash<InputComponent> _inputStash;
         private Stash<GravityComponent> _gravityStash;
         private Stash<GroundedComponent> _groundedStash;
-        
-        List<int> tt = new List<int>(){15,30,60,100,144};
-        private int i = 0;
 
         public void OnAwake()
         {
@@ -41,13 +38,6 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            if (Input.GetKeyDown(KeyCode.RightControl))
-            {
-                Application.targetFrameRate = tt[i];
-                i++;
-                if (i >= tt.Count) i = 0;
-            }
-            
             foreach (var entity in _filter)
             {
                 ref var jumpComponent = ref _jumpStash.Get(entity);
@@ -66,12 +56,13 @@ namespace EscapeRooms.Systems
                     {
                         gravityComponent.IgnoreAttraction = true;
 
-                        float frameTimeDif = 0.016667f - deltaTime;
-                        float ScaledDif = -1 * frameTimeDif * jumpComponent.FrameTimeCorrection;
-                        float frameRateCorrection = 1 + ScaledDif;
+                        float frameTimeDifference = jumpComponent.ReferenceFrameTime - deltaTime;
+                        float ScaledDif = frameTimeDifference * jumpComponent.FrameTimeCorrection;
+                        float frameRateCorrection = 1 - ScaledDif;
 
                         jumpComponent.CurrentForce.y =
-                            Mathf.Sqrt((jumpComponent.JumpStrength * frameRateCorrection) * -2f * gravityComponent.GravitationalAttraction);
+                            Mathf.Sqrt((jumpComponent.JumpStrength * frameRateCorrection)
+                                       * GravityComponent.GRAVITY_ACCELERATION_FACTOR * gravityComponent.GravitationalAttraction);
 
                         jumpComponent.IsJumpAllowed = false;
                     }

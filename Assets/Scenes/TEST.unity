@@ -427,6 +427,7 @@ MonoBehaviour:
   serializedData:
     JumpStrength: 1
     FrameTimeCorrection: 7.7
+    ReferenceFrameTime: 0.016667
     IsJumpAllowed: 0
     CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!114 &63797427
