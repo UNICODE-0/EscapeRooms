@@ -14,7 +14,7 @@
     "ExcludeFolderProperties": true,
     "ExcludeTransformForGameObjectComponentIcons": true,
     "ExcludeCanvasRendererForGameObjectComponentIcons": true,
-    "MaximumComponentIconsAmount": 10,
+    "MaximumComponentIconsAmount": 3,
     "ExcludedTags": [],
     "ExcludedLayers": []
 }
