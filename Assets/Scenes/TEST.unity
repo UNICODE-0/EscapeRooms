@@ -383,6 +383,7 @@ MonoBehaviour:
   serializedData:
     Speed: 5
     CurrentVelocity: {x: 0, y: 0, z: 0}
+    IsMoving: 0
 --- !u!114 &63797423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,6 +476,7 @@ MonoBehaviour:
     SlideVelocityReduction: 1
     MaxSlideVelocityMagnitude: 2
     ZeroVelocityMagnitudePrecision: 0.01
+    MovementSimilarityNeutralizeThresholds: {x: -0.5, y: 0.8}
     CurrentVelocity: {x: 0, y: 0, z: 0}
     SlopeAngle: 0
     IsSliding: 0
