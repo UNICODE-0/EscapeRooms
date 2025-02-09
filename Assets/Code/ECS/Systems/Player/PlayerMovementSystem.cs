@@ -40,11 +40,11 @@ namespace EscapeRooms.Systems
                 ref var movementComponent = ref _movementStash.Get(entity);
 
                 Vector2 moveVector = inputComponent.MoveAction.ReadValue<Vector2>();
-
                 Vector3 moveDirection = (transformComponent.Transform.right * moveVector.x +
                                          transformComponent.Transform.forward * moveVector.y).normalized;
 
                 movementComponent.CurrentVelocity = moveDirection * movementComponent.Speed;
+                movementComponent.IsMoving = inputComponent.MoveAction.inProgress;
             }
         }
 

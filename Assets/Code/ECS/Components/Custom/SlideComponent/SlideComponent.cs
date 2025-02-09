@@ -31,6 +31,9 @@ namespace EscapeRooms.Components
         [MinValue(0f)]
         public float ZeroVelocityMagnitudePrecision;
         
+        [MinMaxSlider(-1f, 1f, true)]
+        public Vector2 MovementSimilarityNeutralizeThresholds;
+        
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector3 CurrentVelocity;
         

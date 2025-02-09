@@ -17,5 +17,8 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector3 CurrentVelocity;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsMoving;
     }
 }

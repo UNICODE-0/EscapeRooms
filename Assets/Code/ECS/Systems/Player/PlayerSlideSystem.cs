@@ -17,6 +17,7 @@ namespace EscapeRooms.Systems
         private Stash<CharacterControllerComponent> _characterControllerStash;
         private Stash<SlideComponent> _slideStash;
         private Stash<GroundedComponent> _groundedStash;
+        private Stash<MovementComponent> _movementStash;
 
         public void OnAwake()
         {
@@ -24,12 +25,14 @@ namespace EscapeRooms.Systems
                 .With<CharacterControllerComponent>()
                 .With<SlideComponent>()
                 .With<GroundedComponent>()
+                .With<MovementComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
             _slideStash = World.GetStash<SlideComponent>();
             _groundedStash = World.GetStash<GroundedComponent>();
+            _movementStash = World.GetStash<MovementComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -39,23 +42,40 @@ namespace EscapeRooms.Systems
                 ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
                 ref var slideComponent = ref _slideStash.Get(entity);
                 ref var groundedComponent = ref _groundedStash.Get(entity);
+                ref var movementComponent = ref _movementStash.Get(entity);
 
                 Vector3 normal = characterControllerComponent.HitHolder.Hit.normal;
                 slideComponent.SlopeAngle = characterControllerComponent.HitHolder.HitYAngle;
                 slideComponent.IsSliding = slideComponent.SlopeAngle > slideComponent.SlideStartAngle;
+                
+                Vector3 slideDirection = new Vector3(
+                    (1f - normal.y) * normal.x,
+                    0,
+                    (1f - normal.y) * normal.z
+                );
 
-                if (slideComponent.IsSliding && groundedComponent.IsGrounded && slideComponent.CurrentVelocity.sqrMagnitude 
-                    < slideComponent.MaxSlideVelocityMagnitude)
+                float slideVelocityMagnitude = slideComponent.CurrentVelocity.sqrMagnitude;
+                bool isSlideZeroVelocity = slideVelocityMagnitude <= slideComponent.ZeroVelocityMagnitudePrecision;
+
+                bool isMovementNeutralizeSlide = false;
+                if(movementComponent.IsMoving)
                 {
-                    Vector3 slideDirection = Vector3.zero;
-                    slideDirection.x = (1f - normal.y) * normal.x;
-                    slideDirection.z = (1f - normal.y) * normal.z;
+                     float movementDirectionSimilarity = Vector3.Dot(isSlideZeroVelocity ? slideDirection.normalized : 
+                         slideComponent.CurrentVelocity.normalized, movementComponent.CurrentVelocity.normalized);
 
+                    isMovementNeutralizeSlide = movementDirectionSimilarity > slideComponent.MovementSimilarityNeutralizeThresholds.y || 
+                                                movementDirectionSimilarity < slideComponent.MovementSimilarityNeutralizeThresholds.x;
+                }
+                
+                if (slideComponent.IsSliding && !isMovementNeutralizeSlide && groundedComponent.IsGrounded && 
+                    slideVelocityMagnitude <= slideComponent.MaxSlideVelocityMagnitude)
+                {
                     slideComponent.CurrentVelocity.x += slideDirection.x * slideComponent.SlideSpeed;
                     slideComponent.CurrentVelocity.z += slideDirection.z * slideComponent.SlideSpeed;
                 }
-                else if (slideComponent.SlopeAngle < slideComponent.SlideStopAngle 
-                         || slideComponent.CurrentVelocity.sqrMagnitude <= slideComponent.ZeroVelocityMagnitudePrecision)
+                else if (slideComponent.SlopeAngle < slideComponent.SlideStopAngle ||
+                         isSlideZeroVelocity ||
+                         isMovementNeutralizeSlide)
                     slideComponent.CurrentVelocity = Vector3.zero;
                 else
                     slideComponent.CurrentVelocity = 
