@@ -35,16 +35,20 @@ namespace EscapeRooms.Mono
 
         private void AddSystems(SystemsGroup group)
         {
+            group.AddSystem(new RaycastSystem());
+
+            #region Player
             group.AddSystem(new PlayerGravitySystem());
             group.AddSystem(new PlayerGroundedCheckSystem());
             group.AddSystem(new PlayerMovementSystem());
             group.AddSystem(new PlayerLedgeCorrectionSystem());
             group.AddSystem(new PlayerSlideSystem());
+            group.AddSystem(new PlayerJumpHeadbuttSystem());
             group.AddSystem(new PlayerJumpSystem());
             group.AddSystem(new PlayerCameraSystem());
             group.AddSystem(new PlayerBodyRotationSystem());
-
             group.AddSystem(new PlayerMotionApplySystem());
+            #endregion
         }
 
         private void AddLateSystems(SystemsGroup group)
