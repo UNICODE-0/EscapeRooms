@@ -300,12 +300,13 @@ GameObject:
   - component: {fileID: 63797426}
   - component: {fileID: 63797429}
   - component: {fileID: 63797431}
+  - component: {fileID: 63797432}
   - component: {fileID: 63797428}
   - component: {fileID: 63797430}
   - component: {fileID: 63797421}
   - component: {fileID: 63797427}
   - component: {fileID: 63797423}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Providers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -324,7 +325,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1718160283}
   m_Father: {fileID: 1891703203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &63797419
@@ -513,6 +515,20 @@ MonoBehaviour:
     PositionDifferenceDetectionInterval: {x: 0, y: 0.05}
     CurrentAttraction: {x: 0, y: 0, z: 0}
     IgnoreAttraction: 0
+--- !u!114 &63797432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066e547491e8430ca2b679c3500c4785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    HeadOverlapCheckEntity: {fileID: 1718160284}
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -976,7 +992,7 @@ GameObject:
   - component: {fileID: 323524073}
   - component: {fileID: 323524072}
   - component: {fileID: 323524075}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -3431,7 +3447,7 @@ GameObject:
   - component: {fileID: 687237170}
   - component: {fileID: 687237172}
   - component: {fileID: 687237171}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Providers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47923,6 +47939,59 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &1718160282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1718160283}
+  - component: {fileID: 1718160284}
+  m_Layer: 3
+  m_Name: HeadIntersection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1718160283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718160282}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.563, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 63797418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1718160284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718160282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0a4ef61abf48ee827418e2d00b4287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    SpherePoint: {fileID: 1718160283}
+    Radius: 0.5
+    MaxHitCollidersCount: 5
+    LayerMask:
+      serializedVersion: 2
+      m_Bits: 1
+    IsSphereIntersect: 0
+    HitCollidersCount: 0
 --- !u!1 &1746010992
 GameObject:
   m_ObjectHideFlags: 0
@@ -47991,7 +48060,7 @@ GameObject:
   - component: {fileID: 1891703205}
   - component: {fileID: 1891703207}
   - component: {fileID: 1891703208}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}

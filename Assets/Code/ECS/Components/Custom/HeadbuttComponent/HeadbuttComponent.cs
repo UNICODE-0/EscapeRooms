@@ -1,8 +1,5 @@
-using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using Sirenix.OdinInspector;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components
@@ -13,7 +10,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct HeadbuttComponent : IComponent
     {
-        public EntityProvider HeadSphereCastEntity;
+        public EntityProvider HeadOverlapCheckEntity;
 
         // [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         // [ReadOnly] public bool IsRayHit;

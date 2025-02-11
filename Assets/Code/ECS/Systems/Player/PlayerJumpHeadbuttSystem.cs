@@ -19,6 +19,9 @@ namespace EscapeRooms.Systems
         private Stash<InputComponent> _inputStash;
         private Stash<GravityComponent> _gravityStash;
         private Stash<GroundedComponent> _groundedStash;
+        private Stash<HeadbuttComponent> _headbuttStash;
+        
+        private Stash<OverlapSphereComponent> _overlapSphereStash;
 
         public void OnAwake()
         {
@@ -34,6 +37,8 @@ namespace EscapeRooms.Systems
             _inputStash = World.GetStash<InputComponent>();
             _gravityStash = World.GetStash<GravityComponent>();
             _groundedStash = World.GetStash<GroundedComponent>();
+            _headbuttStash = World.GetStash<HeadbuttComponent>();
+            _overlapSphereStash = World.GetStash<OverlapSphereComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -44,7 +49,10 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var gravityComponent = ref _gravityStash.Get(entity);
                 ref var groundedComponent = ref _groundedStash.Get(entity);
+                ref var headbuttComponent = ref _headbuttStash.Get(entity);
 
+                ref var headOverlapSphereComponent = ref _overlapSphereStash.Get(headbuttComponent.HeadOverlapCheckEntity.Entity);
+                Debug.LogError(headOverlapSphereComponent.IsSphereIntersect);
             }
         }
 
