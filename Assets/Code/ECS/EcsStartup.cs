@@ -36,6 +36,7 @@ namespace EscapeRooms.Mono
         private void AddSystems(SystemsGroup group)
         {
             group.AddSystem(new RaycastSystem());
+            group.AddSystem(new OverlapSphereSystem());
 
             #region Player
             group.AddSystem(new PlayerGravitySystem());

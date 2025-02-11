@@ -12,30 +12,28 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct RaycastComponent : IComponent
+    public struct OverlapSphereComponent : IComponent
     {
         [Required]
-        public Transform RayStartPoint;
-        
-        public Vector3 Direction;
-        
+        public Transform SpherePoint;
+
         [MinValue(0.01f)]
-        public float RayLength;
+        public float Radius;
         
         [MinValue(1)]
-        public int MaxHitsCount;
+        public int MaxHitCollidersCount;
         
         public LayerMask LayerMask;
 
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsRayHit;
+        [ReadOnly] public bool IsSphereIntersect;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public int HitsCount;
-        
+        [ReadOnly] public int HitCollidersCount;
+    
         [NonSerialized]
         [ShowInInspector]
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public RaycastHit[] Hits;
+        [ReadOnly] public Collider[] HitColliders;
     }
 }
