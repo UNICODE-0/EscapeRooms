@@ -64,6 +64,7 @@ namespace EscapeRooms.Systems
                             Mathf.Sqrt((jumpComponent.JumpStrength * frameRateCorrection)
                                        * GravityComponent.GRAVITY_ACCELERATION_FACTOR * gravityComponent.GravitationalAttraction);
 
+                        jumpComponent.IsJumpForceApplied = true;
                         jumpComponent.IsJumpAllowed = false;
                     }
                 }
@@ -74,6 +75,7 @@ namespace EscapeRooms.Systems
                 }
                 else
                 {
+                    jumpComponent.IsJumpForceApplied = false;
                     gravityComponent.IgnoreAttraction = false;
                     jumpComponent.CurrentForce.y = 0f;
                 }

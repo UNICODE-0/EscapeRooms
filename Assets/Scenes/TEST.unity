@@ -432,6 +432,7 @@ MonoBehaviour:
     FrameTimeCorrection: 7.7
     ReferenceFrameTime: 0.016667
     IsJumpAllowed: 0
+    IsJumpForceApplied: 0
     CurrentForce: {x: 0, y: 0, z: 0}
 --- !u!114 &63797427
 MonoBehaviour:
@@ -529,6 +530,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     HeadOverlapCheckEntity: {fileID: 1718160284}
+    ReboundForcePercentage: 0.25
+    CurrentForce: {x: 0, y: 0, z: 0}
+    IsHeadbuttForceApplied: 0
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -47950,7 +47954,7 @@ GameObject:
   - component: {fileID: 1718160283}
   - component: {fileID: 1718160284}
   m_Layer: 3
-  m_Name: HeadIntersection
+  m_Name: HeadOverlap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

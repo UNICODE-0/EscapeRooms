@@ -1,6 +1,9 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
+using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -11,8 +14,14 @@ namespace EscapeRooms.Components
     public struct HeadbuttComponent : IComponent
     {
         public EntityProvider HeadOverlapCheckEntity;
+        
+        [MinValue(0.01f)]
+        public float ReboundForcePercentage;
 
-        // [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        // [ReadOnly] public bool IsRayHit;
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public Vector3 CurrentForce;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsHeadbuttForceApplied;
     }
 }

@@ -18,6 +18,8 @@ namespace EscapeRooms.Systems
         private Stash<GravityComponent> _gravityStash;
         private Stash<JumpComponent> _jumpStash;
         private Stash<SlideComponent> _slideStash;
+        private Stash<HeadbuttComponent> _headbuttStash;
+
 
         public void OnAwake()
         {
@@ -35,6 +37,7 @@ namespace EscapeRooms.Systems
             _gravityStash = World.GetStash<GravityComponent>();
             _jumpStash = World.GetStash<JumpComponent>();
             _slideStash = World.GetStash<SlideComponent>();
+            _headbuttStash = World.GetStash<HeadbuttComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -46,9 +49,12 @@ namespace EscapeRooms.Systems
                 ref var gravityComponent = ref _gravityStash.Get(entity);
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var slideComponent = ref _slideStash.Get(entity);
+                ref var headbuttComponent = ref _headbuttStash.Get(entity);
+
                 
                 Vector3 motion = (jumpComponent.CurrentForce + gravityComponent.CurrentAttraction +
-                                  movementComponent.CurrentVelocity + slideComponent.CurrentVelocity) * deltaTime;
+                                  movementComponent.CurrentVelocity + slideComponent.CurrentVelocity +
+                                  headbuttComponent.CurrentForce) * deltaTime;
 
                 characterControllerComponent.CharacterController.Move(motion);
             }

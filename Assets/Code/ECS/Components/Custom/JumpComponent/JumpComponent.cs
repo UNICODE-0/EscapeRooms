@@ -26,6 +26,9 @@ namespace EscapeRooms.Components
         [ReadOnly] public bool IsJumpAllowed;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsJumpForceApplied;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector3 CurrentForce;
     }
 }
