@@ -8,23 +8,23 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerGroundedCheckSystem : ISystem
+    public sealed class CharacterGroundedCheckSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<GroundedComponent> _groundedStash;
+        private Stash<CharacterGroundedComponent> _groundedStash;
         private Stash<CharacterControllerComponent> _characterControllerStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<GroundedComponent>()
+                .With<CharacterGroundedComponent>()
                 .With<CharacterControllerComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
-            _groundedStash = World.GetStash<GroundedComponent>();
+            _groundedStash = World.GetStash<CharacterGroundedComponent>();
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
         }
 

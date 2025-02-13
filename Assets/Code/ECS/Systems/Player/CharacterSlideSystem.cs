@@ -8,29 +8,29 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerSlideSystem : ISystem
+    public sealed class CharacterSlideSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<CharacterControllerComponent> _characterControllerStash;
-        private Stash<SlideComponent> _slideStash;
-        private Stash<GroundedComponent> _groundedStash;
+        private Stash<CharacterSlideComponent> _slideStash;
+        private Stash<CharacterGroundedComponent> _groundedStash;
         private Stash<MovementComponent> _movementStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<CharacterControllerComponent>()
-                .With<SlideComponent>()
-                .With<GroundedComponent>()
+                .With<CharacterSlideComponent>()
+                .With<CharacterGroundedComponent>()
                 .With<MovementComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
-            _slideStash = World.GetStash<SlideComponent>();
-            _groundedStash = World.GetStash<GroundedComponent>();
+            _slideStash = World.GetStash<CharacterSlideComponent>();
+            _groundedStash = World.GetStash<CharacterGroundedComponent>();
             _movementStash = World.GetStash<MovementComponent>();
         }
 

@@ -9,15 +9,15 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerLedgeCorrectionSystem : ISystem
+    public sealed class CharacterLedgeCorrectionSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<CharacterControllerComponent> _characterControllerStash;
-        private Stash<SlideComponent> _slideStash;
-        private Stash<GroundedComponent> _groundedStash;
-        private Stash<LedgeCorrectionComponent> _ledgeCorrectionStash;
+        private Stash<CharacterSlideComponent> _slideStash;
+        private Stash<CharacterGroundedComponent> _groundedStash;
+        private Stash<CharacterLedgeCorrectionComponent> _ledgeCorrectionStash;
 
         private Vector3 _previousFramePosition;
 
@@ -25,16 +25,16 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterControllerComponent>()
-                .With<SlideComponent>()
-                .With<GroundedComponent>()
-                .With<LedgeCorrectionComponent>()
+                .With<CharacterSlideComponent>()
+                .With<CharacterGroundedComponent>()
+                .With<CharacterLedgeCorrectionComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
-            _slideStash = World.GetStash<SlideComponent>();
-            _groundedStash = World.GetStash<GroundedComponent>();
-            _ledgeCorrectionStash = World.GetStash<LedgeCorrectionComponent>();
+            _slideStash = World.GetStash<CharacterSlideComponent>();
+            _groundedStash = World.GetStash<CharacterGroundedComponent>();
+            _ledgeCorrectionStash = World.GetStash<CharacterLedgeCorrectionComponent>();
         }
 
         public void OnUpdate(float deltaTime)

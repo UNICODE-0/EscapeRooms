@@ -11,7 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct GravityComponent : IComponent
+    public struct CharacterGravityComponent : IComponent
     {
         public const float GRAVITY_ACCELERATION_FACTOR = -2f;
         

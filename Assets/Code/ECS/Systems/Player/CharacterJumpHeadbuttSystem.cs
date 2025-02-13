@@ -10,14 +10,14 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerJumpHeadbuttSystem : ISystem
+    public sealed class CharacterJumpHeadbuttSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<JumpComponent> _jumpStash;
-        private Stash<GroundedComponent> _groundedStash;
-        private Stash<HeadbuttComponent> _headbuttStash;
+        private Stash<CharacterGroundedComponent> _groundedStash;
+        private Stash<CharacterHeadbuttComponent> _headbuttStash;
         
         private Stash<OverlapSphereComponent> _overlapSphereStash;
         
@@ -25,14 +25,14 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<JumpComponent>()
-                .With<GroundedComponent>()
-                .With<HeadbuttComponent>()
+                .With<CharacterGroundedComponent>()
+                .With<CharacterHeadbuttComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _jumpStash = World.GetStash<JumpComponent>();
-            _groundedStash = World.GetStash<GroundedComponent>();
-            _headbuttStash = World.GetStash<HeadbuttComponent>();
+            _groundedStash = World.GetStash<CharacterGroundedComponent>();
+            _headbuttStash = World.GetStash<CharacterHeadbuttComponent>();
             
             _overlapSphereStash = World.GetStash<OverlapSphereComponent>();
         }

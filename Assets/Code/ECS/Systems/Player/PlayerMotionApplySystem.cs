@@ -15,10 +15,10 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<CharacterControllerComponent> _characterControllerStash;
         private Stash<MovementComponent> _movementStash;
-        private Stash<GravityComponent> _gravityStash;
+        private Stash<CharacterGravityComponent> _gravityStash;
         private Stash<JumpComponent> _jumpStash;
-        private Stash<SlideComponent> _slideStash;
-        private Stash<HeadbuttComponent> _headbuttStash;
+        private Stash<CharacterSlideComponent> _slideStash;
+        private Stash<CharacterHeadbuttComponent> _headbuttStash;
 
 
         public void OnAwake()
@@ -26,18 +26,18 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<CharacterControllerComponent>()
                 .With<MovementComponent>()
-                .With<GravityComponent>()
+                .With<CharacterGravityComponent>()
                 .With<JumpComponent>()
-                .With<SlideComponent>()
+                .With<CharacterSlideComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
             _movementStash = World.GetStash<MovementComponent>();
-            _gravityStash = World.GetStash<GravityComponent>();
+            _gravityStash = World.GetStash<CharacterGravityComponent>();
             _jumpStash = World.GetStash<JumpComponent>();
-            _slideStash = World.GetStash<SlideComponent>();
-            _headbuttStash = World.GetStash<HeadbuttComponent>();
+            _slideStash = World.GetStash<CharacterSlideComponent>();
+            _headbuttStash = World.GetStash<CharacterHeadbuttComponent>();
         }
 
         public void OnUpdate(float deltaTime)

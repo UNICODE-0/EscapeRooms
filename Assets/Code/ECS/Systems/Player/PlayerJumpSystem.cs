@@ -17,23 +17,23 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<JumpComponent> _jumpStash;
         private Stash<InputComponent> _inputStash;
-        private Stash<GravityComponent> _gravityStash;
-        private Stash<GroundedComponent> _groundedStash;
+        private Stash<CharacterGravityComponent> _gravityStash;
+        private Stash<CharacterGroundedComponent> _groundedStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<JumpComponent>()
-                .With<GravityComponent>()
+                .With<CharacterGravityComponent>()
                 .With<InputComponent>()
-                .With<GroundedComponent>()
+                .With<CharacterGroundedComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _jumpStash = World.GetStash<JumpComponent>();
             _inputStash = World.GetStash<InputComponent>();
-            _gravityStash = World.GetStash<GravityComponent>();
-            _groundedStash = World.GetStash<GroundedComponent>();
+            _gravityStash = World.GetStash<CharacterGravityComponent>();
+            _groundedStash = World.GetStash<CharacterGroundedComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -62,7 +62,7 @@ namespace EscapeRooms.Systems
 
                         jumpComponent.CurrentForce.y =
                             Mathf.Sqrt((jumpComponent.JumpStrength * frameRateCorrection)
-                                       * GravityComponent.GRAVITY_ACCELERATION_FACTOR * gravityComponent.GravitationalAttraction);
+                                       * CharacterGravityComponent.GRAVITY_ACCELERATION_FACTOR * gravityComponent.GravitationalAttraction);
 
                         jumpComponent.IsJumpForceApplied = true;
                         jumpComponent.IsJumpAllowed = false;

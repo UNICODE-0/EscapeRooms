@@ -11,7 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SlideComponent : IComponent
+    public struct CharacterSlideComponent : IComponent
     {
         [MinValue(0f)]
         public float SlideStartAngle;

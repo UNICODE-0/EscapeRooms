@@ -39,13 +39,13 @@ namespace EscapeRooms.Mono
             group.AddSystem(new OverlapSphereSystem());
 
             #region Player
-            group.AddSystem(new PlayerGravitySystem());
-            group.AddSystem(new PlayerGroundedCheckSystem());
+            group.AddSystem(new CharacterGravitySystem());
+            group.AddSystem(new CharacterGroundedCheckSystem());
             group.AddSystem(new PlayerMovementSystem());
-            group.AddSystem(new PlayerLedgeCorrectionSystem());
-            group.AddSystem(new PlayerSlideSystem());
+            group.AddSystem(new CharacterLedgeCorrectionSystem());
+            group.AddSystem(new CharacterSlideSystem());
             group.AddSystem(new PlayerJumpSystem());
-            group.AddSystem(new PlayerJumpHeadbuttSystem());
+            group.AddSystem(new CharacterJumpHeadbuttSystem());
             group.AddSystem(new PlayerCameraSystem());
             group.AddSystem(new PlayerBodyRotationSystem());
             group.AddSystem(new PlayerMotionApplySystem());

@@ -11,7 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct HeadbuttComponent : IComponent
+    public struct CharacterHeadbuttComponent : IComponent
     {
         public EntityProvider HeadOverlapCheckEntity;
         
