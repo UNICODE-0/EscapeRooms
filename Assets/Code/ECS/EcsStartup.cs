@@ -52,7 +52,10 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterJumpSystem());
             
             group.AddSystem(new CharacterJumpHeadbuttSystem());
-            group.AddSystem(new PlayerCameraSystem());
+            
+            group.AddSystem(new PlayerFPCameraInputSystem());
+            group.AddSystem(new FPCameraSystem());
+            
             group.AddSystem(new PlayerBodyRotationSystem());
             group.AddSystem(new CharacterFullMotionApplySystem());
             #endregion

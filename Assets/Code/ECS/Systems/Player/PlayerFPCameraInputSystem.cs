@@ -8,28 +8,25 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerCameraSystem : ISystem
+    public sealed class PlayerFPCameraInputSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<TransformComponent> _transformStash;
-        private Stash<CameraComponent> _cameraStash;
+        private Stash<FPCameraComponent> _cameraStash;
         private Stash<InputComponent> _inputStash;
         private Stash<SettingsComponent> _settingsStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<TransformComponent>()
-                .With<CameraComponent>()
+                .With<FPCameraComponent>()
                 .With<InputComponent>()
                 .With<SettingsComponent>()
                 .With<PlayerCameraComponent>()
                 .Build();
 
-            _transformStash = World.GetStash<TransformComponent>();
-            _cameraStash = World.GetStash<CameraComponent>();
+            _cameraStash = World.GetStash<FPCameraComponent>();
             _inputStash = World.GetStash<InputComponent>();
             _settingsStash = World.GetStash<SettingsComponent>();
         }
@@ -38,21 +35,17 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var transformComponent = ref _transformStash.Get(entity);
                 ref var cameraComponent = ref _cameraStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var settingsComponent = ref _settingsStash.Get(entity);
 
                 Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
-                float mouseY = mouseDelta.y * settingsComponent.GameSettings.Sensitivity;
+                
+                Vector2 RotateDelta = Vector3.zero;
+                RotateDelta.x = mouseDelta.y;
+                RotateDelta.y = mouseDelta.x;
 
-                cameraComponent.CurrentXRotation -= mouseY;
-
-                cameraComponent.CurrentXRotation =
-                    Mathf.Clamp(cameraComponent.CurrentXRotation, cameraComponent.MinXRotation,
-                        cameraComponent.MaxXRotation);
-
-                transformComponent.Transform.localRotation = Quaternion.Euler(cameraComponent.CurrentXRotation, 0f, 0f);
+                cameraComponent.RotateDelta = RotateDelta * settingsComponent.GameSettings.Sensitivity;
             }
         }
 
