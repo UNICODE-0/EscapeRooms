@@ -48,7 +48,7 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             group.AddSystem(new PlayerCameraSystem());
             group.AddSystem(new PlayerBodyRotationSystem());
-            group.AddSystem(new PlayerMotionApplySystem());
+            group.AddSystem(new CharacterFullMotionApplySystem());
             #endregion
         }
 

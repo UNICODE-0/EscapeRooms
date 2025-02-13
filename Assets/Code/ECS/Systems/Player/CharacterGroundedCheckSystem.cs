@@ -21,7 +21,6 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<CharacterGroundedComponent>()
                 .With<CharacterControllerComponent>()
-                .With<PlayerComponent>()
                 .Build();
 
             _groundedStash = World.GetStash<CharacterGroundedComponent>();

@@ -8,7 +8,7 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerMotionApplySystem : ISystem
+    public sealed class CharacterFullMotionApplySystem : ISystem
     {
         public World World { get; set; }
 
@@ -20,7 +20,6 @@ namespace EscapeRooms.Systems
         private Stash<CharacterSlideComponent> _slideStash;
         private Stash<CharacterHeadbuttComponent> _headbuttStash;
 
-
         public void OnAwake()
         {
             _filter = World.Filter
@@ -29,7 +28,6 @@ namespace EscapeRooms.Systems
                 .With<CharacterGravityComponent>()
                 .With<JumpComponent>()
                 .With<CharacterSlideComponent>()
-                .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
@@ -50,7 +48,6 @@ namespace EscapeRooms.Systems
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var slideComponent = ref _slideStash.Get(entity);
                 ref var headbuttComponent = ref _headbuttStash.Get(entity);
-
                 
                 Vector3 motion = (jumpComponent.CurrentForce + gravityComponent.CurrentAttraction +
                                   movementComponent.CurrentVelocity + slideComponent.CurrentVelocity +

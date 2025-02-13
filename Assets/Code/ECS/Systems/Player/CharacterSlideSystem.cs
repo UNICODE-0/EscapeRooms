@@ -25,7 +25,6 @@ namespace EscapeRooms.Systems
                 .With<CharacterSlideComponent>()
                 .With<CharacterGroundedComponent>()
                 .With<MovementComponent>()
-                .With<PlayerComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();

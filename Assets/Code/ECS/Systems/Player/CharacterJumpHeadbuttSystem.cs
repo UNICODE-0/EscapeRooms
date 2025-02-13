@@ -27,7 +27,6 @@ namespace EscapeRooms.Systems
                 .With<JumpComponent>()
                 .With<CharacterGroundedComponent>()
                 .With<CharacterHeadbuttComponent>()
-                .With<PlayerComponent>()
                 .Build();
 
             _jumpStash = World.GetStash<JumpComponent>();

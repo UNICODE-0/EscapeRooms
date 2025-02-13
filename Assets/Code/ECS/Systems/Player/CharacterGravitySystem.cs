@@ -21,7 +21,6 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<CharacterGravityComponent>()
                 .With<CharacterGroundedComponent>()
-                .With<PlayerComponent>()
                 .Build();
 
             _gravityStash = World.GetStash<CharacterGravityComponent>();
