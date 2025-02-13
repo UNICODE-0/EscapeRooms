@@ -11,8 +11,14 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct JumpComponent : IComponent
+    public struct CharacterJumpComponent : IComponent
     {
+        [InfoBox("Greater than 0 is true else false")]
+        [MinValue(0f)]
+        public float JumpingState;
+        
+        [PropertySpace]
+        
         [MinValue(0.001f)]
         public float JumpStrength;
         

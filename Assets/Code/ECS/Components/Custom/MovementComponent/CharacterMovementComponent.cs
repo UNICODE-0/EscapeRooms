@@ -10,8 +10,12 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct MovementComponent : IComponent
+    public struct CharacterMovementComponent : IComponent
     {
+        public Vector2 MoveLocalDirection;
+        
+        [PropertySpace]
+        
         [MinValue(0.001f)]
         public float Speed;
         

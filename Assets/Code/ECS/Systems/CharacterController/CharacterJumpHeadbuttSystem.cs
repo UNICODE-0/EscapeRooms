@@ -15,7 +15,7 @@ namespace EscapeRooms.Systems
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<JumpComponent> _jumpStash;
+        private Stash<CharacterJumpComponent> _jumpStash;
         private Stash<CharacterGroundedComponent> _groundedStash;
         private Stash<CharacterHeadbuttComponent> _headbuttStash;
         
@@ -24,12 +24,12 @@ namespace EscapeRooms.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<JumpComponent>()
+                .With<CharacterJumpComponent>()
                 .With<CharacterGroundedComponent>()
                 .With<CharacterHeadbuttComponent>()
                 .Build();
 
-            _jumpStash = World.GetStash<JumpComponent>();
+            _jumpStash = World.GetStash<CharacterJumpComponent>();
             _groundedStash = World.GetStash<CharacterGroundedComponent>();
             _headbuttStash = World.GetStash<CharacterHeadbuttComponent>();
             

@@ -14,9 +14,9 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<CharacterControllerComponent> _characterControllerStash;
-        private Stash<MovementComponent> _movementStash;
+        private Stash<CharacterMovementComponent> _movementStash;
         private Stash<CharacterGravityComponent> _gravityStash;
-        private Stash<JumpComponent> _jumpStash;
+        private Stash<CharacterJumpComponent> _jumpStash;
         private Stash<CharacterSlideComponent> _slideStash;
         private Stash<CharacterHeadbuttComponent> _headbuttStash;
 
@@ -24,16 +24,16 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterControllerComponent>()
-                .With<MovementComponent>()
+                .With<CharacterMovementComponent>()
                 .With<CharacterGravityComponent>()
-                .With<JumpComponent>()
+                .With<CharacterJumpComponent>()
                 .With<CharacterSlideComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
-            _movementStash = World.GetStash<MovementComponent>();
+            _movementStash = World.GetStash<CharacterMovementComponent>();
             _gravityStash = World.GetStash<CharacterGravityComponent>();
-            _jumpStash = World.GetStash<JumpComponent>();
+            _jumpStash = World.GetStash<CharacterJumpComponent>();
             _slideStash = World.GetStash<CharacterSlideComponent>();
             _headbuttStash = World.GetStash<CharacterHeadbuttComponent>();
         }

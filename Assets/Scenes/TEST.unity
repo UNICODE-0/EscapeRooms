@@ -384,6 +384,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     Speed: 5
+    MoveLocalDirection: {x: 0, y: 0}
     CurrentVelocity: {x: 0, y: 0, z: 0}
     IsMoving: 0
 --- !u!114 &63797423
@@ -428,6 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    JumpingState: 0
     JumpStrength: 1
     FrameTimeCorrection: 7.7
     ReferenceFrameTime: 0.016667

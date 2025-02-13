@@ -16,7 +16,7 @@ namespace EscapeRooms.Systems
         private Stash<CharacterControllerComponent> _characterControllerStash;
         private Stash<CharacterSlideComponent> _slideStash;
         private Stash<CharacterGroundedComponent> _groundedStash;
-        private Stash<MovementComponent> _movementStash;
+        private Stash<CharacterMovementComponent> _movementStash;
 
         public void OnAwake()
         {
@@ -24,13 +24,13 @@ namespace EscapeRooms.Systems
                 .With<CharacterControllerComponent>()
                 .With<CharacterSlideComponent>()
                 .With<CharacterGroundedComponent>()
-                .With<MovementComponent>()
+                .With<CharacterMovementComponent>()
                 .Build();
 
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
             _slideStash = World.GetStash<CharacterSlideComponent>();
             _groundedStash = World.GetStash<CharacterGroundedComponent>();
-            _movementStash = World.GetStash<MovementComponent>();
+            _movementStash = World.GetStash<CharacterMovementComponent>();
         }
 
         public void OnUpdate(float deltaTime)
