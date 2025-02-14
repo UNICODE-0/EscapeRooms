@@ -8,28 +8,25 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerBodyRotationSystem : ISystem
+    public sealed class PlayerBodyRotationInputSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<TransformComponent> _transformStash;
-        private Stash<BodyRotationComponent> _bodyRotationStash;
+        private Stash<TransformDeltaRotationComponent> _rotationStash;
         private Stash<InputComponent> _inputStash;
         private Stash<SettingsComponent> _settingsStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<TransformComponent>()
-                .With<BodyRotationComponent>()
+                .With<TransformDeltaRotationComponent>()
                 .With<InputComponent>()
                 .With<SettingsComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
-            _transformStash = World.GetStash<TransformComponent>();
-            _bodyRotationStash = World.GetStash<BodyRotationComponent>();
+            _rotationStash = World.GetStash<TransformDeltaRotationComponent>();
             _inputStash = World.GetStash<InputComponent>();
             _settingsStash = World.GetStash<SettingsComponent>();
         }
@@ -38,16 +35,13 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var transformComponent = ref _transformStash.Get(entity);
-                ref var bodyRotationComponent = ref _bodyRotationStash.Get(entity);
+                ref var rotationComponent = ref _rotationStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var settingsComponent = ref _settingsStash.Get(entity);
 
                 Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
-                float mouseX = mouseDelta.x * settingsComponent.GameSettings.Sensitivity;
-                bodyRotationComponent.CurrentYRotation += mouseX;
-
-                transformComponent.Transform.rotation = Quaternion.Euler(0, bodyRotationComponent.CurrentYRotation, 0f);
+                rotationComponent.EulerRotationDelta = 
+                    new Vector3(0f, mouseDelta.x * settingsComponent.GameSettings.Sensitivity ,0f);
             }
         }
 
