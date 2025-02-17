@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -15,20 +16,17 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<FPCameraComponent> _cameraStash;
         private Stash<InputComponent> _inputStash;
-        private Stash<SettingsComponent> _settingsStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<FPCameraComponent>()
                 .With<InputComponent>()
-                .With<SettingsComponent>()
                 .With<PlayerCameraComponent>()
                 .Build();
 
             _cameraStash = World.GetStash<FPCameraComponent>();
             _inputStash = World.GetStash<InputComponent>();
-            _settingsStash = World.GetStash<SettingsComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -37,7 +35,6 @@ namespace EscapeRooms.Systems
             {
                 ref var cameraComponent = ref _cameraStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
-                ref var settingsComponent = ref _settingsStash.Get(entity);
 
                 Vector2 mouseDelta = inputComponent.LookActionValue;
                 
@@ -45,7 +42,7 @@ namespace EscapeRooms.Systems
                 RotateDelta.x = mouseDelta.y;
                 RotateDelta.y = mouseDelta.x;
 
-                cameraComponent.RotateDelta = RotateDelta * settingsComponent.GameSettings.Sensitivity;
+                cameraComponent.RotateDelta = RotateDelta * GameSettings.Instance.Sensitivity;
             }
         }
 

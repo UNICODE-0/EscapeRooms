@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -14,11 +15,6 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct InputComponent : IComponent
     {
-        [NonSerialized] public InputAction MoveAction;
-        [NonSerialized] public InputAction LookAction;
-        [NonSerialized] public InputAction JumpAction;
-        [NonSerialized] public InputAction CrouchAction;
-        
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector2 MoveActionValue;
         
@@ -26,11 +22,9 @@ namespace EscapeRooms.Components
         [ReadOnly] public Vector2 LookActionValue;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [InlineProperty]
-        [ReadOnly] public DelayedInputTrigger JumpTriggerValue;
+        [ReadOnly] public bool JumpTrigger;
 
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [InlineProperty]
-        [ReadOnly] public DelayedInputTrigger CrouchTriggerValue;
+        [ReadOnly] public bool CrouchTrigger;
     }
 }

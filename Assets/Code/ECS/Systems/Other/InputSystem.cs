@@ -17,7 +17,6 @@ namespace EscapeRooms.Initializers
 
         private Filter _filter;
         private Stash<InputComponent> _playerInputStash;
-        private Stash<SettingsComponent> _settingsStash;
         
         private InputAction _moveAction;
         private InputAction _lookAction;
@@ -31,11 +30,9 @@ namespace EscapeRooms.Initializers
         {
             _filter = World.Filter
                 .With<InputComponent>()
-                .With<SettingsComponent>()
                 .Build();
 
             _playerInputStash = World.GetStash<InputComponent>();
-            _settingsStash = World.GetStash<SettingsComponent>();
 
             InitializeInputActions();
         }
@@ -48,37 +45,27 @@ namespace EscapeRooms.Initializers
             _crouchAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Crouch");
 
             _jumpDelayedTrigger = new DelayedInputTrigger();
-            
-            foreach (var entity in _filter)
-            {
-                ref var playerInputComponent = ref _playerInputStash.Get(entity);
-                ref var settingsComponent = ref _settingsStash.Get(entity);
-
-                playerInputComponent.MoveAction = _moveAction;
-                playerInputComponent.LookAction = _lookAction;
-                
-                playerInputComponent.JumpAction = _jumpAction;
-                playerInputComponent.JumpTriggerValue.Initialize(settingsComponent.GameSettings.JumpInputTriggerDelay);
-                
-                playerInputComponent.CrouchAction = _crouchAction;
-                playerInputComponent.CrouchTriggerValue.Initialize(settingsComponent.GameSettings.CrouchInputTriggerDelay);
-            }
+            _jumpDelayedTrigger.Initialize(GameSettings.Instance.JumpInputTriggerDelay);
+            _crouchDelayedTrigger = new DelayedInputTrigger();
+            _crouchDelayedTrigger.Initialize(GameSettings.Instance.CrouchInputTriggerDelay);
         }
         
         public void OnUpdate(float deltaTime)
         {
-            // Vector2 moveActionValue = _moveAction.ReadValue<Vector2>();
-            // Vector2 lookActionValue = _lookAction.ReadValue<Vector2>();
-            // DelayedInputTrigger lookActionValue = _lookAction.ReadValue<Vector2>();
+            Vector2 moveActionValue = _moveAction.ReadValue<Vector2>();
+            Vector2 lookActionValue = _lookAction.ReadValue<Vector2>();
+            
+            _jumpDelayedTrigger.Update(deltaTime, _jumpAction.triggered);
+            _crouchDelayedTrigger.Update(deltaTime, _crouchAction.triggered);
 
             foreach (var entity in _filter)
             {
                 ref var playerInputComponent = ref _playerInputStash.Get(entity);
 
-                playerInputComponent.MoveActionValue = playerInputComponent.MoveAction.ReadValue<Vector2>();
-                playerInputComponent.LookActionValue = playerInputComponent.LookAction.ReadValue<Vector2>();
-                playerInputComponent.JumpTriggerValue.Update(deltaTime, playerInputComponent.JumpAction.triggered);
-                playerInputComponent.CrouchTriggerValue.Update(deltaTime, playerInputComponent.CrouchAction.triggered);
+                playerInputComponent.MoveActionValue = moveActionValue;
+                playerInputComponent.LookActionValue = lookActionValue;
+                playerInputComponent.JumpTrigger = _jumpDelayedTrigger.IsTriggered;
+                playerInputComponent.CrouchTrigger = _crouchDelayedTrigger.IsTriggered;
             }
         }
 

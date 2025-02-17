@@ -305,7 +305,6 @@ GameObject:
   - component: {fileID: 63797433}
   - component: {fileID: 63797430}
   - component: {fileID: 63797421}
-  - component: {fileID: 63797427}
   - component: {fileID: 63797423}
   m_Layer: 3
   m_Name: Providers
@@ -371,6 +370,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9096d86107a4d46489be79735bd38d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializedData:
+    MoveActionValue: {x: 0, y: 0}
+    LookActionValue: {x: 0, y: 0}
+    JumpTrigger: 0
+    CrouchTrigger: 0
 --- !u!114 &63797422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,25 +434,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    JumpingState: 0
+    JumpInput: 0
     JumpStrength: 1
     FrameTimeCorrection: 7.7
     ReferenceFrameTime: 0.016667
     IsJumpAllowed: 0
     IsJumpForceApplied: 0
     CurrentForce: {x: 0, y: 0, z: 0}
---- !u!114 &63797427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 63797417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0674d57b67664521a7aae89dde885cd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &63797428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +541,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    CrouchState: 0
+    CrouchInput: 0
     StandCapsuleHeight: 2
     StandCapsuleCenter: {x: 0, y: 0, z: 0}
     StandAnimationCurve:
@@ -3521,7 +3513,6 @@ GameObject:
   - component: {fileID: 687237169}
   - component: {fileID: 687237168}
   - component: {fileID: 687237170}
-  - component: {fileID: 687237172}
   - component: {fileID: 687237171}
   m_Layer: 3
   m_Name: Providers
@@ -3588,6 +3579,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9096d86107a4d46489be79735bd38d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializedData:
+    MoveActionValue: {x: 0, y: 0}
+    LookActionValue: {x: 0, y: 0}
+    JumpTrigger: 0
+    CrouchTrigger: 0
 --- !u!114 &687237171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3598,18 +3594,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46696d0f2f99431a9d308806a0534c50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &687237172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 687237166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0674d57b67664521a7aae89dde885cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!43 &690567702
