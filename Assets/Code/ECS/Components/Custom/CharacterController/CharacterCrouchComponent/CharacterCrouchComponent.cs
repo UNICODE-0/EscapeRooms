@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
@@ -11,28 +12,33 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterJumpComponent : IComponent
+    public struct CharacterCrouchComponent : IComponent
     {
-        public bool JumpInput;
+        public bool CrouchInput;
         
         [PropertySpace]
         
-        [MinValue(0.001f)]
-        public float JumpStrength;
+        [MinValue(0f)]
+        public float StandCapsuleHeight;
+        
+        public Vector3 StandCapsuleCenter;
+
+        public AnimationCurve StandAnimationCurve;
         
         [MinValue(0f)]
-        public float FrameTimeCorrection;
+        public float CrouchCapsuleHeight;
         
-        [MinValue(0f)]
-        public float ReferenceFrameTime;
+        public Vector3 CrouchCapsuleCenter;
+        
+        public AnimationCurve CrouchAnimationCurve;
+
+        [MinValue(0.01f)]
+        public float SquatSpeed;
+
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsStandPosition;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsJumpAllowed;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsJumpForceApplied;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Vector3 CurrentForce;
+        [ReadOnly] public bool IsCrouchPosition;
     }
 }

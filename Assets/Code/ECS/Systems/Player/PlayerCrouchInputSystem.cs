@@ -8,24 +8,24 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerJumpInputSystem : ISystem
+    public sealed class PlayerCrouchInputSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<InputComponent> _inputStash;
-        private Stash<CharacterJumpComponent> _jumpStash;
+        private Stash<CharacterCrouchComponent> _characterCrouchStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<InputComponent>()
-                .With<CharacterMovementComponent>()
+                .With<CharacterCrouchComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();
-            _jumpStash = World.GetStash<CharacterJumpComponent>();
+            _characterCrouchStash = World.GetStash<CharacterCrouchComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -33,9 +33,9 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var inputComponent = ref _inputStash.Get(entity);
-                ref var jumpComponent = ref _jumpStash.Get(entity);
-                
-                jumpComponent.JumpInput = inputComponent.JumpAction.ReadValue<float>() > 0;
+                ref var characterCrouchComponent = ref _characterCrouchStash.Get(entity);
+
+                characterCrouchComponent.CrouchInput = inputComponent.CrouchAction.triggered;
             }
         }
 

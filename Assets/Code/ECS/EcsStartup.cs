@@ -43,6 +43,7 @@ namespace EscapeRooms.Mono
             group.AddSystem(new PlayerJumpInputSystem());
             group.AddSystem(new PlayerFPCameraInputSystem());
             group.AddSystem(new PlayerBodyRotationInputSystem());
+            group.AddSystem(new PlayerCrouchInputSystem());
             #endregion
             
             #region CharacterController
@@ -53,6 +54,7 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterSlideSystem());
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
+            group.AddSystem(new CharacterCrouchSystem());
             group.AddSystem(new FPCameraSystem());
             
             group.AddSystem(new CharacterFullMotionApplySystem());

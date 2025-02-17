@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 63797431}
   - component: {fileID: 63797432}
   - component: {fileID: 63797428}
+  - component: {fileID: 63797433}
   - component: {fileID: 63797430}
   - component: {fileID: 63797421}
   - component: {fileID: 63797427}
@@ -383,8 +384,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    Speed: 5
     MoveLocalDirection: {x: 0, y: 0}
+    Speed: 5
     CurrentVelocity: {x: 0, y: 0, z: 0}
     IsMoving: 0
 --- !u!114 &63797423
@@ -461,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    CurrentYRotation: 0
+    EulerRotationDelta: {x: 0, y: 0, z: 0}
 --- !u!114 &63797429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +536,75 @@ MonoBehaviour:
     ReboundForcePercentage: 0.25
     CurrentForce: {x: 0, y: 0, z: 0}
     IsHeadbuttForceApplied: 0
+--- !u!114 &63797433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708ec17b663e4e19828bdbfa32907c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    CrouchState: 0
+    StandCapsuleHeight: 2
+    StandCapsuleCenter: {x: 0, y: 0, z: 0}
+    StandAnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    CrouchCapsuleHeight: 1
+    CrouchCapsuleCenter: {x: 0, y: -0.5, z: 0}
+    CrouchAnimationCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    SquatSpeed: 3
+    IsStandPosition: 0
+    IsCrouchPosition: 0
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -3502,6 +3572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    RotateDelta: {x: 0, y: 0}
     MinXRotation: -80
     MaxXRotation: 80
     CurrentXRotation: 0

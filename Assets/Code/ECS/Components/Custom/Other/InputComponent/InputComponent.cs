@@ -15,5 +15,6 @@ namespace EscapeRooms.Components
         [NonSerialized] public InputAction MoveAction;
         [NonSerialized] public InputAction LookAction;
         [NonSerialized] public InputAction JumpAction;
+        [NonSerialized] public InputAction CrouchAction;
     }
 }
