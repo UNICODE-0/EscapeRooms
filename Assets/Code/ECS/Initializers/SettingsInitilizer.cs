@@ -33,7 +33,9 @@ namespace EscapeRooms.Initializers
             return new GameSettings()
             {
                 TargetFrameRate = 0,
-                Sensitivity = 0.1f
+                Sensitivity = 0.1f,
+                CrouchInputTriggerDelay = 0.1f,
+                JumpInputTriggerDelay = 0.1f
             };
         }
         

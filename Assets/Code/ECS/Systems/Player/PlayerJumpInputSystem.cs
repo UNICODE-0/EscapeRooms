@@ -35,7 +35,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 
-                jumpComponent.JumpInput = inputComponent.JumpActionValue > 0;
+                jumpComponent.JumpInput = inputComponent.JumpTriggerValue.IsTriggered;
             }
         }
 

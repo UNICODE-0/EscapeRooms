@@ -4,5 +4,7 @@ namespace EscapeRooms.Data
     {
         public int TargetFrameRate;
         public float Sensitivity;
+        public float JumpInputTriggerDelay;
+        public float CrouchInputTriggerDelay;
     }
 }

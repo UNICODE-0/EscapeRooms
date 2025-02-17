@@ -25,10 +25,12 @@ namespace EscapeRooms.Components
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public Vector2 LookActionValue;
         
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float JumpActionValue;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float CrouchActionValue;
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [InlineProperty]
+        [ReadOnly] public DelayedInputTrigger JumpTriggerValue;
+
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [InlineProperty]
+        [ReadOnly] public DelayedInputTrigger CrouchTriggerValue;
     }
 }

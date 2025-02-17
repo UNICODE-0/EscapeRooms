@@ -15,14 +15,17 @@ namespace EscapeRooms.Initializers
 
         private Filter _filter;
         private Stash<InputComponent> _playerInputStash;
+        private Stash<SettingsComponent> _settingsStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<InputComponent>()
+                .With<SettingsComponent>()
                 .Build();
 
             _playerInputStash = World.GetStash<InputComponent>();
+            _settingsStash = World.GetStash<SettingsComponent>();
 
             SetInputActions();
         }
@@ -37,11 +40,16 @@ namespace EscapeRooms.Initializers
             foreach (var entity in _filter)
             {
                 ref var playerInputComponent = ref _playerInputStash.Get(entity);
+                ref var settingsComponent = ref _settingsStash.Get(entity);
 
                 playerInputComponent.MoveAction = moveAction;
                 playerInputComponent.LookAction = lookAction;
+                
                 playerInputComponent.JumpAction = jumpAction;
+                playerInputComponent.JumpTriggerValue.Initialize(settingsComponent.GameSettings.JumpInputTriggerDelay);
+                
                 playerInputComponent.CrouchAction = crouchAction;
+                playerInputComponent.CrouchTriggerValue.Initialize(settingsComponent.GameSettings.CrouchInputTriggerDelay);
             }
         }
         
@@ -53,8 +61,8 @@ namespace EscapeRooms.Initializers
 
                 playerInputComponent.MoveActionValue = playerInputComponent.MoveAction.ReadValue<Vector2>();
                 playerInputComponent.LookActionValue = playerInputComponent.LookAction.ReadValue<Vector2>();
-                playerInputComponent.JumpActionValue = playerInputComponent.JumpAction.ReadValue<float>();
-                playerInputComponent.CrouchActionValue = playerInputComponent.CrouchAction.ReadValue<float>();
+                playerInputComponent.JumpTriggerValue.Update(deltaTime, playerInputComponent.JumpAction.triggered);
+                playerInputComponent.CrouchTriggerValue.Update(deltaTime, playerInputComponent.CrouchAction.triggered);
             }
         }
 

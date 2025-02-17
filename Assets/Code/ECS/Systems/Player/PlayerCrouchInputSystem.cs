@@ -35,7 +35,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var characterCrouchComponent = ref _characterCrouchStash.Get(entity);
 
-                characterCrouchComponent.CrouchInput = inputComponent.CrouchActionValue > 0;
+                characterCrouchComponent.CrouchInput = inputComponent.CrouchTriggerValue.IsTriggered;
             }
         }
 
