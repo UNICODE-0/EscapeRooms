@@ -39,9 +39,8 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var settingsComponent = ref _settingsStash.Get(entity);
 
-                Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
                 rotationComponent.EulerRotationDelta = 
-                    new Vector3(0f, mouseDelta.x * settingsComponent.GameSettings.Sensitivity ,0f);
+                    new Vector3(0f, inputComponent.LookActionValue.x * settingsComponent.GameSettings.Sensitivity ,0f);
             }
         }
 

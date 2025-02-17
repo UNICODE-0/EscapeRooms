@@ -40,12 +40,9 @@ namespace EscapeRooms.Systems
                 ref var gravityComponent = ref _gravityStash.Get(entity);
                 ref var groundedComponent = ref _groundedStash.Get(entity);
 
-                if (!jumpComponent.IsJumpAllowed && !jumpComponent.JumpInput)
-                    jumpComponent.IsJumpAllowed = true;
-
                 if (groundedComponent.IsGrounded)
                 {
-                    if (jumpComponent.JumpInput && jumpComponent.IsJumpAllowed)
+                    if (jumpComponent.JumpInput)
                     {
                         gravityComponent.IgnoreAttraction = true;
 
@@ -58,7 +55,6 @@ namespace EscapeRooms.Systems
                                        * CharacterGravityComponent.GRAVITY_ACCELERATION_FACTOR * gravityComponent.GravitationalAttraction);
 
                         jumpComponent.IsJumpForceApplied = true;
-                        jumpComponent.IsJumpAllowed = false;
                     }
                 }
 

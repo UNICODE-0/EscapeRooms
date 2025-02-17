@@ -39,7 +39,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var settingsComponent = ref _settingsStash.Get(entity);
 
-                Vector2 mouseDelta = inputComponent.LookAction.ReadValue<Vector2>();
+                Vector2 mouseDelta = inputComponent.LookActionValue;
                 
                 Vector2 RotateDelta = Vector3.zero;
                 RotateDelta.x = mouseDelta.y;

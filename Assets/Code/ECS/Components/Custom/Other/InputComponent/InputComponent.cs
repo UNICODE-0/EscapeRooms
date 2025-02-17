@@ -1,7 +1,9 @@
 using System;
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
-using UnityEngine;
+using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Components
@@ -16,5 +18,17 @@ namespace EscapeRooms.Components
         [NonSerialized] public InputAction LookAction;
         [NonSerialized] public InputAction JumpAction;
         [NonSerialized] public InputAction CrouchAction;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public Vector2 MoveActionValue;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public Vector2 LookActionValue;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public float JumpActionValue;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public float CrouchActionValue;
     }
 }

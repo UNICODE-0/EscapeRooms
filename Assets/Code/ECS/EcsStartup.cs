@@ -29,12 +29,13 @@ namespace EscapeRooms.Mono
 
         private void AddInitializers(SystemsGroup group)
         {
-            group.AddInitializer(new InputInitializer());
             group.AddInitializer(new SettingsInitializer());
         }
 
         private void AddSystems(SystemsGroup group)
         {
+            group.AddSystem(new InputSystem());
+            
             group.AddSystem(new RaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
 
