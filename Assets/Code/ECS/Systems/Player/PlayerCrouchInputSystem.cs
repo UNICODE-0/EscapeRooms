@@ -14,18 +14,18 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<InputComponent> _inputStash;
-        private Stash<CharacterCrouchComponent> _characterCrouchStash;
+        private Stash<CharacterHeightLerpComponent> _characterHeightLerpStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<InputComponent>()
-                .With<CharacterCrouchComponent>()
+                .With<CharacterHeightLerpComponent>()
                 .With<PlayerComponent>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();
-            _characterCrouchStash = World.GetStash<CharacterCrouchComponent>();
+            _characterHeightLerpStash = World.GetStash<CharacterHeightLerpComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -33,9 +33,9 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var inputComponent = ref _inputStash.Get(entity);
-                ref var characterCrouchComponent = ref _characterCrouchStash.Get(entity);
+                ref var characterHeightLerpComponent = ref _characterHeightLerpStash.Get(entity);
 
-                characterCrouchComponent.CrouchInput = inputComponent.CrouchTrigger;
+                characterHeightLerpComponent.ChangeStateInput = inputComponent.CrouchTrigger;
             }
         }
 

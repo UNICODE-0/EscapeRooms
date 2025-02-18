@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    HeadOverlapCheckEntity: {fileID: 1718160284}
+    HeadOverlapCheckProvider: {fileID: 1718160284}
     ReboundForcePercentage: 0.25
     CurrentForce: {x: 0, y: 0, z: 0}
     IsHeadbuttForceApplied: 0
@@ -541,62 +541,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    CrouchInput: 0
-    StandCapsuleHeight: 2
-    StandCapsuleCenter: {x: 0, y: 0, z: 0}
-    StandAnimationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    CrouchCapsuleHeight: 1
-    CrouchCapsuleCenter: {x: 0, y: -0.5, z: 0}
-    CrouchAnimationCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 2
-        outSlope: 2
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    SquatSpeed: 3
-    IsStandPosition: 0
-    IsCrouchPosition: 0
+    ChangeStateInput: 0
+    DefaultState:
+      CapsuleHeight: 2
+      CapsuleCenter: {x: 0, y: 0, z: 0}
+      OutCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      OutTime: 1
+    TargetState:
+      CapsuleHeight: 1
+      CapsuleCenter: {x: 0, y: -0.5, z: 0}
+      OutCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      OutTime: 1
+    LerpStartTime: 0
+    IsTargetState: 0
+    IsChangeColliderInProgress: 0
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0

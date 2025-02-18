@@ -51,7 +51,7 @@ namespace EscapeRooms.Systems
                     continue;
                 }
                     
-                ref var headOverlapSphereComponent = ref _overlapSphereStash.Get(headbuttComponent.HeadOverlapCheckEntity.Entity);
+                ref var headOverlapSphereComponent = ref _overlapSphereStash.Get(headbuttComponent.HeadOverlapCheckProvider.Entity);
                 if (jumpComponent.IsJumpForceApplied && !headbuttComponent.IsHeadbuttForceApplied && 
                     headOverlapSphereComponent.IsSphereIntersect)
                 {
