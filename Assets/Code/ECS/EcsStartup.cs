@@ -64,6 +64,7 @@ namespace EscapeRooms.Mono
             #endregion
             
             group.AddSystem(new TransformDeltaRotationSystem());
+            group.AddSystem(new TransformPositionLerpSystem());
         }
 
         private void AddLateSystems(SystemsGroup group)

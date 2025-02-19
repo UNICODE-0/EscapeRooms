@@ -543,13 +543,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     CrouchInput: 0
-    FloatLerpProvider: {fileID: 1913946922}
+    HeightLerpProvider: {fileID: 1913946922}
+    HeadLerpProvider: {fileID: 687237172}
     StandState:
       CapsuleHeight: 2
       CapsuleCenter: {x: 0, y: 0, z: 0}
     CrouchState:
-      CapsuleHeight: 1
-      CapsuleCenter: {x: 0, y: -0.5, z: 0}
+      CapsuleHeight: 1.25
+      CapsuleCenter: {x: 0, y: -0.375, z: 0}
     IsCrouching: 0
 --- !u!43 &171974159
 Mesh:
@@ -1620,6 +1621,60 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &618543361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 618543362}
+  - component: {fileID: 618543363}
+  m_Layer: 3
+  m_Name: HeadFloatLerp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &618543362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618543361}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 687237167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &618543363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618543361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a3e907898f4b5fab9a99bff4b27093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    StartLerpInput: 0
+    From: 0
+    To: 1
+    Ease: 3
+    Time: 0.2
+    CurrentValue: 0
+    LerpStartTime: 0
+    IsLerpInProgress: 0
+    IsLerpTimeIsUp: 0
 --- !u!1 &665380153
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,6 +3521,7 @@ GameObject:
   - component: {fileID: 687237167}
   - component: {fileID: 687237169}
   - component: {fileID: 687237168}
+  - component: {fileID: 687237172}
   - component: {fileID: 687237170}
   - component: {fileID: 687237171}
   m_Layer: 3
@@ -3487,7 +3543,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 618543362}
   m_Father: {fileID: 323524074}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &687237168
@@ -3550,6 +3607,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46696d0f2f99431a9d308806a0534c50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &687237172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdda0c9ab3954cb7be50d9ec3f4d40ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    ChangePositionInput: 0
+    FloatLerpProvider: {fileID: 618543363}
+    DefaultPosition: {x: 0, y: 0.728, z: 0}
+    TargetPosition: {x: 0, y: -0.018, z: 0}
+    IsTargetState: 0
 --- !u!43 &690567702
 Mesh:
   m_ObjectHideFlags: 0

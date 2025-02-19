@@ -14,9 +14,12 @@ namespace EscapeRooms.Components
     {
         public bool ChangePositionInput;
 
-        [PropertySpace]
+        [PropertySpace] 
+        
+        public FloatLerpProvider FloatLerpProvider;
         
         public Vector3 DefaultPosition;
+        
         public Vector3 TargetPosition;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 

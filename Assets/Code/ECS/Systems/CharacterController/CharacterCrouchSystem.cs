@@ -16,6 +16,7 @@ namespace EscapeRooms.Systems
         private Stash<CharacterCrouchComponent> _crouchStash;
         private Stash<CharacterControllerComponent> _characterStash;
         private Stash<FloatLerpComponent> _floatLerpStash;
+        private Stash<TransformPositionLerpComponent> _transformPositionLerpStash;
 
         public void OnAwake()
         {
@@ -27,6 +28,7 @@ namespace EscapeRooms.Systems
             _crouchStash = World.GetStash<CharacterCrouchComponent>();
             _characterStash = World.GetStash<CharacterControllerComponent>();
             _floatLerpStash = World.GetStash<FloatLerpComponent>();
+            _transformPositionLerpStash = World.GetStash<TransformPositionLerpComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -35,17 +37,14 @@ namespace EscapeRooms.Systems
             {
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 ref var characterComponent = ref _characterStash.Get(entity);
-                ref var floatLerpComponent = ref _floatLerpStash.Get(crouchComponent.FloatLerpProvider.Entity);
+                ref var HeightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
+                ref var HeadLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
 
-                if (crouchComponent.CrouchInput && !floatLerpComponent.IsLerpInProgress)
+                HeightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
+                HeadLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
+
+                if (HeightFloatLerpComponent.IsLerpInProgress)
                 {
-                    floatLerpComponent.StartLerpInput = true;
-                }
-
-                if (floatLerpComponent.IsLerpInProgress)
-                {
-                    floatLerpComponent.StartLerpInput = false;
-
                     ref CharacterCrouchState from = ref crouchComponent.IsCrouching ? 
                         ref crouchComponent.CrouchState : ref crouchComponent.StandState;
                     
@@ -53,15 +52,14 @@ namespace EscapeRooms.Systems
                         ref crouchComponent.StandState : ref crouchComponent.CrouchState;
                     
                     characterComponent.CharacterController.height = 
-                        Mathf.Lerp(from.CapsuleHeight, to.CapsuleHeight, floatLerpComponent.CurrentValue);
+                        Mathf.Lerp(from.CapsuleHeight, to.CapsuleHeight, HeightFloatLerpComponent.CurrentValue);
                     
                     characterComponent.CharacterController.center = 
-                        Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, floatLerpComponent.CurrentValue);
+                        Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, HeightFloatLerpComponent.CurrentValue);
 
-                    if (floatLerpComponent.IsLerpTimeIsUp)
+                    if (HeightFloatLerpComponent.IsLerpTimeIsUp)
                         crouchComponent.IsCrouching = !crouchComponent.IsCrouching;
                 }
-                
             }
         }
 
