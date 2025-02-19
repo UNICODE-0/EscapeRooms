@@ -13,37 +13,29 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterHeightLerpComponent : IComponent
+    public struct CharacterCrouchComponent : IComponent
     {
-        public bool ChangeStateInput;
+        public bool CrouchInput;
 
         [PropertySpace] 
         
-        public CharacterHeightLerpState DefaultState;
+        public FloatLerpProvider FloatLerpProvider;
         
-        public CharacterHeightLerpState TargetState;
+        public CharacterCrouchState StandState;
         
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float LerpStartTime;
-
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsTargetState;
+        public CharacterCrouchState CrouchState;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsChangeColliderInProgress;
+        [ReadOnly] public bool IsCrouching;
     }
     
     [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterHeightLerpState
+    public struct CharacterCrouchState
     {
         public float CapsuleHeight;
         public Vector3 CapsuleCenter;
-        public AnimationCurve OutCurve;
-        
-        [MinValue(0f)]
-        public float OutTime;
     }
 }

@@ -38,6 +38,8 @@ namespace EscapeRooms.Mono
             
             group.AddSystem(new RaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
+            
+            group.AddSystem(new FloatLerpSystem());
 
             #region Player
             group.AddSystem(new PlayerMovementInputSystem());
@@ -55,7 +57,7 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterSlideSystem());
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
-            group.AddSystem(new CharacterHeightLerpSystem());
+            group.AddSystem(new CharacterCrouchSystem());
             group.AddSystem(new FPCameraSystem());
             
             group.AddSystem(new CharacterFullMotionApplySystem());

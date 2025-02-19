@@ -327,6 +327,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1718160283}
+  - {fileID: 1913946921}
   m_Father: {fileID: 1891703203}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &63797419
@@ -541,66 +542,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    ChangeStateInput: 0
-    DefaultState:
+    CrouchInput: 0
+    FloatLerpProvider: {fileID: 1913946922}
+    StandState:
       CapsuleHeight: 2
       CapsuleCenter: {x: 0, y: 0, z: 0}
-      OutCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 2
-          outSlope: 2
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      OutTime: 1
-    TargetState:
+    CrouchState:
       CapsuleHeight: 1
       CapsuleCenter: {x: 0, y: -0.5, z: 0}
-      OutCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 3
-          time: 0
-          value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 2
-          outSlope: 2
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      OutTime: 1
-    LerpStartTime: 0
-    IsTargetState: 0
-    IsChangeColliderInProgress: 0
+    IsCrouching: 0
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -48404,6 +48354,60 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1913946920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913946921}
+  - component: {fileID: 1913946922}
+  m_Layer: 3
+  m_Name: CrouchFloatLerp
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1913946921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913946920}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.563, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 63797418}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1913946922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913946920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0a3e907898f4b5fab9a99bff4b27093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    StartLerpInput: 0
+    From: 0
+    To: 1
+    Ease: 3
+    Time: 0.2
+    CurrentValue: 0
+    LerpStartTime: 0
+    IsLerpInProgress: 0
+    IsLerpTimeIsUp: 0
 --- !u!43 &1963498015
 Mesh:
   m_ObjectHideFlags: 0
