@@ -34,11 +34,17 @@ namespace EscapeRooms.Mono
 
         private void AddSystems(SystemsGroup group)
         {
+            #region InputRequests
+            group.AddSystem(new PlayerJumpInputInterruptSystem());
+            #endregion
+
             group.AddSystem(new InputSystem());
             
+            #region Physics
             group.AddSystem(new RaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
-            
+            #endregion
+
             group.AddSystem(new FloatLerpSystem());
 
             #region Player
@@ -63,8 +69,10 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterFullMotionApplySystem());
             #endregion
             
+            #region Transform
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
+            #endregion
         }
 
         private void AddLateSystems(SystemsGroup group)

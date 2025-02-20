@@ -40,7 +40,7 @@ namespace EscapeRooms.Data
                 return;
             }
             
-            if (inputTriggerValue && !IsTriggered)
+            if (inputTriggerValue && !_isTriggered)
             {
                 _targetValue = true;
                 _timer = _delayDuration;
@@ -61,6 +61,13 @@ namespace EscapeRooms.Data
             }
 
             _isTriggered = _targetValue;
+        }
+
+        public void Interrupt()
+        {
+            _timer = 0f;
+            _targetValue = false;
+            _isTriggered = false;
         }
     }
 }

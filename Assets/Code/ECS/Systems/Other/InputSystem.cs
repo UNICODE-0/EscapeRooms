@@ -26,6 +26,8 @@ namespace EscapeRooms.Initializers
         private DelayedInputTrigger _jumpDelayedTrigger;
         private DelayedInputTrigger _crouchDelayedTrigger;
 
+        private Request<InputTriggerInterruptRequest> _triggerInterruptRequest;
+        
         public void OnAwake()
         {
             _filter = World.Filter
@@ -33,6 +35,7 @@ namespace EscapeRooms.Initializers
                 .Build();
 
             _playerInputStash = World.GetStash<InputComponent>();
+            _triggerInterruptRequest = World.GetRequest<InputTriggerInterruptRequest>();
 
             InitializeInputActions();
         }
@@ -54,6 +57,8 @@ namespace EscapeRooms.Initializers
         {
             Vector2 moveActionValue = _moveAction.ReadValue<Vector2>();
             Vector2 lookActionValue = _lookAction.ReadValue<Vector2>();
+
+            HandleInterruptTriggerEvent();
             
             _jumpDelayedTrigger.Update(deltaTime, _jumpAction.triggered);
             _crouchDelayedTrigger.Update(deltaTime, _crouchAction.triggered);
@@ -69,6 +74,22 @@ namespace EscapeRooms.Initializers
             }
         }
 
+        private void HandleInterruptTriggerEvent()
+        {
+            foreach (var interruptReq in _triggerInterruptRequest.Consume())
+            {
+                switch (interruptReq.TriggerToInterrupt)
+                {
+                    case InputTriggers.Jump:
+                        _jumpDelayedTrigger.Interrupt();
+                        break;
+                    case InputTriggers.Crouch:
+                        _crouchDelayedTrigger.Interrupt();
+                        break;
+                }
+            }
+        }
+        
         public void Dispose()
         {
         }

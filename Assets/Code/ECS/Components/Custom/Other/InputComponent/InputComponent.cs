@@ -27,4 +27,10 @@ namespace EscapeRooms.Components
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool CrouchTrigger;
     }
+
+    public enum InputTriggers
+    {
+        Jump,
+        Crouch
+    }
 }

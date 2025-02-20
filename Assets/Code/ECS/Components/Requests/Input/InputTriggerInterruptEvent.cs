@@ -1,7 +1,4 @@
-using EscapeRooms.Mono;
 using Scellecs.Morpeh;
-using Unity.Collections;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components
@@ -10,10 +7,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-
-    public struct CharacterControllerComponent : IComponent
+    public struct InputTriggerInterruptRequest : IRequestData
     {
-        public CharacterController CharacterController;
-        public ControllerColliderHitHolder HitHolder;
+        public InputTriggers TriggerToInterrupt;
     }
 }
