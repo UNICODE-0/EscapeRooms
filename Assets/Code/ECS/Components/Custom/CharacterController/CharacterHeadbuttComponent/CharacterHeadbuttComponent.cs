@@ -13,6 +13,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct CharacterHeadbuttComponent : IComponent
     {
+        [Required]
         public OverlapSphereProvider HeadOverlapCheckProvider;
         
         [MinValue(0.01f)]

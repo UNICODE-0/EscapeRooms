@@ -19,8 +19,10 @@ namespace EscapeRooms.Components
 
         [PropertySpace] 
         
+        [Required]
         public FloatLerpProvider HeightLerpProvider;
 
+        [Required]
         public TransformPositionLerpProvider HeadLerpProvider;
         
         public CharacterCrouchState StandState;
