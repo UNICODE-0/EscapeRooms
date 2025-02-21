@@ -37,13 +37,13 @@ namespace EscapeRooms.Systems
             {
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 ref var characterComponent = ref _characterStash.Get(entity);
-                ref var HeightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
-                ref var HeadLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
+                ref var heightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
+                ref var headLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
 
-                HeightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
-                HeadLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
+                heightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
+                headLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
 
-                if (HeightFloatLerpComponent.IsLerpInProgress)
+                if (heightFloatLerpComponent.IsLerpInProgress)
                 {
                     ref CharacterCrouchState from = ref crouchComponent.IsCrouching ? 
                         ref crouchComponent.CrouchState : ref crouchComponent.StandState;
@@ -52,12 +52,12 @@ namespace EscapeRooms.Systems
                         ref crouchComponent.StandState : ref crouchComponent.CrouchState;
                     
                     characterComponent.CharacterController.height = 
-                        Mathf.Lerp(from.CapsuleHeight, to.CapsuleHeight, HeightFloatLerpComponent.CurrentValue);
+                        Mathf.Lerp(from.CapsuleHeight, to.CapsuleHeight, heightFloatLerpComponent.CurrentValue);
                     
                     characterComponent.CharacterController.center = 
-                        Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, HeightFloatLerpComponent.CurrentValue);
+                        Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, heightFloatLerpComponent.CurrentValue);
 
-                    if (HeightFloatLerpComponent.IsLerpTimeIsUp)
+                    if (heightFloatLerpComponent.IsLerpTimeIsUp)
                         crouchComponent.IsCrouching = !crouchComponent.IsCrouching;
                 }
             }

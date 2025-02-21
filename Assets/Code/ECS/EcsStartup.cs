@@ -64,6 +64,7 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             group.AddSystem(new CharacterCrouchSystem());
+            group.AddSystem(new CharacterCrouchSlowdownSystem());
             group.AddSystem(new FPCameraSystem());
             
             group.AddSystem(new CharacterJumpForceApplySystem());
