@@ -66,7 +66,13 @@ namespace EscapeRooms.Mono
             group.AddSystem(new CharacterCrouchSystem());
             group.AddSystem(new FPCameraSystem());
             
-            group.AddSystem(new CharacterFullMotionApplySystem());
+            group.AddSystem(new CharacterJumpForceApplySystem());
+            group.AddSystem(new CharacterGravityAttractionApplySystem());
+            group.AddSystem(new CharacterMovementVelocityApplySystem());
+            group.AddSystem(new CharacterSlideVelocityApplySystem());
+            group.AddSystem(new CharacterHeadbuttForceApplySystem());
+
+            group.AddSystem(new CharacterMotionSystem());
             #endregion
             
             #region Transform

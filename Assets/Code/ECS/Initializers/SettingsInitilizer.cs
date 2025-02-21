@@ -1,9 +1,7 @@
-using EscapeRooms.Components;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Initializers
 {
