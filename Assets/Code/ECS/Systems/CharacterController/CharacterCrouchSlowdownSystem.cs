@@ -42,8 +42,18 @@ namespace EscapeRooms.Systems
                 ref var movementComponent = ref _movementStash.Get(entity);
                 ref var crouchFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
 
-                if ((!crouchComponent.IsCrouching && crouchFloatLerpComponent.IsLerpInProgress && !crouchFloatLerpComponent.IsLerpTimeIsUp) || 
-                    (crouchComponent.IsCrouching && (!crouchFloatLerpComponent.IsLerpInProgress || crouchFloatLerpComponent.IsLerpTimeIsUp)))
+                /* We need to check IsLerpTimeIsUp because IsCrouching state
+                changed to opposite in crouching system which executed before, but IsLerpInProgress still true.
+                This means that the squat operation has already been performed in this frame. */
+                
+                bool isSquattingInProgress = !crouchComponent.IsCrouching && crouchFloatLerpComponent.IsLerpInProgress &&
+                                            !crouchFloatLerpComponent.IsLerpTimeIsUp;
+
+                bool isCrouchingAndNotStandingUp = crouchComponent.IsCrouching &&
+                                                    (!crouchFloatLerpComponent.IsLerpInProgress ||
+                                                     crouchFloatLerpComponent.IsLerpTimeIsUp);
+                
+                if (isSquattingInProgress || isCrouchingAndNotStandingUp)
                 {
                     crouchSlowdownComponent.IsSlowdownActive = true;
                     crouchSlowdownComponent.CurrentModifier = Mathf.Lerp(1f, crouchSlowdownComponent.SlowdownModifier,
