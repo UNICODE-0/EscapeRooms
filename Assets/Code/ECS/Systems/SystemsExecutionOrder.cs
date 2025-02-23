@@ -1,7 +1,6 @@
-using EscapeRooms.Systems;
 using Scellecs.Morpeh;
 
-namespace EscapeRooms.Mono.Systems
+namespace EscapeRooms.Systems
 {
     public static class SystemsExecutionOrder
     {

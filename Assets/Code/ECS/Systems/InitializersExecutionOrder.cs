@@ -1,7 +1,6 @@
-using EscapeRooms.Initializers;
 using Scellecs.Morpeh;
 
-namespace EscapeRooms.Mono.Systems
+namespace EscapeRooms.Initializers
 {
     public static class InitializersExecutionOrder
     {
