@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Vector3 = System.Numerics.Vector3;
 
-namespace EscapeRooms.Initializers
+namespace EscapeRooms.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
