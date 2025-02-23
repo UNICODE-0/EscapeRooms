@@ -22,7 +22,7 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterCrouchComponent>()
-                .With<CharacterMovementComponent>()
+                .With<CharacterControllerComponent>()
                 .Build();
 
             _crouchStash = World.GetStash<CharacterCrouchComponent>();
