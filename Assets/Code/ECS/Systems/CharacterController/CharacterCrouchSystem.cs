@@ -45,6 +45,8 @@ namespace EscapeRooms.Systems
 
                 if (heightFloatLerpComponent.IsLerpInProgress)
                 {
+                    crouchComponent.IsSquatInProgress = true;
+                    
                     ref CharacterCrouchState from = ref crouchComponent.IsCrouching ? 
                         ref crouchComponent.CrouchState : ref crouchComponent.StandState;
                     
@@ -58,7 +60,10 @@ namespace EscapeRooms.Systems
                         Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, heightFloatLerpComponent.CurrentValue);
 
                     if (heightFloatLerpComponent.IsLerpTimeIsUp)
+                    {
+                        crouchComponent.IsSquatInProgress = false;
                         crouchComponent.IsCrouching = !crouchComponent.IsCrouching;
+                    }
                 }
             }
         }

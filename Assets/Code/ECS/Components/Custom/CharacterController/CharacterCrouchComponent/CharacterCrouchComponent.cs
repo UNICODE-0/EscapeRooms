@@ -26,11 +26,13 @@ namespace EscapeRooms.Components
         public TransformPositionLerpProvider HeadLerpProvider;
         
         public CharacterCrouchState StandState;
-        
         public CharacterCrouchState CrouchState;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsCrouching;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsSquatInProgress;
     }
     
     [System.Serializable]
