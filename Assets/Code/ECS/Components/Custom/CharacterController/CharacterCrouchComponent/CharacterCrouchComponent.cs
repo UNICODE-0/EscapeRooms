@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
@@ -15,6 +16,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct CharacterCrouchComponent : IComponent
     {
+        [NonSerialized] public int CrouchBlockFlag;
+        
         public bool CrouchInput;
 
         [PropertySpace] 

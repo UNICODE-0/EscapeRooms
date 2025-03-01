@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -40,8 +41,11 @@ namespace EscapeRooms.Systems
                 ref var heightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
                 ref var headLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
 
-                heightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
-                headLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
+                if (crouchComponent.CrouchBlockFlag.IsFlagClear())
+                {
+                    heightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
+                    headLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
+                }
 
                 if (heightFloatLerpComponent.IsLerpInProgress)
                 {

@@ -554,6 +554,7 @@ MonoBehaviour:
       CapsuleHeight: 1.25
       CapsuleCenter: {x: 0, y: -0.375, z: 0}
     IsCrouching: 0
+    IsSquatInProgress: 0
 --- !u!114 &63797434
 MonoBehaviour:
   m_ObjectHideFlags: 0

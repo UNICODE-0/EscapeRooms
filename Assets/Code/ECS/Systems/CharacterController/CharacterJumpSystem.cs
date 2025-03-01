@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using EscapeRooms.Components;
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -39,10 +40,10 @@ namespace EscapeRooms.Systems
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var gravityComponent = ref _gravityStash.Get(entity);
                 ref var groundedComponent = ref _groundedStash.Get(entity);
-
+                
                 if (groundedComponent.IsGrounded)
                 {
-                    if (jumpComponent.JumpInput)
+                    if (jumpComponent.JumpInput && jumpComponent.JumpBlockFlag.IsFlagClear())
                     {
                         gravityComponent.IgnoreAttraction = true;
 

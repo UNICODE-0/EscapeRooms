@@ -1,3 +1,4 @@
+using System;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
@@ -13,6 +14,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct CharacterJumpComponent : IComponent
     {
+        [NonSerialized] public int JumpBlockFlag;
+        
         public bool JumpInput;
         
         [PropertySpace]
