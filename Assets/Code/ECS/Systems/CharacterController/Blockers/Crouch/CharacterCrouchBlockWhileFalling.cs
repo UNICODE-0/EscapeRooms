@@ -37,10 +37,8 @@ namespace EscapeRooms.Systems
                 ref var groundComponent = ref _groundedStash.Get(entity);
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 
-                if (groundComponent.IsGrounded)
-                    crouchComponent.CrouchBlockFlag.RemoveFlag(CrouchBlockWhileFallingFlag);
-                else
-                    crouchComponent.CrouchBlockFlag.AddFlag(CrouchBlockWhileFallingFlag);
+                FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
+                    CrouchBlockWhileFallingFlag, !groundComponent.IsGrounded);
             }
         }
 
