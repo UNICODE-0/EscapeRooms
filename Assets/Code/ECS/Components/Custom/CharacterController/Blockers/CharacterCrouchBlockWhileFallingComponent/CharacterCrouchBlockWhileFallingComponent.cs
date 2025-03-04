@@ -1,16 +1,14 @@
-using Scellecs.Morpeh.Providers;
+using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
+    [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    
-    [RequireComponent(typeof(CharacterControllerProvider))]
-    
-    public sealed class CharacterCrouchStandingBlockProvider : MonoProvider<CharacterCrouchStandingBlockComponent>
+    public struct CharacterCrouchBlockWhileFallingComponent : IComponent
     {
     }
 }

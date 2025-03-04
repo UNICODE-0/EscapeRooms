@@ -306,6 +306,9 @@ GameObject:
   - component: {fileID: 63797433}
   - component: {fileID: 63797435}
   - component: {fileID: 63797436}
+  - component: {fileID: 63797438}
+  - component: {fileID: 63797437}
+  - component: {fileID: 63797439}
   - component: {fileID: 63797430}
   - component: {fileID: 63797421}
   - component: {fileID: 63797423}
@@ -602,6 +605,42 @@ MonoBehaviour:
   serializedData:
     StandPossibilityCheckSphereCast: {fileID: 1574374403}
     StandingPossibilityCheckSphereOverlap: {fileID: 1718160284}
+--- !u!114 &63797437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d475cfb147a4266bc9148a7cd04a63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &63797438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f212fe1bb8f54d3f9f2c2b61543770fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &63797439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e8f535ea28407d99d3018cf9f084f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0
@@ -1111,7 +1150,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.2
   far clip plane: 100
   field of view: 60.000004
   orthographic: 0

@@ -22,6 +22,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<CharacterJumpComponent>()
                 .With<CharacterCrouchComponent>()
+                .With<CharacterCrouchBlockWhileJumpComponent>()
                 .Build();
 
             _jumpStash = World.GetStash<CharacterJumpComponent>();
