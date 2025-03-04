@@ -65,6 +65,12 @@ namespace EscapeRooms.Systems
 
         private bool InterpolateFloat(ref FloatLerpComponent floatLerpComponent)
         {
+            if (floatLerpComponent.IsLerpPaused)
+            {
+                floatLerpComponent.LerpStartTime += Time.deltaTime;
+                return false;
+            }
+            
             float timeElapsed = Time.time - floatLerpComponent.LerpStartTime;
             float scaledTime = Mathf.Clamp01(timeElapsed / floatLerpComponent.Time);
 

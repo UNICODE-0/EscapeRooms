@@ -40,16 +40,34 @@ namespace EscapeRooms.Systems
                 ref var characterComponent = ref _characterStash.Get(entity);
                 ref var heightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
                 ref var headLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
+                ref var headFloatLerpComponent = ref _floatLerpStash.Get(headLerpComponent.FloatLerpProvider.Entity);
 
                 if (crouchComponent.CrouchBlockFlag.IsFlagClear())
                 {
                     heightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
                     headLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
                 }
+                else
+                {
+                    heightFloatLerpComponent.StartLerpInput = false;
+                    headLerpComponent.ChangePositionInput = false;
+                }
 
                 if (heightFloatLerpComponent.IsLerpInProgress)
                 {
                     crouchComponent.IsSquatInProgress = true;
+
+                    if (crouchComponent.CrouchBlockFlag.CheckFlag(CharacterCrouchStandingBlockSystem
+                            .CrouchStandingBlockFlag))
+                    {
+                        heightFloatLerpComponent.IsLerpPaused = true;
+                        headFloatLerpComponent.IsLerpPaused = true;
+                    }
+                    else
+                    {
+                        heightFloatLerpComponent.IsLerpPaused = false;
+                        headFloatLerpComponent.IsLerpPaused = false;
+                    }
                     
                     ref CharacterCrouchState from = ref crouchComponent.IsCrouching ? 
                         ref crouchComponent.CrouchState : ref crouchComponent.StandState;

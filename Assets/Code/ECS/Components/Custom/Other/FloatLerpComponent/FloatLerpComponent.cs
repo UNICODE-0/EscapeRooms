@@ -38,5 +38,8 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsLerpTimeIsUp;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsLerpPaused;
     }
 }
