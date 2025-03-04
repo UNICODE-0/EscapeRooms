@@ -9,37 +9,37 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class CharacterCrouchStandingBlockSystem : ISystem
+    public sealed class CharacterCrouchStandBlockSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<CharacterCrouchStandingBlockComponent> _standingBlockStash;
+        private Stash<CharacterCrouchStandBlockComponent> _standBlockStash;
         private Stash<CharacterCrouchComponent> _crouchStash;
-        private Stash<OverlapSphereComponent> _overlapSphereStash;
+        private Stash<SphereCastComponent> _sphereCastStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<CharacterCrouchStandingBlockComponent>()
+                .With<CharacterCrouchStandBlockComponent>()
                 .With<CharacterCrouchComponent>()
                 .Build();
 
-            _standingBlockStash = World.GetStash<CharacterCrouchStandingBlockComponent>();
+            _standBlockStash = World.GetStash<CharacterCrouchStandBlockComponent>();
             _crouchStash = World.GetStash<CharacterCrouchComponent>();
-            _overlapSphereStash = World.GetStash<OverlapSphereComponent>();
+            _sphereCastStash = World.GetStash<SphereCastComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filter)
             {
-                ref var standingBlockComponent = ref _standingBlockStash.Get(entity);
+                ref var standBlockComponent = ref _standBlockStash.Get(entity);
                 ref var crouchComponent = ref _crouchStash.Get(entity);
-                ref var sphereOverlapComponent = ref _overlapSphereStash.Get(standingBlockComponent.StandingPossibilityCheckSphereOverlap.Entity);
+                ref var sphereCastComponent = ref _sphereCastStash.Get(standBlockComponent.StandPossibilityCheckSphereCast.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG, sphereOverlapComponent.IsSphereIntersect);
+                    CrouchBlockers.CROUCH_STAND_BLOCK_FLAG, sphereCastComponent.IsSphereHit);
             }
         }
 

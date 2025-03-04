@@ -306,6 +306,7 @@ GameObject:
   - component: {fileID: 63797433}
   - component: {fileID: 63797435}
   - component: {fileID: 63797436}
+  - component: {fileID: 63797440}
   - component: {fileID: 63797438}
   - component: {fileID: 63797437}
   - component: {fileID: 63797439}
@@ -603,7 +604,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    StandPossibilityCheckSphereCast: {fileID: 1574374403}
     StandingPossibilityCheckSphereOverlap: {fileID: 1718160284}
 --- !u!114 &63797437
 MonoBehaviour:
@@ -641,6 +641,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e8f535ea28407d99d3018cf9f084f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &63797440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88706fdd78540309b1a80318ca33a2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    StandPossibilityCheckSphereCast: {fileID: 1574374403}
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0

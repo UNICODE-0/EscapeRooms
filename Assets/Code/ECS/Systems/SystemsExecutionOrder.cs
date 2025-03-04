@@ -53,7 +53,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterMovementSystem());
             group.AddSystem(new CharacterLedgeCorrectionSystem());
             group.AddSystem(new CharacterSlideSystem());
-
+            
+            group.AddSystem(new CharacterCrouchStandBlockSystem());
             group.AddSystem(new CharacterCrouchStandingBlockSystem());
             group.AddSystem(new CharacterCrouchBlockWhileJumpSystem());
             group.AddSystem(new CharacterCrouchBlockWhileFalling());

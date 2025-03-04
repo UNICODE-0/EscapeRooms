@@ -1,16 +1,16 @@
-using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
-    [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterCrouchStandingBlockComponent : IComponent
-    {
-        public OverlapSphereProvider StandingPossibilityCheckSphereOverlap;
-    }
     
+    [RequireComponent(typeof(CharacterCrouchProvider))]
+    
+    public sealed class CharacterCrouchStandBlockProvider : MonoProvider<CharacterCrouchStandBlockComponent>
+    {
+    }
 }
