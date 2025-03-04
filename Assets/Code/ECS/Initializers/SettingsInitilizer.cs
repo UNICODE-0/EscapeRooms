@@ -1,9 +1,7 @@
-using EscapeRooms.Components;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Initializers
 {
@@ -14,17 +12,8 @@ namespace EscapeRooms.Initializers
     {
         public World World { get; set; }
         
-        private Filter _filter;
-        private Stash<SettingsComponent> _settingsStash;
-
         public void OnAwake()
         {
-            _filter = World.Filter
-                .With<SettingsComponent>()
-                .Build();
-
-            _settingsStash = World.GetStash<SettingsComponent>();
-            
             SetSettings(LoadSettings());
         }
 
@@ -32,18 +21,17 @@ namespace EscapeRooms.Initializers
         {
             return new GameSettings()
             {
-                TargetFrameRate = 100,
-                Sensitivity = 0.1f
+                TargetFrameRate = 0,
+                Sensitivity = 0.1f,
+                CrouchInputTriggerDelay = 0.1f,
+                JumpInputTriggerDelay = 0.1f
             };
         }
         
         public void SetSettings(GameSettings settings)
         {
-            foreach (var entity in _filter)
-            {
-                ref var settingsComponent = ref _settingsStash.Get(entity);
-                settingsComponent.GameSettings = settings;
-            }
+            if (!GameSettings.TrySetInstance(settings))
+                Debug.LogError("Game settings already has instance");
 
             Application.targetFrameRate = settings.TargetFrameRate;
             Cursor.lockState = CursorLockMode.Locked;
@@ -51,6 +39,8 @@ namespace EscapeRooms.Initializers
 
         public void Dispose()
         {
+            if (!GameSettings.TryRemoveInstance())
+                Debug.LogError("Game settings already disposed");
         }
     }
 }

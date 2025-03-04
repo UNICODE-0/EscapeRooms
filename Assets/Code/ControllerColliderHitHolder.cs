@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
 
-public class ControllerColliderHitHolder : MonoBehaviour
+namespace EscapeRooms.Mono
 {
-    public ControllerColliderHit Hit { get; private set; } = new();
-    public float HitYAngle { get; private set; }
-    
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    public class ControllerColliderHitHolder : MonoBehaviour
     {
-        Hit = hit;
-        HitYAngle = Vector3.Angle(Vector3.up, hit.normal);
+        public ControllerColliderHit Hit { get; private set; } = new();
+        public float HitYAngle { get; private set; }
+
+        private void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Hit = hit;
+            HitYAngle = Vector3.Angle(Vector3.up, hit.normal);
+        }
     }
 }

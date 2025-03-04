@@ -1,0 +1,97 @@
+using EscapeRooms.Components;
+using EscapeRooms.Data;
+using Scellecs.Morpeh;
+using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using Vector3 = System.Numerics.Vector3;
+
+namespace EscapeRooms.Systems
+{
+    [Il2CppSetOption(Option.NullChecks, false)]
+    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
+    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
+    public sealed class InputSystem : ISystem
+    {
+        public World World { get; set; }
+
+        private Filter _filter;
+        private Stash<InputComponent> _playerInputStash;
+        
+        private InputAction _moveAction;
+        private InputAction _lookAction;
+        private InputAction _jumpAction;
+        private InputAction _crouchAction;
+
+        private DelayedInputTrigger _jumpDelayedTrigger;
+        private DelayedInputTrigger _crouchDelayedTrigger;
+
+        private Request<InputTriggerInterruptRequest> _triggerInterruptRequest;
+        
+        public void OnAwake()
+        {
+            _filter = World.Filter
+                .With<InputComponent>()
+                .Build();
+
+            _playerInputStash = World.GetStash<InputComponent>();
+            _triggerInterruptRequest = World.GetRequest<InputTriggerInterruptRequest>();
+
+            InitializeInputActions();
+        }
+        
+        public void InitializeInputActions()
+        {
+            _moveAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Move");
+            _lookAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Look");
+            _jumpAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Jump");
+            _crouchAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Crouch");
+
+            _jumpDelayedTrigger = new DelayedInputTrigger();
+            _jumpDelayedTrigger.Initialize(GameSettings.Instance.JumpInputTriggerDelay);
+            _crouchDelayedTrigger = new DelayedInputTrigger();
+            _crouchDelayedTrigger.Initialize(GameSettings.Instance.CrouchInputTriggerDelay);
+        }
+        
+        public void OnUpdate(float deltaTime)
+        {
+            Vector2 moveActionValue = _moveAction.ReadValue<Vector2>();
+            Vector2 lookActionValue = _lookAction.ReadValue<Vector2>();
+
+            HandleInterruptTriggerEvent();
+            
+            _jumpDelayedTrigger.Update(deltaTime, _jumpAction.triggered);
+            _crouchDelayedTrigger.Update(deltaTime, _crouchAction.triggered);
+
+            foreach (var entity in _filter)
+            {
+                ref var playerInputComponent = ref _playerInputStash.Get(entity);
+
+                playerInputComponent.MoveActionValue = moveActionValue;
+                playerInputComponent.LookActionValue = lookActionValue;
+                playerInputComponent.JumpTrigger = _jumpDelayedTrigger.IsTriggered;
+                playerInputComponent.CrouchTrigger = _crouchDelayedTrigger.IsTriggered;
+            }
+        }
+
+        private void HandleInterruptTriggerEvent()
+        {
+            foreach (var interruptReq in _triggerInterruptRequest.Consume())
+            {
+                switch (interruptReq.TriggerToInterrupt)
+                {
+                    case InputTriggers.Jump:
+                        _jumpDelayedTrigger.Interrupt();
+                        break;
+                    case InputTriggers.Crouch:
+                        _crouchDelayedTrigger.Interrupt();
+                        break;
+                }
+            }
+        }
+        
+        public void Dispose()
+        {
+        }
+    }
+}
