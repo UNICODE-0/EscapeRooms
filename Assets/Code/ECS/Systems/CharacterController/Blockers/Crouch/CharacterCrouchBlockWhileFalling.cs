@@ -11,8 +11,6 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class CharacterCrouchBlockWhileFalling : ISystem
     {
-        public const int CrouchBlockWhileFallingFlag = 1 << 1;
-        
         public World World { get; set; }
 
         private Filter _filter;
@@ -38,7 +36,7 @@ namespace EscapeRooms.Systems
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockWhileFallingFlag, !groundComponent.IsGrounded);
+                    CrouchBlockers.CROUCH_BLOCK_WHILE_FALLING_FLAG, !groundComponent.IsGrounded);
             }
         }
 

@@ -11,9 +11,6 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class CharacterCrouchStandingBlockSystem : ISystem
     {
-        public const int CrouchStandBlockFlag = 1 << 2;
-        public const int CrouchStandingBlockFlag = 1 << 3;
-
         public World World { get; set; }
 
         private Filter _filter;
@@ -45,10 +42,10 @@ namespace EscapeRooms.Systems
                 ref var sphereOverlapComponent = ref _overlapSphereStash.Get(standingBlockComponent.StandingPossibilityCheckSphereOverlap.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchStandBlockFlag, sphereCastComponent.IsSphereHit);
+                    CrouchBlockers.CROUCH_STAND_BLOCK_FLAG, sphereCastComponent.IsSphereHit);
                 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchStandingBlockFlag, sphereOverlapComponent.IsSphereIntersect);
+                    CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG, sphereOverlapComponent.IsSphereIntersect);
             }
         }
 

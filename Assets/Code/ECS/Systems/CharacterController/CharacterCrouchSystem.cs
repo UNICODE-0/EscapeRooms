@@ -57,8 +57,7 @@ namespace EscapeRooms.Systems
                 {
                     crouchComponent.IsSquatInProgress = true;
 
-                    if (crouchComponent.CrouchBlockFlag.CheckFlag(CharacterCrouchStandingBlockSystem
-                            .CrouchStandingBlockFlag))
+                    if (crouchComponent.CrouchBlockFlag.CheckFlag(CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG))
                     {
                         heightFloatLerpComponent.IsLerpPaused = true;
                         headFloatLerpComponent.IsLerpPaused = true;
