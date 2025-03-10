@@ -12,6 +12,7 @@ namespace EscapeRooms.Systems
             LerpBlock(group);
             PlayerBlock(group);
             CharacterControllerBlock(group);
+            DragBlock(group);
             TransformBlock(group);
         }
 
@@ -44,6 +45,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerFPCameraInputSystem());
             group.AddSystem(new PlayerBodyRotationInputSystem());
             group.AddSystem(new PlayerCrouchInputSystem());
+            group.AddSystem(new PlayerDragInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -82,6 +84,11 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
+        }
+        
+        private static void DragBlock(SystemsGroup group)
+        {
+            group.AddSystem(new DragSystem());
         }
     }
 }
