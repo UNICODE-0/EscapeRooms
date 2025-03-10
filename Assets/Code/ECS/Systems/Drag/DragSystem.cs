@@ -49,12 +49,10 @@ namespace EscapeRooms.Systems
                     {
                         ref var raycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
                 
-                        if(raycastComponent.HitsCount > 0 &&
-                           EntityProvider.map.TryGetValue(raycastComponent.Hits.First().collider.gameObject.GetHashCode(),
-                               out var item))
+                        if(raycastComponent.HitsCount > 0)
                         {
-                            ref var draggableComponent = ref _draggableStash.Get(item.entity, out bool isDraggableExist);
-                            if (isDraggableExist)
+                            if (EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item) 
+                                && _draggableStash.Has(item.entity))
                             {
                                 ref var jointComponent = ref _configurableJointStash.Get(item.entity);
                                 ref var rigidbodyComponent = ref _rigidbodyStash.Get(entity);
