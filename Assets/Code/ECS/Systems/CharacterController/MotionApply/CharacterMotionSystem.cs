@@ -40,6 +40,8 @@ namespace EscapeRooms.Systems
 
                 characterMotionComponent.LastMotion = characterMotionComponent.CurrentMotion;
                 characterMotionComponent.CurrentMotion = Vector3.zero;
+                
+                //Physics.Simulate(0.01f);
             }
         }
 

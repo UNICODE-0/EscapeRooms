@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Modules.UnityMathematics.Editor;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
