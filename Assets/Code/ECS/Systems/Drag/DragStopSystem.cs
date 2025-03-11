@@ -12,14 +12,12 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DragSystem : ISystem
+    public sealed class DragStopSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<DraggableComponent> _draggableStash;
         private Stash<DragComponent> _dragStash;
-        private Stash<RaycastComponent> _raycastStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
 
@@ -27,12 +25,9 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<DragComponent>()
-                .With<RigidbodyComponent>()
                 .Build();
 
-            _draggableStash = World.GetStash<DraggableComponent>();
             _dragStash = World.GetStash<DragComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
         }
@@ -42,41 +37,34 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var dragComponent = ref _dragStash.Get(entity);
-
-                if (dragComponent.DragInput)
-                {
-                    if (!dragComponent.IsDragging)
-                    {
-                        ref var raycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
                 
-                        if(raycastComponent.HitsCount > 0)
-                        {
-                            if (EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item) 
-                                && _draggableStash.Has(item.entity))
-                            {
-                                ref var jointComponent = ref _configurableJointStash.Get(item.entity);
-                                ref var rigidbodyComponent = ref _rigidbodyStash.Get(entity);
-                            
-                                jointComponent.ConfigurableJoint.connectedBody = rigidbodyComponent.Rigidbody;
-
-                                dragComponent.DraggableEntity = item.entity;
-                                dragComponent.IsDragging = true;
-                            }
-                        }
-                    }
-                }
-                else if(dragComponent.IsDragging)
+                if(!dragComponent.DragInput && dragComponent.IsDragging)
                 {
                     ref var jointComponent = ref _configurableJointStash.Get(dragComponent.DraggableEntity);
+                    ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(dragComponent.DraggableEntity);
 
                     jointComponent.ConfigurableJoint.connectedBody = null;
+                    SetJointDefaultData(jointComponent.ConfigurableJoint);
+                    
+                    itemRigidbodyComponent.Rigidbody.linearDamping = 0;
+                    itemRigidbodyComponent.Rigidbody.angularDamping = 0.05f; // default value
                         
                     dragComponent.DraggableEntity = default;
                     dragComponent.IsDragging = false;
                 }
             }
         }
-
+        
+        private void SetJointDefaultData(ConfigurableJoint joint)
+        {
+            joint.xDrive = default;
+            joint.yDrive = default;
+            joint.zDrive = default;
+            
+            joint.angularXDrive = default;
+            joint.angularYZDrive = default;
+        }
+        
         public void Dispose()
         {
         }

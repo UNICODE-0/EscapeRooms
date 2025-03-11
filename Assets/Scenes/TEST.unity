@@ -670,11 +670,11 @@ GameObject:
   - component: {fileID: 116761113}
   - component: {fileID: 116761112}
   - component: {fileID: 116761118}
-  - component: {fileID: 116761119}
   - component: {fileID: 116761120}
   - component: {fileID: 116761123}
   - component: {fileID: 116761122}
   - component: {fileID: 116761121}
+  - component: {fileID: 116761124}
   m_Layer: 4
   m_Name: Dragable
   m_TagString: Untagged
@@ -751,20 +751,20 @@ ConfigurableJoint:
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 40
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 40
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_ZDrive:
     serializedVersion: 4
-    positionSpring: 2000
-    positionDamper: 40
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_TargetRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -772,14 +772,14 @@ ConfigurableJoint:
   m_RotationDriveMode: 0
   m_AngularXDrive:
     serializedVersion: 4
-    positionSpring: 100
-    positionDamper: 10
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_AngularYZDrive:
     serializedVersion: 4
-    positionSpring: 100
-    positionDamper: 10
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_SlerpDrive:
@@ -808,8 +808,8 @@ Rigidbody:
   m_GameObject: {fileID: 116761110}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 5
-  m_AngularDrag: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -901,24 +901,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.1950216, y: 0.27816796, z: 0.24777848}
   m_Center: {x: -0.00000013783574, y: 0.011464536, z: -0.023242835}
---- !u!114 &116761119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116761110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb4595ef2af90694dbc52fa7265d5163, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 0}
-  _rigidbody: {fileID: 0}
-  _joint: {fileID: 116761112}
-  _dist: 0
-  _speed: 0
-  _impulse: 0
 --- !u!65 &116761120
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -980,6 +962,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93ea54a0ffb476eb70d10104c6b695e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializedData:
+    DragDriveSpring: 2500
+    DragDriveDamper: 40
+    DragAngularDriveSpring: 100
+    DragAngularDriveDamper: 10
+    BodyLinearDamping: 5
+    BodyAngularDamping: 1
+--- !u!114 &116761124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116761110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f00fd23872a84a61bf5986da9d921f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    Rigidbody: {fileID: 116761113}
 --- !u!43 &171974159
 Mesh:
   m_ObjectHideFlags: 0

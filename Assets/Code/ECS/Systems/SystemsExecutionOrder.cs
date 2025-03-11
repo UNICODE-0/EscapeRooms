@@ -88,7 +88,8 @@ namespace EscapeRooms.Systems
         
         private static void DragBlock(SystemsGroup group)
         {
-            group.AddSystem(new DragSystem());
+            group.AddSystem(new DragStartSystem());
+            group.AddSystem(new DragStopSystem());
         }
     }
 }
