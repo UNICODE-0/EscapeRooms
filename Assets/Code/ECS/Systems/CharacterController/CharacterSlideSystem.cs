@@ -13,37 +13,37 @@ namespace EscapeRooms.Systems
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<CharacterControllerComponent> _characterControllerStash;
         private Stash<CharacterSlideComponent> _slideStash;
         private Stash<CharacterGroundedComponent> _groundedStash;
         private Stash<CharacterMovementComponent> _movementStash;
+        private Stash<CharacterControllerHitHolderComponent> _characterControllerHitStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<CharacterControllerComponent>()
                 .With<CharacterSlideComponent>()
                 .With<CharacterGroundedComponent>()
                 .With<CharacterMovementComponent>()
+                .With<CharacterControllerHitHolderComponent>()
                 .Build();
 
-            _characterControllerStash = World.GetStash<CharacterControllerComponent>();
             _slideStash = World.GetStash<CharacterSlideComponent>();
             _groundedStash = World.GetStash<CharacterGroundedComponent>();
             _movementStash = World.GetStash<CharacterMovementComponent>();
+            _characterControllerHitStash = World.GetStash<CharacterControllerHitHolderComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filter)
             {
-                ref var characterControllerComponent = ref _characterControllerStash.Get(entity);
                 ref var slideComponent = ref _slideStash.Get(entity);
                 ref var groundedComponent = ref _groundedStash.Get(entity);
                 ref var movementComponent = ref _movementStash.Get(entity);
+                ref var characterControllerHitComponent = ref _characterControllerHitStash.Get(entity);
 
-                Vector3 normal = characterControllerComponent.HitHolder.Hit.normal;
-                slideComponent.SlopeAngle = characterControllerComponent.HitHolder.HitYAngle;
+                Vector3 normal = characterControllerHitComponent.HitHolder.Hit.normal;
+                slideComponent.SlopeAngle = characterControllerHitComponent.HitHolder.HitYAngle;
                 slideComponent.IsSliding = slideComponent.SlopeAngle > slideComponent.SlideStartAngle;
                 
                 Vector3 slideDirection = new Vector3(

@@ -9,7 +9,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
     [RequireComponent(typeof(CharacterMotionProvider))]
-    [RequireComponent(typeof(CharacterControllerProvider))]
+    [RequireComponent(typeof(CharacterControllerHitHolderProvider))]
     [RequireComponent(typeof(CharacterGroundedProvider))]
     [RequireComponent(typeof(CharacterMovementProvider))]
 

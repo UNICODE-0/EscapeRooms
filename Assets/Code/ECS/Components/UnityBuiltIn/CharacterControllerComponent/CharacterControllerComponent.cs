@@ -1,5 +1,6 @@
 using EscapeRooms.Mono;
 using Scellecs.Morpeh;
+using Sirenix.OdinInspector;
 using Unity.Collections;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -13,7 +14,7 @@ namespace EscapeRooms.Components
 
     public struct CharacterControllerComponent : IComponent
     {
+        [Required]
         public CharacterController CharacterController;
-        public ControllerColliderHitHolder HitHolder;
     }
 }
