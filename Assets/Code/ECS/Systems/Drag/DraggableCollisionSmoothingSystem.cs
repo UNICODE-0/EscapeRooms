@@ -49,6 +49,7 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
+            // Disable triggers for optimization purposes
             foreach (var evt in _dragStartEvent.publishedChanges)
             {
                 ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(evt.Draggable);
@@ -63,7 +64,6 @@ namespace EscapeRooms.Systems
             
             foreach (var entity in _filter)
             {
-                ref var draggableComponent = ref _draggableStash.Get(entity);
                 ref var colliderTriggerEventsHolderComponent = ref _colliderTriggerEventsHolderStash.Get(entity);
                 ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(entity);
 
@@ -73,29 +73,28 @@ namespace EscapeRooms.Systems
                 if (!draggableSmoothingComponent.IsSmoothed && 
                     (type is ColliderTriggerType.Enter || type is ColliderTriggerType.Stay))
                 {
-                    ref var jointComponent = ref _configurableJointStash.Get(entity);
-                    
-                    ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
-                        draggableSmoothingComponent.SmoothDriveSpring, 
-                        draggableSmoothingComponent.SmoothDriveDamper,
-                        draggableSmoothingComponent.SmoothAngularDriveSpring, 
-                        draggableSmoothingComponent.SmoothAngularDriveDamper);
-                    
-                    draggableSmoothingComponent.IsSmoothed = true;
+                    SetJointDriveData(entity, true);
                 }
                 else if (draggableSmoothingComponent.IsSmoothed && type is ColliderTriggerType.Exit)
                 {
-                    ref var jointComponent = ref _configurableJointStash.Get(entity);
-                    
-                    ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
-                        draggableComponent.DragDriveSpring,
-                        draggableComponent.DragDriveDamper,
-                        draggableComponent.DragAngularDriveSpring, 
-                        draggableComponent.DragAngularDriveDamper);
-
-                    draggableSmoothingComponent.IsSmoothed = false;
+                    SetJointDriveData(entity, false);
                 }
             }
+        }
+        
+        private void SetJointDriveData(Entity entity, bool isSmoothed)
+        {
+            ref var jointComponent = ref _configurableJointStash.Get(entity);
+            ref var draggableComponent = ref _draggableStash.Get(entity);
+            ref var smoothingComponent = ref _draggableSmoothingStash.Get(entity);
+
+            ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+                isSmoothed ? smoothingComponent.SmoothDriveSpring : draggableComponent.DragDriveSpring,
+                isSmoothed ? smoothingComponent.SmoothDriveDamper : draggableComponent.DragDriveDamper,
+                isSmoothed ? smoothingComponent.SmoothAngularDriveSpring : draggableComponent.DragAngularDriveSpring,
+                isSmoothed ? smoothingComponent.SmoothAngularDriveDamper : draggableComponent.DragAngularDriveDamper);
+
+            smoothingComponent.IsSmoothed = isSmoothed;
         }
         
         public void Dispose()

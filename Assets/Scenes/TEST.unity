@@ -688,7 +688,6 @@ GameObject:
   - component: {fileID: 116761126}
   - component: {fileID: 116761127}
   - component: {fileID: 116761123}
-  - component: {fileID: 116761122}
   - component: {fileID: 116761121}
   - component: {fileID: 116761124}
   - component: {fileID: 116761125}
@@ -953,20 +952,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     ConfigurableJoint: {fileID: 116761112}
---- !u!114 &116761122
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 116761110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb0f4dae3b64ecba46828dc884de4e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedData:
-    GameObject: {fileID: 116761110}
 --- !u!114 &116761123
 MonoBehaviour:
   m_ObjectHideFlags: 0
