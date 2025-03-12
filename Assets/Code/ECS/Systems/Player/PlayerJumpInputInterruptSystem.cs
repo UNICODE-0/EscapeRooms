@@ -1,7 +1,6 @@
 using EscapeRooms.Components;
 using EscapeRooms.Requests;
 using Scellecs.Morpeh;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Systems
@@ -21,7 +20,7 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterJumpComponent>()
-                .With<PlayerComponent>()
+                .With<PlayerFlag>()
                 .Build();
 
             _jumpStash = World.GetStash<CharacterJumpComponent>();

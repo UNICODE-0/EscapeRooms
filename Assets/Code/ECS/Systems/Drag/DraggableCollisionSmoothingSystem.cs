@@ -1,13 +1,8 @@
-using System.Linq;
 using EscapeRooms.Components;
-using EscapeRooms.Data;
 using EscapeRooms.Events;
 using EscapeRooms.Helpers;
 using EscapeRooms.Mono;
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Collections;
-using Scellecs.Morpeh.Providers;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Systems

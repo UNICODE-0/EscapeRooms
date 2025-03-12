@@ -1,8 +1,5 @@
-using System;
-using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components

@@ -1,12 +1,13 @@
-using Scellecs.Morpeh.Providers;
+using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components
 {
+    [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerCameraProvider : MonoProvider<PlayerCameraComponent>
+    public struct PlayerHandFlag : IComponent
     {
     }
 }

@@ -5,7 +5,6 @@ using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Vector3 = System.Numerics.Vector3;
 
 namespace EscapeRooms.Systems
 {

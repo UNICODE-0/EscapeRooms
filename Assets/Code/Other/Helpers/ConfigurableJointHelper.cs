@@ -1,4 +1,3 @@
-using EscapeRooms.Components;
 using UnityEngine;
 
 namespace EscapeRooms.Helpers

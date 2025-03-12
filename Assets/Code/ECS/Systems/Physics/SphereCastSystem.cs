@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Collections;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Systems
 {
