@@ -9,9 +9,9 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterControllerHitHolderComponent : IComponent
+    public struct ColliderTriggerEventsHolderComponent : IComponent
     {
         [Required]
-        public ControllerColliderHitHolder HitHolder;
+        public ColliderTriggerEventsHolder EventsHolder;
     }
 }
