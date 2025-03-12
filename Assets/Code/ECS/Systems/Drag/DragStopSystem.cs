@@ -1,6 +1,7 @@
 using System.Linq;
 using EscapeRooms.Components;
 using EscapeRooms.Data;
+using EscapeRooms.Events;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -20,7 +21,10 @@ namespace EscapeRooms.Systems
         private Stash<DragComponent> _dragStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
-
+        private Stash<OnDragFlag> _onDragStash;
+        
+        private Event<DragStopEvent> _dragStopEvent;
+        
         public void OnAwake()
         {
             _filter = World.Filter
@@ -30,6 +34,9 @@ namespace EscapeRooms.Systems
             _dragStash = World.GetStash<DragComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            _onDragStash = World.GetStash<OnDragFlag>();
+            
+            _dragStopEvent = World.GetEvent<DragStopEvent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -48,7 +55,15 @@ namespace EscapeRooms.Systems
                     
                     itemRigidbodyComponent.Rigidbody.linearDamping = 0;
                     itemRigidbodyComponent.Rigidbody.angularDamping = 0.05f; // default value
-                        
+                    
+                    _onDragStash.Remove(dragComponent.DraggableEntity);
+                    
+                    _dragStopEvent.ThisFrame(new DragStopEvent()
+                    {
+                        Draggable = dragComponent.DraggableEntity,
+                        Owner = entity
+                    });
+                    
                     dragComponent.DraggableEntity = default;
                     dragComponent.IsDragging = false;
                 }

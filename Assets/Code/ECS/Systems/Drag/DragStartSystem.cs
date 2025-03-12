@@ -1,6 +1,8 @@
 using System.Linq;
 using EscapeRooms.Components;
 using EscapeRooms.Data;
+using EscapeRooms.Events;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -22,6 +24,9 @@ namespace EscapeRooms.Systems
         private Stash<RaycastComponent> _raycastStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
+        private Stash<OnDragFlag> _onDragStash;
+        
+        private Event<DragStartEvent> _dragStartEvent;
 
         public void OnAwake()
         {
@@ -35,6 +40,9 @@ namespace EscapeRooms.Systems
             _raycastStash = World.GetStash<RaycastComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            _onDragStash = World.GetStash<OnDragFlag>();
+            
+            _dragStartEvent = World.GetEvent<DragStartEvent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -58,41 +66,30 @@ namespace EscapeRooms.Systems
                             ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(item.entity);
 
                             jointComponent.ConfigurableJoint.connectedBody = handRigidbodyComponent.Rigidbody;
-                            SetJointDragData(jointComponent.ConfigurableJoint, ref draggableComponent);
+                            
+                            ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+                                draggableComponent.DragDriveSpring, 
+                                draggableComponent.DragDriveDamper, 
+                                draggableComponent.DragAngularDriveSpring, 
+                                draggableComponent.DragAngularDriveDamper);
                             
                             itemRigidbodyComponent.Rigidbody.linearDamping = draggableComponent.BodyLinearDamping;
                             itemRigidbodyComponent.Rigidbody.angularDamping = draggableComponent.BodyAngularDamping;
-                        
+                            
                             dragComponent.DraggableEntity = item.entity;
                             dragComponent.IsDragging = true;
+
+                            _onDragStash.Add(item.entity);
+                            
+                            _dragStartEvent.ThisFrame(new DragStartEvent()
+                            {
+                                Draggable = item.entity,
+                                Owner = entity
+                            });
                         }
                     }
                 }
             }
-        }
-
-        private void SetJointDragData(ConfigurableJoint joint, ref DraggableComponent draggableComponent)
-        {
-            JointDrive dragDrive = new JointDrive()
-            {
-                positionSpring = draggableComponent.DragDriveSpring,
-                positionDamper = draggableComponent.DragDriveDamper,
-                maximumForce = float.MaxValue
-            };
-            
-            JointDrive dragAngularDrive = new JointDrive()
-            {
-                positionSpring = draggableComponent.DragAngularDriveSpring,
-                positionDamper = draggableComponent.DragAngularDriveDamper,
-                maximumForce = float.MaxValue
-            };
-
-            joint.xDrive = dragDrive;
-            joint.yDrive = dragDrive;
-            joint.zDrive = dragDrive;
-            
-            joint.angularXDrive = dragAngularDrive;
-            joint.angularYZDrive = dragAngularDrive;
         }
 
         public void Dispose()

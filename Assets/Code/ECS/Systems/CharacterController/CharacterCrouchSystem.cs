@@ -1,5 +1,6 @@
 using EscapeRooms.Components;
 using EscapeRooms.Data;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;

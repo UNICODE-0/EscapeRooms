@@ -7,8 +7,5 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct InputTriggerInterruptRequest : IRequestData
-    {
-        public InputTriggers TriggerToInterrupt;
-    }
+    public struct OnDragFlag : IComponent { }
 }

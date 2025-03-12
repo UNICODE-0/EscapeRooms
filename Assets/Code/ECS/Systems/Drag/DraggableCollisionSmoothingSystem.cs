@@ -1,6 +1,9 @@
 using System.Linq;
 using EscapeRooms.Components;
 using EscapeRooms.Data;
+using EscapeRooms.Events;
+using EscapeRooms.Helpers;
+using EscapeRooms.Mono;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -18,22 +21,80 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<DraggableComponent> _draggableStash;
+        private Stash<ColliderTriggerEventsHolderComponent> _colliderTriggerEventsHolderStash;
+        private Stash<DraggableCollisionSmoothingComponent> _draggableSmoothingStash;
+        private Stash<ConfigurableJointComponent> _configurableJointStash;
+
+        private Event<DragStartEvent> _dragStartEvent;
+        private Event<DragStopEvent> _dragStopEvent;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<DraggableComponent>()
+                .With<ColliderTriggerEventsHolderComponent>()
+                .With<DraggableCollisionSmoothingComponent>()
+                .With<ConfigurableJointComponent>()
+                .With<OnDragFlag>()
                 .Build();
 
             _draggableStash = World.GetStash<DraggableComponent>();
+            _colliderTriggerEventsHolderStash = World.GetStash<ColliderTriggerEventsHolderComponent>();
+            _draggableSmoothingStash = World.GetStash<DraggableCollisionSmoothingComponent>();
+            _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
+
+            _dragStartEvent = World.GetEvent<DragStartEvent>();
+            _dragStopEvent = World.GetEvent<DragStopEvent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
+            foreach (var evt in _dragStartEvent.publishedChanges)
+            {
+                ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(evt.Draggable);
+                draggableSmoothingComponent.SmoothingTrigger.enabled = true;
+            }
+            
+            foreach (var evt in _dragStopEvent.publishedChanges)
+            {
+                ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(evt.Draggable);
+                draggableSmoothingComponent.SmoothingTrigger.enabled = false;
+            }
+            
             foreach (var entity in _filter)
             {
                 ref var draggableComponent = ref _draggableStash.Get(entity);
-                
+                ref var colliderTriggerEventsHolderComponent = ref _colliderTriggerEventsHolderStash.Get(entity);
+                ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(entity);
+
+                ColliderTriggerType type = colliderTriggerEventsHolderComponent.EventsHolder
+                    .LastTrigger;
+
+                if (!draggableSmoothingComponent.IsSmoothed && 
+                    (type is ColliderTriggerType.Enter || type is ColliderTriggerType.Stay))
+                {
+                    ref var jointComponent = ref _configurableJointStash.Get(entity);
+                    
+                    ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+                        draggableSmoothingComponent.SmoothDriveSpring, 
+                        draggableSmoothingComponent.SmoothDriveDamper,
+                        draggableSmoothingComponent.SmoothAngularDriveSpring, 
+                        draggableSmoothingComponent.SmoothAngularDriveDamper);
+                    
+                    draggableSmoothingComponent.IsSmoothed = true;
+                }
+                else if (draggableSmoothingComponent.IsSmoothed && type is ColliderTriggerType.Exit)
+                {
+                    ref var jointComponent = ref _configurableJointStash.Get(entity);
+                    
+                    ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+                        draggableComponent.DragDriveSpring,
+                        draggableComponent.DragDriveDamper,
+                        draggableComponent.DragAngularDriveSpring, 
+                        draggableComponent.DragAngularDriveDamper);
+
+                    draggableSmoothingComponent.IsSmoothed = false;
+                }
             }
         }
         

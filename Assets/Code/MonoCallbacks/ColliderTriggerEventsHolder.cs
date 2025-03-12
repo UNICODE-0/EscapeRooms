@@ -26,13 +26,13 @@ namespace EscapeRooms.Mono
             LastTrigger = ColliderTriggerType.Exit;
             LastTriggeredCollider = other;
         }
-        
-        public enum ColliderTriggerType
-        {
-            None,
-            Enter,
-            Stay,
-            Exit
-        }
+    }
+    
+    public enum ColliderTriggerType
+    {
+        None,
+        Enter,
+        Stay,
+        Exit
     }
 }

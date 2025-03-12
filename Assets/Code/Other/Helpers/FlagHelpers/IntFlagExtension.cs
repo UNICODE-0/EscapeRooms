@@ -1,4 +1,4 @@
-namespace EscapeRooms.Data
+namespace EscapeRooms.Helpers
 {
     public static class IntFlagExtension
     {

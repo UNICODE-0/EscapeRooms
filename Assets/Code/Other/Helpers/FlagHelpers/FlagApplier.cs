@@ -1,6 +1,6 @@
 using EscapeRooms.Data;
 
-namespace EscapeRooms.Systems
+namespace EscapeRooms.Helpers
 {
     public static class FlagApplier
     {
