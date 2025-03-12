@@ -691,7 +691,7 @@ GameObject:
   - component: {fileID: 116761121}
   - component: {fileID: 116761124}
   - component: {fileID: 116761125}
-  m_Layer: 4
+  m_Layer: 0
   m_Name: Dragable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -903,7 +903,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 116761110}
-  m_Material: {fileID: 13400000, guid: 119271eac23cbb04e895a595e13ef98d, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -927,7 +927,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 55
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -965,6 +965,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    Colliders:
+    - {fileID: 116761118}
+    MaterialOnDrag: {fileID: 13400000, guid: 119271eac23cbb04e895a595e13ef98d, type: 2}
+    ExcludeLayersOnDrag:
+      serializedVersion: 2
+      m_Bits: 8
     DragDriveSpring: 2500
     DragDriveDamper: 40
     DragAngularDriveSpring: 100
@@ -50569,7 +50575,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 24
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1

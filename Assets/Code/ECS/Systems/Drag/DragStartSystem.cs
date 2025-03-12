@@ -72,6 +72,12 @@ namespace EscapeRooms.Systems
                             
                             itemRigidbodyComponent.Rigidbody.linearDamping = draggableComponent.BodyLinearDamping;
                             itemRigidbodyComponent.Rigidbody.angularDamping = draggableComponent.BodyAngularDamping;
+
+                            foreach (var collider in draggableComponent.Colliders)
+                            {
+                                collider.excludeLayers = draggableComponent.ExcludeLayersOnDrag;
+                                collider.sharedMaterial = draggableComponent.MaterialOnDrag;
+                            }
                             
                             dragComponent.DraggableEntity = item.entity;
                             dragComponent.IsDragging = true;

@@ -1,6 +1,8 @@
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -10,6 +12,15 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct DraggableComponent : IComponent
     {
+        [Required]
+        public Collider[] Colliders;
+        
+        public PhysicsMaterial MaterialOnDrag;
+
+        public LayerMask ExcludeLayersOnDrag;
+        
+        [PropertySpace]
+        
         [MinValue(0)]
         public float DragDriveSpring;
         

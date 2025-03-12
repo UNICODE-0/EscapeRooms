@@ -15,6 +15,7 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<DragComponent> _dragStash;
+        private Stash<DraggableComponent> _draggableStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
         private Stash<OnDragFlag> _onDragStash;
@@ -31,6 +32,7 @@ namespace EscapeRooms.Systems
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
             _onDragStash = World.GetStash<OnDragFlag>();
+            _draggableStash = World.GetStash<DraggableComponent>();
             
             _dragStopEvent = World.GetEvent<DragStopEvent>();
         }
@@ -59,6 +61,13 @@ namespace EscapeRooms.Systems
                         Draggable = dragComponent.DraggableEntity,
                         Owner = entity
                     });
+                    
+                    ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
+                    foreach (var collider in draggableComponent.Colliders)
+                    {
+                        collider.excludeLayers = default;
+                        collider.sharedMaterial = null;
+                    }
                     
                     dragComponent.DraggableEntity = default;
                     dragComponent.IsDragging = false;
