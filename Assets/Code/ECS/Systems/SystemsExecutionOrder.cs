@@ -14,6 +14,10 @@ namespace EscapeRooms.Systems
             CharacterControllerBlock(group);
             DragBlock(group);
             TransformBlock(group);
+            
+            // Late systems
+            
+            ComponentEventsBlock(group);
         }
 
         private static void InputRequestBlock(SystemsGroup group)
@@ -69,6 +73,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             
+            group.AddSystem(new CharacterRigidbodyStaticCollisionSystem());
+            
             group.AddSystem(new FPCameraSystem());
             
             group.AddSystem(new CharacterJumpForceApplySystem());
@@ -91,6 +97,13 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DragStartSystem());
             group.AddSystem(new DragStopSystem());
             group.AddSystem(new DraggableCollisionSmoothingSystem());
+        }
+        
+        // Late systems
+        
+        private static void ComponentEventsBlock(SystemsGroup group)
+        {
+            group.AddSystem(new EventComponentDisposeSystem());
         }
     }
 }

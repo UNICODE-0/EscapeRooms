@@ -10,17 +10,34 @@ namespace EscapeRooms.Mono
 
         private void OnTriggerEnter(Collider other)
         {
+            OnTriggerEnterHandler(other);
+        }
+        
+        private void OnTriggerStay(Collider other)
+        {
+            OnTriggerStayHandler(other);
+        }
+        
+        private void OnTriggerExit(Collider other)
+        {
+            OnTriggerExitHandler(other);
+        }
+        
+        // =======================================
+        
+        protected virtual void OnTriggerEnterHandler(Collider other)
+        {
             LastTrigger = ColliderTriggerType.Enter;
             LastTriggeredCollider = other;
         }
-
-        private void OnTriggerStay(Collider other)
+        
+        protected virtual void OnTriggerStayHandler(Collider other)
         {
             LastTrigger = ColliderTriggerType.Stay;
             LastTriggeredCollider = other;
         }
-
-        private void OnTriggerExit(Collider other)
+        
+        protected virtual void OnTriggerExitHandler(Collider other)
         {
             LastTrigger = ColliderTriggerType.Exit;
             LastTriggeredCollider = other;
