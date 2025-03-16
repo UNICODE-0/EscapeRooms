@@ -73,7 +73,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             
-            group.AddSystem(new RigidbodyStaticCollisionSystem());
+            group.AddSystem(new CharacterStaticCollisionSystem());
             
             group.AddSystem(new FPCameraSystem());
             
