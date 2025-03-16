@@ -1,3 +1,4 @@
+using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Unity.IL2CPP.CompilerServices;
@@ -7,9 +8,9 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class EventComponentDisposeSystem : ILateSystem
+    public sealed class FlagDisposeSystem : ILateSystem
     {
-        public static readonly FastList<IComponent> EventsToDispose = new FastList<IComponent>();
+        public static readonly FastList<IFlagComponent> EventsToDispose = new FastList<IFlagComponent>();
         
         public World World { get; set; }
         public void OnAwake()
@@ -20,8 +21,9 @@ namespace EscapeRooms.Systems
         {
             foreach (var evt in EventsToDispose)
             {
-                
+                evt.DisposeAction.Invoke();
             }
+            EventsToDispose.Clear();
         }
 
         public void Dispose()

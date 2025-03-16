@@ -73,7 +73,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             
-            group.AddSystem(new CharacterRigidbodyStaticCollisionSystem());
+            group.AddSystem(new RigidbodyStaticCollisionSystem());
             
             group.AddSystem(new FPCameraSystem());
             
@@ -103,7 +103,7 @@ namespace EscapeRooms.Systems
         
         private static void ComponentEventsBlock(SystemsGroup group)
         {
-            group.AddSystem(new EventComponentDisposeSystem());
+            group.AddSystem(new FlagDisposeSystem());
         }
     }
 }

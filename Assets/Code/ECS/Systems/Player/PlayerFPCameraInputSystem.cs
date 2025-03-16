@@ -22,7 +22,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<FPCameraComponent>()
                 .With<InputComponent>()
-                .With<PlayerCameraFlag>()
+                .With<PlayerCameraTag>()
                 .Build();
 
             _cameraStash = World.GetStash<FPCameraComponent>();

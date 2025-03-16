@@ -8,24 +8,24 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class CharacterRigidbodyStaticCollisionSystem : ISystem
+    public sealed class RigidbodyStaticCollisionSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<CharacterMovementComponent> _movementStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
-        private Stash<CharacterRigidbodyStaticCollisionEventComponent> _triggerEventStash;
+        private Stash<RigidbodyStaticCollisionFlag> _triggerEventStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<RigidbodyComponent>()
-                .With<CharacterRigidbodyStaticCollisionEventComponent>()
+                .With<RigidbodyStaticCollisionFlag>()
                 .Build();
 
             _movementStash = World.GetStash<CharacterMovementComponent>();
-            _triggerEventStash = World.GetStash<CharacterRigidbodyStaticCollisionEventComponent>();
+            _triggerEventStash = World.GetStash<RigidbodyStaticCollisionFlag>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
         }
 
@@ -34,7 +34,16 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var rigidbodyComponent = ref _rigidbodyStash.Get(entity);
-                rigidbodyComponent.Rigidbody.isKinematic = true;
+                ref var triggerEventComponent = ref _triggerEventStash.Get(entity);
+
+                if (triggerEventComponent.IsLastFrameOfLife)
+                {
+                    rigidbodyComponent.Rigidbody.isKinematic = false;
+                }
+                else
+                {                 
+                    rigidbodyComponent.Rigidbody.isKinematic = true;
+                }
             }
         }
         

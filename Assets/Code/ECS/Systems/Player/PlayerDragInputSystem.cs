@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<InputComponent>()
                 .With<DragComponent>()
-                .With<PlayerHandFlag>()
+                .With<PlayerHandTag>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();

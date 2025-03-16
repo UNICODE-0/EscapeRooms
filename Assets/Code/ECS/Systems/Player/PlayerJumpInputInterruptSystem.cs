@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterJumpComponent>()
-                .With<PlayerFlag>()
+                .With<PlayerTag>()
                 .Build();
 
             _jumpStash = World.GetStash<CharacterJumpComponent>();

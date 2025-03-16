@@ -22,7 +22,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<TransformDeltaRotationComponent>()
                 .With<InputComponent>()
-                .With<PlayerFlag>()
+                .With<PlayerTag>()
                 .Build();
 
             _rotationStash = World.GetStash<TransformDeltaRotationComponent>();

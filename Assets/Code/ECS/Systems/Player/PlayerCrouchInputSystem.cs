@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<InputComponent>()
                 .With<CharacterCrouchComponent>()
-                .With<PlayerFlag>()
+                .With<PlayerTag>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();
