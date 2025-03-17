@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -49,29 +50,20 @@ namespace EscapeRooms.Systems
                 ref var transformComponent = ref _transformStash.Get(entity);
                 ref var characterTransformComponent = ref _transformStash.Get(triggerEventComponent.Owner);
 
-                Vector3 targetPos2D = new Vector3()
-                {
-                    x = transformComponent.Transform.position.x,
-                    y = 0f,
-                    z = transformComponent.Transform.position.z
-                };
-                
-                Vector3 characterPos2D = new Vector3()
-                {
-                    x = characterTransformComponent.Transform.position.x,
-                    y = 0f,
-                    z = characterTransformComponent.Transform.position.z
-                };
-
+                Vector3 targetPos2D = transformComponent.Transform.position.GetXZ();
+                Vector3 characterPos2D = characterTransformComponent.Transform.position.GetXZ();
                 Vector3 directionToTarget = (targetPos2D - characterPos2D).normalized;
+                
                 float movementDirectionSimilarity =
                     Vector3.Dot(directionToTarget, characterMovementComponent.CurrentVelocity.normalized);
 
-                bool needDisableKinematic = movementDirectionSimilarity <=
+                bool isMovingOverThreshold = movementDirectionSimilarity <=
                                             characterStaticCollisionComponent.DirectionToTargetSimilarityThreshold && 
                                             characterMovementComponent.IsMoving;
                 
-                if (triggerEventComponent.IsLastFrameOfLife || !characterMovementComponent.IsMoving || needDisableKinematic)
+                if (triggerEventComponent.IsLastFrameOfLife 
+                    || !characterMovementComponent.IsMoving 
+                    || isMovingOverThreshold)
                 {
                     rigidbodyComponent.Rigidbody.isKinematic = false;
                 }

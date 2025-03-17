@@ -64,7 +64,7 @@ namespace EscapeRooms.Systems
 
                             jointComponent.ConfigurableJoint.connectedBody = handRigidbodyComponent.Rigidbody;
                             
-                            ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+                            jointComponent.ConfigurableJoint.SetJointDriveData(
                                 draggableComponent.DragDriveSpring, 
                                 draggableComponent.DragDriveDamper, 
                                 draggableComponent.DragAngularDriveSpring, 

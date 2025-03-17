@@ -83,7 +83,7 @@ namespace EscapeRooms.Systems
             ref var draggableComponent = ref _draggableStash.Get(entity);
             ref var smoothingComponent = ref _draggableSmoothingStash.Get(entity);
 
-            ConfigurableJointHelper.SetJointDriveData(jointComponent.ConfigurableJoint,
+            jointComponent.ConfigurableJoint.SetJointDriveData(
                 isSmoothed ? smoothingComponent.SmoothDriveSpring : draggableComponent.DragDriveSpring,
                 isSmoothed ? smoothingComponent.SmoothDriveDamper : draggableComponent.DragDriveDamper,
                 isSmoothed ? smoothingComponent.SmoothAngularDriveSpring : draggableComponent.DragAngularDriveSpring,

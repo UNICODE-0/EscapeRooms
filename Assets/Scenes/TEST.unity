@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    DirectionToTargetSimilarityThresholds: {x: 0, y: 0}
+    DirectionToTargetSimilarityThreshold: 0
 --- !u!1 &116761110
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1648,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.2
+  near clip plane: 0.05
   far clip plane: 100
   field of view: 60.000004
   orthographic: 0

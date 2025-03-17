@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace EscapeRooms.Helpers
 {
-    public class ConfigurableJointHelper
+    public static class ConfigurableExtension
     {
-        public static void SetJointDriveData(ConfigurableJoint joint, float driveSpring, float driveDamper
+        public static void SetJointDriveData(this ConfigurableJoint joint, float driveSpring, float driveDamper
             , float angDriveSpring, float angDriveDamper)
         {
             JointDrive dragDrive = new JointDrive()
