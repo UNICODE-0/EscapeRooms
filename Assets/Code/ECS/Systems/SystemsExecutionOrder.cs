@@ -14,6 +14,7 @@ namespace EscapeRooms.Systems
             CharacterControllerBlock(group);
             DragBlock(group);
             TransformBlock(group);
+            ColliderBlock(group);
             
             // Late systems
             
@@ -90,6 +91,11 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
+        }
+        
+        private static void ColliderBlock(SystemsGroup group)
+        {
+            group.AddSystem(new CapsuleColliderHeightLerpSystem());
         }
         
         private static void DragBlock(SystemsGroup group)

@@ -68,10 +68,10 @@ namespace EscapeRooms.Systems
                         headFloatLerpComponent.IsLerpPaused = false;
                     }
                     
-                    ref CharacterCrouchState from = ref crouchComponent.IsCrouching ? 
+                    ref CapsuleHeightState from = ref crouchComponent.IsCrouching ? 
                         ref crouchComponent.CrouchState : ref crouchComponent.StandState;
                     
-                    ref CharacterCrouchState to = ref crouchComponent.IsCrouching ?
+                    ref CapsuleHeightState to = ref crouchComponent.IsCrouching ?
                         ref crouchComponent.StandState : ref crouchComponent.CrouchState;
                     
                     characterComponent.CharacterController.height = 

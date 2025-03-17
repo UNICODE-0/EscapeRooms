@@ -16,6 +16,7 @@ namespace EscapeRooms.Components
 
         [PropertySpace] 
         
+        [Required]
         public FloatLerpProvider FloatLerpProvider;
         
         public Vector3 DefaultPosition;

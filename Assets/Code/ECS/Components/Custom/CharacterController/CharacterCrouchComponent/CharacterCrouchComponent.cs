@@ -25,23 +25,13 @@ namespace EscapeRooms.Components
         [Required]
         public TransformPositionLerpProvider HeadLerpProvider;
         
-        public CharacterCrouchState StandState;
-        public CharacterCrouchState CrouchState;
+        public CapsuleHeightState StandState;
+        public CapsuleHeightState CrouchState;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsCrouching;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsSquatInProgress;
-    }
-    
-    [System.Serializable]
-    [Il2CppSetOption(Option.NullChecks, false)]
-    [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
-    [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct CharacterCrouchState
-    {
-        public float CapsuleHeight;
-        public Vector3 CapsuleCenter;
     }
 }

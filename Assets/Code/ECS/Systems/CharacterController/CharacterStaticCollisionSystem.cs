@@ -24,6 +24,7 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<RigidbodyComponent>()
+                .With<TransformComponent>()
                 .With<CharacterStaticCollisionFlag>()
                 .Build();
 

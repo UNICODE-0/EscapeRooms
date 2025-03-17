@@ -8,11 +8,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
-    [RequireComponent(typeof(CharacterMovementProvider))]
-    [RequireComponent(typeof(TransformProvider))]
-
-    public sealed class CharacterStaticCollisionProvider :
-        MonoProvider<CharacterStaticCollisionComponent>
+    public sealed class CapsuleColliderHeightLerpProvider : MonoProvider<CapsuleColliderHeightLerpComponent>
     {
     }
 }

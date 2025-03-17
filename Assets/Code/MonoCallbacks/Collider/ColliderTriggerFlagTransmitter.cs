@@ -30,11 +30,11 @@ namespace EscapeRooms.Mono
             TryAddCollisionTriggerComponent(other.gameObject.GetInstanceID());
         }
 
-        protected override void OnTriggerStayHandler(Collider other)
-        {
-            base.OnTriggerStayHandler(other);
-            TryAddCollisionTriggerComponent(other.gameObject.GetInstanceID());
-        }
+        // protected override void OnTriggerStayHandler(Collider other)
+        // {
+        //     base.OnTriggerStayHandler(other);
+        //     TryAddCollisionTriggerComponent(other.gameObject.GetInstanceID());
+        // }
 
         protected override void OnTriggerExitHandler(Collider other)
         {
