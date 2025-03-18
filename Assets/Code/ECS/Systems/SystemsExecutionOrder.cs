@@ -60,6 +60,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterMovementSystem());
             group.AddSystem(new CharacterLedgeCorrectionSystem());
             group.AddSystem(new CharacterSlideSystem());
+
+            group.AddSystem(new CharacterStaticCollisionSystem());
             
             group.AddSystem(new CharacterCrouchStandBlockSystem());
             group.AddSystem(new CharacterCrouchStandingBlockSystem());
@@ -73,8 +75,6 @@ namespace EscapeRooms.Systems
 
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
-            
-            group.AddSystem(new CharacterStaticCollisionSystem());
             
             group.AddSystem(new FPCameraSystem());
             

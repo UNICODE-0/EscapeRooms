@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
@@ -14,5 +15,8 @@ namespace EscapeRooms.Components
         [MinValue(-1f)]
         [MaxValue(1f)]
         public float DirectionToTargetSimilarityThreshold;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public bool IsAnyStaticCollisionExist;
     }
 }

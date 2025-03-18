@@ -13,7 +13,9 @@ namespace EscapeRooms.Systems
     {
         public World World { get; set; }
 
-        private Filter _filter;
+        private Filter _filterForCharacters;
+        private Filter _filterForObjects;
+        
         private Stash<CharacterMovementComponent> _movementStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
         private Stash<CharacterStaticCollisionFlag> _triggerEventStash;
@@ -22,10 +24,14 @@ namespace EscapeRooms.Systems
 
         public void OnAwake()
         {
-            _filter = World.Filter
+            _filterForObjects = World.Filter
                 .With<RigidbodyComponent>()
                 .With<TransformComponent>()
                 .With<CharacterStaticCollisionFlag>()
+                .Build();
+
+            _filterForCharacters = World.Filter
+                .With<CharacterStaticCollisionComponent>()
                 .Build();
 
             _movementStash = World.GetStash<CharacterMovementComponent>();
@@ -37,7 +43,15 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (var entity in _filter)
+            foreach (var entity in _filterForCharacters)
+            {
+                ref var characterStaticCollisionComponent = 
+                    ref _characterStaticCollisionStash.Get(entity);
+
+                characterStaticCollisionComponent.IsAnyStaticCollisionExist = false;
+            }
+            
+            foreach (var entity in _filterForObjects)
             {
                 ref var triggerEventComponent = ref _triggerEventStash.Get(entity);
                 ref var characterStaticCollisionComponent = 
@@ -69,7 +83,8 @@ namespace EscapeRooms.Systems
                     rigidbodyComponent.Rigidbody.isKinematic = false;
                 }
                 else
-                {                 
+                {
+                    characterStaticCollisionComponent.IsAnyStaticCollisionExist = true;
                     rigidbodyComponent.Rigidbody.isKinematic = true;
                 }
             }
