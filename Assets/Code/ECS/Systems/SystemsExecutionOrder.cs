@@ -96,6 +96,7 @@ namespace EscapeRooms.Systems
         private static void ColliderBlock(SystemsGroup group)
         {
             group.AddSystem(new CapsuleColliderHeightLerpSystem());
+            group.AddSystem(new CharacterHeightLerpSystem());
         }
         
         private static void DragBlock(SystemsGroup group)

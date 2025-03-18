@@ -15,7 +15,6 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<CharacterCrouchComponent> _crouchStash;
-        private Stash<CharacterControllerComponent> _characterStash;
         private Stash<FloatLerpComponent> _floatLerpStash;
         private Stash<TransformPositionLerpComponent> _transformPositionLerpStash;
 
@@ -23,11 +22,9 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterCrouchComponent>()
-                .With<CharacterControllerComponent>()
                 .Build();
 
             _crouchStash = World.GetStash<CharacterCrouchComponent>();
-            _characterStash = World.GetStash<CharacterControllerComponent>();
             _floatLerpStash = World.GetStash<FloatLerpComponent>();
             _transformPositionLerpStash = World.GetStash<TransformPositionLerpComponent>();
         }
@@ -37,7 +34,6 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var crouchComponent = ref _crouchStash.Get(entity);
-                ref var characterComponent = ref _characterStash.Get(entity);
                 ref var heightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
                 ref var headLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
                 ref var headFloatLerpComponent = ref _floatLerpStash.Get(headLerpComponent.FloatLerpProvider.Entity);
@@ -67,18 +63,6 @@ namespace EscapeRooms.Systems
                         heightFloatLerpComponent.IsLerpPaused = false;
                         headFloatLerpComponent.IsLerpPaused = false;
                     }
-                    
-                    ref CapsuleHeightState from = ref crouchComponent.IsCrouching ? 
-                        ref crouchComponent.CrouchState : ref crouchComponent.StandState;
-                    
-                    ref CapsuleHeightState to = ref crouchComponent.IsCrouching ?
-                        ref crouchComponent.StandState : ref crouchComponent.CrouchState;
-                    
-                    characterComponent.CharacterController.height = 
-                        Mathf.Lerp(from.CapsuleHeight, to.CapsuleHeight, heightFloatLerpComponent.CurrentValue);
-                    
-                    characterComponent.CharacterController.center = 
-                        Vector3.Lerp(from.CapsuleCenter, to.CapsuleCenter, heightFloatLerpComponent.CurrentValue);
 
                     if (heightFloatLerpComponent.IsLerpTimeIsUp)
                     {

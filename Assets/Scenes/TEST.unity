@@ -305,6 +305,7 @@ GameObject:
   - component: {fileID: 63797432}
   - component: {fileID: 63797428}
   - component: {fileID: 63797433}
+  - component: {fileID: 63797443}
   - component: {fileID: 63797435}
   - component: {fileID: 63797436}
   - component: {fileID: 63797440}
@@ -554,12 +555,6 @@ MonoBehaviour:
     CrouchInput: 0
     HeightLerpProvider: {fileID: 1913946922}
     HeadLerpProvider: {fileID: 687237172}
-    StandState:
-      CapsuleHeight: 2
-      CapsuleCenter: {x: 0, y: 0, z: 0}
-    CrouchState:
-      CapsuleHeight: 1.25
-      CapsuleCenter: {x: 0, y: -0.375, z: 0}
     IsCrouching: 0
     IsSquatInProgress: 0
 --- !u!114 &63797434
@@ -685,6 +680,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     DirectionToTargetSimilarityThreshold: 0
+--- !u!114 &63797443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12df324023c1461e9ac641c97f4ba6b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    LerpData:
+      ChangeStateInput: 0
+      LerpProvider: {fileID: 1913946922}
+      UseLerpProviderInputState: 1
+      DefaultState:
+        CapsuleHeight: 2
+        CapsuleCenter: {x: 0, y: 0, z: 0}
+      TargetState:
+        CapsuleHeight: 1.25
+        CapsuleCenter: {x: 0, y: -0.375, z: 0}
+      IsTargetState: 0
 --- !u!1 &116761110
 GameObject:
   m_ObjectHideFlags: 0
@@ -8524,16 +8543,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    ChangeHeightInput: 0
-    FloatLerpProvider: {fileID: 1913946922}
-    UseFloatProviderInputState: 1
-    DefaultState:
-      CapsuleHeight: 1.92
-      CapsuleCenter: {x: 0, y: 0.07, z: 0}
-    TargetState:
-      CapsuleHeight: 1.17
-      CapsuleCenter: {x: 0, y: -0.305, z: 0}
-    IsTargetState: 0
+    LerpData:
+      ChangeStateInput: 0
+      LerpProvider: {fileID: 1913946922}
+      UseLerpProviderInputState: 1
+      DefaultState:
+        CapsuleHeight: 1.92
+        CapsuleCenter: {x: 0, y: 0.07, z: 0}
+      TargetState:
+        CapsuleHeight: 1.17
+        CapsuleCenter: {x: 0, y: -0.305, z: 0}
+      IsTargetState: 0
 --- !u!114 &1140511890
 MonoBehaviour:
   m_ObjectHideFlags: 0

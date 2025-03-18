@@ -25,9 +25,6 @@ namespace EscapeRooms.Components
         [Required]
         public TransformPositionLerpProvider HeadLerpProvider;
         
-        public CapsuleHeightState StandState;
-        public CapsuleHeightState CrouchState;
-        
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsCrouching;
         
