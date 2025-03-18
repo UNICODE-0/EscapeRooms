@@ -12,18 +12,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct TransformPositionLerpComponent : IComponent
     {
-        public bool ChangePositionInput;
-
-        [PropertySpace] 
-        
-        [Required]
-        public FloatLerpProvider FloatLerpProvider;
-        
-        public Vector3 DefaultPosition;
-        
-        public Vector3 TargetPosition;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsTargetState;
+        [HideLabel]
+        [InlineProperty]
+        public LerpDataComponent<Vector3> LerpData;
     }
 }

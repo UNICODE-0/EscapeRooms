@@ -554,7 +554,7 @@ MonoBehaviour:
   serializedData:
     CrouchInput: 0
     HeightLerpProvider: {fileID: 1913946922}
-    HeadLerpProvider: {fileID: 687237172}
+    HeadLerpProvider: {fileID: 618543363}
     IsCrouching: 0
     IsSquatInProgress: 0
 --- !u!114 &63797434
@@ -5259,11 +5259,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    ChangePositionInput: 0
-    FloatLerpProvider: {fileID: 618543363}
-    DefaultPosition: {x: 0, y: 0.728, z: 0}
-    TargetPosition: {x: 0, y: -0.018, z: 0}
-    IsTargetState: 0
+    LerpData:
+      ChangeStateInput: 0
+      LerpProvider: {fileID: 618543363}
+      UseLerpProviderInputState: 1
+      DefaultState: {x: 0, y: 0.728, z: 0}
+      TargetState: {x: 0, y: -0.018, z: 0}
+      IsTargetState: 0
 --- !u!43 &690567702
 Mesh:
   m_ObjectHideFlags: 0
@@ -5624,7 +5626,7 @@ Transform:
   m_GameObject: {fileID: 744386656}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.17, y: 2.1688702, z: -5.8168054}
+  m_LocalPosition: {x: -0.17, y: 2.27, z: -5.8168054}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -35,18 +35,17 @@ namespace EscapeRooms.Systems
             {
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 ref var heightFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeightLerpProvider.Entity);
-                ref var headLerpComponent = ref _transformPositionLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
-                ref var headFloatLerpComponent = ref _floatLerpStash.Get(headLerpComponent.FloatLerpProvider.Entity);
+                ref var headFloatLerpComponent = ref _floatLerpStash.Get(crouchComponent.HeadLerpProvider.Entity);
 
                 if (crouchComponent.CrouchBlockFlag.IsFlagClear())
                 {
                     heightFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
-                    headLerpComponent.ChangePositionInput = crouchComponent.CrouchInput;
+                    headFloatLerpComponent.StartLerpInput = crouchComponent.CrouchInput;
                 }
                 else
                 {
                     heightFloatLerpComponent.StartLerpInput = false;
-                    headLerpComponent.ChangePositionInput = false;
+                    headFloatLerpComponent.StartLerpInput = false;
                 }
 
                 if (heightFloatLerpComponent.IsLerpInProgress)

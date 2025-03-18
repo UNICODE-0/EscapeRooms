@@ -23,7 +23,7 @@ namespace EscapeRooms.Components
         public FloatLerpProvider HeightLerpProvider;
 
         [Required]
-        public TransformPositionLerpProvider HeadLerpProvider;
+        public FloatLerpProvider HeadLerpProvider;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsCrouching;
