@@ -94,6 +94,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
+            group.AddSystem(new TransformOrbitalFollowSystem());
         }
         
         private static void ColliderBlock(SystemsGroup group)

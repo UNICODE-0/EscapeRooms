@@ -46677,12 +46677,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1470096552}
-  - component: {fileID: 1470096553}
   - component: {fileID: 1470096554}
   - component: {fileID: 1470096557}
   - component: {fileID: 1470096556}
   - component: {fileID: 1470096555}
   - component: {fileID: 1470096558}
+  - component: {fileID: 1470096560}
+  - component: {fileID: 1470096559}
   m_Layer: 0
   m_Name: OrbitalHand
   m_TagString: Untagged
@@ -46705,23 +46706,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 465942473}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1470096553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470096551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a35d4df69746bc44c97e6badef137296, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 516747334}
-  _center: {fileID: 323524074}
-  _speed: 10
-  _radius: 1.5
-  _rotSpeed: 10
 --- !u!54 &1470096554
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46809,6 +46793,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e501cdee0e174b70a87890423180bba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1470096559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4aabdb1a55a43c0847b4246c4153112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    Target: {fileID: 516747334}
+    SphereCenter: {fileID: 323524074}
+    FollowSpeed: 10
+    RotationSpeed: 10
+    SphereRadius: 1.5
+    CurrentAzimuth: 0
+    CurrentZenith: 0
+--- !u!114 &1470096560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faf623976c3cd5047a04f1c67170602a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    Transform: {fileID: 1470096552}
 --- !u!43 &1525544982
 Mesh:
   m_ObjectHideFlags: 0
