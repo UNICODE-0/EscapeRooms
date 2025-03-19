@@ -2131,7 +2131,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 516747334}
-  - component: {fileID: 516747335}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -2154,33 +2153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 323524074}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &516747335
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 516747333}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!43 &534434558
 Mesh:
   m_ObjectHideFlags: 0
@@ -46678,12 +46650,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1470096552}
   - component: {fileID: 1470096554}
-  - component: {fileID: 1470096557}
+  - component: {fileID: 1470096560}
   - component: {fileID: 1470096556}
+  - component: {fileID: 1470096557}
+  - component: {fileID: 1470096559}
   - component: {fileID: 1470096555}
   - component: {fileID: 1470096558}
-  - component: {fileID: 1470096560}
-  - component: {fileID: 1470096559}
   m_Layer: 0
   m_Name: OrbitalHand
   m_TagString: Untagged
