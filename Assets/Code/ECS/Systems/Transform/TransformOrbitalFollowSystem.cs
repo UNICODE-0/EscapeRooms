@@ -1,9 +1,7 @@
-using System.Diagnostics;
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using Debug = UnityEngine.Debug;
 
 namespace EscapeRooms.Systems
 {
