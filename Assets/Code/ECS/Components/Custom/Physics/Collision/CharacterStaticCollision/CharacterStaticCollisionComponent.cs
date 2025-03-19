@@ -17,6 +17,6 @@ namespace EscapeRooms.Components
         public float DirectionToTargetSimilarityThreshold;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsAnyStaticCollisionExist;
+        [ReadOnly] [InlineProperty] public FrameUniqueBool IsAnyStaticCollisionExist;
     }
 }

@@ -35,8 +35,7 @@ namespace EscapeRooms.Initializers
         
         public void SetSettings(GameSettings settings)
         {
-            if (!GameSettings.TrySetInstance(settings))
-                Debug.LogError("Game settings already has instance");
+            GameSettings.TrySetInstance(settings);
 
             Application.targetFrameRate = settings.TargetFrameRate;
             Cursor.lockState = CursorLockMode.Locked;
@@ -44,8 +43,7 @@ namespace EscapeRooms.Initializers
 
         public void Dispose()
         {
-            if (!GameSettings.TryRemoveInstance())
-                Debug.LogError("Game settings already disposed");
+            GameSettings.TryRemoveInstance();
         }
     }
 }

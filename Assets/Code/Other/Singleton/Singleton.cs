@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace EscapeRooms.Data
 {
     public class Singleton<T> where T: class
@@ -7,7 +9,11 @@ namespace EscapeRooms.Data
 
         public static bool TrySetInstance(T settings)
         {
-            if (_instance != null) return false;
+            if (_instance != null)
+            {
+                Debug.LogError($"{typeof(T)} already has instance");
+                return false;
+            }
             
             _instance = settings;
             return true;
@@ -15,7 +21,11 @@ namespace EscapeRooms.Data
         
         public static bool TryRemoveInstance()
         {
-            if (_instance == null) return false;
+            if (_instance == null)
+            {
+                Debug.LogError($"{typeof(T)} instance already disposed");
+                return false;
+            }
 
             _instance = null;
             return true;

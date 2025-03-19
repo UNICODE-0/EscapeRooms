@@ -13,8 +13,7 @@ namespace EscapeRooms.Systems
     {
         public World World { get; set; }
 
-        private Filter _filterForCharacters;
-        private Filter _filterForObjects;
+        private Filter _filter;
         
         private Stash<CharacterMovementComponent> _movementStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
@@ -24,14 +23,10 @@ namespace EscapeRooms.Systems
 
         public void OnAwake()
         {
-            _filterForObjects = World.Filter
+            _filter = World.Filter
                 .With<RigidbodyComponent>()
                 .With<TransformComponent>()
                 .With<CharacterStaticCollisionFlag>()
-                .Build();
-
-            _filterForCharacters = World.Filter
-                .With<CharacterStaticCollisionComponent>()
                 .Build();
 
             _movementStash = World.GetStash<CharacterMovementComponent>();
@@ -43,15 +38,7 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (var entity in _filterForCharacters)
-            {
-                ref var characterStaticCollisionComponent = 
-                    ref _characterStaticCollisionStash.Get(entity);
-
-                characterStaticCollisionComponent.IsAnyStaticCollisionExist = false;
-            }
-            
-            foreach (var entity in _filterForObjects)
+            foreach (var entity in _filter)
             {
                 ref var triggerEventComponent = ref _triggerEventStash.Get(entity);
                 ref var characterStaticCollisionComponent = 
@@ -76,15 +63,20 @@ namespace EscapeRooms.Systems
                                             characterStaticCollisionComponent.DirectionToTargetSimilarityThreshold && 
                                             characterMovementComponent.IsMoving;
                 
+                ref var anyCollisionExist = ref characterStaticCollisionComponent.IsAnyStaticCollisionExist;
+
                 if (triggerEventComponent.IsLastFrameOfLife 
                     || !characterMovementComponent.IsMoving 
                     || isMovingOverThreshold)
                 {
+                    anyCollisionExist.SetFalse(notTrueOnThisFrame: true);
+                    
                     rigidbodyComponent.Rigidbody.isKinematic = false;
                 }
                 else
                 {
-                    characterStaticCollisionComponent.IsAnyStaticCollisionExist = true;
+                    anyCollisionExist.SetTrue();
+                    
                     rigidbodyComponent.Rigidbody.isKinematic = true;
                 }
             }

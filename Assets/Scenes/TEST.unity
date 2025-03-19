@@ -44288,7 +44288,7 @@ MonoBehaviour:
     MaxHitsCount: 1
     LayerMask:
       serializedVersion: 2
-      m_Bits: 127
+      m_Bits: 64
     IsRayHit: 0
     HitsCount: 0
 --- !u!43 &1390166556

@@ -19,6 +19,7 @@ namespace EscapeRooms.Systems
             // Late systems
             
             ComponentEventsBlock(group);
+            FrameDataBlock(group);
         }
 
         private static void InputRequestBlock(SystemsGroup group)
@@ -111,6 +112,10 @@ namespace EscapeRooms.Systems
         private static void ComponentEventsBlock(SystemsGroup group)
         {
             group.AddSystem(new FlagDisposeSystem());
+        }
+        private static void FrameDataBlock(SystemsGroup group)
+        {
+            group.AddSystem(new FrameDataSystem());
         }
     }
 }
