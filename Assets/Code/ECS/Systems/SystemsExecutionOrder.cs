@@ -67,12 +67,14 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterCrouchStandBlockSystem());
             group.AddSystem(new CharacterCrouchStandingBlockSystem());
             group.AddSystem(new CharacterCrouchBlockWhileJumpSystem());
-            group.AddSystem(new CharacterCrouchBlockWhileFalling());
+            group.AddSystem(new CharacterCrouchBlockWhileStaticCollisionSystem());
+            group.AddSystem(new CharacterCrouchBlockWhileFallingSystem());
             
             group.AddSystem(new CharacterCrouchSystem());
             group.AddSystem(new CharacterCrouchSlowdownSystem());
             
             group.AddSystem(new CharacterJumpBlockWhileCrouchSystem());
+            group.AddSystem(new CharacterJumpBlockWhileStaticCollisionSystem());
 
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());

@@ -2,29 +2,30 @@ using EscapeRooms.Components;
 using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class CharacterCrouchBlockWhileFalling : ISystem
+    public sealed class CharacterCrouchBlockWhileStaticCollisionSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<CharacterGroundedComponent> _groundedStash;
+        private Stash<CharacterStaticCollisionComponent> _staticCollisionStash;
         private Stash<CharacterCrouchComponent> _crouchStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<CharacterGroundedComponent>()
+                .With<CharacterStaticCollisionComponent>()
                 .With<CharacterCrouchComponent>()
-                .With<CharacterCrouchBlockWhileFallingComponent>()
+                .With<CharacterCrouchBlockWhileStaticCollisionComponent>()
                 .Build();
 
-            _groundedStash = World.GetStash<CharacterGroundedComponent>();
+            _staticCollisionStash = World.GetStash<CharacterStaticCollisionComponent>();
             _crouchStash = World.GetStash<CharacterCrouchComponent>();
         }
 
@@ -32,11 +33,12 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var groundComponent = ref _groundedStash.Get(entity);
+                ref var staticCollisionComponent = ref _staticCollisionStash.Get(entity);
                 ref var crouchComponent = ref _crouchStash.Get(entity);
-                
+
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_BLOCK_WHILE_FALLING_FLAG, !groundComponent.IsGrounded);
+                    CrouchBlockers.CROUCH_BLOCK_WHILE_STATIC_COLLISION_FLAG, 
+                    staticCollisionComponent.IsAnyStaticCollisionExist.GetValue());
             }
         }
 
