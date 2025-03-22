@@ -28,7 +28,7 @@ namespace EscapeRooms.Components
         [ReadOnly] public bool DragInProgress;
     }
 
-    public enum InputTriggers
+    public enum InputTrigger
     {
         Jump,
         Crouch,

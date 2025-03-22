@@ -1,6 +1,7 @@
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Requests
 {
@@ -10,6 +11,6 @@ namespace EscapeRooms.Requests
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct InputTriggerInterruptRequest : IRequestData
     {
-        public InputTriggers TriggerToInterrupt;
+        public InputTrigger TriggerToInterrupt;
     }
 }

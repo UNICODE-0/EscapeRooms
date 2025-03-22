@@ -1,3 +1,4 @@
+using System;
 using EscapeRooms.Initializers;
 using EscapeRooms.Systems;
 using Scellecs.Morpeh;
@@ -8,7 +9,7 @@ namespace EscapeRooms.Mono
     public class EcsStartup : MonoBehaviour
     {
         private World _world;
-
+        
         private void Start()
         {
             _world = World.Default;

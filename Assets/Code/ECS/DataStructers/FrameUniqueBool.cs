@@ -24,7 +24,7 @@ namespace EscapeRooms.Data
             {
                 return;
             }
-            
+
             _value = true;
             _setTrueFrameId = FrameData.Instance.FrameId;
         }

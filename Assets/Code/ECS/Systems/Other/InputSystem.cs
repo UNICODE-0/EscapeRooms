@@ -83,10 +83,10 @@ namespace EscapeRooms.Systems
             {
                 switch (interruptReq.TriggerToInterrupt)
                 {
-                    case InputTriggers.Jump:
+                    case InputTrigger.Jump:
                         _jumpDelayedTrigger.Interrupt();
                         break;
-                    case InputTriggers.Crouch:
+                    case InputTrigger.Crouch:
                         _crouchDelayedTrigger.Interrupt();
                         break;
                 }
