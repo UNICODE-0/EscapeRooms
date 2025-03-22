@@ -75,7 +75,6 @@ namespace EscapeRooms.Systems
 
                             foreach (var collider in draggableComponent.Colliders)
                             {
-                                //collider.excludeLayers = draggableComponent.ExcludeLayersOnDrag;
                                 collider.sharedMaterial = draggableComponent.MaterialOnDrag;
                             }
                             

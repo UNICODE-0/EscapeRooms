@@ -65,7 +65,6 @@ namespace EscapeRooms.Systems
                     ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
                     foreach (var collider in draggableComponent.Colliders)
                     {
-                        collider.excludeLayers = default;
                         collider.sharedMaterial = null;
                     }
                     

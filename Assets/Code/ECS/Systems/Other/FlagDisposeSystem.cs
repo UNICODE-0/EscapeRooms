@@ -10,7 +10,7 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class FlagDisposeSystem : ILateSystem
     {
-        public static readonly FastList<IFlagComponent> EventsToDispose = new FastList<IFlagComponent>();
+        public static readonly FastList<IFlagComponent> FlagsToDispose = new FastList<IFlagComponent>();
         
         public World World { get; set; }
         public void OnAwake()
@@ -19,16 +19,16 @@ namespace EscapeRooms.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (var evt in EventsToDispose)
+            foreach (var evt in FlagsToDispose)
             {
                 evt.DisposeAction.Invoke();
             }
-            EventsToDispose.Clear();
+            FlagsToDispose.Clear();
         }
 
         public void Dispose()
         {
-            EventsToDispose.Clear();
+            FlagsToDispose.Clear();
         }
     }
 }

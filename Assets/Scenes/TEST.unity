@@ -1042,9 +1042,6 @@ MonoBehaviour:
     Colliders:
     - {fileID: 116761118}
     MaterialOnDrag: {fileID: 13400000, guid: 119271eac23cbb04e895a595e13ef98d, type: 2}
-    ExcludeLayersOnDrag:
-      serializedVersion: 2
-      m_Bits: 8
     DragDriveSpring: 2500
     DragDriveDamper: 40
     DragAngularDriveSpring: 100
@@ -46752,6 +46749,7 @@ MonoBehaviour:
   serializedData:
     DragInput: 0
     DragRaycast: {fileID: 1387658322}
+    MinDragDistance: 1.15
     IsDragging: 0
 --- !u!114 &1470096558
 MonoBehaviour:

@@ -65,7 +65,7 @@ namespace EscapeRooms.Mono
                         
                         _collisionTriggerStash.Remove(componentToDispose.Owner.Entity);
                     };
-                    FlagDisposeSystem.EventsToDispose.Add(collisionTriggerComponent);
+                    FlagDisposeSystem.FlagsToDispose.Add(collisionTriggerComponent);
                 }
             }
         }

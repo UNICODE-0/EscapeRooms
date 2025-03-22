@@ -108,6 +108,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DragStartSystem());
             group.AddSystem(new DragStopSystem());
             group.AddSystem(new DraggableCollisionSmoothingSystem());
+            group.AddSystem(new DragOrbitalPositionSetSystem());
         }
         
         // Late systems

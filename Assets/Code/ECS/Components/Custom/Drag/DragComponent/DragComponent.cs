@@ -18,6 +18,9 @@ namespace EscapeRooms.Components
         
         [NotNull]
         public RaycastProvider DragRaycast;
+
+        [MinValue(0.001f)] 
+        public float MinDragDistance;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsDragging;

@@ -16,8 +16,6 @@ namespace EscapeRooms.Components
         
         public PhysicsMaterial MaterialOnDrag;
 
-        public LayerMask ExcludeLayersOnDrag;
-        
         [PropertySpace]
         
         [MinValue(0)]
