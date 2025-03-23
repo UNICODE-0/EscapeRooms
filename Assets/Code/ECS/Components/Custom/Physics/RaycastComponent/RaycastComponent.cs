@@ -36,5 +36,10 @@ namespace EscapeRooms.Components
         [ShowInInspector]
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public RaycastHit[] Hits;
+        
+#if UNITY_EDITOR
+        [FoldoutGroup(Consts.DEBUG_FOLDOUT_NAME)]
+        public bool DrawLineToBoundsClosestPoint;
+#endif
     }
 }

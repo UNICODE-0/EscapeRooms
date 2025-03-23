@@ -40,9 +40,23 @@ namespace EscapeRooms.Systems
 
                 float targetAzimuth = Mathf.Atan2(toTarget.z, toTarget.x);
                 float targetZenith = Mathf.Acos(Mathf.Clamp(toTarget.y, -1f, 1f));
-
                 float radius = orbitalFollowComponent.SphereRadius;
-                float angularSpeed = orbitalFollowComponent.FollowSpeed / radius;
+                
+                float rotationSpeed;
+                float angularSpeed;
+                
+                if (orbitalFollowComponent.OneFramePermanentCalculation)
+                {
+                    rotationSpeed = float.MaxValue;
+                    angularSpeed = float.MaxValue;
+                    
+                    orbitalFollowComponent.OneFramePermanentCalculation = false;
+                }
+                else
+                {
+                    angularSpeed = orbitalFollowComponent.FollowSpeed / radius;
+                    rotationSpeed = orbitalFollowComponent.RotationSpeed;
+                }
                  
                 float azimuth = Mathf.MoveTowardsAngle(
                     orbitalFollowComponent.CurrentAzimuth * Mathf.Rad2Deg,
@@ -70,7 +84,7 @@ namespace EscapeRooms.Systems
                 
                 transform.position = centerPosition + new Vector3(x, y, z) + orbitalFollowComponent.Offset;
                 transform.rotation = Quaternion.Lerp(transform.rotation, orbitalFollowComponent.Target.rotation,
-                    Time.deltaTime * orbitalFollowComponent.RotationSpeed);
+                    Time.deltaTime * rotationSpeed);
             }
         }
 

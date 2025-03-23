@@ -19,6 +19,7 @@ namespace EscapeRooms.Systems
         private Stash<TransformOrbitalFollowComponent> _transformOrbitalFollowStash;
         private Stash<RaycastComponent> _raycastStash;
         private Stash<DragComponent> _dragStash;
+        private Stash<DraggableComponent> _draggableStash;
 
         private Event<DragStartEvent> _dragStartEvent;
 
@@ -28,7 +29,8 @@ namespace EscapeRooms.Systems
             _transformOrbitalFollowStash = World.GetStash<TransformOrbitalFollowComponent>();
             _raycastStash = World.GetStash<RaycastComponent>();
             _dragStash = World.GetStash<DragComponent>();
-            
+            _draggableStash = World.GetStash<DraggableComponent>();
+                
             _dragStartEvent = World.GetEvent<DragStartEvent>();
         }
 
@@ -40,23 +42,46 @@ namespace EscapeRooms.Systems
                 if(!exist) return;
                 
                 ref var followingHandTransformComponent = ref _transformStash.Get(evt.Owner);
+                ref var draggableComponent = ref _draggableStash.Get(evt.Draggable);
                 ref var draggableTransformComponent = ref _transformStash.Get(evt.Draggable);
                 ref var dragComponent = ref _dragStash.Get(evt.Owner); 
                 ref var dragStartRaycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
-
-                Transform draggable = draggableTransformComponent.Transform;
-                Transform dragRaycastStart = dragStartRaycastComponent.RayStartPoint;
-                Transform followingHand = followingHandTransformComponent.Transform;
-                Transform originalHand = transformOrbitalFollowComponent.Target;
-
-                float distanceToDraggable = Vector3.Distance(dragRaycastStart.position, draggable.position);
-                if (distanceToDraggable < dragComponent.MinDragDistance)
-                    distanceToDraggable = dragComponent.MinDragDistance;
-
-                transformOrbitalFollowComponent.SphereRadius = distanceToDraggable;
-                followingHand.position = draggable.position;
-                originalHand.position = draggable.position;
+                
+                Transform draggableTf = draggableTransformComponent.Transform;
+                Transform dragRaycastStartTf = dragStartRaycastComponent.RayStartPoint;
+                Transform followingHandTf = followingHandTransformComponent.Transform;
+                Transform originalHandTf = transformOrbitalFollowComponent.Target;
+                
+                transformOrbitalFollowComponent.SphereRadius = 
+                    GetDistanceToDraggable(draggableTf, draggableComponent.Colliders, 
+                        dragRaycastStartTf, dragComponent.MinDragDistance);
+                
+                originalHandTf.position = draggableTf.position;
+                transformOrbitalFollowComponent.OneFramePermanentCalculation = true;
             }
+        }
+
+        private float GetDistanceToDraggable(Transform draggablePos, Collider[] colliders, Transform target, float minDistance)
+        {
+            float currentMinDistance = float.MaxValue;
+            
+            foreach (var collider in colliders)
+            {
+                float currentDistance = Vector3.Distance(target.position, collider.ClosestPointOnBounds(target.position));
+                
+                if (currentMinDistance > currentDistance)
+                    currentMinDistance = currentDistance;
+            }
+            
+            float distanceToDraggableCenter = Vector3.Distance(draggablePos.position, target.position);
+
+            if (currentMinDistance < minDistance)
+            {
+                float minDistanceDiff = minDistance - currentMinDistance;
+                return distanceToDraggableCenter + minDistanceDiff;
+            }
+            
+            return distanceToDraggableCenter;
         }
         
         public void Dispose()
