@@ -68,7 +68,7 @@ namespace EscapeRooms.Systems
 
                 Transform transform = transformComponent.Transform;
                 
-                transform.position = centerPosition + new Vector3(x, y, z);
+                transform.position = centerPosition + new Vector3(x, y, z) + orbitalFollowComponent.Offset;
                 transform.rotation = Quaternion.Lerp(transform.rotation, orbitalFollowComponent.Target.rotation,
                     Time.deltaTime * orbitalFollowComponent.RotationSpeed);
             }

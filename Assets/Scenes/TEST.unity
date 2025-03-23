@@ -46650,6 +46650,7 @@ GameObject:
   - component: {fileID: 1470096560}
   - component: {fileID: 1470096556}
   - component: {fileID: 1470096557}
+  - component: {fileID: 1470096561}
   - component: {fileID: 1470096559}
   - component: {fileID: 1470096555}
   - component: {fileID: 1470096558}
@@ -46781,6 +46782,7 @@ MonoBehaviour:
     FollowSpeed: 10
     RotationSpeed: 10
     SphereRadius: 1.5
+    Offset: {x: 0, y: 0, z: 0}
     CurrentAzimuth: 0
     CurrentZenith: 0
 --- !u!114 &1470096560
@@ -46797,6 +46799,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     Transform: {fileID: 1470096552}
+--- !u!114 &1470096561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9040c8e4dae476e97e63f4bb9a41301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    MovementProvider: {fileID: 63797422}
+    CorrectionScale: 0.21
+    CorrectionApplySpeed: 10
+    IsCorrectionAdded: 0
+    IsCorrectionSubtracted: 0
 --- !u!43 &1525544982
 Mesh:
   m_ObjectHideFlags: 0

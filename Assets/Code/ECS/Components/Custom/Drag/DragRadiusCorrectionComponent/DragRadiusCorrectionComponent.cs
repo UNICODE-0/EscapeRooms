@@ -2,8 +2,6 @@ using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -11,29 +9,23 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct TransformOrbitalFollowComponent : IComponent
+    public struct DragRadiusCorrectionComponent : IComponent
     {
         [Required] 
-        public Transform Target;
+        public CharacterMovementProvider MovementProvider;
         
-        [Required] 
-        public Transform SphereCenter;
+        [PropertySpace]
+        
+        [MinValue(0.01f)]
+        public float CorrectionScale;
 
-        [MinValue(0.001f)]
-        public float FollowSpeed;
-        
-        [MinValue(0.001f)]
-        public float RotationSpeed;
-
-        [MinValue(0.001f)]
-        public float SphereRadius;
-        
-        public Vector3 Offset;
+        [MinValue(0.01f)]
+        public float CorrectionApplySpeed;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float CurrentAzimuth;
+        [ReadOnly] public bool IsCorrectionAdded;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float CurrentZenith;
+        [ReadOnly] public bool IsCorrectionSubtracted;
     }
 }
