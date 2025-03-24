@@ -64,7 +64,7 @@ namespace EscapeRooms.Systems
                                             characterMovementComponent.IsMoving;
                 
                 ref var anyCollisionExist = ref characterStaticCollisionComponent.IsAnyStaticCollisionExist;
-
+                
                 if (triggerEventComponent.IsLastFrameOfLife 
                     || !characterMovementComponent.IsMoving 
                     || isMovingOverThreshold)

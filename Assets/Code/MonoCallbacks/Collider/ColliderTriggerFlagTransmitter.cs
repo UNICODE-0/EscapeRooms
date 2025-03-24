@@ -57,15 +57,11 @@ namespace EscapeRooms.Mono
 
                 if (triggerExist)
                 {
-                    collisionTriggerComponent.IsLastFrameOfLife = true;
-                    collisionTriggerComponent.DisposeAction = () =>
+                    Entity receiverEntity = collisionTriggerReceiverComponent.Owner.Entity;
+                    FlagDisposeSystem.ScheduleFlagDispose(ref collisionTriggerComponent, () =>
                     {
-                        ref var componentToDispose = 
-                            ref _collisionTriggerReceiverStash.Get(otherEntityItem.entity);
-                        
-                        _collisionTriggerStash.Remove(componentToDispose.Owner.Entity);
-                    };
-                    FlagDisposeSystem.FlagsToDispose.Add(collisionTriggerComponent);
+                        _collisionTriggerStash.Remove(receiverEntity);
+                    });
                 }
             }
         }

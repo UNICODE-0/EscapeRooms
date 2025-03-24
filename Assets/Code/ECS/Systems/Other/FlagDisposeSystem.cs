@@ -1,3 +1,4 @@
+using System;
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
@@ -10,7 +11,14 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public sealed class FlagDisposeSystem : ILateSystem
     {
-        public static readonly FastList<IFlagComponent> FlagsToDispose = new FastList<IFlagComponent>();
+        private static readonly FastList<IFlagComponent> FlagsToDispose = new FastList<IFlagComponent>();
+        public static void ScheduleFlagDispose<Flag>(ref Flag flag, Action disposeAction) 
+            where Flag : struct, IFlagComponent
+        {
+            flag.IsLastFrameOfLife = true;
+            flag.DisposeAction = disposeAction;
+            FlagsToDispose.Add(flag);
+        }
         
         public World World { get; set; }
         public void OnAwake()

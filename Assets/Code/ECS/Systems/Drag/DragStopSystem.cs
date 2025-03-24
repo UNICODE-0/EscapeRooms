@@ -1,6 +1,7 @@
 using EscapeRooms.Components;
 using EscapeRooms.Events;
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Collections;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
@@ -54,7 +55,15 @@ namespace EscapeRooms.Systems
                     itemRigidbodyComponent.Rigidbody.linearDamping = 0;
                     itemRigidbodyComponent.Rigidbody.angularDamping = 0.05f; // default value
                     
-                    _onDragStash.Remove(dragComponent.DraggableEntity);
+                    ref var onDragFlag = ref _onDragStash.Get(dragComponent.DraggableEntity, out bool onDragFlagExist);
+                    if (onDragFlagExist)
+                    {
+                        Entity draggableEntity = dragComponent.DraggableEntity;
+                        FlagDisposeSystem.ScheduleFlagDispose(ref onDragFlag, () =>
+                        {
+                            _onDragStash.Remove(draggableEntity);
+                        });
+                    }
                     
                     _dragStopEvent.ThisFrame(new DragStopEvent()
                     {

@@ -20,6 +20,7 @@ namespace EscapeRooms.Systems
         private Stash<RaycastComponent> _raycastStash;
         private Stash<DragComponent> _dragStash;
         private Stash<DraggableComponent> _draggableStash;
+        private Stash<ConfigurableJointComponent> _configurableJointStash;
 
         private Event<DragStartEvent> _dragStartEvent;
 
@@ -30,6 +31,7 @@ namespace EscapeRooms.Systems
             _raycastStash = World.GetStash<RaycastComponent>();
             _dragStash = World.GetStash<DragComponent>();
             _draggableStash = World.GetStash<DraggableComponent>();
+            _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
                 
             _dragStartEvent = World.GetEvent<DragStartEvent>();
         }
@@ -46,17 +48,26 @@ namespace EscapeRooms.Systems
                 ref var draggableTransformComponent = ref _transformStash.Get(evt.Draggable);
                 ref var dragComponent = ref _dragStash.Get(evt.Owner); 
                 ref var dragStartRaycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
+                ref var jointComponent = ref _configurableJointStash.Get(evt.Draggable); 
                 
                 Transform draggableTf = draggableTransformComponent.Transform;
                 Transform dragRaycastStartTf = dragStartRaycastComponent.RayStartPoint;
                 Transform followingHandTf = followingHandTransformComponent.Transform;
                 Transform originalHandTf = transformOrbitalFollowComponent.Target;
+
+                Vector3 hitPosition = dragStartRaycastComponent.Hits[0].point;
+                float distToHitPosition = Vector3.Distance(hitPosition, dragRaycastStartTf.position);
+
+                Vector3 hitLocalPosition = draggableTransformComponent.Transform.InverseTransformPoint(hitPosition);
+                jointComponent.ConfigurableJoint.anchor = hitLocalPosition;
+
+                if (distToHitPosition < dragComponent.MinDragDistance)
+                {
+                    distToHitPosition = dragComponent.MinDragDistance;
+                }
                 
-                transformOrbitalFollowComponent.SphereRadius = 
-                    GetDistanceToDraggable(draggableTf, draggableComponent.Colliders, 
-                        dragRaycastStartTf, dragComponent.MinDragDistance);
-                
-                originalHandTf.position = draggableTf.position;
+                transformOrbitalFollowComponent.SphereRadius = distToHitPosition;
+                originalHandTf.position = hitPosition;
                 transformOrbitalFollowComponent.OneFramePermanentCalculation = true;
             }
         }

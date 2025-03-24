@@ -4,6 +4,7 @@ using EscapeRooms.Helpers;
 using EscapeRooms.Mono;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -19,6 +20,7 @@ namespace EscapeRooms.Systems
         private Stash<ColliderTriggerEventsHolderComponent> _colliderTriggerEventsHolderStash;
         private Stash<DraggableCollisionSmoothingComponent> _draggableSmoothingStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
+        private Stash<OnDragFlag> _dragFlagStash;
 
         private Event<DragStartEvent> _dragStartEvent;
         private Event<DragStopEvent> _dragStopEvent;
@@ -37,6 +39,7 @@ namespace EscapeRooms.Systems
             _colliderTriggerEventsHolderStash = World.GetStash<ColliderTriggerEventsHolderComponent>();
             _draggableSmoothingStash = World.GetStash<DraggableCollisionSmoothingComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
+            _dragFlagStash = World.GetStash<OnDragFlag>();
 
             _dragStartEvent = World.GetEvent<DragStartEvent>();
             _dragStopEvent = World.GetEvent<DragStopEvent>();
@@ -59,9 +62,16 @@ namespace EscapeRooms.Systems
             
             foreach (var entity in _filter)
             {
-                ref var colliderTriggerEventsHolderComponent = ref _colliderTriggerEventsHolderStash.Get(entity);
+                ref var onDragFlag = ref _dragFlagStash.Get(entity);
                 ref var draggableSmoothingComponent = ref _draggableSmoothingStash.Get(entity);
-
+                if (onDragFlag.IsLastFrameOfLife)
+                {
+                    draggableSmoothingComponent.IsSmoothed = false;
+                    continue;
+                }
+                
+                ref var colliderTriggerEventsHolderComponent = ref _colliderTriggerEventsHolderStash.Get(entity);
+                
                 ColliderTriggerType type = colliderTriggerEventsHolderComponent.EventsHolder
                     .LastTrigger;
 

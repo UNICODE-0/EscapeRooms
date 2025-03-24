@@ -81,7 +81,10 @@ namespace EscapeRooms.Systems
                             dragComponent.DraggableEntity = item.entity;
                             dragComponent.IsDragging = true;
 
-                            _onDragStash.Add(item.entity);
+                            _onDragStash.Add(item.entity, new OnDragFlag()
+                            {
+                                Owner = entity
+                            });
                             
                             _dragStartEvent.ThisFrame(new DragStartEvent()
                             {
