@@ -20,6 +20,7 @@ namespace EscapeRooms.Systems
         private Stash<CharacterStaticCollisionFlag> _triggerEventStash;
         private Stash<CharacterStaticCollisionComponent> _characterStaticCollisionStash;
         private Stash<TransformComponent> _transformStash;
+        private Stash<CharacterStaticCollisionEndBlocker> _collisionEndBlockerStash;
 
         public void OnAwake()
         {
@@ -34,6 +35,7 @@ namespace EscapeRooms.Systems
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
             _characterStaticCollisionStash = World.GetStash<CharacterStaticCollisionComponent>();
             _transformStash = World.GetStash<TransformComponent>();
+            _collisionEndBlockerStash = World.GetStash<CharacterStaticCollisionEndBlocker>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -71,12 +73,21 @@ namespace EscapeRooms.Systems
                 {
                     anyCollisionExist.SetFalse(notTrueOnThisFrame: true);
                     
+                    if(!rigidbodyComponent.Rigidbody.isKinematic) continue; 
+                    
+                    /* When the state of kinematic changes, the OnTriggerEnter/Stay/Exit statuses are updated,
+                    so we need to skip one iteration of exit processing. */
+                    _collisionEndBlockerStash.Add(entity, out _);
                     rigidbodyComponent.Rigidbody.isKinematic = false;
                 }
                 else
                 {
                     anyCollisionExist.SetTrue();
                     
+                    if(rigidbodyComponent.Rigidbody.isKinematic) continue;
+                    
+                    // The same as above
+                    _collisionEndBlockerStash.Add(entity, out _);
                     rigidbodyComponent.Rigidbody.isKinematic = true;
                 }
             }
