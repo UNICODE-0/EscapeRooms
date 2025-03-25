@@ -1,4 +1,5 @@
 using EscapeRooms.Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace EscapeRooms.Mono
@@ -6,6 +7,7 @@ namespace EscapeRooms.Mono
     [RequireComponent(typeof(Collider))]
     public class ColliderTriggerEventsHolder : MonoBehaviour
     {
+        [ReadOnly] [InlineProperty]   
         public FrameUniqueBool IsAnyTriggerInProgress;
 
         private void OnTriggerEnter(Collider other)

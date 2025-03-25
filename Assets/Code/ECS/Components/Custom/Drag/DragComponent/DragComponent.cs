@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -12,7 +13,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct DragComponent : IComponent
     {
-        public bool DragInput;
+        public bool DragStartInput;
+        public bool DragStopInput;
 
         [PropertySpace] 
         

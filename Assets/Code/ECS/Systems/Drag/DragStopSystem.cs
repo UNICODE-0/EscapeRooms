@@ -44,7 +44,7 @@ namespace EscapeRooms.Systems
             {
                 ref var dragComponent = ref _dragStash.Get(entity);
                 
-                if(!dragComponent.DragInput && dragComponent.IsDragging)
+                if(dragComponent.DragStopInput && dragComponent.IsDragging)
                 {
                     ref var jointComponent = ref _configurableJointStash.Get(dragComponent.DraggableEntity);
                     ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(dragComponent.DraggableEntity);

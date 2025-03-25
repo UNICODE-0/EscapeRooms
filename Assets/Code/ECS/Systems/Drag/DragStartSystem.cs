@@ -48,7 +48,7 @@ namespace EscapeRooms.Systems
             {
                 ref var dragComponent = ref _dragStash.Get(entity);
 
-                if (dragComponent.DragInput && !dragComponent.IsDragging)
+                if (dragComponent.DragStartInput && !dragComponent.IsDragging)
                 {
                     ref var raycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
                     

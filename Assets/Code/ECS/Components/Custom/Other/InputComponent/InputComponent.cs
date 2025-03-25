@@ -3,6 +3,7 @@ using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -25,7 +26,10 @@ namespace EscapeRooms.Components
         [ReadOnly] public bool CrouchTrigger;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [ReadOnly] public bool DragInProgress;
+        [ReadOnly] public bool DragStartTrigger;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [ReadOnly] public bool DragStopInProgress;
     }
 
     public enum InputTrigger

@@ -73,7 +73,8 @@ namespace EscapeRooms.Systems
                 playerInputComponent.LookActionValue = lookActionValue;
                 playerInputComponent.JumpTrigger = _jumpDelayedTrigger.IsTriggered;
                 playerInputComponent.CrouchTrigger = _crouchDelayedTrigger.IsTriggered;
-                playerInputComponent.DragInProgress = _dragAction.inProgress;
+                playerInputComponent.DragStartTrigger = _dragAction.triggered;
+                playerInputComponent.DragStopInProgress = !_dragAction.inProgress;
             }
         }
 
