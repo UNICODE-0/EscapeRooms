@@ -4,6 +4,6 @@ namespace EscapeRooms.Data
     {
         public const int MAX_FRAME_ID = int.MaxValue;
         
-        public int FrameId;
+        public int FrameId = 1;
     }
 }

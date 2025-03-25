@@ -20,24 +20,28 @@ namespace EscapeRooms.Data
 
         public void SetTrue(bool notFalseOnThisFrame = false)
         {
-            if (notFalseOnThisFrame && _setFalseFrameId == FrameData.Instance.FrameId)
+            int frameId = FrameData.Instance is null ? 0 : FrameData.Instance.FrameId;
+            
+            if (notFalseOnThisFrame && _setFalseFrameId == frameId)
             {
                 return;
             }
 
             _value = true;
-            _setTrueFrameId = FrameData.Instance.FrameId;
+            _setTrueFrameId = frameId;
         }
 
         public void SetFalse(bool notTrueOnThisFrame = false)
         {
-            if (notTrueOnThisFrame && _setTrueFrameId == FrameData.Instance.FrameId)
+            int frameId = FrameData.Instance is null ? 0 : FrameData.Instance.FrameId;
+            
+            if (notTrueOnThisFrame && _setTrueFrameId == frameId)
             {
                 return;
             }
             
             _value = false;
-            _setFalseFrameId = FrameData.Instance.FrameId;
+            _setFalseFrameId = frameId;
         }
     }
 }

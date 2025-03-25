@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using EscapeRooms.Initializers;
 using EscapeRooms.Systems;
 using Scellecs.Morpeh;
@@ -10,7 +11,7 @@ namespace EscapeRooms.Mono
     {
         private World _world;
         
-        private void Start()
+        private void Awake()
         {
             _world = World.Default;
 
@@ -24,7 +25,6 @@ namespace EscapeRooms.Mono
             #endif
 
             _world.AddSystemsGroup(order: 0, systemsGroup);
-
         }
 
         private void AddDebugSystems(SystemsGroup group)

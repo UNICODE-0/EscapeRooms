@@ -72,15 +72,14 @@ namespace EscapeRooms.Systems
                 
                 ref var colliderTriggerEventsHolderComponent = ref _colliderTriggerEventsHolderStash.Get(entity);
                 
-                ColliderTriggerType type = colliderTriggerEventsHolderComponent.EventsHolder
-                    .LastTrigger;
+                var isAnyTriggerInProgress = colliderTriggerEventsHolderComponent.EventsHolder
+                    .IsAnyTriggerInProgress;
 
-                if (!draggableSmoothingComponent.IsSmoothed && 
-                    (type is ColliderTriggerType.Enter || type is ColliderTriggerType.Stay))
+                if (!draggableSmoothingComponent.IsSmoothed && isAnyTriggerInProgress.GetValue())
                 {
                     SetJointDriveData(entity, true);
                 }
-                else if (draggableSmoothingComponent.IsSmoothed && type is ColliderTriggerType.Exit)
+                else if (draggableSmoothingComponent.IsSmoothed && !isAnyTriggerInProgress.GetValue())
                 {
                     SetJointDriveData(entity, false);
                 }

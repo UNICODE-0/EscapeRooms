@@ -7,7 +7,7 @@ namespace EscapeRooms.Data
         private static T _instance;
         public static T Instance => _instance;
 
-        public static bool TrySetInstance(T settings)
+        public static bool TrySetInstance(T instance)
         {
             if (_instance != null)
             {
@@ -15,7 +15,7 @@ namespace EscapeRooms.Data
                 return false;
             }
             
-            _instance = settings;
+            _instance = instance;
             return true;
         }
         

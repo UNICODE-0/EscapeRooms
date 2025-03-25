@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using UnityEngine;
 
 namespace EscapeRooms.Mono
@@ -5,8 +6,7 @@ namespace EscapeRooms.Mono
     [RequireComponent(typeof(Collider))]
     public class ColliderTriggerEventsHolder : MonoBehaviour
     {
-        public ColliderTriggerType LastTrigger { get; private set; } = ColliderTriggerType.None;
-        public Collider LastTriggeredCollider { get; private set; }
+        public FrameUniqueBool IsAnyTriggerInProgress;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -27,28 +27,17 @@ namespace EscapeRooms.Mono
         
         protected virtual void OnTriggerEnterHandler(Collider other)
         {
-            LastTrigger = ColliderTriggerType.Enter;
-            LastTriggeredCollider = other;
+            IsAnyTriggerInProgress.SetTrue();
         }
         
         protected virtual void OnTriggerStayHandler(Collider other)
         {
-            LastTrigger = ColliderTriggerType.Stay;
-            LastTriggeredCollider = other;
+            IsAnyTriggerInProgress.SetTrue();
         }
         
         protected virtual void OnTriggerExitHandler(Collider other)
         {
-            LastTrigger = ColliderTriggerType.Exit;
-            LastTriggeredCollider = other;
+            IsAnyTriggerInProgress.SetFalse();
         }
-    }
-    
-    public enum ColliderTriggerType
-    {
-        None,
-        Enter,
-        Stay,
-        Exit
     }
 }
