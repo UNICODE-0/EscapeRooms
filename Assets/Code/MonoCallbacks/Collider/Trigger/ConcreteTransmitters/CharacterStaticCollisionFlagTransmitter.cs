@@ -4,8 +4,7 @@ namespace EscapeRooms.Mono
 {
     public class CharacterStaticCollisionFlagTransmitter 
         : ColliderTriggerFlagTransmitter<CharacterStaticCollisionFlag, 
-            CharacterStaticCollisionFlagReceiverComponent, 
-            CharacterStaticCollisionEndBlocker>
+            CharacterStaticCollisionFlagReceiverComponent>
     {
         
     }
