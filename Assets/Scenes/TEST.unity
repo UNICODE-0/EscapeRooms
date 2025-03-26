@@ -2155,9 +2155,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.51
-  m_Height: 2.5
+  m_Height: 2.8
   m_Direction: 1
-  m_Center: {x: 0, y: -0.1875, z: 0}
+  m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!114 &462664928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5720,11 +5720,11 @@ MonoBehaviour:
       LerpProvider: {fileID: 1913946922}
       UseLerpProviderInputState: 1
       DefaultState:
-        CapsuleHeight: 2.5
-        CapsuleCenter: {x: 0, y: -0.1875, z: 0}
+        CapsuleHeight: 2.8
+        CapsuleCenter: {x: 0, y: -0.35, z: 0}
       TargetState:
-        CapsuleHeight: 1.75
-        CapsuleCenter: {x: 0, y: -0.5625, z: 0}
+        CapsuleHeight: 2.05
+        CapsuleCenter: {x: 0, y: -0.725, z: 0}
       IsTargetState: 0
 --- !u!114 &673089453
 MonoBehaviour:
@@ -9049,11 +9049,11 @@ MonoBehaviour:
       LerpProvider: {fileID: 1913946922}
       UseLerpProviderInputState: 1
       DefaultState:
-        CapsuleHeight: 1.92
-        CapsuleCenter: {x: 0, y: 0.07, z: 0}
+        CapsuleHeight: 1.84
+        CapsuleCenter: {x: 0, y: 0.095, z: 0}
       TargetState:
-        CapsuleHeight: 1.17
-        CapsuleCenter: {x: 0, y: -0.305, z: 0}
+        CapsuleHeight: 1.09
+        CapsuleCenter: {x: 0, y: -0.28, z: 0}
       IsTargetState: 0
 --- !u!114 &1140511890
 MonoBehaviour:
@@ -43863,9 +43863,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.52
-  m_Height: 1.92
+  m_Height: 1.84
   m_Direction: 1
-  m_Center: {x: 0, y: 0.07, z: 0}
+  m_Center: {x: 0, y: 0.095, z: 0}
 --- !u!1 &1366744168
 GameObject:
   m_ObjectHideFlags: 0
