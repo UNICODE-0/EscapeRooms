@@ -13,5 +13,6 @@ namespace EscapeRooms.Components
         public Entity Owner { get; set; }
         public bool IsLastFrameOfLife { get; set; }
         public Action DisposeAction { get; set; }
+        public int DisposeOrder { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -17,7 +18,19 @@ namespace EscapeRooms.Systems
         {
             flag.IsLastFrameOfLife = true;
             flag.DisposeAction = disposeAction;
+            flag.DisposeOrder = FlagsToDispose.length;
             FlagsToDispose.Add(flag);
+        }
+        
+        public static void CancelFlagDispose<Flag>(ref Flag flag) 
+            where Flag : struct, IFlagComponent
+        {
+            if(!flag.IsLastFrameOfLife) return;
+            
+            flag.IsLastFrameOfLife = false;
+            flag.DisposeAction = null;
+            
+            FlagsToDispose[flag.DisposeOrder].IsLastFrameOfLife = false;
         }
         
         public World World { get; set; }
@@ -29,8 +42,10 @@ namespace EscapeRooms.Systems
         {
             foreach (var evt in FlagsToDispose)
             {
-                evt.DisposeAction.Invoke();
+                if (evt.IsLastFrameOfLife)
+                    evt.DisposeAction.Invoke();
             }
+            
             FlagsToDispose.Clear();
         }
 

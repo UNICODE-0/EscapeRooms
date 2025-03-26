@@ -1,6 +1,9 @@
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
+using Scellecs.Morpeh.Collections;
+using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -14,6 +17,8 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<CharacterGroundedComponent> _groundedStash;
         private Stash<CharacterControllerComponent> _characterControllerStash;
+        private Stash<RigidbodyComponent> _rigidbodyStash;
+        private Stash<CharacterControllerHitHolderComponent> _characterHitStash;
 
         public void OnAwake()
         {
@@ -24,6 +29,8 @@ namespace EscapeRooms.Systems
 
             _groundedStash = World.GetStash<CharacterGroundedComponent>();
             _characterControllerStash = World.GetStash<CharacterControllerComponent>();
+            _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            _characterHitStash = World.GetStash<CharacterControllerHitHolderComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -33,7 +40,22 @@ namespace EscapeRooms.Systems
                 ref var groundedComponent = ref _groundedStash.Get(entity);
                 ref var characterComponent = ref _characterControllerStash.Get(entity);
 
-                groundedComponent.IsGrounded = characterComponent.CharacterController.isGrounded;
+                if (characterComponent.CharacterController.isGrounded)
+                {
+                    ref var characterHitComponent = ref _characterHitStash.Get(entity);
+                    if (EntityProvider.map.TryGetValue(characterHitComponent.HitHolder.Hit.gameObject.GetInstanceID(), 
+                            out var otherEntityItem))
+                    {
+                        ref var rigidbodyComponent = ref _rigidbodyStash.Get(otherEntityItem.entity);
+                        
+                        groundedComponent.IsGrounded = !rigidbodyComponent.Rigidbody.isKinematic && 
+                        rigidbodyComponent.Rigidbody.linearVelocity.sqrMagnitude < groundedComponent.MaxStandingDraggableVelocity;
+                    }
+                    else
+                        groundedComponent.IsGrounded = true;
+                }
+                else
+                    groundedComponent.IsGrounded = false;
             }
         }
 

@@ -27,21 +27,13 @@ namespace EscapeRooms.Mono
             _exitBlockerStash = World.Default.GetStash<ExitBlocker>();
         }
 
-        protected override void OnTriggerEnterHandler(Collider other)
+        protected override void OnUniqueTriggerEnter(Collider other)
         {
-            base.OnTriggerEnterHandler(other);
             TryAddCollisionTriggerComponent(other.gameObject.GetInstanceID());
         }
 
-        // protected override void OnTriggerStayHandler(Collider other)
-        // {
-        //     base.OnTriggerStayHandler(other);
-        //     TryAddCollisionTriggerComponent(other.gameObject.GetInstanceID());
-        // }
-
-        protected override void OnTriggerExitHandler(Collider other)
+        protected override void OnUniqueTriggerExit(Collider other)
         {
-            base.OnTriggerExitHandler(other);
             TryRemoveCollisionTriggerComponent(other.gameObject.GetInstanceID());
         }
 
@@ -92,7 +84,13 @@ namespace EscapeRooms.Mono
                     ref _collisionTriggerStash.Add(collisionTriggerReceiverComponent.Owner.Entity, out bool otherCollisionExist);
 
                 if (otherCollisionExist)
+                {
+                    ref var existedCollisionTriggerComponent = 
+                        ref _collisionTriggerStash.Get(collisionTriggerReceiverComponent.Owner.Entity);
+                    
+                    FlagDisposeSystem.CancelFlagDispose(ref existedCollisionTriggerComponent);
                     return;
+                }
                 
                 collisionTriggerComponent.Owner = _owner.Entity;
             }
