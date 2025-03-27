@@ -1,7 +1,6 @@
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -14,17 +13,17 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<DragComponent> _dragStash;
-        private Stash<ColliderTriggerEventsHolderComponent> _triggerStash;
+        private Stash<ColliderUniqueTriggerEventsHolderComponent> _triggerStash;
         
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<DragComponent>()
-                .With<ColliderTriggerEventsHolderComponent>()
+                .With<ColliderUniqueTriggerEventsHolderComponent>()
                 .Build();
 
             _dragStash = World.GetStash<DragComponent>();
-            _triggerStash = World.GetStash<ColliderTriggerEventsHolderComponent>();
+            _triggerStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -37,7 +36,7 @@ namespace EscapeRooms.Systems
                 {
                     ref var triggerComponent = ref _triggerStash.Get(entity);
 
-                    if (triggerComponent.EventsHolder.IsAnyTriggerInProgress.GetValue())
+                    if (triggerComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
                     {
                         dragComponent.DragStopInput = true;
                     }

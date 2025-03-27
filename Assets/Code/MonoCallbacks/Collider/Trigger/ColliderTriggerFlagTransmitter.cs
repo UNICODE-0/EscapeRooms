@@ -9,7 +9,7 @@ using Sirenix.OdinInspector;
 namespace EscapeRooms.Mono
 {
     // Logic of this class executed BEFORE update loop in ECS world
-    public abstract class ColliderTriggerFlagTransmitter<Flag, Receiver> : ColliderTriggerEventsHolder 
+    public abstract class ColliderTriggerFlagTransmitter<Flag, Receiver> : ColliderUniqueTriggerEventsHolder 
         where Flag: struct, IFlagComponent
         where Receiver: struct, IOwnerProviderComponent
     {
