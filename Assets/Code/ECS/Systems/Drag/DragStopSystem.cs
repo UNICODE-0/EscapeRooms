@@ -1,7 +1,7 @@
 using EscapeRooms.Components;
 using EscapeRooms.Events;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Collections;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
@@ -48,12 +48,16 @@ namespace EscapeRooms.Systems
                 {
                     ref var jointComponent = ref _configurableJointStash.Get(dragComponent.DraggableEntity);
                     ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(dragComponent.DraggableEntity);
+                    ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
 
                     jointComponent.ConfigurableJoint.connectedBody = null;
                     SetJointDefaultData(jointComponent.ConfigurableJoint);
-                    
+
+                    itemRigidbodyComponent.Rigidbody.mass = draggableComponent.MassBeforeDrag;
                     itemRigidbodyComponent.Rigidbody.linearDamping = 0;
                     itemRigidbodyComponent.Rigidbody.angularDamping = 0.05f; // default value
+                    ClampVelocity(itemRigidbodyComponent.Rigidbody, draggableComponent.MaxVelocity,
+                        draggableComponent.MaxAngularVelocity);
                     
                     ref var onDragFlag = ref _onDragStash.Get(dragComponent.DraggableEntity, out bool onDragFlagExist);
                     if (onDragFlagExist)
@@ -71,7 +75,6 @@ namespace EscapeRooms.Systems
                         Owner = entity
                     });
                     
-                    ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
                     foreach (var collider in draggableComponent.Colliders)
                     {
                         collider.sharedMaterial = null;
@@ -81,6 +84,12 @@ namespace EscapeRooms.Systems
                     dragComponent.IsDragging = false;
                 }
             }
+        }
+
+        private void ClampVelocity(Rigidbody rigidbody, float maxVelocity, float maxAngVelocity)
+        {
+            rigidbody.linearVelocity = rigidbody.linearVelocity.Clamp(-maxVelocity, maxVelocity);
+            rigidbody.angularVelocity = rigidbody.angularVelocity.Clamp(-maxAngVelocity, maxAngVelocity);
         }
         
         private void SetJointDefaultData(ConfigurableJoint joint)

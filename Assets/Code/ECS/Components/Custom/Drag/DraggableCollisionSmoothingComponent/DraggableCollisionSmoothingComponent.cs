@@ -15,19 +15,19 @@ namespace EscapeRooms.Components
         [Required]
         public Collider SmoothingTrigger;
         
-        [PropertySpace]
-        
+        [FoldoutGroup("SmoothDrive")]
         [MinValue(0)]
         public float SmoothDriveSpring;
         
+        [FoldoutGroup("SmoothDrive")]
         [MinValue(0)]
         public float SmoothDriveDamper;
         
-        [PropertySpace]
-        
+        [FoldoutGroup("SmoothAngularDrive")]
         [MinValue(0)]
         public float SmoothAngularDriveSpring;
         
+        [FoldoutGroup("SmoothAngularDrive")]
         [MinValue(0)]
         public float SmoothAngularDriveDamper;
         

@@ -13,5 +13,14 @@ namespace EscapeRooms.Helpers
                 z = vector3.z
             };
         }
+
+        public static Vector3 Clamp(this Vector3 vector3, float min, float max)
+        {
+            return new Vector3(
+                Mathf.Clamp(vector3.x, min, max),
+                Mathf.Clamp(vector3.y, min, max),
+                Mathf.Clamp(vector3.z, min, max)
+            );
+        }
     }
 }

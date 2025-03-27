@@ -21,11 +21,5 @@ namespace EscapeRooms.Components
 
         [MinValue(0.01f)]
         public float CorrectionApplySpeed;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsCorrectionAdded;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public bool IsCorrectionSubtracted;
     }
 }

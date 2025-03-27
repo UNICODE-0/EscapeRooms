@@ -69,7 +69,9 @@ namespace EscapeRooms.Systems
                                 draggableComponent.DragDriveDamper, 
                                 draggableComponent.DragAngularDriveSpring, 
                                 draggableComponent.DragAngularDriveDamper);
-                            
+
+                            draggableComponent.MassBeforeDrag = itemRigidbodyComponent.Rigidbody.mass;
+                            itemRigidbodyComponent.Rigidbody.mass = draggableComponent.MassWhileDrag;
                             itemRigidbodyComponent.Rigidbody.linearDamping = draggableComponent.BodyLinearDamping;
                             itemRigidbodyComponent.Rigidbody.angularDamping = draggableComponent.BodyAngularDamping;
 
