@@ -106,7 +106,8 @@ namespace EscapeRooms.Systems
         private static void DragBlock(SystemsGroup group)
         {
             group.AddSystem(new DragInterruptByCollisionSystem());
-            
+            group.AddSystem(new DragInterruptByDistanceSystem());
+
             group.AddSystem(new DragStartSystem());
             group.AddSystem(new DragStopSystem());
             

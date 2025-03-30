@@ -24,6 +24,12 @@ namespace EscapeRooms.Components
         [MinValue(0.001f)] 
         public float MinDragDistance;
         
+        [MinValue(0.001f)] 
+        public float MaxDragDistance;
+        
+        [MinValue(0.001f)] 
+        public float MaxDragDeviation;
+        
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsDragging;
         

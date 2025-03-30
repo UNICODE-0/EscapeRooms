@@ -49838,6 +49838,8 @@ MonoBehaviour:
     DragStopInput: 0
     DragRaycast: {fileID: 1387658322}
     MinDragDistance: 1
+    MaxDragDistance: 2
+    MaxDragDeviation: 3
     IsDragging: 0
 --- !u!114 &1470096558
 MonoBehaviour:
@@ -51932,7 +51934,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_Pivot.x
