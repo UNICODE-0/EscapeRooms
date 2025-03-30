@@ -167,7 +167,7 @@ namespace EscapeRooms.Data
                 {
                     ""name"": """",
                     ""id"": ""d06aa45c-8c79-4fb1-ab9a-a7a4d6851b13"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
