@@ -37,7 +37,7 @@ namespace EscapeRooms.Systems
                 {
                     _triggerInterruptRequest.Publish(new InputTriggerInterruptRequest()
                     {
-                        TriggerToInterrupt = InputTrigger.Jump
+                        TriggerToInterrupt = InterruptibleInputTrigger.Jump
                     });
                 }
             }

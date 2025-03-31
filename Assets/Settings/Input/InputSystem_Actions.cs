@@ -73,6 +73,15 @@ namespace EscapeRooms.Data
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""7293e911-120f-4629-93b2-27f2b282c200"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,8 +179,19 @@ namespace EscapeRooms.Data
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Drag"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e30bf021-35ca-441d-893d-a22bf30f2ad4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -248,6 +268,7 @@ namespace EscapeRooms.Data
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
+            m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
@@ -319,6 +340,7 @@ namespace EscapeRooms.Data
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Drag;
+        private readonly InputAction m_Player_Throw;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
@@ -328,6 +350,7 @@ namespace EscapeRooms.Data
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Drag => m_Wrapper.m_Player_Drag;
+            public InputAction @Throw => m_Wrapper.m_Player_Throw;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -352,6 +375,9 @@ namespace EscapeRooms.Data
                 @Drag.started += instance.OnDrag;
                 @Drag.performed += instance.OnDrag;
                 @Drag.canceled += instance.OnDrag;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -371,6 +397,9 @@ namespace EscapeRooms.Data
                 @Drag.started -= instance.OnDrag;
                 @Drag.performed -= instance.OnDrag;
                 @Drag.canceled -= instance.OnDrag;
+                @Throw.started -= instance.OnThrow;
+                @Throw.performed -= instance.OnThrow;
+                @Throw.canceled -= instance.OnThrow;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -440,6 +469,7 @@ namespace EscapeRooms.Data
             void OnCrouch(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnDrag(InputAction.CallbackContext context);
+            void OnThrow(InputAction.CallbackContext context);
         }
     }
 }

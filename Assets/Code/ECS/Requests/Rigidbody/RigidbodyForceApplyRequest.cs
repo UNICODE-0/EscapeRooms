@@ -1,7 +1,6 @@
-using EscapeRooms.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace EscapeRooms.Requests
 {
@@ -9,8 +8,10 @@ namespace EscapeRooms.Requests
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct InputTriggerInterruptRequest : IRequestData
+    public struct RigidbodyForceApplyRequest : IRequestData
     {
-        public InterruptibleInputTrigger TriggerToInterrupt;
+        public Rigidbody Rigidbody;
+        public Vector3 Force;
+        public ForceMode Mode;
     }
 }

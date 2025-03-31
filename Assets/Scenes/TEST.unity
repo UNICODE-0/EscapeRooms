@@ -389,6 +389,7 @@ MonoBehaviour:
     CrouchTrigger: 0
     DragStartTrigger: 0
     DragStopInProgress: 0
+    ThrowTrigger: 0
 --- !u!114 &63797422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6650,6 +6651,7 @@ MonoBehaviour:
     CrouchTrigger: 0
     DragStartTrigger: 0
     DragStopInProgress: 0
+    ThrowTrigger: 0
 --- !u!114 &687237171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49735,6 +49737,7 @@ GameObject:
   - component: {fileID: 1470096556}
   - component: {fileID: 1470096557}
   - component: {fileID: 1470096561}
+  - component: {fileID: 1470096563}
   - component: {fileID: 1470096559}
   - component: {fileID: 1470096555}
   - component: {fileID: 1470096558}
@@ -49807,6 +49810,7 @@ MonoBehaviour:
     CrouchTrigger: 0
     DragStartTrigger: 0
     DragStopInProgress: 0
+    ThrowTrigger: 0
 --- !u!114 &1470096556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49919,6 +49923,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     EventsHolder: {fileID: 462664928}
+--- !u!114 &1470096563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353e4a92f0e84f6ca9027ab6b882d9d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    ThrowInput: 0
+    ThrowImpulse: 8
+    MassImpulseBonus: 0.75
 --- !u!1 &1473984032
 GameObject:
   m_ObjectHideFlags: 0

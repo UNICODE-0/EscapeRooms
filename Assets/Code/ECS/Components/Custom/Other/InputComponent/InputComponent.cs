@@ -30,9 +30,12 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool DragStopInProgress;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [ReadOnly] public bool ThrowTrigger;
     }
 
-    public enum InputTrigger
+    public enum InterruptibleInputTrigger
     {
         Jump,
         Crouch,

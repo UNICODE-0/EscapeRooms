@@ -15,6 +15,7 @@ namespace EscapeRooms.Systems
             DragBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
+            RigidbodyBlock(group);
             
             // Late systems
             
@@ -51,6 +52,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerFPCameraInputSystem());
             group.AddSystem(new PlayerBodyRotationInputSystem());
             group.AddSystem(new PlayerCrouchInputSystem());
+            group.AddSystem(new PlayerThrowInputSystem());
             group.AddSystem(new PlayerDragInputSystem());
         }
         
@@ -105,8 +107,11 @@ namespace EscapeRooms.Systems
         
         private static void DragBlock(SystemsGroup group)
         {
+            group.AddSystem(new ThrowSystem());
+            
             group.AddSystem(new DragInterruptByCollisionSystem());
             group.AddSystem(new DragInterruptByDistanceSystem());
+            group.AddSystem(new DragInterruptByThrowSystem());
 
             group.AddSystem(new DragStartSystem());
             group.AddSystem(new DragStopSystem());
@@ -114,6 +119,11 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DraggableCollisionSmoothingSystem());
             group.AddSystem(new DragOrbitalPositionSetSystem());
             group.AddSystem(new DragRadiusCorrectionSystem());
+        }
+        
+        private static void RigidbodyBlock(SystemsGroup group)
+        {
+            group.AddSystem(new RigidbodyForceApplySystem());
         }
         
         // Late systems
