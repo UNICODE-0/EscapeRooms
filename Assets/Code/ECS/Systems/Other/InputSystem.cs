@@ -24,6 +24,7 @@ namespace EscapeRooms.Systems
         private InputAction _crouchAction;
         private InputAction _dragAction;
         private InputAction _throwAction;
+        private InputAction _dragRotationAction;
 
         private DelayedInputTrigger _jumpDelayedTrigger;
         private DelayedInputTrigger _crouchDelayedTrigger;
@@ -50,6 +51,7 @@ namespace EscapeRooms.Systems
             _crouchAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Crouch");
             _dragAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Drag");
             _throwAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Throw");
+            _dragRotationAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRotation");
 
             _jumpDelayedTrigger = new DelayedInputTrigger();
             _jumpDelayedTrigger.Initialize(GameSettings.Instance.JumpInputTriggerDelay);
@@ -78,6 +80,7 @@ namespace EscapeRooms.Systems
                 playerInputComponent.DragStartTrigger = _dragAction.triggered;
                 playerInputComponent.DragStopInProgress = !_dragAction.inProgress;
                 playerInputComponent.ThrowTrigger = _throwAction.triggered;
+                playerInputComponent.DragRotationInProgress = _dragRotationAction.inProgress;
             }
         }
 

@@ -82,6 +82,15 @@ namespace EscapeRooms.Data
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragRotation"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6214490-5dd0-4eff-b31e-c5d0d3563070"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ namespace EscapeRooms.Data
                     ""action"": ""Throw"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c3599ba-8d72-48ff-8131-bc7b241e171a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DragRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +289,7 @@ namespace EscapeRooms.Data
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
             m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
+            m_Player_DragRotation = m_Player.FindAction("DragRotation", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
@@ -341,6 +362,7 @@ namespace EscapeRooms.Data
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Drag;
         private readonly InputAction m_Player_Throw;
+        private readonly InputAction m_Player_DragRotation;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
@@ -351,6 +373,7 @@ namespace EscapeRooms.Data
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Drag => m_Wrapper.m_Player_Drag;
             public InputAction @Throw => m_Wrapper.m_Player_Throw;
+            public InputAction @DragRotation => m_Wrapper.m_Player_DragRotation;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -378,6 +401,9 @@ namespace EscapeRooms.Data
                 @Throw.started += instance.OnThrow;
                 @Throw.performed += instance.OnThrow;
                 @Throw.canceled += instance.OnThrow;
+                @DragRotation.started += instance.OnDragRotation;
+                @DragRotation.performed += instance.OnDragRotation;
+                @DragRotation.canceled += instance.OnDragRotation;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -400,6 +426,9 @@ namespace EscapeRooms.Data
                 @Throw.started -= instance.OnThrow;
                 @Throw.performed -= instance.OnThrow;
                 @Throw.canceled -= instance.OnThrow;
+                @DragRotation.started -= instance.OnDragRotation;
+                @DragRotation.performed -= instance.OnDragRotation;
+                @DragRotation.canceled -= instance.OnDragRotation;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -470,6 +499,7 @@ namespace EscapeRooms.Data
             void OnJump(InputAction.CallbackContext context);
             void OnDrag(InputAction.CallbackContext context);
             void OnThrow(InputAction.CallbackContext context);
+            void OnDragRotation(InputAction.CallbackContext context);
         }
     }
 }

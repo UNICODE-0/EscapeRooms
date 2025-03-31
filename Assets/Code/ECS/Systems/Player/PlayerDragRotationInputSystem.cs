@@ -9,23 +9,23 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerBodyRotationInputSystem : ISystem
+    public sealed class PlayerDragRotationInputSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<TransformDeltaRotationComponent> _rotationStash;
+        private Stash<DragRotationComponent> _rotationStash;
         private Stash<InputComponent> _inputStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<TransformDeltaRotationComponent>()
+                .With<DragRotationComponent>()
                 .With<InputComponent>()
-                .With<PlayerTag>()
+                .With<PlayerHandTag>()
                 .Build();
 
-            _rotationStash = World.GetStash<TransformDeltaRotationComponent>();
+            _rotationStash = World.GetStash<DragRotationComponent>();
             _inputStash = World.GetStash<InputComponent>();
         }
 
@@ -35,15 +35,15 @@ namespace EscapeRooms.Systems
             {
                 ref var rotationComponent = ref _rotationStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
-
+                
                 if (inputComponent.DragRotationInProgress)
                 {
-                    rotationComponent.EulerRotationDelta = Vector3.zero;
+                    rotationComponent.RotationDeltaInput =
+                        inputComponent.LookActionValue * GameSettings.Instance.Sensitivity;
                 }
                 else
                 {
-                    rotationComponent.EulerRotationDelta = 
-                        new Vector3(0f, inputComponent.LookActionValue.x * GameSettings.Instance.Sensitivity, 0f);
+                    rotationComponent.RotationDeltaInput = Vector2.zero;
                 }
             }
         }

@@ -49,10 +49,9 @@ namespace EscapeRooms.Systems
                     ref var jointComponent = ref _configurableJointStash.Get(dragComponent.DraggableEntity);
                     ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(dragComponent.DraggableEntity);
                     ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
-
-                    jointComponent.ConfigurableJoint.connectedBody = null;
+                    
                     SetJointDefaultData(jointComponent.ConfigurableJoint);
-
+                    
                     itemRigidbodyComponent.Rigidbody.mass = draggableComponent.MassBeforeDrag;
                     itemRigidbodyComponent.Rigidbody.linearDamping = 0;
                     itemRigidbodyComponent.Rigidbody.angularDamping = 0.05f; // default value
@@ -94,6 +93,9 @@ namespace EscapeRooms.Systems
         
         private void SetJointDefaultData(ConfigurableJoint joint)
         {
+            joint.connectedBody = null;
+            joint.targetRotation = Quaternion.identity;
+            
             joint.xDrive = default;
             joint.yDrive = default;
             joint.zDrive = default;

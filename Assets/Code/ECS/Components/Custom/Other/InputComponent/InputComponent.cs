@@ -33,7 +33,11 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool ThrowTrigger;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [ReadOnly] public bool DragRotationInProgress;
     }
+    
 
     public enum InterruptibleInputTrigger
     {

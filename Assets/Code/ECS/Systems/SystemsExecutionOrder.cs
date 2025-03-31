@@ -54,6 +54,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerCrouchInputSystem());
             group.AddSystem(new PlayerThrowInputSystem());
             group.AddSystem(new PlayerDragInputSystem());
+            group.AddSystem(new PlayerDragRotationInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -119,6 +120,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DraggableCollisionSmoothingSystem());
             group.AddSystem(new DragOrbitalPositionSetSystem());
             group.AddSystem(new DragRadiusCorrectionSystem());
+            
+            group.AddSystem(new DragRotationSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)
