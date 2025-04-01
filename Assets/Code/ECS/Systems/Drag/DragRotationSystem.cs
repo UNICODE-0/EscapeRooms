@@ -3,6 +3,7 @@ using EscapeRooms.Events;
 using EscapeRooms.Helpers;
 using EscapeRooms.Mono;
 using Scellecs.Morpeh;
+using Sirenix.Utilities;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
@@ -53,7 +54,9 @@ namespace EscapeRooms.Systems
                     ref var transformComponent = ref _transformStash.Get(entity);
                     ref var jointComponent = ref _jointStash.Get(dragComponent.DraggableEntity);
 
-                    Vector2 input = rotationComponent.RotationDeltaInput * rotationComponent.RotationSpeed;
+                    Vector2 input =
+                        rotationComponent.RotationDeltaInput.Clamp(rotationComponent.MinInputDelta,
+                            rotationComponent.MaxInputDelta) * rotationComponent.RotationSpeed;
 
                     Vector3 worldRightAxis = transformComponent.Transform.right;
                     Vector3 worldUpAxis = transformComponent.Transform.up;
@@ -61,11 +64,11 @@ namespace EscapeRooms.Systems
                     Vector3 localRightAxis = Quaternion.Inverse(jointComponent.ConfigurableJoint.transform.rotation) * worldRightAxis;
                     Vector3 localUpAxis = Quaternion.Inverse(jointComponent.ConfigurableJoint.transform.rotation) * worldUpAxis;
 
-                    Quaternion rotation1 = Quaternion.AngleAxis(-input.y, localRightAxis);
-                    Quaternion rotation2 = Quaternion.AngleAxis(input.x, localUpAxis);
+                    Quaternion rotationX = Quaternion.AngleAxis(-input.y, localRightAxis);
+                    Quaternion rotationY = Quaternion.AngleAxis(input.x, localUpAxis);
 
                     jointComponent.ConfigurableJoint.targetRotation = 
-                        rotation1 * rotation2 * jointComponent.ConfigurableJoint.targetRotation;
+                        rotationX * rotationY * jointComponent.ConfigurableJoint.targetRotation;
                     
                     rotationComponent.IsRotating = true;
                 }

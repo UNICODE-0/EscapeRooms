@@ -75,11 +75,11 @@ namespace EscapeRooms.Systems
                 var isAnyTriggerInProgress = colliderTriggerEventsHolderComponent.EventsHolder
                     .IsAnyTriggerInProgress;
 
-                if (!draggableSmoothingComponent.IsSmoothed && isAnyTriggerInProgress.GetValue())
+                if (isAnyTriggerInProgress.GetValue() && !draggableSmoothingComponent.IsSmoothed)
                 {
                     SetJointDriveData(entity, true);
                 }
-                else if (draggableSmoothingComponent.IsSmoothed && !isAnyTriggerInProgress.GetValue())
+                else if (!isAnyTriggerInProgress.GetValue() && draggableSmoothingComponent.IsSmoothed)
                 {
                     SetJointDriveData(entity, false);
                 }

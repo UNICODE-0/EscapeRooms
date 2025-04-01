@@ -18,6 +18,12 @@ namespace EscapeRooms.Components
         
         [MinValue(0.001f)] 
         public float RotationSpeed;
+
+        [MinValue(0.001f)]
+        public Vector2 MaxInputDelta;
+        
+        [MaxValue(0.001f)]
+        public Vector2 MinInputDelta;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsRotating;
