@@ -36,6 +36,9 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool DragRotationInProgress;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
+        [ReadOnly] public Vector2 DragRadiusChangeActionValue;
     }
     
 

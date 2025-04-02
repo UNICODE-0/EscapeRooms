@@ -391,6 +391,7 @@ MonoBehaviour:
     DragStopInProgress: 0
     ThrowTrigger: 0
     DragRotationInProgress: 0
+    DragRadiusChangeActionValue: {x: 0, y: 0}
 --- !u!114 &63797422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6654,6 +6655,7 @@ MonoBehaviour:
     DragStopInProgress: 0
     ThrowTrigger: 0
     DragRotationInProgress: 0
+    DragRadiusChangeActionValue: {x: 0, y: 0}
 --- !u!114 &687237171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49745,6 +49747,7 @@ GameObject:
   - component: {fileID: 1470096558}
   - component: {fileID: 1470096562}
   - component: {fileID: 1470096564}
+  - component: {fileID: 1470096565}
   m_Layer: 0
   m_Name: OrbitalHand
   m_TagString: Untagged
@@ -49815,6 +49818,7 @@ MonoBehaviour:
     DragStopInProgress: 0
     ThrowTrigger: 0
     DragRotationInProgress: 0
+    DragRadiusChangeActionValue: {x: 0, y: 0}
 --- !u!114 &1470096556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49961,7 +49965,21 @@ MonoBehaviour:
     MaxInputDelta: {x: 2, y: 2}
     MinInputDelta: {x: -2, y: -2}
     IsRotating: 0
-    Rotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1470096565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39eeb5955cbd4e6899f4bf61c83a1b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    RadiusChangeDeltaInput: {x: 0, y: 0}
+    Speed: 0.1
 --- !u!1 &1473984032
 GameObject:
   m_ObjectHideFlags: 0
@@ -51977,7 +51995,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 177638, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22451668, guid: 0abab5bb77339e4428787a870eb31bd3, type: 3}
       propertyPath: m_Pivot.x

@@ -91,6 +91,15 @@ namespace EscapeRooms.Data
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragRadiusChange"",
+                    ""type"": ""Value"",
+                    ""id"": ""ca65328b-2f6b-4de9-9fe5-f2c51949f5c8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -214,6 +223,17 @@ namespace EscapeRooms.Data
                     ""action"": ""DragRotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17043a6a-3071-4d81-87f7-748c47b3a51f"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DragRadiusChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -290,6 +310,7 @@ namespace EscapeRooms.Data
             m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
             m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
             m_Player_DragRotation = m_Player.FindAction("DragRotation", throwIfNotFound: true);
+            m_Player_DragRadiusChange = m_Player.FindAction("DragRadiusChange", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
@@ -363,6 +384,7 @@ namespace EscapeRooms.Data
         private readonly InputAction m_Player_Drag;
         private readonly InputAction m_Player_Throw;
         private readonly InputAction m_Player_DragRotation;
+        private readonly InputAction m_Player_DragRadiusChange;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
@@ -374,6 +396,7 @@ namespace EscapeRooms.Data
             public InputAction @Drag => m_Wrapper.m_Player_Drag;
             public InputAction @Throw => m_Wrapper.m_Player_Throw;
             public InputAction @DragRotation => m_Wrapper.m_Player_DragRotation;
+            public InputAction @DragRadiusChange => m_Wrapper.m_Player_DragRadiusChange;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -404,6 +427,9 @@ namespace EscapeRooms.Data
                 @DragRotation.started += instance.OnDragRotation;
                 @DragRotation.performed += instance.OnDragRotation;
                 @DragRotation.canceled += instance.OnDragRotation;
+                @DragRadiusChange.started += instance.OnDragRadiusChange;
+                @DragRadiusChange.performed += instance.OnDragRadiusChange;
+                @DragRadiusChange.canceled += instance.OnDragRadiusChange;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -429,6 +455,9 @@ namespace EscapeRooms.Data
                 @DragRotation.started -= instance.OnDragRotation;
                 @DragRotation.performed -= instance.OnDragRotation;
                 @DragRotation.canceled -= instance.OnDragRotation;
+                @DragRadiusChange.started -= instance.OnDragRadiusChange;
+                @DragRadiusChange.performed -= instance.OnDragRadiusChange;
+                @DragRadiusChange.canceled -= instance.OnDragRadiusChange;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -500,6 +529,7 @@ namespace EscapeRooms.Data
             void OnDrag(InputAction.CallbackContext context);
             void OnThrow(InputAction.CallbackContext context);
             void OnDragRotation(InputAction.CallbackContext context);
+            void OnDragRadiusChange(InputAction.CallbackContext context);
         }
     }
 }

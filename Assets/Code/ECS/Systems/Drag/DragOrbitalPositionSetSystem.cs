@@ -1,7 +1,6 @@
 using EscapeRooms.Components;
 using EscapeRooms.Events;
 using EscapeRooms.Helpers;
-using EscapeRooms.Mono;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -71,16 +70,7 @@ namespace EscapeRooms.Systems
 
         private float GetDistanceToDraggable(Vector3 hitPoint, Collider[] colliders, Vector3 targetPosition, float minDistance)
         {
-            float currentMinDistance = float.MaxValue;
-            
-            foreach (var collider in colliders)
-            {
-                float currentDistance = Vector3.Distance(targetPosition, collider.ClosestPointOnBounds(targetPosition));
-
-                if (currentMinDistance > currentDistance)
-                    currentMinDistance = currentDistance;
-            }
-            
+            float currentMinDistance = ColliderExtension.GetMinDistanceToClosestPoints(colliders, targetPosition);
             float distanceToDragPoint = Vector3.Distance(hitPoint, targetPosition);
 
             if (currentMinDistance < minDistance)

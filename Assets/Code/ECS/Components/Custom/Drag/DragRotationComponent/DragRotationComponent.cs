@@ -27,8 +27,5 @@ namespace EscapeRooms.Components
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsRotating;
-        
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Quaternion Rotation;
     }
 }

@@ -39,7 +39,7 @@ namespace EscapeRooms.Systems
 
                     float distance = Vector3.Distance(handTransformComponent.Transform.position,
                         draggableTransformComponent.Transform.position);
-                    
+
                     if (distance >= dragComponent.MaxDragDeviation)
                     {
                         dragComponent.DragStopInput = true;
