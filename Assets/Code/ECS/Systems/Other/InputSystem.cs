@@ -1,10 +1,10 @@
 using EscapeRooms.Components;
 using EscapeRooms.Data;
+using EscapeRooms.Requests;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Vector3 = System.Numerics.Vector3;
 
 namespace EscapeRooms.Systems
 {
@@ -22,6 +22,10 @@ namespace EscapeRooms.Systems
         private InputAction _lookAction;
         private InputAction _jumpAction;
         private InputAction _crouchAction;
+        private InputAction _interactAction;
+        private InputAction _throwAction;
+        private InputAction _dragRotateAction;
+        private InputAction _dragRadiusChangeAction;
 
         private DelayedInputTrigger _jumpDelayedTrigger;
         private DelayedInputTrigger _crouchDelayedTrigger;
@@ -46,6 +50,10 @@ namespace EscapeRooms.Systems
             _lookAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Look");
             _jumpAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Jump");
             _crouchAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Crouch");
+            _interactAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Interact");
+            _throwAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Throw");
+            _dragRotateAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRotate");
+            _dragRadiusChangeAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRadiusChange");
 
             _jumpDelayedTrigger = new DelayedInputTrigger();
             _jumpDelayedTrigger.Initialize(GameSettings.Instance.JumpInputTriggerDelay);
@@ -57,6 +65,7 @@ namespace EscapeRooms.Systems
         {
             Vector2 moveActionValue = _moveAction.ReadValue<Vector2>();
             Vector2 lookActionValue = _lookAction.ReadValue<Vector2>();
+            Vector2 dragRadiusChangeValue = _dragRadiusChangeAction.ReadValue<Vector2>();
 
             HandleInterruptTriggerEvent();
             
@@ -67,10 +76,15 @@ namespace EscapeRooms.Systems
             {
                 ref var playerInputComponent = ref _playerInputStash.Get(entity);
 
-                playerInputComponent.MoveActionValue = moveActionValue;
-                playerInputComponent.LookActionValue = lookActionValue;
+                playerInputComponent.MoveValue = moveActionValue;
+                playerInputComponent.LookValue = lookActionValue;
                 playerInputComponent.JumpTrigger = _jumpDelayedTrigger.IsTriggered;
                 playerInputComponent.CrouchTrigger = _crouchDelayedTrigger.IsTriggered;
+                playerInputComponent.InteractStartTrigger = _interactAction.triggered;
+                playerInputComponent.InteractStopInProgress = !_interactAction.inProgress;
+                playerInputComponent.ThrowTrigger = _throwAction.triggered;
+                playerInputComponent.DragRotationInProgress = _dragRotateAction.inProgress;
+                playerInputComponent.DragRadiusChangeValue = dragRadiusChangeValue;
             }
         }
 
@@ -80,10 +94,10 @@ namespace EscapeRooms.Systems
             {
                 switch (interruptReq.TriggerToInterrupt)
                 {
-                    case InputTriggers.Jump:
+                    case InterruptibleInputTrigger.Jump:
                         _jumpDelayedTrigger.Interrupt();
                         break;
-                    case InputTriggers.Crouch:
+                    case InterruptibleInputTrigger.Crouch:
                         _crouchDelayedTrigger.Interrupt();
                         break;
                 }

@@ -4,7 +4,6 @@ using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -37,5 +36,10 @@ namespace EscapeRooms.Components
         [ShowInInspector]
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public RaycastHit[] Hits;
+        
+#if UNITY_EDITOR
+        [FoldoutGroup(Consts.DEBUG_FOLDOUT_NAME)]
+        public bool DrawLineToBoundsClosestPoint;
+#endif
     }
 }

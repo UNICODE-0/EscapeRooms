@@ -1,6 +1,5 @@
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Systems
@@ -21,7 +20,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<InputComponent>()
                 .With<CharacterMovementComponent>()
-                .With<PlayerComponent>()
+                .With<PlayerTag>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();
@@ -35,7 +34,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var movementComponent = ref _movementStash.Get(entity);
 
-                movementComponent.MoveLocalDirection = inputComponent.MoveActionValue;
+                movementComponent.MoveLocalDirection = inputComponent.MoveValue;
             }
         }
 

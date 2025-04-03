@@ -22,7 +22,7 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<TransformDeltaRotationComponent>()
                 .With<InputComponent>()
-                .With<PlayerComponent>()
+                .With<PlayerTag>()
                 .Build();
 
             _rotationStash = World.GetStash<TransformDeltaRotationComponent>();
@@ -36,8 +36,15 @@ namespace EscapeRooms.Systems
                 ref var rotationComponent = ref _rotationStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
 
-                rotationComponent.EulerRotationDelta = 
-                    new Vector3(0f, inputComponent.LookActionValue.x * GameSettings.Instance.Sensitivity, 0f);
+                if (inputComponent.DragRotationInProgress)
+                {
+                    rotationComponent.EulerRotationDelta = Vector3.zero;
+                }
+                else
+                {
+                    rotationComponent.EulerRotationDelta = 
+                        new Vector3(0f, inputComponent.LookValue.x * GameSettings.Instance.Sensitivity, 0f);
+                }
             }
         }
 

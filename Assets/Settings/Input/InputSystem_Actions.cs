@@ -64,6 +64,42 @@ namespace EscapeRooms.Data
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""95f7224f-3150-433b-be31-d370cb99508b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""7293e911-120f-4629-93b2-27f2b282c200"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""a6214490-5dd0-4eff-b31e-c5d0d3563070"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DragRadiusChange"",
+                    ""type"": ""Value"",
+                    ""id"": ""ca65328b-2f6b-4de9-9fe5-f2c51949f5c8"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -154,6 +190,50 @@ namespace EscapeRooms.Data
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d06aa45c-8c79-4fb1-ab9a-a7a4d6851b13"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e30bf021-35ca-441d-893d-a22bf30f2ad4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c3599ba-8d72-48ff-8131-bc7b241e171a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DragRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17043a6a-3071-4d81-87f7-748c47b3a51f"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""DragRadiusChange"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -227,6 +307,10 @@ namespace EscapeRooms.Data
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+            m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
+            m_Player_DragRotate = m_Player.FindAction("DragRotate", throwIfNotFound: true);
+            m_Player_DragRadiusChange = m_Player.FindAction("DragRadiusChange", throwIfNotFound: true);
         }
 
         ~@InputSystem_Actions()
@@ -297,6 +381,10 @@ namespace EscapeRooms.Data
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Interact;
+        private readonly InputAction m_Player_Throw;
+        private readonly InputAction m_Player_DragRotate;
+        private readonly InputAction m_Player_DragRadiusChange;
         public struct PlayerActions
         {
             private @InputSystem_Actions m_Wrapper;
@@ -305,6 +393,10 @@ namespace EscapeRooms.Data
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Interact => m_Wrapper.m_Player_Interact;
+            public InputAction @Throw => m_Wrapper.m_Player_Throw;
+            public InputAction @DragRotate => m_Wrapper.m_Player_DragRotate;
+            public InputAction @DragRadiusChange => m_Wrapper.m_Player_DragRadiusChange;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -326,6 +418,18 @@ namespace EscapeRooms.Data
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+                @Throw.started += instance.OnThrow;
+                @Throw.performed += instance.OnThrow;
+                @Throw.canceled += instance.OnThrow;
+                @DragRotate.started += instance.OnDragRotate;
+                @DragRotate.performed += instance.OnDragRotate;
+                @DragRotate.canceled += instance.OnDragRotate;
+                @DragRadiusChange.started += instance.OnDragRadiusChange;
+                @DragRadiusChange.performed += instance.OnDragRadiusChange;
+                @DragRadiusChange.canceled += instance.OnDragRadiusChange;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -342,6 +446,18 @@ namespace EscapeRooms.Data
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Interact.started -= instance.OnInteract;
+                @Interact.performed -= instance.OnInteract;
+                @Interact.canceled -= instance.OnInteract;
+                @Throw.started -= instance.OnThrow;
+                @Throw.performed -= instance.OnThrow;
+                @Throw.canceled -= instance.OnThrow;
+                @DragRotate.started -= instance.OnDragRotate;
+                @DragRotate.performed -= instance.OnDragRotate;
+                @DragRotate.canceled -= instance.OnDragRotate;
+                @DragRadiusChange.started -= instance.OnDragRadiusChange;
+                @DragRadiusChange.performed -= instance.OnDragRadiusChange;
+                @DragRadiusChange.canceled -= instance.OnDragRadiusChange;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -410,6 +526,10 @@ namespace EscapeRooms.Data
             void OnLook(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
+            void OnThrow(InputAction.CallbackContext context);
+            void OnDragRotate(InputAction.CallbackContext context);
+            void OnDragRadiusChange(InputAction.CallbackContext context);
         }
     }
 }

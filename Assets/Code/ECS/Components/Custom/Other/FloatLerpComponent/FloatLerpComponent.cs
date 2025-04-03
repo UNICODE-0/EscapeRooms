@@ -3,8 +3,6 @@ using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {

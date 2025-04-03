@@ -6,5 +6,6 @@ namespace EscapeRooms.Systems
         public const int CROUCH_BLOCK_WHILE_FALLING_FLAG = 1 << 1;
         public const int CROUCH_STAND_BLOCK_FLAG = 1 << 2;
         public const int CROUCH_STANDING_BLOCK_FLAG = 1 << 3;
+        public const int CROUCH_BLOCK_WHILE_STATIC_COLLISION_FLAG = 1 << 4;
     }
 }

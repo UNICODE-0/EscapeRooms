@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using EscapeRooms.Components;
-using EscapeRooms.Data;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -39,7 +38,8 @@ namespace EscapeRooms.Systems
                 ref var sphereCastComponent = ref _sphereCastStash.Get(standBlockComponent.StandPossibilityCheckSphereCast.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_STAND_BLOCK_FLAG, sphereCastComponent.IsSphereHit);
+                    CrouchBlockers.CROUCH_STAND_BLOCK_FLAG, 
+                    crouchComponent.IsCrouching && sphereCastComponent.IsSphereHit);
             }
         }
 

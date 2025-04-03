@@ -16,6 +16,8 @@ namespace EscapeRooms.Systems
         private Stash<TransformComponent> _transformStash;
         private Stash<TransformPositionLerpComponent> _positionLerpStash;
         private Stash<FloatLerpComponent> _floatLerpStash;
+        
+        private LerpDataHandler<Vector3> _lerpDataHandler;
 
         public void OnAwake()
         {
@@ -27,6 +29,8 @@ namespace EscapeRooms.Systems
             _transformStash = World.GetStash<TransformComponent>();
             _positionLerpStash = World.GetStash<TransformPositionLerpComponent>();
             _floatLerpStash = World.GetStash<FloatLerpComponent>();
+            
+            _lerpDataHandler = new LerpDataHandler<Vector3>(_floatLerpStash);
         }
 
         public void OnUpdate(float deltaTime)
@@ -35,29 +39,19 @@ namespace EscapeRooms.Systems
             {
                 ref var transformComponent = ref _transformStash.Get(entity);
                 ref var positionLerpComponent = ref _positionLerpStash.Get(entity);
-                ref var floatLerpComponent = ref _floatLerpStash.Get(positionLerpComponent.FloatLerpProvider.Entity);
 
-                floatLerpComponent.StartLerpInput = positionLerpComponent.ChangePositionInput;
-
-                if (floatLerpComponent.IsLerpInProgress)
+                if (_lerpDataHandler.Handle(ref positionLerpComponent.LerpData,
+                        out var from, out var to, out float progress))
                 {
-                    ref Vector3 from = ref positionLerpComponent.IsTargetState ? 
-                        ref positionLerpComponent.TargetPosition : ref positionLerpComponent.DefaultPosition;
-                    
-                    ref Vector3 to = ref positionLerpComponent.IsTargetState ?
-                        ref positionLerpComponent.DefaultPosition : ref positionLerpComponent.TargetPosition;
-                    
                     transformComponent.Transform.localPosition = 
-                        Vector3.Lerp(from, to, floatLerpComponent.CurrentValue);
-
-                    if (floatLerpComponent.IsLerpTimeIsUp)
-                        positionLerpComponent.IsTargetState = !positionLerpComponent.IsTargetState;
+                        Vector3.Lerp(from, to, progress);
                 }
             }
         }
 
         public void Dispose()
         {
+            _lerpDataHandler = null;
         }
     }
 }

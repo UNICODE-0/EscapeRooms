@@ -8,8 +8,8 @@ namespace EscapeRooms.Mono
     public class EcsStartup : MonoBehaviour
     {
         private World _world;
-
-        private void Start()
+        
+        private void Awake()
         {
             _world = World.Default;
 
@@ -23,7 +23,6 @@ namespace EscapeRooms.Mono
             #endif
 
             _world.AddSystemsGroup(order: 0, systemsGroup);
-
         }
 
         private void AddDebugSystems(SystemsGroup group)

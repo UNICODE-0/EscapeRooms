@@ -16,13 +16,18 @@ namespace EscapeRooms.Initializers
         {
             SetSettings(LoadSettings());
         }
+        
 
         public GameSettings LoadSettings()
         {
             return new GameSettings()
             {
                 TargetFrameRate = 0,
-                Sensitivity = 0.1f,
+                Sensitivity = 0.05f
+#if UNITY_WEBGL && !UNITY_EDITOR
+                * 0.25f
+#endif
+                ,
                 CrouchInputTriggerDelay = 0.1f,
                 JumpInputTriggerDelay = 0.1f
             };
@@ -30,8 +35,7 @@ namespace EscapeRooms.Initializers
         
         public void SetSettings(GameSettings settings)
         {
-            if (!GameSettings.TrySetInstance(settings))
-                Debug.LogError("Game settings already has instance");
+            GameSettings.TrySetInstance(settings);
 
             Application.targetFrameRate = settings.TargetFrameRate;
             Cursor.lockState = CursorLockMode.Locked;
@@ -39,8 +43,7 @@ namespace EscapeRooms.Initializers
 
         public void Dispose()
         {
-            if (!GameSettings.TryRemoveInstance())
-                Debug.LogError("Game settings already disposed");
+            GameSettings.TryRemoveInstance();
         }
     }
 }

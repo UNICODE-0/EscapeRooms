@@ -12,7 +12,16 @@ namespace EscapeRooms.Systems
             LerpBlock(group);
             PlayerBlock(group);
             CharacterControllerBlock(group);
+            DragBlock(group);
+            RotateBlock(group);
             TransformBlock(group);
+            ColliderBlock(group);
+            RigidbodyBlock(group);
+            
+            // Late systems
+            
+            ComponentEventsBlock(group);
+            FrameDataBlock(group);
         }
 
         private static void InputRequestBlock(SystemsGroup group)
@@ -44,6 +53,11 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerFPCameraInputSystem());
             group.AddSystem(new PlayerBodyRotationInputSystem());
             group.AddSystem(new PlayerCrouchInputSystem());
+            group.AddSystem(new PlayerThrowInputSystem());
+            group.AddSystem(new PlayerDragInputSystem());
+            group.AddSystem(new PlayerDragRotationInputSystem());
+            group.AddSystem(new PlayerDragRadiusChangeInputSystem());
+            group.AddSystem(new PlayerRotateInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -53,16 +67,20 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterMovementSystem());
             group.AddSystem(new CharacterLedgeCorrectionSystem());
             group.AddSystem(new CharacterSlideSystem());
+
+            group.AddSystem(new CharacterStaticCollisionSystem());
             
             group.AddSystem(new CharacterCrouchStandBlockSystem());
             group.AddSystem(new CharacterCrouchStandingBlockSystem());
             group.AddSystem(new CharacterCrouchBlockWhileJumpSystem());
-            group.AddSystem(new CharacterCrouchBlockWhileFalling());
+            group.AddSystem(new CharacterCrouchBlockWhileStaticCollisionSystem());
+            group.AddSystem(new CharacterCrouchBlockWhileFallingSystem());
             
             group.AddSystem(new CharacterCrouchSystem());
             group.AddSystem(new CharacterCrouchSlowdownSystem());
             
             group.AddSystem(new CharacterJumpBlockWhileCrouchSystem());
+            group.AddSystem(new CharacterJumpBlockWhileStaticCollisionSystem());
 
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
@@ -82,6 +100,56 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
+            group.AddSystem(new TransformOrbitalFollowSystem());
+        }
+        
+        private static void ColliderBlock(SystemsGroup group)
+        {
+            group.AddSystem(new CapsuleColliderHeightLerpSystem());
+            group.AddSystem(new CharacterHeightLerpSystem());
+        }
+        
+        private static void DragBlock(SystemsGroup group)
+        {
+            group.AddSystem(new ThrowSystem());
+            
+            group.AddSystem(new DragInterruptByCollisionSystem());
+            group.AddSystem(new DragInterruptByDistanceSystem());
+            group.AddSystem(new DragInterruptByThrowSystem());
+
+            group.AddSystem(new DragStartSystem());
+            group.AddSystem(new DragStopSystem());
+            
+            group.AddSystem(new DraggableCollisionSmoothingSystem());
+            group.AddSystem(new DragOrbitalPositionSetSystem());
+            group.AddSystem(new DragRadiusCorrectionSystem());
+            
+            group.AddSystem(new DragRotationSystem());
+            group.AddSystem(new DragDistanceChangeSystem());
+        }
+
+        private static void RotateBlock(SystemsGroup group)
+        {
+            group.AddSystem(new RotateStartSystem());
+            group.AddSystem(new RotateStopSystem());
+            
+            group.AddSystem(new RotateSystem());
+        }
+        
+        private static void RigidbodyBlock(SystemsGroup group)
+        {
+            group.AddSystem(new RigidbodyForceApplySystem());
+        }
+        
+        // Late systems
+        
+        private static void ComponentEventsBlock(SystemsGroup group)
+        {
+            group.AddSystem(new FlagDisposeSystem());
+        }
+        private static void FrameDataBlock(SystemsGroup group)
+        {
+            group.AddSystem(new FrameDataSystem());
         }
     }
 }

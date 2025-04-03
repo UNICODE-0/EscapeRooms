@@ -1,6 +1,6 @@
 using EscapeRooms.Components;
+using EscapeRooms.Requests;
 using Scellecs.Morpeh;
-using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Systems
@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<CharacterJumpComponent>()
-                .With<PlayerComponent>()
+                .With<PlayerTag>()
                 .Build();
 
             _jumpStash = World.GetStash<CharacterJumpComponent>();
@@ -37,7 +37,7 @@ namespace EscapeRooms.Systems
                 {
                     _triggerInterruptRequest.Publish(new InputTriggerInterruptRequest()
                     {
-                        TriggerToInterrupt = InputTriggers.Jump
+                        TriggerToInterrupt = InterruptibleInputTrigger.Jump
                     });
                 }
             }

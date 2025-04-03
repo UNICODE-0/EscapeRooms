@@ -1,6 +1,5 @@
-using System.Collections.Generic;
 using EscapeRooms.Components;
-using EscapeRooms.Data;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -39,7 +38,8 @@ namespace EscapeRooms.Systems
                 ref var sphereOverlapComponent = ref _overlapSphereStash.Get(standingBlockComponent.StandingPossibilityCheckSphereOverlap.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG, sphereOverlapComponent.IsSphereIntersect);
+                    CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG, 
+                    crouchComponent.IsCrouching && sphereOverlapComponent.IsSphereIntersect);
             }
         }
 

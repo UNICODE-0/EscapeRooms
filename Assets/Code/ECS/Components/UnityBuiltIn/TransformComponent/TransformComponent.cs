@@ -1,4 +1,5 @@
 using Scellecs.Morpeh;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
 
@@ -10,6 +11,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct TransformComponent : IComponent
     {
+        [Required]
         public Transform Transform;
     }
 }

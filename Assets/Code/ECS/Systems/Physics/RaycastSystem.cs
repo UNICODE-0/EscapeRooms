@@ -1,10 +1,7 @@
-using System.Collections.Generic;
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Collections;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.InputSystem;
 
 namespace EscapeRooms.Systems
 {
@@ -38,6 +35,15 @@ namespace EscapeRooms.Systems
                 raycastComponent.HitsCount = Physics.RaycastNonAlloc(raycastComponent.RayStartPoint.position,
                     raycastComponent.RayStartPoint.rotation * raycastComponent.Direction, 
                     raycastComponent.Hits, raycastComponent.RayLength, raycastComponent.LayerMask);
+                
+#if UNITY_EDITOR
+                if (raycastComponent.DrawLineToBoundsClosestPoint && raycastComponent.HitsCount > 0)
+                {
+                    var hit = raycastComponent.Hits[0];
+                    Vector3 closest = hit.collider.ClosestPointOnBounds(raycastComponent.RayStartPoint.position);
+                    Debug.DrawLine(raycastComponent.RayStartPoint.position, closest, Color.magenta);
+                }
+#endif
 
                 raycastComponent.IsRayHit = raycastComponent.HitsCount > 0;
             }
