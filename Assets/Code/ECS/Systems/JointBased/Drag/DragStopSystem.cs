@@ -58,15 +58,12 @@ namespace EscapeRooms.Systems
                     ClampVelocity(itemRigidbodyComponent.Rigidbody, draggableComponent.MaxVelocity,
                         draggableComponent.MaxAngularVelocity);
                     
-                    ref var onDragFlag = ref _onDragStash.Get(dragComponent.DraggableEntity, out bool onDragFlagExist);
-                    if (onDragFlagExist)
+                    ref var onDragFlag = ref _onDragStash.Get(dragComponent.DraggableEntity);
+                    Entity draggableEntity = dragComponent.DraggableEntity;
+                    FlagDisposeSystem.ScheduleFlagDispose(ref onDragFlag, () =>
                     {
-                        Entity draggableEntity = dragComponent.DraggableEntity;
-                        FlagDisposeSystem.ScheduleFlagDispose(ref onDragFlag, () =>
-                        {
-                            _onDragStash.Remove(draggableEntity);
-                        });
-                    }
+                        _onDragStash.Remove(draggableEntity);
+                    });
                     
                     _dragStopEvent.ThisFrame(new DragStopEvent()
                     {

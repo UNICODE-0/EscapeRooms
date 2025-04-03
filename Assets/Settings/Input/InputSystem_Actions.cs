@@ -66,7 +66,7 @@ namespace EscapeRooms.Data
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drag"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""95f7224f-3150-433b-be31-d370cb99508b"",
                     ""expectedControlType"": """",
@@ -84,7 +84,7 @@ namespace EscapeRooms.Data
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""DragRotation"",
+                    ""name"": ""DragRotate"",
                     ""type"": ""Button"",
                     ""id"": ""a6214490-5dd0-4eff-b31e-c5d0d3563070"",
                     ""expectedControlType"": """",
@@ -198,7 +198,7 @@ namespace EscapeRooms.Data
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Drag"",
+                    ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -220,7 +220,7 @@ namespace EscapeRooms.Data
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""DragRotation"",
+                    ""action"": ""DragRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -307,9 +307,9 @@ namespace EscapeRooms.Data
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-            m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
+            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             m_Player_Throw = m_Player.FindAction("Throw", throwIfNotFound: true);
-            m_Player_DragRotation = m_Player.FindAction("DragRotation", throwIfNotFound: true);
+            m_Player_DragRotate = m_Player.FindAction("DragRotate", throwIfNotFound: true);
             m_Player_DragRadiusChange = m_Player.FindAction("DragRadiusChange", throwIfNotFound: true);
         }
 
@@ -381,9 +381,9 @@ namespace EscapeRooms.Data
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Crouch;
         private readonly InputAction m_Player_Jump;
-        private readonly InputAction m_Player_Drag;
+        private readonly InputAction m_Player_Interact;
         private readonly InputAction m_Player_Throw;
-        private readonly InputAction m_Player_DragRotation;
+        private readonly InputAction m_Player_DragRotate;
         private readonly InputAction m_Player_DragRadiusChange;
         public struct PlayerActions
         {
@@ -393,9 +393,9 @@ namespace EscapeRooms.Data
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
-            public InputAction @Drag => m_Wrapper.m_Player_Drag;
+            public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputAction @Throw => m_Wrapper.m_Player_Throw;
-            public InputAction @DragRotation => m_Wrapper.m_Player_DragRotation;
+            public InputAction @DragRotate => m_Wrapper.m_Player_DragRotate;
             public InputAction @DragRadiusChange => m_Wrapper.m_Player_DragRadiusChange;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -418,15 +418,15 @@ namespace EscapeRooms.Data
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Drag.started += instance.OnDrag;
-                @Drag.performed += instance.OnDrag;
-                @Drag.canceled += instance.OnDrag;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @Throw.started += instance.OnThrow;
                 @Throw.performed += instance.OnThrow;
                 @Throw.canceled += instance.OnThrow;
-                @DragRotation.started += instance.OnDragRotation;
-                @DragRotation.performed += instance.OnDragRotation;
-                @DragRotation.canceled += instance.OnDragRotation;
+                @DragRotate.started += instance.OnDragRotate;
+                @DragRotate.performed += instance.OnDragRotate;
+                @DragRotate.canceled += instance.OnDragRotate;
                 @DragRadiusChange.started += instance.OnDragRadiusChange;
                 @DragRadiusChange.performed += instance.OnDragRadiusChange;
                 @DragRadiusChange.canceled += instance.OnDragRadiusChange;
@@ -446,15 +446,15 @@ namespace EscapeRooms.Data
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
-                @Drag.started -= instance.OnDrag;
-                @Drag.performed -= instance.OnDrag;
-                @Drag.canceled -= instance.OnDrag;
+                @Interact.started -= instance.OnInteract;
+                @Interact.performed -= instance.OnInteract;
+                @Interact.canceled -= instance.OnInteract;
                 @Throw.started -= instance.OnThrow;
                 @Throw.performed -= instance.OnThrow;
                 @Throw.canceled -= instance.OnThrow;
-                @DragRotation.started -= instance.OnDragRotation;
-                @DragRotation.performed -= instance.OnDragRotation;
-                @DragRotation.canceled -= instance.OnDragRotation;
+                @DragRotate.started -= instance.OnDragRotate;
+                @DragRotate.performed -= instance.OnDragRotate;
+                @DragRotate.canceled -= instance.OnDragRotate;
                 @DragRadiusChange.started -= instance.OnDragRadiusChange;
                 @DragRadiusChange.performed -= instance.OnDragRadiusChange;
                 @DragRadiusChange.canceled -= instance.OnDragRadiusChange;
@@ -526,9 +526,9 @@ namespace EscapeRooms.Data
             void OnLook(InputAction.CallbackContext context);
             void OnCrouch(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
-            void OnDrag(InputAction.CallbackContext context);
+            void OnInteract(InputAction.CallbackContext context);
             void OnThrow(InputAction.CallbackContext context);
-            void OnDragRotation(InputAction.CallbackContext context);
+            void OnDragRotate(InputAction.CallbackContext context);
             void OnDragRadiusChange(InputAction.CallbackContext context);
         }
     }

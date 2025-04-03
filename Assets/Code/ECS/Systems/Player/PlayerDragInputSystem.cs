@@ -34,8 +34,8 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var dragComponent = ref _dragStash.Get(entity);
 
-                dragComponent.DragStartInput = inputComponent.DragStartTrigger;
-                dragComponent.DragStopInput = inputComponent.DragStopInProgress;
+                dragComponent.DragStartInput = inputComponent.InteractStartTrigger;
+                dragComponent.DragStopInput = inputComponent.InteractStopInProgress;
             }
         }
 

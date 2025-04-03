@@ -34,7 +34,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var movementComponent = ref _movementStash.Get(entity);
 
-                movementComponent.MoveLocalDirection = inputComponent.MoveActionValue;
+                movementComponent.MoveLocalDirection = inputComponent.MoveValue;
             }
         }
 

@@ -14,10 +14,10 @@ namespace EscapeRooms.Components
     public struct InputComponent : IComponent
     {
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Vector2 MoveActionValue;
+        [ReadOnly] public Vector2 MoveValue;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Vector2 LookActionValue;
+        [ReadOnly] public Vector2 LookValue;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool JumpTrigger;
@@ -26,10 +26,10 @@ namespace EscapeRooms.Components
         [ReadOnly] public bool CrouchTrigger;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [ReadOnly] public bool DragStartTrigger;
+        [ReadOnly] public bool InteractStartTrigger;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [ReadOnly] public bool DragStopInProgress;
+        [ReadOnly] public bool InteractStopInProgress;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
         [ReadOnly] public bool ThrowTrigger;
@@ -38,7 +38,7 @@ namespace EscapeRooms.Components
         [ReadOnly] public bool DragRotationInProgress;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)]
-        [ReadOnly] public Vector2 DragRadiusChangeActionValue;
+        [ReadOnly] public Vector2 DragRadiusChangeValue;
     }
     
 

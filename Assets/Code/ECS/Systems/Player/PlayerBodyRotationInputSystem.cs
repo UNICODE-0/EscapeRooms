@@ -43,7 +43,7 @@ namespace EscapeRooms.Systems
                 else
                 {
                     rotationComponent.EulerRotationDelta = 
-                        new Vector3(0f, inputComponent.LookActionValue.x * GameSettings.Instance.Sensitivity, 0f);
+                        new Vector3(0f, inputComponent.LookValue.x * GameSettings.Instance.Sensitivity, 0f);
                 }
             }
         }

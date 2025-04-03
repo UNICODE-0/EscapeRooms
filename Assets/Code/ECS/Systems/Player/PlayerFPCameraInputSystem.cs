@@ -42,7 +42,7 @@ namespace EscapeRooms.Systems
                 }
                 else
                 {
-                    Vector2 mouseDelta = inputComponent.LookActionValue;
+                    Vector2 mouseDelta = inputComponent.LookValue;
                     Vector2 RotateDelta = Vector3.zero;
                     RotateDelta.x = mouseDelta.y;
                     RotateDelta.y = mouseDelta.x;

@@ -36,7 +36,7 @@ namespace EscapeRooms.Systems
                 ref var radiusChangeComponent = ref _radiusChangeStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
                 
-                radiusChangeComponent.RadiusChangeDeltaInput = inputComponent.DragRadiusChangeActionValue;
+                radiusChangeComponent.RadiusChangeDeltaInput = inputComponent.DragRadiusChangeValue;
             }
         }
 

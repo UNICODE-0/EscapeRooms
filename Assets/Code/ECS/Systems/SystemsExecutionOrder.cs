@@ -13,6 +13,7 @@ namespace EscapeRooms.Systems
             PlayerBlock(group);
             CharacterControllerBlock(group);
             DragBlock(group);
+            RotateBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
@@ -56,6 +57,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerDragInputSystem());
             group.AddSystem(new PlayerDragRotationInputSystem());
             group.AddSystem(new PlayerDragRadiusChangeInputSystem());
+            group.AddSystem(new PlayerRotateInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -124,6 +126,14 @@ namespace EscapeRooms.Systems
             
             group.AddSystem(new DragRotationSystem());
             group.AddSystem(new DragDistanceChangeSystem());
+        }
+
+        private static void RotateBlock(SystemsGroup group)
+        {
+            group.AddSystem(new RotateStartSystem());
+            group.AddSystem(new RotateStopSystem());
+            
+            group.AddSystem(new RotateSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

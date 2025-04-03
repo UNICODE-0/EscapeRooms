@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drag",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "95f7224f-3150-433b-be31-d370cb99508b",
                     "expectedControlType": "",
@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DragRotation",
+                    "name": "DragRotate",
                     "type": "Button",
                     "id": "a6214490-5dd0-4eff-b31e-c5d0d3563070",
                     "expectedControlType": "",
@@ -174,7 +174,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "Drag",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -196,7 +196,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "DragRotation",
+                    "action": "DragRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

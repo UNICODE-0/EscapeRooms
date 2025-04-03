@@ -22,9 +22,9 @@ namespace EscapeRooms.Systems
         private InputAction _lookAction;
         private InputAction _jumpAction;
         private InputAction _crouchAction;
-        private InputAction _dragAction;
+        private InputAction _interactAction;
         private InputAction _throwAction;
-        private InputAction _dragRotationAction;
+        private InputAction _dragRotateAction;
         private InputAction _dragRadiusChangeAction;
 
         private DelayedInputTrigger _jumpDelayedTrigger;
@@ -50,9 +50,9 @@ namespace EscapeRooms.Systems
             _lookAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Look");
             _jumpAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Jump");
             _crouchAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Crouch");
-            _dragAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Drag");
+            _interactAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Interact");
             _throwAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("Throw");
-            _dragRotationAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRotation");
+            _dragRotateAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRotate");
             _dragRadiusChangeAction = UnityEngine.InputSystem.InputSystem.actions.FindAction("DragRadiusChange");
 
             _jumpDelayedTrigger = new DelayedInputTrigger();
@@ -76,15 +76,15 @@ namespace EscapeRooms.Systems
             {
                 ref var playerInputComponent = ref _playerInputStash.Get(entity);
 
-                playerInputComponent.MoveActionValue = moveActionValue;
-                playerInputComponent.LookActionValue = lookActionValue;
+                playerInputComponent.MoveValue = moveActionValue;
+                playerInputComponent.LookValue = lookActionValue;
                 playerInputComponent.JumpTrigger = _jumpDelayedTrigger.IsTriggered;
                 playerInputComponent.CrouchTrigger = _crouchDelayedTrigger.IsTriggered;
-                playerInputComponent.DragStartTrigger = _dragAction.triggered;
-                playerInputComponent.DragStopInProgress = !_dragAction.inProgress;
+                playerInputComponent.InteractStartTrigger = _interactAction.triggered;
+                playerInputComponent.InteractStopInProgress = !_interactAction.inProgress;
                 playerInputComponent.ThrowTrigger = _throwAction.triggered;
-                playerInputComponent.DragRotationInProgress = _dragRotationAction.inProgress;
-                playerInputComponent.DragRadiusChangeActionValue = dragRadiusChangeValue;
+                playerInputComponent.DragRotationInProgress = _dragRotateAction.inProgress;
+                playerInputComponent.DragRadiusChangeValue = dragRadiusChangeValue;
             }
         }
 
