@@ -8,8 +8,9 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
-    [RequireComponent(typeof(HingeJointProvider))]
-    
+    [RequireComponent(typeof(ConfigurableJointProvider))]
+    [RequireComponent(typeof(TransformProvider))]
+
     public sealed class RotatableProvider : MonoProvider<RotatableComponent>
     {
     }

@@ -20,8 +20,9 @@ namespace EscapeRooms.Systems
         private Stash<RaycastComponent> _raycastStash;
         private Stash<RotateComponent> _rotateStash;
         private Stash<RotatableComponent> _rotatableStash;
-        private Stash<HingeJointComponent> _hingeJointStash;
+        private Stash<ConfigurableJointComponent> _jointStash;
         private Stash<OnRotateFlag> _onRotateStash;
+        private Stash<TransformComponent> _transformStash;
 
         public void OnAwake()
         {
@@ -32,8 +33,9 @@ namespace EscapeRooms.Systems
             _raycastStash = World.GetStash<RaycastComponent>();
             _rotateStash = World.GetStash<RotateComponent>();
             _rotatableStash = World.GetStash<RotatableComponent>();
-            _hingeJointStash = World.GetStash<HingeJointComponent>();
+            _jointStash = World.GetStash<ConfigurableJointComponent>();
             _onRotateStash = World.GetStash<OnRotateFlag>();
+            _transformStash = World.GetStash<TransformComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -52,17 +54,20 @@ namespace EscapeRooms.Systems
                         ref var rotatableComponent = ref _rotatableStash.Get(item.entity, out bool rotatableExist);
                         if (rotatableExist)
                         {
-                            ref var hingeComponent = ref _hingeJointStash.Get(item.entity);
+                            ref var jointComponent = ref _jointStash.Get(item.entity);
+                            ref var transformComponent = ref _transformStash.Get(item.entity);
 
                             rotateComponent.IsRotating = true;
                             rotateComponent.RotatingEntity = item.entity;
+
+                            jointComponent.ConfigurableJoint.targetRotation =
+                                Quaternion.Inverse(transformComponent.Transform.rotation);
                             
-                            hingeComponent.HingeJoint.useSpring = true;
-                            hingeComponent.HingeJoint.spring = new JointSpring()
+                            jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
                             {
-                                spring = rotatableComponent.Spring,
-                                damper = rotatableComponent.Damper,
-                                targetPosition = 0f
+                                positionSpring = rotatableComponent.Spring,
+                                positionDamper = rotatableComponent.Damper,
+                                maximumForce = float.MaxValue
                             };
 
                             _onRotateStash.Add(item.entity, new OnRotateFlag()

@@ -1,3 +1,4 @@
+using System.Numerics;
 using EscapeRooms.Data;
 using JetBrains.Annotations;
 using Scellecs.Morpeh;
@@ -12,6 +13,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct RotateComponent : IComponent
     {
+        public float RotateDeltaInput;
         public bool RotateStartInput;
         public bool RotateStopInput;
 
@@ -19,6 +21,9 @@ namespace EscapeRooms.Components
         
         [NotNull]
         public RaycastProvider RotateRaycast;
+        
+        [MinValue(0.01f)]
+        public float RotationSpeed;
 
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsRotating;

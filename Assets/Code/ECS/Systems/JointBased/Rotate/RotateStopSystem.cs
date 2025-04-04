@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
         private Stash<RaycastComponent> _raycastStash;
         private Stash<RotateComponent> _rotateStash;
         private Stash<RotatableComponent> _rotatableStash;
-        private Stash<HingeJointComponent> _hingeJointStash;
+        private Stash<ConfigurableJointComponent> _jointStash;
         private Stash<OnRotateFlag> _onRotateStash;
 
         public void OnAwake()
@@ -32,7 +32,7 @@ namespace EscapeRooms.Systems
             _raycastStash = World.GetStash<RaycastComponent>();
             _rotateStash = World.GetStash<RotateComponent>();
             _rotatableStash = World.GetStash<RotatableComponent>();
-            _hingeJointStash = World.GetStash<HingeJointComponent>();
+            _jointStash = World.GetStash<ConfigurableJointComponent>();
             _onRotateStash = World.GetStash<OnRotateFlag>();
         }
 
@@ -45,10 +45,16 @@ namespace EscapeRooms.Systems
                 if (rotateComponent.RotateStopInput && rotateComponent.IsRotating)
                 {
                     ref var rotatableComponent = ref _rotatableStash.Get(rotateComponent.RotatingEntity);
-                    ref var hingeComponent = ref _hingeJointStash.Get(rotateComponent.RotatingEntity);
+                    ref var jointComponent = ref _jointStash.Get(rotateComponent.RotatingEntity);
                     ref var onRotateFlag = ref _onRotateStash.Get(rotateComponent.RotatingEntity);
                     
-                    hingeComponent.HingeJoint.useSpring = false;
+                    jointComponent.ConfigurableJoint.targetRotation = Quaternion.identity;
+                    jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
+                    {
+                        positionSpring = default,
+                        positionDamper = default,
+                        maximumForce = float.MaxValue
+                    };
                     
                     Entity rotatingEntity = rotateComponent.RotatingEntity;
                     FlagDisposeSystem.ScheduleFlagDispose(ref onRotateFlag, () =>

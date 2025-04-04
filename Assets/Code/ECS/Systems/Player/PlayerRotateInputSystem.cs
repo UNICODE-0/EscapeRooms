@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -34,6 +35,7 @@ namespace EscapeRooms.Systems
                 ref var inputComponent = ref _inputStash.Get(entity);
                 ref var rotateComponent = ref _rotateStash.Get(entity);
 
+                rotateComponent.RotateDeltaInput = inputComponent.LookValue.x * GameSettings.Instance.Sensitivity;
                 rotateComponent.RotateStartInput = inputComponent.InteractStartTrigger;
                 rotateComponent.RotateStopInput = inputComponent.InteractStopInProgress;
             }

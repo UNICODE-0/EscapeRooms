@@ -1,8 +1,7 @@
-using EscapeRooms.Data;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -15,10 +14,21 @@ namespace EscapeRooms.Components
         [MinValue(0.01f)] 
         public float Spring;
             
-        [FormerlySerializedAs("Dumper")] [MinValue(0f)]
+        [MinValue(0f)]
         public float Damper;
+
+        [FoldoutGroup("MinMaxAngle")] 
+        public QuaternionQuarter MinAngleQuarter;
         
-        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public float TargetAngle;
+        [FoldoutGroup("MinMaxAngle")] 
+        [MinValue(0f), MaxValue(90f)]
+        public float MinAngle;
+        
+        [FoldoutGroup("MinMaxAngle")] 
+        public QuaternionQuarter MaxAngleQuarter;
+        
+        [FoldoutGroup("MinMaxAngle")] 
+        [MinValue(0f), MaxValue(90f)]
+        public float MaxAngle;
     }
 }
