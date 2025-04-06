@@ -1,5 +1,6 @@
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -9,6 +10,6 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct FPCameraBlockWhileRotationComponent : IComponent
     {
-        public RotateProvider Rotate;
+        [FormerlySerializedAs("Rotate")] public HingeRotationProvider _hingeRotation;
     }
 }

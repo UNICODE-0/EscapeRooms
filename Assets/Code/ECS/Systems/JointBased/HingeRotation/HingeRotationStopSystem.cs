@@ -12,41 +12,36 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class RotateStopSystem : ISystem
+    public sealed class HingeRotationStopSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<RaycastComponent> _raycastStash;
-        private Stash<RotateComponent> _rotateStash;
-        private Stash<RotatableComponent> _rotatableStash;
+        private Stash<HingeRotationComponent> _rotationStash;
         private Stash<ConfigurableJointComponent> _jointStash;
-        private Stash<OnRotateFlag> _onRotateStash;
+        private Stash<OnHingeRotationFlag> _onRotateStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<RotateComponent>()
+                .With<HingeRotationComponent>()
                 .Build();
 
-            _raycastStash = World.GetStash<RaycastComponent>();
-            _rotateStash = World.GetStash<RotateComponent>();
-            _rotatableStash = World.GetStash<RotatableComponent>();
+            _rotationStash = World.GetStash<HingeRotationComponent>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
-            _onRotateStash = World.GetStash<OnRotateFlag>();
+            _onRotateStash = World.GetStash<OnHingeRotationFlag>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filter)
             {
-                ref var rotateComponent = ref _rotateStash.Get(entity);
+                ref var rotationComponent = ref _rotationStash.Get(entity);
 
-                if (rotateComponent.RotateStopInput && rotateComponent.IsRotating)
+                if (rotationComponent.RotateStopInput && rotationComponent.IsRotating)
                 {
-                    ref var rotatableComponent = ref _rotatableStash.Get(rotateComponent.RotatingEntity);
-                    ref var jointComponent = ref _jointStash.Get(rotateComponent.RotatingEntity);
-                    ref var onRotateFlag = ref _onRotateStash.Get(rotateComponent.RotatingEntity);
+                    ref var jointComponent = ref _jointStash.Get(rotationComponent.RotatingEntity);
+                    ref var onRotateFlag = ref _onRotateStash.Get(rotationComponent.RotatingEntity);
                     
                     jointComponent.ConfigurableJoint.targetRotation = Quaternion.identity;
                     jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
@@ -56,13 +51,13 @@ namespace EscapeRooms.Systems
                         maximumForce = float.MaxValue
                     };
                     
-                    Entity rotatingEntity = rotateComponent.RotatingEntity;
+                    Entity rotatingEntity = rotationComponent.RotatingEntity;
                     FlagDisposeSystem.ScheduleFlagDispose(ref onRotateFlag, () =>
                     {
                         _onRotateStash.Remove(rotatingEntity);
                     });
                     
-                    rotateComponent.IsRotating = false;
+                    rotationComponent.IsRotating = false;
                 }
             }
         }

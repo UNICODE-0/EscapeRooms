@@ -1,5 +1,6 @@
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -7,7 +8,10 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
-    public sealed class RotateProvider : MonoProvider<RotateComponent>
+    [RequireComponent(typeof(ConfigurableJointProvider))]
+    [RequireComponent(typeof(TransformProvider))]
+
+    public sealed class HingeRotatableProvider : MonoProvider<HingeRotatableComponent>
     {
     }
 }

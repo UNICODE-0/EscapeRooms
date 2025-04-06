@@ -12,29 +12,29 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class RotateSystem : ISystem
+    public sealed class HingeRotationSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<RotatableComponent> _rotatableStash;
-        private Stash<RotateComponent> _rotateStash;
+        private Stash<HingeRotatableComponent> _rotatableStash;
+        private Stash<HingeRotationComponent> _rotationStash;
         private Stash<ConfigurableJointComponent> _jointStash;
         private Stash<TransformComponent> _transformStash;
-        private Stash<OnRotateFlag> _onRotateStash;
+        private Stash<OnHingeRotationFlag> _onRotationStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<RotatableComponent>()
+                .With<HingeRotatableComponent>()
                 .With<TransformComponent>()
-                .With<OnRotateFlag>()
+                .With<OnHingeRotationFlag>()
                 .Build();
 
-            _rotatableStash = World.GetStash<RotatableComponent>();
+            _rotatableStash = World.GetStash<HingeRotatableComponent>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
-            _rotateStash = World.GetStash<RotateComponent>();
-            _onRotateStash = World.GetStash<OnRotateFlag>();
+            _rotationStash = World.GetStash<HingeRotationComponent>();
+            _onRotationStash = World.GetStash<OnHingeRotationFlag>();
             _transformStash = World.GetStash<TransformComponent>();
         }
 
@@ -45,12 +45,12 @@ namespace EscapeRooms.Systems
                 ref var rotatableComponent = ref _rotatableStash.Get(entity);
                 ref var jointComponent = ref _jointStash.Get(entity);
                 
-                ref var onRotateComponent = ref _onRotateStash.Get(entity);
+                ref var onRotationComponent = ref _onRotationStash.Get(entity);
                 ref var transformComponent = ref _transformStash.Get(entity);
-                ref var rotateComponent = ref _rotateStash.Get(onRotateComponent.Owner);
+                ref var rotationComponent = ref _rotationStash.Get(onRotationComponent.Owner);
 
                 Quaternion rotationX = Quaternion.AngleAxis(
-                    -rotateComponent.RotateDeltaInput * rotateComponent.RotationSpeed,
+                    -rotationComponent.RotateDeltaInput * rotationComponent.RotationSpeed,
                     transformComponent.Transform.right);
                 
                 Quaternion result = rotationX * jointComponent.ConfigurableJoint.targetRotation;

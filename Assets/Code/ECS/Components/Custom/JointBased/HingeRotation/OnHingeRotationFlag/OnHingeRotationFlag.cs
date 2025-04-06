@@ -8,7 +8,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct OnRotateFlag : IFlagComponent
+    public struct OnHingeRotationFlag : IFlagComponent
     {
         public Entity Owner { get; set; }
         public bool IsLastFrameOfLife { get; set; }

@@ -12,29 +12,29 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class RotateStartSystem : ISystem
+    public sealed class HingeRotationStartSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
         private Stash<RaycastComponent> _raycastStash;
-        private Stash<RotateComponent> _rotateStash;
-        private Stash<RotatableComponent> _rotatableStash;
+        private Stash<HingeRotationComponent> _rotationStash;
+        private Stash<HingeRotatableComponent> _rotatableStash;
         private Stash<ConfigurableJointComponent> _jointStash;
-        private Stash<OnRotateFlag> _onRotateStash;
+        private Stash<OnHingeRotationFlag> _onRotateStash;
         private Stash<TransformComponent> _transformStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<RotateComponent>()
+                .With<HingeRotationComponent>()
                 .Build();
 
             _raycastStash = World.GetStash<RaycastComponent>();
-            _rotateStash = World.GetStash<RotateComponent>();
-            _rotatableStash = World.GetStash<RotatableComponent>();
+            _rotationStash = World.GetStash<HingeRotationComponent>();
+            _rotatableStash = World.GetStash<HingeRotatableComponent>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
-            _onRotateStash = World.GetStash<OnRotateFlag>();
+            _onRotateStash = World.GetStash<OnHingeRotationFlag>();
             _transformStash = World.GetStash<TransformComponent>();
         }
 
@@ -42,11 +42,11 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var rotateComponent = ref _rotateStash.Get(entity);
+                ref var rotationComponent = ref _rotationStash.Get(entity);
 
-                if (rotateComponent.RotateStartInput && !rotateComponent.IsRotating)
+                if (rotationComponent.RotateStartInput && !rotationComponent.IsRotating)
                 {
-                    ref var raycastComponent = ref _raycastStash.Get(rotateComponent.RotateRaycast.Entity);
+                    ref var raycastComponent = ref _raycastStash.Get(rotationComponent.DetectionRaycast.Entity);
                     
                     if (raycastComponent.HitsCount > 0 && 
                         EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
@@ -57,8 +57,8 @@ namespace EscapeRooms.Systems
                             ref var jointComponent = ref _jointStash.Get(item.entity);
                             ref var transformComponent = ref _transformStash.Get(item.entity);
 
-                            rotateComponent.IsRotating = true;
-                            rotateComponent.RotatingEntity = item.entity;
+                            rotationComponent.IsRotating = true;
+                            rotationComponent.RotatingEntity = item.entity;
 
                             jointComponent.ConfigurableJoint.targetRotation =
                                 Quaternion.Inverse(transformComponent.Transform.rotation);
@@ -70,7 +70,7 @@ namespace EscapeRooms.Systems
                                 maximumForce = float.MaxValue
                             };
 
-                            _onRotateStash.Add(item.entity, new OnRotateFlag()
+                            _onRotateStash.Add(item.entity, new OnHingeRotationFlag()
                             {
                                 Owner = entity,
                             });

@@ -136,10 +136,10 @@ namespace EscapeRooms.Systems
 
         private static void RotateBlock(SystemsGroup group)
         {
-            group.AddSystem(new RotateStartSystem());
-            group.AddSystem(new RotateStopSystem());
+            group.AddSystem(new HingeRotationStartSystem());
+            group.AddSystem(new HingeRotationStopSystem());
             
-            group.AddSystem(new RotateSystem());
+            group.AddSystem(new HingeRotationSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

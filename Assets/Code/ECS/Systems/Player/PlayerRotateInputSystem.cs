@@ -14,18 +14,18 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<InputComponent> _inputStash;
-        private Stash<RotateComponent> _rotateStash;
+        private Stash<HingeRotationComponent> _rotateStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<InputComponent>()
-                .With<RotateComponent>()
+                .With<HingeRotationComponent>()
                 .With<PlayerHandTag>()
                 .Build();
 
             _inputStash = World.GetStash<InputComponent>();
-            _rotateStash = World.GetStash<RotateComponent>();
+            _rotateStash = World.GetStash<HingeRotationComponent>();
         }
 
         public void OnUpdate(float deltaTime)

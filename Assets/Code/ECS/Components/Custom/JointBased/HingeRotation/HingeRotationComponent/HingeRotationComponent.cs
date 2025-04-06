@@ -1,4 +1,3 @@
-using System.Numerics;
 using EscapeRooms.Data;
 using JetBrains.Annotations;
 using Scellecs.Morpeh;
@@ -11,7 +10,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct RotateComponent : IComponent
+    public struct HingeRotationComponent : IComponent
     {
         public float RotateDeltaInput;
         public bool RotateStartInput;
@@ -20,7 +19,7 @@ namespace EscapeRooms.Components
         [PropertySpace] 
         
         [NotNull]
-        public RaycastProvider RotateRaycast;
+        public RaycastProvider DetectionRaycast;
         
         [MinValue(0.01f)]
         public float RotationSpeed;

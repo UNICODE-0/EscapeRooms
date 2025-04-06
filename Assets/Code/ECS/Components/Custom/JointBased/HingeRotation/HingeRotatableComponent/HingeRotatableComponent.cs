@@ -9,7 +9,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct RotatableComponent : IComponent
+    public struct HingeRotatableComponent : IComponent
     {
         [MinValue(0.01f)] 
         public float Spring;

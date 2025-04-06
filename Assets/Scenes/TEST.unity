@@ -47645,7 +47645,7 @@ MonoBehaviour:
       m_Bits: 192
     IsRayHit: 0
     HitsCount: 0
-    DrawLineToBoundsClosestPoint: 1
+    DrawLineToBoundsClosestPoint: 0
 --- !u!43 &1390166556
 Mesh:
   m_ObjectHideFlags: 0
@@ -50716,7 +50716,7 @@ MonoBehaviour:
     RotateDeltaInput: 0
     RotateStartInput: 0
     RotateStopInput: 0
-    RotateRaycast: {fileID: 1387658322}
+    DetectionRaycast: {fileID: 1387658322}
     RotationSpeed: 2
     IsRotating: 0
 --- !u!1 &1473984032
