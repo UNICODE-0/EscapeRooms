@@ -1,7 +1,5 @@
-using System;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -9,10 +7,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct TransformDeltaRotationComponent : IComponent
+    public struct DeltaRotationBlockWhileDragRotationComponent : IComponent
     {
-        [NonSerialized] public int RotationBlockFlag;
-        
-        public Vector3 EulerRotationDelta;
+        public DragRotationProvider DragRotation;
     }
 }

@@ -105,6 +105,9 @@ namespace EscapeRooms.Systems
         
         private static void TransformBlock(SystemsGroup group)
         {
+            group.AddSystem(new DeltaRotationBlockWhileDragRotationSystem());
+            group.AddSystem(new DeltaRotationBlockWhileHingeRotationSystem());
+
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
             group.AddSystem(new TransformOrbitalFollowSystem());

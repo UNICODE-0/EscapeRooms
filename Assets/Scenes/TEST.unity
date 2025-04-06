@@ -812,6 +812,8 @@ GameObject:
   - component: {fileID: 63797431}
   - component: {fileID: 63797432}
   - component: {fileID: 63797428}
+  - component: {fileID: 63797446}
+  - component: {fileID: 63797447}
   - component: {fileID: 63797433}
   - component: {fileID: 63797443}
   - component: {fileID: 63797435}
@@ -1242,6 +1244,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0139efa05fe24b17a92c90f5185e6a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &63797446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bca46eb3a97473bb69c3a9b3c9985dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    DragRotation: {fileID: 1470096564}
+--- !u!114 &63797447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63797417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53b38494bff4c2c9cb3d40b79c3d7f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    DragRotation: {fileID: 1470096564}
 --- !u!1 &77132052
 GameObject:
   m_ObjectHideFlags: 0
@@ -50695,6 +50725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    RotationActiveInput: 0
     RotationDeltaInput: {x: 0, y: 0}
     RotationSpeed: 3
     MaxInputDelta: {x: 2, y: 2}
