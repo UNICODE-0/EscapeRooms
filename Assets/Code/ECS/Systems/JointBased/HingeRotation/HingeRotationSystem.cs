@@ -60,6 +60,25 @@ namespace EscapeRooms.Systems
                 float min = result.GetXAxisAngleInQuarter(rotatableComponent.MinAngleQuarter);
                 float max = result.GetXAxisAngleInQuarter(rotatableComponent.MaxAngleQuarter);
 
+#if UNITY_EDITOR
+                if(rotatableComponent.ShowQuarterAndAngle)
+                {
+                    float Q1 = result.GetXAxisAngleInQuarter(QuaternionQuarter.First);
+                    float Q2 = result.GetXAxisAngleInQuarter(QuaternionQuarter.Second);
+                    float Q3 = result.GetXAxisAngleInQuarter(QuaternionQuarter.Third);
+                    float Q4 = result.GetXAxisAngleInQuarter(QuaternionQuarter.Fourth);
+
+                    if (Q1 >= 0)
+                        Debug.Log("Quarter 1: " + Q1);
+                    else if (Q2 >= 0)
+                        Debug.Log("Quarter 2: " + Q2);
+                    else if (Q3 >= 0)
+                        Debug.Log("Quarter 3: " + Q3);
+                    else if (Q4 >= 0)
+                        Debug.Log("Quarter 4: " + Q4);
+                }
+#endif
+
                 if (min >= rotatableComponent.MinAngle || max >= rotatableComponent.MaxAngle)
                     return;
 

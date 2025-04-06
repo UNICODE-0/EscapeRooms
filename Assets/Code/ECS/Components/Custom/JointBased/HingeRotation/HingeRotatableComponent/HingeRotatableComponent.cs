@@ -1,3 +1,4 @@
+using EscapeRooms.Data;
 using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
@@ -30,5 +31,10 @@ namespace EscapeRooms.Components
         [FoldoutGroup("MinMaxAngle")] 
         [MinValue(0f), MaxValue(90f)]
         public float MaxAngle;
+        
+#if UNITY_EDITOR
+        [FoldoutGroup(Consts.DEBUG_FOLDOUT_NAME)]
+        public bool ShowQuarterAndAngle;
+#endif
     }
 }
