@@ -49,16 +49,18 @@ namespace EscapeRooms.Systems
                 ref var transformComponent = ref _transformStash.Get(entity);
                 ref var rotationComponent = ref _rotationStash.Get(onRotationComponent.Owner);
 
-                Quaternion rotationX = Quaternion.AngleAxis(
-                    -rotationComponent.RotateDeltaInput * rotationComponent.RotationSpeed,
-                    transformComponent.Transform.right);
+                float input =
+                    -Mathf.Clamp(rotationComponent.RotateDeltaInput, rotationComponent.DeltaRange.x,
+                        rotationComponent.DeltaRange.y) * rotationComponent.RotationSpeed;
                 
-                Quaternion result = rotationX * jointComponent.ConfigurableJoint.targetRotation;
+                Quaternion rotationX = Quaternion.AngleAxis(input, transformComponent.Transform.right);
+                
+                Quaternion result = jointComponent.ConfigurableJoint.targetRotation * rotationX;
 
                 float min = result.GetXAxisAngleInQuarter(rotatableComponent.MinAngleQuarter);
                 float max = result.GetXAxisAngleInQuarter(rotatableComponent.MaxAngleQuarter);
 
-                if(min >= rotatableComponent.MinAngle || max >= rotatableComponent.MaxAngle)
+                if (min >= rotatableComponent.MinAngle || max >= rotatableComponent.MaxAngle)
                     return;
 
                 jointComponent.ConfigurableJoint.targetRotation = result;

@@ -50763,6 +50763,7 @@ MonoBehaviour:
     RotateStartInput: 0
     RotateStopInput: 0
     DetectionRaycast: {fileID: 1387658322}
+    DeltaRange: {x: -2, y: 2}
     RotationSpeed: 2
     IsRotating: 0
 --- !u!1 &1473984032

@@ -3,6 +3,7 @@ using JetBrains.Annotations;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -20,6 +21,9 @@ namespace EscapeRooms.Components
         
         [NotNull]
         public RaycastProvider DetectionRaycast;
+
+        [MinMaxSlider(-5f, 5f, true)] 
+        public Vector2 DeltaRange;
         
         [MinValue(0.01f)]
         public float RotationSpeed;
