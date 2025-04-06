@@ -1,3 +1,4 @@
+using System;
 using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
@@ -12,6 +13,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct FPCameraComponent : IComponent
     {
+        [NonSerialized] public int RotationBlockFlag;
+        
         public Vector2 RotateDelta;
         
         [PropertySpace]

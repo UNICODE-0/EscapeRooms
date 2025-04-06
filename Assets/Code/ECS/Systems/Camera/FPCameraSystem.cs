@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -31,9 +32,11 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var transformComponent = ref _transformStash.Get(entity);
                 ref var cameraComponent = ref _cameraStash.Get(entity);
-
+                if(cameraComponent.RotationBlockFlag.IsFlagNotClear()) continue;
+                
+                ref var transformComponent = ref _transformStash.Get(entity);
+                
                 cameraComponent.CurrentXRotation -= cameraComponent.RotateDelta.x;
 
                 cameraComponent.CurrentXRotation =

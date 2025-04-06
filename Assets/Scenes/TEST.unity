@@ -7250,6 +7250,7 @@ GameObject:
   - component: {fileID: 687237172}
   - component: {fileID: 687237170}
   - component: {fileID: 687237171}
+  - component: {fileID: 687237173}
   m_Layer: 3
   m_Name: Providers
   m_TagString: Untagged
@@ -7360,6 +7361,20 @@ MonoBehaviour:
       DefaultState: {x: 0, y: 0.728, z: 0}
       TargetState: {x: 0, y: -0.018, z: 0}
       IsTargetState: 0
+--- !u!114 &687237173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fe4f6c1468e41baada2af60628da13e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    DragRotation: {fileID: 1470096564}
 --- !u!43 &690567702
 Mesh:
   m_ObjectHideFlags: 0

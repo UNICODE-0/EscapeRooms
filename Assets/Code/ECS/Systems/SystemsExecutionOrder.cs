@@ -13,6 +13,7 @@ namespace EscapeRooms.Systems
             PlayerBlock(group);
             CharacterControllerBlock(group);
             DragBlock(group);
+            CameraBlock(group);
             RotateBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
@@ -85,8 +86,6 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             
-            group.AddSystem(new FPCameraSystem());
-            
             group.AddSystem(new CharacterJumpForceApplySystem());
             group.AddSystem(new CharacterGravityAttractionApplySystem());
             group.AddSystem(new CharacterMovementVelocityApplySystem());
@@ -94,6 +93,13 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterHeadbuttForceApplySystem());
 
             group.AddSystem(new CharacterMotionSystem());
+        }
+        
+        private static void CameraBlock(SystemsGroup group)
+        {
+            group.AddSystem(new FPCameraBlockWhileDragRotationSystem());
+
+            group.AddSystem(new FPCameraSystem());
         }
         
         private static void TransformBlock(SystemsGroup group)

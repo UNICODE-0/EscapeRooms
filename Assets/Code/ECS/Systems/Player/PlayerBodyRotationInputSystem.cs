@@ -35,16 +35,9 @@ namespace EscapeRooms.Systems
             {
                 ref var rotationComponent = ref _rotationStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
-
-                if (inputComponent.DragRotationInProgress)
-                {
-                    rotationComponent.EulerRotationDelta = Vector3.zero;
-                }
-                else
-                {
-                    rotationComponent.EulerRotationDelta = 
-                        new Vector3(0f, inputComponent.LookValue.x * GameSettings.Instance.Sensitivity, 0f);
-                }
+                
+                rotationComponent.EulerRotationDelta = 
+                    new Vector3(0f, inputComponent.LookValue.x * GameSettings.Instance.Sensitivity, 0f);
             }
         }
 
