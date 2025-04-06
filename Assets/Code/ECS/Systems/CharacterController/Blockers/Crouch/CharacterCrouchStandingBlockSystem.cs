@@ -38,7 +38,7 @@ namespace EscapeRooms.Systems
                 ref var sphereOverlapComponent = ref _overlapSphereStash.Get(standingBlockComponent.StandingPossibilityCheckSphereOverlap.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_STANDING_BLOCK_FLAG, 
+                    CrouchBlockers.STANDING, 
                     crouchComponent.IsCrouching && sphereOverlapComponent.IsSphereIntersect);
             }
         }

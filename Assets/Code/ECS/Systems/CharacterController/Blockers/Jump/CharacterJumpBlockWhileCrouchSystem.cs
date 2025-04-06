@@ -35,7 +35,7 @@ namespace EscapeRooms.Systems
                 ref var jumpComponent = ref _jumpStash.Get(entity);
                 ref var crouchComponent = ref _crouchStash.Get(entity);
                 
-                FlagApplier.HandleFlagCondition(ref jumpComponent.JumpBlockFlag, JumpBlockers.JUMP_BLOCK_WHILE_CROUCH_FLAG, 
+                FlagApplier.HandleFlagCondition(ref jumpComponent.JumpBlockFlag, JumpBlockers.CROUCH, 
                     crouchComponent.IsCrouching || crouchComponent.IsSquatInProgress || crouchComponent.CrouchInput);
             }
         }
