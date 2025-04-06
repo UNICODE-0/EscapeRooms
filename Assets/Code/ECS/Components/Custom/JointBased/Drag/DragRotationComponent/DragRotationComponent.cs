@@ -12,6 +12,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct DragRotationComponent : IComponent
     {
+        public bool RotationActiveInput;
         public Vector2 RotationDeltaInput;
 
         [PropertySpace] 

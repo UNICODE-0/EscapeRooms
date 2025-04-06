@@ -98,6 +98,7 @@ namespace EscapeRooms.Systems
         private static void CameraBlock(SystemsGroup group)
         {
             group.AddSystem(new FPCameraBlockWhileDragRotationSystem());
+            group.AddSystem(new FPCameraBlockWhileHingeRotationSystem());
 
             group.AddSystem(new FPCameraSystem());
         }

@@ -7251,6 +7251,7 @@ GameObject:
   - component: {fileID: 687237170}
   - component: {fileID: 687237171}
   - component: {fileID: 687237173}
+  - component: {fileID: 687237174}
   m_Layer: 3
   m_Name: Providers
   m_TagString: Untagged
@@ -7375,6 +7376,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     DragRotation: {fileID: 1470096564}
+--- !u!114 &687237174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687237166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ced265540d74e3e8cc8114c024c2951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    HingeRotation: {fileID: 1470096566}
 --- !u!43 &690567702
 Mesh:
   m_ObjectHideFlags: 0

@@ -13,20 +13,20 @@ namespace EscapeRooms.Systems
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<DragRotationComponent> _dragRotationStash;
+        private Stash<HingeRotationComponent> _hingeRotationStash;
         private Stash<FPCameraComponent> _fpCameraStash;
-        private Stash<FPCameraBlockWhileDragRotationComponent> _blockWhileRotationStash;
+        private Stash<FPCameraBlockWhileHingeRotationComponent> _blockWhileRotationStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<FPCameraComponent>()
-                .With<FPCameraBlockWhileDragRotationComponent>()
+                .With<FPCameraBlockWhileHingeRotationComponent>()
                 .Build();
 
-            _dragRotationStash = World.GetStash<DragRotationComponent>();
+            _hingeRotationStash = World.GetStash<HingeRotationComponent>();
             _fpCameraStash = World.GetStash<FPCameraComponent>();
-            _blockWhileRotationStash = World.GetStash<FPCameraBlockWhileDragRotationComponent>();
+            _blockWhileRotationStash = World.GetStash<FPCameraBlockWhileHingeRotationComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -35,10 +35,10 @@ namespace EscapeRooms.Systems
             {
                 ref var fpCameraComponent = ref _fpCameraStash.Get(entity);
                 ref var blockerComponent = ref _blockWhileRotationStash.Get(entity);
-                ref var dragRotationComponent = ref _dragRotationStash.Get(blockerComponent.DragRotation.Entity);
+                ref var hingeRotationComponent = ref _hingeRotationStash.Get(blockerComponent.HingeRotation.Entity);
                 
                 FlagApplier.HandleFlagCondition(ref fpCameraComponent.RotationBlockFlag, 
-                    FPCameraBlockers.DRAG_ROTATION, dragRotationComponent.IsRotating);
+                    FPCameraBlockers.HINGE_ROTATION, hingeRotationComponent.IsRotating);
             }
         }
 

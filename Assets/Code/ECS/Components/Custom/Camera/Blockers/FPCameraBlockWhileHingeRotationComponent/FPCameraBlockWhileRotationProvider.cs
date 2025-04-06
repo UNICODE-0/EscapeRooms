@@ -1,15 +1,16 @@
-using Scellecs.Morpeh;
+using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine.Serialization;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
-    [System.Serializable]
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct FPCameraBlockWhileRotationComponent : IComponent
+    
+    [RequireComponent(typeof(FPCameraProvider))]
+    
+    public sealed class FPCameraBlockWhileHingeRotationProvider : MonoProvider<FPCameraBlockWhileHingeRotationComponent>
     {
-        [FormerlySerializedAs("Rotate")] public HingeRotationProvider _hingeRotation;
     }
 }
