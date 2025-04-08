@@ -140,6 +140,8 @@ namespace EscapeRooms.Systems
 
         private static void RotateBlock(SystemsGroup group)
         {
+            group.AddSystem(new HingeRotationInterruptByCollisionSystem());
+            
             group.AddSystem(new HingeRotationStartSystem());
             group.AddSystem(new HingeRotationStopSystem());
             
