@@ -36,19 +36,12 @@ namespace EscapeRooms.Systems
                 ref var cameraComponent = ref _cameraStash.Get(entity);
                 ref var inputComponent = ref _inputStash.Get(entity);
                 
-                if (inputComponent.DragRotationInProgress)
-                {
-                    cameraComponent.RotateDelta = Vector2.zero;
-                }
-                else
-                {
-                    Vector2 mouseDelta = inputComponent.LookValue;
-                    Vector2 RotateDelta = Vector3.zero;
-                    RotateDelta.x = mouseDelta.y;
-                    RotateDelta.y = mouseDelta.x;
+                Vector2 mouseDelta = inputComponent.LookValue;
+                Vector2 RotateDelta = Vector3.zero;
+                RotateDelta.x = mouseDelta.y;
+                RotateDelta.y = mouseDelta.x;
 
-                    cameraComponent.RotateDelta = RotateDelta * GameSettings.Instance.Sensitivity;
-                }
+                cameraComponent.RotateDelta = RotateDelta * GameSettings.Instance.Sensitivity;
             }
         }
 

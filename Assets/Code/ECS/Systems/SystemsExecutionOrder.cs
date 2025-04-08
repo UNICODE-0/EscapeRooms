@@ -13,6 +13,7 @@ namespace EscapeRooms.Systems
             PlayerBlock(group);
             CharacterControllerBlock(group);
             DragBlock(group);
+            CameraBlock(group);
             RotateBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
@@ -85,8 +86,6 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterJumpSystem());
             group.AddSystem(new CharacterJumpHeadbuttSystem());
             
-            group.AddSystem(new FPCameraSystem());
-            
             group.AddSystem(new CharacterJumpForceApplySystem());
             group.AddSystem(new CharacterGravityAttractionApplySystem());
             group.AddSystem(new CharacterMovementVelocityApplySystem());
@@ -96,8 +95,19 @@ namespace EscapeRooms.Systems
             group.AddSystem(new CharacterMotionSystem());
         }
         
+        private static void CameraBlock(SystemsGroup group)
+        {
+            group.AddSystem(new FPCameraBlockWhileDragRotationSystem());
+            group.AddSystem(new FPCameraBlockWhileHingeRotationSystem());
+
+            group.AddSystem(new FPCameraSystem());
+        }
+        
         private static void TransformBlock(SystemsGroup group)
         {
+            group.AddSystem(new DeltaRotationBlockWhileDragRotationSystem());
+            group.AddSystem(new DeltaRotationBlockWhileHingeRotationSystem());
+
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
             group.AddSystem(new TransformOrbitalFollowSystem());
@@ -130,10 +140,12 @@ namespace EscapeRooms.Systems
 
         private static void RotateBlock(SystemsGroup group)
         {
-            group.AddSystem(new RotateStartSystem());
-            group.AddSystem(new RotateStopSystem());
+            group.AddSystem(new HingeRotationInterruptByCollisionSystem());
             
-            group.AddSystem(new RotateSystem());
+            group.AddSystem(new HingeRotationStartSystem());
+            group.AddSystem(new HingeRotationStopSystem());
+            
+            group.AddSystem(new HingeRotationSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

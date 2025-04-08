@@ -38,11 +38,13 @@ namespace EscapeRooms.Systems
                 
                 if (inputComponent.DragRotationInProgress)
                 {
+                    rotationComponent.RotationActiveInput = true;
                     rotationComponent.RotationDeltaInput =
                         inputComponent.LookValue * GameSettings.Instance.Sensitivity;
                 }
                 else
                 {
+                    rotationComponent.RotationActiveInput = false;
                     rotationComponent.RotationDeltaInput = Vector2.zero;
                 }
             }

@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using UnityEngine;
 using Unity.IL2CPP.CompilerServices;
@@ -31,9 +32,10 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var transformComponent = ref _transformStash.Get(entity);
                 ref var rotationComponent = ref _rotationStash.Get(entity);
-
+                if(rotationComponent.RotationBlockFlag.IsFlagNotClear()) continue;
+                
+                ref var transformComponent = ref _transformStash.Get(entity);
                 transformComponent.Transform.rotation *= Quaternion.Euler(rotationComponent.EulerRotationDelta);
             }
         }

@@ -36,7 +36,7 @@ namespace EscapeRooms.Systems
                 ref var jumpComponent = ref _jumpStash.Get(entity);
 
                 FlagApplier.HandleFlagCondition(ref jumpComponent.JumpBlockFlag, 
-                    JumpBlockers.JUMP_BLOCK_WHILE_STATIC_COLLISION_FLAG, 
+                    JumpBlockers.STATIC_COLLISION, 
                     staticCollisionComponent.IsAnyStaticCollisionExist.GetValue());
             }
         }

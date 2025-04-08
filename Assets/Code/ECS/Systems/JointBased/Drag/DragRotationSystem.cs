@@ -40,17 +40,10 @@ namespace EscapeRooms.Systems
             foreach (var entity in _filter)
             {
                 ref var dragComponent = ref _dragStash.Get(entity);
+                ref var rotationComponent = ref _dragRotationStash.Get(entity);
 
-                if (dragComponent.IsDragging)
+                if (dragComponent.IsDragging && rotationComponent.RotationActiveInput)
                 {
-                    ref var rotationComponent = ref _dragRotationStash.Get(entity);
-
-                    if (rotationComponent.RotationDeltaInput == Vector2.zero)
-                    {
-                        rotationComponent.IsRotating = false;
-                        continue;
-                    }
-                    
                     ref var transformComponent = ref _transformStash.Get(entity);
                     ref var jointComponent = ref _jointStash.Get(dragComponent.DraggableEntity);
 
@@ -71,6 +64,10 @@ namespace EscapeRooms.Systems
                         rotationX * rotationY * jointComponent.ConfigurableJoint.targetRotation;
                     
                     rotationComponent.IsRotating = true;
+                }
+                else
+                {
+                    rotationComponent.IsRotating = false;
                 }
             }
         }

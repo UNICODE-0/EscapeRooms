@@ -38,7 +38,7 @@ namespace EscapeRooms.Systems
                 ref var sphereCastComponent = ref _sphereCastStash.Get(standBlockComponent.StandPossibilityCheckSphereCast.Entity);
 
                 FlagApplier.HandleFlagCondition(ref crouchComponent.CrouchBlockFlag, 
-                    CrouchBlockers.CROUCH_STAND_BLOCK_FLAG, 
+                    CrouchBlockers.STAND, 
                     crouchComponent.IsCrouching && sphereCastComponent.IsSphereHit);
             }
         }
