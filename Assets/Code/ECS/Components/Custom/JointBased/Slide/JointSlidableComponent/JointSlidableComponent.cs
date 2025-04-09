@@ -1,6 +1,7 @@
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -16,7 +17,7 @@ namespace EscapeRooms.Components
         [MinValue(0f)]
         public float Damper;
         
-        [MinValue(0.01f)]
-        public float MaxDistance;
+        [MinMaxSlider(-20f, 20f, true)]
+        public Vector2 MinMaxDistance;
     }
 }

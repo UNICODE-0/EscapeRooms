@@ -1316,6 +1316,10 @@ PrefabInstance:
       value: TablePart
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1347,6 +1351,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
       insertIndex: -1
       addedObject: {fileID: 112781928}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 112781930}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 112781929}
   m_SourcePrefab: {fileID: 100100000, guid: 89ddde853d1c2934989228948cf4b762, type: 3}
 --- !u!4 &112781917 stripped
 Transform:
@@ -1408,12 +1418,12 @@ ConfigurableJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_TargetPosition: {x: -0.5, y: 0, z: 0}
+  m_TargetPosition: {x: 0, y: 0, z: 0}
   m_TargetVelocity: {x: 0, y: 0, z: 0}
   m_XDrive:
     serializedVersion: 4
-    positionSpring: 100
-    positionDamper: 50
+    positionSpring: 0
+    positionDamper: 0
     maximumForce: 3.4028233e+38
     useAcceleration: 0
   m_YDrive:
@@ -1613,6 +1623,36 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.022132397, y: 0.10320852, z: 1.2899377}
   m_Center: {x: 0.1572, y: -0.008068446, z: -0.0011523962}
+--- !u!114 &112781929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112781918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 266a421cc522405eb08b9d9e7c28eef4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    Spring: 100
+    Damper: 20
+    MinMaxDistance: {x: -0.5, y: 0}
+--- !u!114 &112781930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112781918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697ed8a0f46d4a7d99f8cf4cc539d06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    ConfigurableJoint: {fileID: 112781919}
 --- !u!1 &116761110
 GameObject:
   m_ObjectHideFlags: 0
@@ -51691,7 +51731,7 @@ MonoBehaviour:
     MaxHitsCount: 1
     LayerMask:
       serializedVersion: 2
-      m_Bits: 192
+      m_Bits: 448
     IsRayHit: 0
     HitsCount: 0
     DrawLineToBoundsClosestPoint: 0
@@ -52469,7 +52509,7 @@ MeshCollider:
   m_Mesh: {fileID: 891771925}
 --- !u!33 &1445552660
 MeshFilter:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 10
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -54782,6 +54822,7 @@ GameObject:
   - component: {fileID: 1470096564}
   - component: {fileID: 1470096565}
   - component: {fileID: 1470096566}
+  - component: {fileID: 1470096567}
   m_Layer: 0
   m_Name: OrbitalHand
   m_TagString: Untagged
@@ -54882,7 +54923,7 @@ MonoBehaviour:
   serializedData:
     DragStartInput: 0
     DragStopInput: 0
-    DragRaycast: {fileID: 1387658322}
+    DetectionRaycast: {fileID: 1387658322}
     MinDragDistance: 1
     MaxDragDistance: 2
     MaxDragDeviation: 3
@@ -55021,6 +55062,26 @@ MonoBehaviour:
     DeltaRange: {x: -2, y: 2}
     RotationSpeed: 2
     IsRotating: 0
+--- !u!114 &1470096567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470096551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f295df506179426380ae320ae80d9f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedData:
+    SlideDeltaInput: 0
+    SlideStartInput: 0
+    SlideStopInput: 0
+    DetectionRaycast: {fileID: 1387658322}
+    DeltaRange: {x: -2, y: 2}
+    SlideSpeed: 0.01
+    IsSliding: 0
 --- !u!1 &1473984032
 GameObject:
   m_ObjectHideFlags: 0

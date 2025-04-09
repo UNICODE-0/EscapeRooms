@@ -59,7 +59,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerDragInputSystem());
             group.AddSystem(new PlayerDragRotationInputSystem());
             group.AddSystem(new PlayerDragRadiusChangeInputSystem());
-            group.AddSystem(new PlayerRotateInputSystem());
+            group.AddSystem(new PlayerHingeRotateInputSystem());
+            group.AddSystem(new PlayerJointSlideInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -152,6 +153,9 @@ namespace EscapeRooms.Systems
         private static void JointSlideBlock(SystemsGroup group)
         {
             group.AddSystem(new JointSlideStartSystem());
+            group.AddSystem(new JointSlideStopSystem());
+            
+            group.AddSystem(new JointSlideSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

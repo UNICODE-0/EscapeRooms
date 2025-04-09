@@ -8,7 +8,7 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class PlayerRotateInputSystem : ISystem
+    public sealed class PlayerHingeRotateInputSystem : ISystem
     {
         public World World { get; set; }
 

@@ -9,7 +9,6 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
     [RequireComponent(typeof(ConfigurableJointProvider))]
-    [RequireComponent(typeof(TransformProvider))]
 
     public sealed class JointSlidableProvider : MonoProvider<JointSlidableComponent>
     {
