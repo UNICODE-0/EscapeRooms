@@ -13,17 +13,16 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<DragComponent> _dragStash;
-        private Stash<ColliderUniqueTriggerEventsHolderComponent> _triggerStash;
+        private Stash<InteractInterruptFlag> _flagStash;
         
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<DragComponent>()
-                .With<ColliderUniqueTriggerEventsHolderComponent>()
                 .Build();
 
             _dragStash = World.GetStash<DragComponent>();
-            _triggerStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
+            _flagStash = World.GetStash<InteractInterruptFlag>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -32,14 +31,9 @@ namespace EscapeRooms.Systems
             {
                 ref var dragComponent = ref _dragStash.Get(entity);
 
-                if(dragComponent.IsDragging)
+                if(dragComponent.IsDragging && _flagStash.Has(dragComponent.DraggableEntity))
                 {
-                    ref var triggerComponent = ref _triggerStash.Get(entity);
-
-                    if (triggerComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
-                    {
-                        dragComponent.DragStopInput = true;
-                    }
+                    dragComponent.DragStopInput = true;
                 }
             }
         }
