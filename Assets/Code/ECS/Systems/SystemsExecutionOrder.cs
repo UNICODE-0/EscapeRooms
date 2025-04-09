@@ -14,7 +14,8 @@ namespace EscapeRooms.Systems
             CharacterControllerBlock(group);
             DragBlock(group);
             CameraBlock(group);
-            RotateBlock(group);
+            HingeRotateBlock(group);
+            JointSlideBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
@@ -138,7 +139,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DragDistanceChangeSystem());
         }
 
-        private static void RotateBlock(SystemsGroup group)
+        private static void HingeRotateBlock(SystemsGroup group)
         {
             group.AddSystem(new HingeRotationInterruptByCollisionSystem());
             
@@ -146,6 +147,11 @@ namespace EscapeRooms.Systems
             group.AddSystem(new HingeRotationStopSystem());
             
             group.AddSystem(new HingeRotationSystem());
+        }
+        
+        private static void JointSlideBlock(SystemsGroup group)
+        {
+            group.AddSystem(new SlideStartSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)
