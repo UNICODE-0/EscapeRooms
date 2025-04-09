@@ -14,17 +14,16 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<HingeRotationComponent> _hingeRotationStash;
-        private Stash<ColliderUniqueTriggerEventsHolderComponent> _triggerStash;
-        
+        private Stash<InteractInterruptFlag> _flagStash;
+
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<HingeRotationComponent>()
-                .With<ColliderUniqueTriggerEventsHolderComponent>()
                 .Build();
 
             _hingeRotationStash = World.GetStash<HingeRotationComponent>();
-            _triggerStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
+            _flagStash = World.GetStash<InteractInterruptFlag>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -33,14 +32,9 @@ namespace EscapeRooms.Systems
             {
                 ref var hingeRotationComponent = ref _hingeRotationStash.Get(entity);
 
-                if(hingeRotationComponent.IsRotating)
+                if(hingeRotationComponent.IsRotating && _flagStash.Has(hingeRotationComponent.RotatingEntity))
                 {
-                    ref var triggerComponent = ref _triggerStash.Get(entity);
-
-                    if (triggerComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
-                    {
-                        hingeRotationComponent.RotateStopInput = true;
-                    }
+                    hingeRotationComponent.RotateStopInput = true;
                 }
             }
         }
