@@ -11,7 +11,7 @@ namespace EscapeRooms.Components
     [RequireComponent(typeof(ConfigurableJointProvider))]
     [RequireComponent(typeof(TransformProvider))]
 
-    public sealed class SlidableProvider : MonoProvider<SlidableComponent>
+    public sealed class JointSlidableProvider : MonoProvider<JointSlidableComponent>
     {
     }
 }

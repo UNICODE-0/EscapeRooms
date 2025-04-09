@@ -19,7 +19,7 @@ namespace EscapeRooms.Components
         [PropertySpace] 
         
         [NotNull]
-        public RaycastProvider DragRaycast;
+        public RaycastProvider DetectionRaycast;
 
         [MinValue(0.001f)] 
         public float MinDragDistance;

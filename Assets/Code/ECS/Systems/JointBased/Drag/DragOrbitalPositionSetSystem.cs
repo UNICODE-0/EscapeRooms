@@ -45,7 +45,7 @@ namespace EscapeRooms.Systems
                 ref var draggableComponent = ref _draggableStash.Get(evt.Draggable);
                 ref var draggableTransformComponent = ref _transformStash.Get(evt.Draggable);
                 ref var dragComponent = ref _dragStash.Get(evt.Owner); 
-                ref var dragStartRaycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
+                ref var dragStartRaycastComponent = ref _raycastStash.Get(dragComponent.DetectionRaycast.Entity);
                 ref var jointComponent = ref _configurableJointStash.Get(evt.Draggable); 
                 
                 Transform dragRaycastStartTf = dragStartRaycastComponent.RayStartPoint;

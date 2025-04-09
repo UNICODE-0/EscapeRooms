@@ -1,5 +1,5 @@
+using System;
 using Scellecs.Morpeh;
-using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components
@@ -8,15 +8,11 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SlidableComponent : IComponent
+    public struct OnJointSlideFlag : IFlagComponent
     {
-        [MinValue(0.01f)] 
-        public float Spring;
-            
-        [MinValue(0f)]
-        public float Damper;
-        
-        [MinValue(0.01f)]
-        public float MaxDistance;
+        public Entity Owner { get; set; }
+        public bool IsLastFrameOfLife { get; set; }
+        public Action DisposeAction { get; set; }
+        public int DisposeOrder { get; set; }
     }
 }

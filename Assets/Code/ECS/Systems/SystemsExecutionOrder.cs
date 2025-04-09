@@ -151,7 +151,7 @@ namespace EscapeRooms.Systems
         
         private static void JointSlideBlock(SystemsGroup group)
         {
-            group.AddSystem(new SlideStartSystem());
+            group.AddSystem(new JointSlideStartSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

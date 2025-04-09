@@ -12,27 +12,27 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class SlideStartSystem : ISystem
+    public sealed class JointSlideStartSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<SlideComponent> _slideStash;
+        private Stash<JointSlideComponent> _slideStash;
         private Stash<RaycastComponent> _raycastStash;
-        private Stash<SlidableComponent> _slidableStash;
-        private Stash<OnSlideFlag> _onSlideStash;
+        private Stash<JointSlidableComponent> _slidableStash;
+        private Stash<OnJointSlideFlag> _onSlideStash;
         private Stash<ConfigurableJointComponent> _jointStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<SlideComponent>()
+                .With<JointSlideComponent>()
                 .Build();
 
-            _slideStash = World.GetStash<SlideComponent>();
+            _slideStash = World.GetStash<JointSlideComponent>();
             _raycastStash = World.GetStash<RaycastComponent>();
-            _slidableStash = World.GetStash<SlidableComponent>();
-            _onSlideStash = World.GetStash<OnSlideFlag>();
+            _slidableStash = World.GetStash<JointSlidableComponent>();
+            _onSlideStash = World.GetStash<OnJointSlideFlag>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
         }
 
@@ -61,7 +61,7 @@ namespace EscapeRooms.Systems
                                 maximumForce = float.MaxValue
                             };
                             
-                            _onSlideStash.Add(item.entity, new OnSlideFlag()
+                            _onSlideStash.Add(item.entity, new OnJointSlideFlag()
                             {
                                 Owner = entity
                             });

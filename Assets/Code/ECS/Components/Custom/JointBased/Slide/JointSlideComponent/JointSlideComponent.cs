@@ -12,7 +12,7 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct SlideComponent : IComponent
+    public struct JointSlideComponent : IComponent
     {
         public float SlideDeltaInput;
         public bool SlideStartInput;
