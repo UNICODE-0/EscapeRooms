@@ -101,6 +101,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new FPCameraBlockWhileDragRotationSystem());
             group.AddSystem(new FPCameraBlockWhileHingeRotationSystem());
+            group.AddSystem(new FPCameraBlockWhileJointSlidingSystem());
 
             group.AddSystem(new FPCameraSystem());
         }
@@ -109,6 +110,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new DeltaRotationBlockWhileDragRotationSystem());
             group.AddSystem(new DeltaRotationBlockWhileHingeRotationSystem());
+            group.AddSystem(new DeltaRotationBlockWhileJointSlideSystem());
 
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
