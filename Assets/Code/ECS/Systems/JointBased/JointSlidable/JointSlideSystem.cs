@@ -1,5 +1,6 @@
 using EscapeRooms.Components;
 using Scellecs.Morpeh;
+using Sirenix.Utilities;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 
@@ -44,19 +45,12 @@ namespace EscapeRooms.Systems
                     -Mathf.Clamp(slideComponent.SlideDeltaInput, slideComponent.DeltaRange.x,
                         slideComponent.DeltaRange.y) * slideComponent.SlideSpeed;
 
-                Vector3 positionDelta = new Vector3(input, 0f, 0f);
+                Vector3 positionDelta = slidableComponent.SlideDirection *
+                                        (slideComponent.InverseInput ? -input : input);
                 Vector3 result = jointComponent.ConfigurableJoint.targetPosition + positionDelta;
 
-                if (result.x < slidableComponent.MinMaxDistance.x)
-                {
-                    result.x = slidableComponent.MinMaxDistance.x;
-                }
+                result = result.Clamp(slidableComponent.MinDistance, slidableComponent.MaxDistance);
                 
-                if (result.x > slidableComponent.MinMaxDistance.y)
-                {
-                    result.x = slidableComponent.MinMaxDistance.y;
-                }
-
                 jointComponent.ConfigurableJoint.targetPosition = result;
             }
         }

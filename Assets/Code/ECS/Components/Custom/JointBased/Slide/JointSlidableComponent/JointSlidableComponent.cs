@@ -17,7 +17,9 @@ namespace EscapeRooms.Components
         [MinValue(0f)]
         public float Damper;
         
-        [MinMaxSlider(-20f, 20f, true)]
-        public Vector2 MinMaxDistance;
+        public Vector3 MinDistance;
+        public Vector3 MaxDistance;
+        
+        public Vector3 SlideDirection;
     }
 }
