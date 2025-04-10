@@ -23,6 +23,8 @@ namespace EscapeRooms.Systems
         private Stash<ConfigurableJointComponent> _jointStash;
         private Stash<OnHingeRotationFlag> _onRotateStash;
         private Stash<TransformComponent> _transformStash;
+        private Stash<RigidbodyComponent> _rigidbodyStash;
+
 
         public void OnAwake()
         {
@@ -36,6 +38,7 @@ namespace EscapeRooms.Systems
             _jointStash = World.GetStash<ConfigurableJointComponent>();
             _onRotateStash = World.GetStash<OnHingeRotationFlag>();
             _transformStash = World.GetStash<TransformComponent>();
+            _rigidbodyStash = World.GetStash<RigidbodyComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -56,9 +59,13 @@ namespace EscapeRooms.Systems
                         {
                             ref var jointComponent = ref _jointStash.Get(item.entity);
                             ref var transformComponent = ref _transformStash.Get(item.entity);
+                            ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(item.entity);
 
                             rotationComponent.IsRotating = true;
                             rotationComponent.RotatableEntity = item.entity;
+                            
+                            rotatableComponent.MassBeforeRotate = itemRigidbodyComponent.Rigidbody.mass;
+                            itemRigidbodyComponent.Rigidbody.mass = rotatableComponent.MassWhileRotate;
 
                             jointComponent.ConfigurableJoint.targetRotation =
                                 Quaternion.Inverse(transformComponent.Transform.rotation);

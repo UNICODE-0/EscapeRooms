@@ -16,6 +16,8 @@ namespace EscapeRooms.Systems
         private Stash<HingeRotationComponent> _rotationStash;
         private Stash<ConfigurableJointComponent> _jointStash;
         private Stash<OnHingeRotationFlag> _onRotateStash;
+        private Stash<RigidbodyComponent> _rigidbodyStash;
+        private Stash<HingeRotatableComponent> _rotatableStash;
 
         public void OnAwake()
         {
@@ -26,6 +28,8 @@ namespace EscapeRooms.Systems
             _rotationStash = World.GetStash<HingeRotationComponent>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
             _onRotateStash = World.GetStash<OnHingeRotationFlag>();
+            _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            _rotatableStash = World.GetStash<HingeRotatableComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -38,6 +42,10 @@ namespace EscapeRooms.Systems
                 {
                     ref var jointComponent = ref _jointStash.Get(rotationComponent.RotatableEntity);
                     ref var onRotateFlag = ref _onRotateStash.Get(rotationComponent.RotatableEntity);
+                    ref var rotatableComponent = ref _rotatableStash.Get(rotationComponent.RotatableEntity);
+                    ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(rotationComponent.RotatableEntity);
+                    
+                    itemRigidbodyComponent.Rigidbody.mass = rotatableComponent.MassBeforeRotate;
                     
                     jointComponent.ConfigurableJoint.targetRotation = Quaternion.identity;
                     jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()

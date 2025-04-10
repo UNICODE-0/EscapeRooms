@@ -39,7 +39,7 @@ namespace EscapeRooms.Systems
 
                     float distance = Vector3.Distance(handTransformComponent.Transform.position,
                         rotatableTransformComponent.Transform.position);
-
+            
                     if (distance >= hingeRotationComponent.MaxDeviation)
                     {
                         hingeRotationComponent.RotateStopInput = true;

@@ -32,6 +32,12 @@ namespace EscapeRooms.Components
         [MinValue(0f), MaxValue(90f)]
         public float MaxAngle;
         
+        [MinValue(0.001f)]
+        public float MassWhileRotate;
+        
+        [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
+        [ReadOnly] public float MassBeforeRotate;
+        
 #if UNITY_EDITOR
         [FoldoutGroup(Consts.DEBUG_FOLDOUT_NAME)]
         public bool ShowQuarterAndAngle;
