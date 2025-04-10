@@ -143,7 +143,8 @@ namespace EscapeRooms.Systems
         private static void HingeRotateBlock(SystemsGroup group)
         {
             group.AddSystem(new HingeRotationInterruptByCollisionSystem());
-            
+            group.AddSystem(new HingeRotationInterruptByDistanceSystem());
+
             group.AddSystem(new HingeRotationStartSystem());
             group.AddSystem(new HingeRotationStopSystem());
             
@@ -152,6 +153,9 @@ namespace EscapeRooms.Systems
         
         private static void JointSlideBlock(SystemsGroup group)
         {
+            group.AddSystem(new JointSlideInterruptByCollisionSystem());
+            group.AddSystem(new JointSlideInterruptByDistanceSystem());
+
             group.AddSystem(new JointSlideStartSystem());
             group.AddSystem(new JointSlideStopSystem());
             

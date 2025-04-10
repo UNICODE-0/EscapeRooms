@@ -22,6 +22,7 @@ namespace EscapeRooms.Systems
         private Stash<JointSlidableComponent> _slidableStash;
         private Stash<OnJointSlideFlag> _onSlideStash;
         private Stash<ConfigurableJointComponent> _jointStash;
+        private Stash<TransformComponent> _transformStash;
 
         public void OnAwake()
         {
@@ -34,6 +35,7 @@ namespace EscapeRooms.Systems
             _slidableStash = World.GetStash<JointSlidableComponent>();
             _onSlideStash = World.GetStash<OnJointSlideFlag>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
+            _transformStash = World.GetStash<TransformComponent>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -52,7 +54,16 @@ namespace EscapeRooms.Systems
                         ref var slidableComponent = ref _slidableStash.Get(item.entity, out bool slidableExist);
                         if (slidableExist)
                         {
+                            ref var transformComponent = ref _transformStash.Get(item.entity);
                             ref var jointComponent = ref _jointStash.Get(item.entity);
+
+                            float distanceToOrigin =
+                                Vector3.Distance(
+                                    transformComponent.Transform.localPosition + jointComponent.ConfigurableJoint.anchor,
+                                    slidableComponent.Origin.localPosition);
+
+                            jointComponent.ConfigurableJoint.targetPosition =
+                                slidableComponent.SlideDirection * distanceToOrigin;
                             
                             jointComponent.ConfigurableJoint.xDrive = new JointDrive()
                             {

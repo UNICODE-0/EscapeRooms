@@ -36,8 +36,8 @@ namespace EscapeRooms.Systems
 
                 if (rotationComponent.RotateStopInput && rotationComponent.IsRotating)
                 {
-                    ref var jointComponent = ref _jointStash.Get(rotationComponent.RotatingEntity);
-                    ref var onRotateFlag = ref _onRotateStash.Get(rotationComponent.RotatingEntity);
+                    ref var jointComponent = ref _jointStash.Get(rotationComponent.RotatableEntity);
+                    ref var onRotateFlag = ref _onRotateStash.Get(rotationComponent.RotatableEntity);
                     
                     jointComponent.ConfigurableJoint.targetRotation = Quaternion.identity;
                     jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
@@ -47,7 +47,7 @@ namespace EscapeRooms.Systems
                         maximumForce = float.MaxValue
                     };
                     
-                    Entity rotatingEntity = rotationComponent.RotatingEntity;
+                    Entity rotatingEntity = rotationComponent.RotatableEntity;
                     FlagDisposeSystem.ScheduleFlagDispose(ref onRotateFlag, () =>
                     {
                         _onRotateStash.Remove(rotatingEntity);

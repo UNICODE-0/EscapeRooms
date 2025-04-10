@@ -21,5 +21,8 @@ namespace EscapeRooms.Components
         public Vector3 MaxDistance;
         
         public Vector3 SlideDirection;
+        
+        [Required]
+        public Transform Origin;
     }
 }

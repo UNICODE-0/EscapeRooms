@@ -8,21 +8,21 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class HingeRotationInterruptByCollisionSystem : ISystem
+    public sealed class JointSlideInterruptByCollisionSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<HingeRotationComponent> _hingeRotationStash;
+        private Stash<JointSlideComponent> _jointSlideStash;
         private Stash<InteractInterruptFlag> _flagStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<HingeRotationComponent>()
+                .With<JointSlideComponent>()
                 .Build();
 
-            _hingeRotationStash = World.GetStash<HingeRotationComponent>();
+            _jointSlideStash = World.GetStash<JointSlideComponent>();
             _flagStash = World.GetStash<InteractInterruptFlag>();
         }
 
@@ -30,11 +30,11 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var hingeRotationComponent = ref _hingeRotationStash.Get(entity);
+                ref var jointSlideComponent = ref _jointSlideStash.Get(entity);
 
-                if(hingeRotationComponent.IsRotating && _flagStash.Has(hingeRotationComponent.RotatableEntity))
+                if(jointSlideComponent.IsSliding && _flagStash.Has(jointSlideComponent.SlidableEntity))
                 {
-                    hingeRotationComponent.RotateStopInput = true;
+                    jointSlideComponent.SlideStopInput = true;
                 }
             }
         }

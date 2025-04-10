@@ -30,6 +30,9 @@ namespace EscapeRooms.Components
         
         [MinValue(0.01f)]
         public float SlideSpeed;
+        
+        [MinValue(0.001f)] 
+        public float MaxDeviation;
 
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsSliding;

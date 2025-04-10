@@ -43,6 +43,7 @@ namespace EscapeRooms.Systems
                     ref var jointComponent = ref _jointStash.Get(slideComponent.SlidableEntity);
                     ref var onSlideFlag = ref _onSlideStash.Get(slideComponent.SlidableEntity);
 
+                    jointComponent.ConfigurableJoint.targetPosition = default;
                     jointComponent.ConfigurableJoint.xDrive = new JointDrive()
                     {
                         positionSpring = default,
