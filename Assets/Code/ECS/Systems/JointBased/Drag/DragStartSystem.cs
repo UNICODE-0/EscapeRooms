@@ -50,7 +50,7 @@ namespace EscapeRooms.Systems
 
                 if (dragComponent.DragStartInput && !dragComponent.IsDragging)
                 {
-                    ref var raycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
+                    ref var raycastComponent = ref _raycastStash.Get(dragComponent.DetectionRaycast.Entity);
                     
                     if (raycastComponent.HitsCount > 0 && 
                         EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))

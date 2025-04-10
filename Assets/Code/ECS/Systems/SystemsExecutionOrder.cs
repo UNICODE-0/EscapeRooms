@@ -14,7 +14,8 @@ namespace EscapeRooms.Systems
             CharacterControllerBlock(group);
             DragBlock(group);
             CameraBlock(group);
-            RotateBlock(group);
+            HingeRotateBlock(group);
+            JointSlideBlock(group);
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
@@ -58,7 +59,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new PlayerDragInputSystem());
             group.AddSystem(new PlayerDragRotationInputSystem());
             group.AddSystem(new PlayerDragRadiusChangeInputSystem());
-            group.AddSystem(new PlayerRotateInputSystem());
+            group.AddSystem(new PlayerHingeRotateInputSystem());
+            group.AddSystem(new PlayerJointSlideInputSystem());
         }
         
         private static void CharacterControllerBlock(SystemsGroup group)
@@ -99,6 +101,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new FPCameraBlockWhileDragRotationSystem());
             group.AddSystem(new FPCameraBlockWhileHingeRotationSystem());
+            group.AddSystem(new FPCameraBlockWhileJointSlidingSystem());
 
             group.AddSystem(new FPCameraSystem());
         }
@@ -107,6 +110,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new DeltaRotationBlockWhileDragRotationSystem());
             group.AddSystem(new DeltaRotationBlockWhileHingeRotationSystem());
+            group.AddSystem(new DeltaRotationBlockWhileJointSlideSystem());
 
             group.AddSystem(new TransformDeltaRotationSystem());
             group.AddSystem(new TransformPositionLerpSystem());
@@ -138,14 +142,26 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DragDistanceChangeSystem());
         }
 
-        private static void RotateBlock(SystemsGroup group)
+        private static void HingeRotateBlock(SystemsGroup group)
         {
             group.AddSystem(new HingeRotationInterruptByCollisionSystem());
-            
+            group.AddSystem(new HingeRotationInterruptByDistanceSystem());
+
             group.AddSystem(new HingeRotationStartSystem());
             group.AddSystem(new HingeRotationStopSystem());
             
             group.AddSystem(new HingeRotationSystem());
+        }
+        
+        private static void JointSlideBlock(SystemsGroup group)
+        {
+            group.AddSystem(new JointSlideInterruptByCollisionSystem());
+            group.AddSystem(new JointSlideInterruptByDistanceSystem());
+
+            group.AddSystem(new JointSlideStartSystem());
+            group.AddSystem(new JointSlideStopSystem());
+            
+            group.AddSystem(new JointSlideSystem());
         }
         
         private static void RigidbodyBlock(SystemsGroup group)

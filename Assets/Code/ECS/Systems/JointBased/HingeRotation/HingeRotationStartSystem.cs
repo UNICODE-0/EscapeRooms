@@ -58,7 +58,7 @@ namespace EscapeRooms.Systems
                             ref var transformComponent = ref _transformStash.Get(item.entity);
 
                             rotationComponent.IsRotating = true;
-                            rotationComponent.RotatingEntity = item.entity;
+                            rotationComponent.RotatableEntity = item.entity;
 
                             jointComponent.ConfigurableJoint.targetRotation =
                                 Quaternion.Inverse(transformComponent.Transform.rotation);

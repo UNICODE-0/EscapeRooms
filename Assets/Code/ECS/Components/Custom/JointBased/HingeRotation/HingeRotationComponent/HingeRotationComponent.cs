@@ -4,6 +4,7 @@ using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -27,11 +28,14 @@ namespace EscapeRooms.Components
         
         [MinValue(0.01f)]
         public float RotationSpeed;
+        
+        [MinValue(0.01f)]
+        public float MaxDeviation;
 
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsRotating;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
-        [ReadOnly] public Entity RotatingEntity;
+        [ReadOnly] public Entity RotatableEntity;
     }
 }

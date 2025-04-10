@@ -8,21 +8,21 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DragInterruptByDistanceSystem : ISystem
+    public sealed class HingeRotationInterruptByDistanceSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<DragComponent> _dragStash;
+        private Stash<HingeRotationComponent> _hingeRotationStash;
         private Stash<TransformComponent> _transformStash;
 
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<DragComponent>()
+                .With<HingeRotationComponent>()
                 .Build();
 
-            _dragStash = World.GetStash<DragComponent>();
+            _hingeRotationStash = World.GetStash<HingeRotationComponent>();
             _transformStash = World.GetStash<TransformComponent>();
         }
 
@@ -30,19 +30,19 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var dragComponent = ref _dragStash.Get(entity);
+                ref var hingeRotationComponent = ref _hingeRotationStash.Get(entity);
 
-                if(dragComponent.IsDragging)
+                if(hingeRotationComponent.IsRotating)
                 {
                     ref var handTransformComponent = ref _transformStash.Get(entity);
-                    ref var draggableTransformComponent = ref _transformStash.Get(dragComponent.DraggableEntity);
+                    ref var rotatableTransformComponent = ref _transformStash.Get(hingeRotationComponent.RotatableEntity);
 
                     float distance = Vector3.Distance(handTransformComponent.Transform.position,
-                        draggableTransformComponent.Transform.position);
+                        rotatableTransformComponent.Transform.position);
 
-                    if (distance >= dragComponent.MaxDeviation)
+                    if (distance >= hingeRotationComponent.MaxDeviation)
                     {
-                        dragComponent.DragStopInput = true;
+                        hingeRotationComponent.RotateStopInput = true;
                     }
                 }
             }

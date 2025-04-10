@@ -44,7 +44,7 @@ namespace EscapeRooms.Systems
                 if (dragComponent.IsDragging && dragRadiusChangeComponent.RadiusChangeDeltaInput != Vector2.zero)
                 {
                     ref var draggableComponent = ref _draggableStash.Get(dragComponent.DraggableEntity);
-                    ref var dragRaycastComponent = ref _raycastStash.Get(dragComponent.DragRaycast.Entity);
+                    ref var dragRaycastComponent = ref _raycastStash.Get(dragComponent.DetectionRaycast.Entity);
 
                     float currentMinDistance = ColliderExtension.GetMinDistanceToClosestPoints(draggableComponent.Colliders,
                         dragRaycastComponent.RayStartPoint.position);
