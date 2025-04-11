@@ -9625,7 +9625,6 @@ Transform:
   - {fileID: 618543362}
   - {fileID: 1718160283}
   - {fileID: 1387658321}
-  - {fileID: 2088773851}
   m_Father: {fileID: 323524074}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &687237168
@@ -11749,7 +11748,7 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 2
+  m_AngularXMotion: 1
   m_AngularYMotion: 0
   m_AngularZMotion: 0
   m_LinearLimitSpring:
@@ -11763,11 +11762,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -177
+    limit: -151.75906
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 177
+    limit: 0
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -51797,7 +51796,7 @@ MonoBehaviour:
   serializedData:
     RayStartPoint: {fileID: 323524074}
     Direction: {x: 0, y: 0, z: 1}
-    RayLength: 2.2
+    RayLength: 2.3
     MaxHitsCount: 1
     LayerMask:
       serializedVersion: 2
@@ -54963,7 +54962,7 @@ MonoBehaviour:
     RotateDeltaInput: 0
     RotateStartInput: 0
     RotateStopInput: 0
-    DetectionRaycast: {fileID: 2088773852}
+    DetectionRaycast: {fileID: 1387658322}
     DeltaRange: {x: -2, y: 2}
     RotationSpeed: 2
     MaxDeviation: 3
@@ -64289,61 +64288,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!1 &2088773850
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2088773851}
-  - component: {fileID: 2088773852}
-  m_Layer: 0
-  m_Name: LongInteractRaycast
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2088773851
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088773850}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.102999985, z: 1.601}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 687237167}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2088773852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2088773850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dbd708400454e748424ad9e67e66166, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializedData:
-    RayStartPoint: {fileID: 323524074}
-    Direction: {x: 0, y: 0, z: 1}
-    RayLength: 3.2
-    MaxHitsCount: 1
-    LayerMask:
-      serializedVersion: 2
-      m_Bits: 448
-    IsRayHit: 0
-    HitsCount: 0
-    DrawLineToBoundsClosestPoint: 0
 --- !u!43 &2122276780
 Mesh:
   m_ObjectHideFlags: 0
