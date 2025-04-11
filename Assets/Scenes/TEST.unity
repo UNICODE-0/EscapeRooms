@@ -1506,7 +1506,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!65 &112781923
@@ -3869,7 +3869,7 @@ Transform:
   - {fileID: 1393488584}
   - {fileID: 773192824}
   - {fileID: 1580055537}
-  m_Father: {fileID: 1866583472}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &367991257
 MonoBehaviour:
@@ -60030,7 +60030,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 367991256}
   - {fileID: 1091434416}
   - {fileID: 445082773}
   - {fileID: 2002782315}
@@ -64845,3 +64844,4 @@ SceneRoots:
   - {fileID: 254023629}
   - {fileID: 2051266277}
   - {fileID: 1015739509}
+  - {fileID: 367991256}

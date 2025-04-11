@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c847b7ca6004d76952cdeb52c7009a3, type: 3}
+  m_Name: DraggableConfiguration
+  m_EditorClassIdentifier: 
+  DraggableLayer: 6
+  SmoothingTriggerSizeScale: 1.2
+  SmoothingExcludeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  DraggableComponentSample:
+    Colliders: []
+    MaterialOnDrag: {fileID: 13400000, guid: 119271eac23cbb04e895a595e13ef98d, type: 2}
+    DragDriveSpring: 2500
+    DragDriveDamper: 40
+    DragAngularDriveSpring: 100
+    DragAngularDriveDamper: 10
+    BodyLinearDamping: 5
+    BodyAngularDamping: 1
+    MassWhileDrag: 1
+    MaxVelocity: 4.75
+    MaxAngularVelocity: 4.75
+    MassBeforeDrag: 0
+  DraggableCollisionSmoothingComponentSample:
+    SmoothingTrigger: {fileID: 0}
+    SmoothDriveSpring: 300
+    SmoothDriveDamper: 10
+    SmoothAngularDriveSpring: 20
+    SmoothAngularDriveDamper: 10
+    IsSmoothed: 0
