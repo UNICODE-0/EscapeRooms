@@ -14,8 +14,11 @@ namespace EscapeRooms.Editor
         private const string ROTATABLE_CFG_PATH = "InteractableCreator/RotatableConfiguration";
         private const string SLIDABLE_CFG_PATH = "InteractableCreator/SlidableConfiguration";
 
+        [HorizontalGroup("Target", 50)]
+        [PreviewField(100, ObjectFieldAlignment.Left)]
         public GameObject Target;
 
+        [LabelWidth(59)]
         public InteractableType Type;
         
         [MenuItem("Tools/EscapeRooms/InteractableCreator")]
@@ -27,6 +30,12 @@ namespace EscapeRooms.Editor
         [Button(ButtonSizes.Medium)]
         public void CreateInteractable()
         {
+            if (Target is null)
+            {
+                Debug.LogError("Can't make interactable, target is null");
+                return;
+            }
+
             switch (Type)
             {
                 case InteractableType.Draggable: 
