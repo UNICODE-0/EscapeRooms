@@ -30,7 +30,7 @@ namespace EscapeRooms.Systems
         private DelayedInputTrigger _jumpDelayedTrigger;
         private DelayedInputTrigger _crouchDelayedTrigger;
 
-        private Request<InputTriggerInterruptRequest> _triggerInterruptRequest;
+        private Request<InputTriggerInterruptRequest> _triggerInterruptRequests;
         
         public void OnAwake()
         {
@@ -39,7 +39,7 @@ namespace EscapeRooms.Systems
                 .Build();
 
             _playerInputStash = World.GetStash<InputComponent>();
-            _triggerInterruptRequest = World.GetRequest<InputTriggerInterruptRequest>();
+            _triggerInterruptRequests = World.GetRequest<InputTriggerInterruptRequest>();
 
             InitializeInputActions();
         }
@@ -90,7 +90,7 @@ namespace EscapeRooms.Systems
 
         private void HandleInterruptTriggerEvent()
         {
-            foreach (var interruptReq in _triggerInterruptRequest.Consume())
+            foreach (var interruptReq in _triggerInterruptRequests.Consume())
             {
                 switch (interruptReq.TriggerToInterrupt)
                 {

@@ -19,7 +19,8 @@ namespace EscapeRooms.Systems
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
-            
+            NodesBlock(group);
+
             // Late systems
             
             ComponentEventsBlock(group);
@@ -167,6 +168,15 @@ namespace EscapeRooms.Systems
         private static void RigidbodyBlock(SystemsGroup group)
         {
             group.AddSystem(new RigidbodyForceApplySystem());
+        }
+        
+        private static void NodesBlock(SystemsGroup group)
+        {
+            group.AddSystem(new NodeInitializeSystem());
+            
+            group.AddSystem(new DraggableDetectionNodeSystem());
+            
+            group.AddSystem(new NodeCompleteSystem());
         }
         
         // Late systems
