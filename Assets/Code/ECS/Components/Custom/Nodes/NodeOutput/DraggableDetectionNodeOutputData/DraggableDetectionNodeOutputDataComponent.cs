@@ -1,6 +1,5 @@
-
+using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Components
 {
@@ -8,9 +7,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct NodeDraggableInputData : INodeInputData
+    public struct DraggableDetectionNodeOutputDataComponent : INodeDataComponent
     {
-        [SerializeField]
-        public DraggableComponent Draggable;
+        public Entity DraggableEntity;
     }
 }

@@ -1,8 +1,8 @@
 using EscapeRooms.Components;
-using EscapeRooms.Helpers;
 using EscapeRooms.Requests;
 using Scellecs.Morpeh;
-using UnityEngine;
+using Scellecs.Morpeh.Collections;
+using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Systems
@@ -17,23 +17,24 @@ namespace EscapeRooms.Systems
         private Filter _filter;
 
         private Stash<DraggableDetectionNodeComponent> _nodeStash;
-        private Stash<NodeInitializeFlag> _nodeInitFlagStash;
-        private Stash<ColliderTriggerEventsHolderComponent> _colliderTriggerEventsStash;
-
+        private Stash<ColliderUniqueTriggerEventsHolderComponent> _colliderTriggerEventsStash;
         private Request<NodeCompleteRequest> _completeRequests;
+
+        private NodeIO<DraggableDetectionNodeOutputDataComponent> _io;
         
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<DraggableDetectionNodeComponent>()
-                .With<ColliderTriggerEventsHolderComponent>()
+                .With<ColliderUniqueTriggerEventsHolderComponent>()
                 .Build();
 
             _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
-            _colliderTriggerEventsStash = World.GetStash<ColliderTriggerEventsHolderComponent>();
-            _nodeInitFlagStash = World.GetStash<NodeInitializeFlag>();
-                
+            _colliderTriggerEventsStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
+
+            _io = new();
+            _io.Initialize(World);
         }
 
         public void OnUpdate(float deltaTime)
@@ -42,9 +43,19 @@ namespace EscapeRooms.Systems
             {
                 ref var eventsHolderComponent = ref _colliderTriggerEventsStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
+
                 
-                if (eventsHolderComponent.EventsHolder.IsAnyTriggerInProgress.GetValue())
+                if (eventsHolderComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
                 {
+                    ref var output = ref _io.TryGet(nodeComponent.OutputDataProvider, out bool exist);
+
+                    if (exist)
+                    {
+                        int draggableGameObject =
+                            eventsHolderComponent.EventsHolder.TriggeredGameObjects.GetKeyByIndex(0);
+                        output.DraggableEntity = EntityProvider.map.GetValueByKey(draggableGameObject).entity;
+                    }
+                    
                     _completeRequests.Publish(new NodeCompleteRequest()
                     {
                         CurrentNodeEntity = entity,
@@ -55,7 +66,7 @@ namespace EscapeRooms.Systems
         }
 
         public void Dispose()
-        {
+        { 
         }
     }
 }

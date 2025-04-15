@@ -1,4 +1,4 @@
-using Scellecs.Morpeh.Providers;
+using EscapeRooms.Providers;
 using Unity.IL2CPP.CompilerServices;
 
 namespace EscapeRooms.Components
@@ -7,7 +7,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class NodeInputDataProvider : MonoProvider<NodeInputDataComponent>
+    public sealed class DraggableDetectionNodeOutputDataProvider : 
+        NodeDataProvider<DraggableDetectionNodeOutputDataComponent>
     {
     }
 }

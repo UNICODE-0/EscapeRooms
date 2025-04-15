@@ -9,8 +9,9 @@ namespace EscapeRooms.Mono
     {
         protected override void OnTriggerEnterHandler(Collider other)
         {
-            if (EntityProvider.map.TryGetValue(other.gameObject.GetInstanceID(), out var otherEntityItem) 
-                && !ValidateTriggeredEntity(otherEntityItem.entity))
+            bool exist = EntityProvider.map.TryGetValue(other.gameObject.GetInstanceID(), out var otherEntityItem);
+
+            if (!exist || !ValidateTriggeredEntity(otherEntityItem.entity))
                 return;
             
             base.OnTriggerEnterHandler(other);
