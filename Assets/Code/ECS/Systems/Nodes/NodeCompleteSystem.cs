@@ -40,7 +40,6 @@ namespace EscapeRooms.Systems
                 _initRequests.Publish(new NodeInitializeRequest()
                 {
                     NodeProvider = request.NextNodeProvider,
-                    Data = request.OutputData
                 }, allowNextFrame: true);
             }
         }

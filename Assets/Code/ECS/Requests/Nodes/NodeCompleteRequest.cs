@@ -14,7 +14,5 @@ namespace EscapeRooms.Requests
     {
         public Entity CurrentNodeEntity;
         public EntityProvider NextNodeProvider;
-
-        public INodeInputData OutputData;
     }
 }

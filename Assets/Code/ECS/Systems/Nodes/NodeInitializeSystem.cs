@@ -15,14 +15,11 @@ namespace EscapeRooms.Systems
         public World World { get; set; }
         
         private Stash<NodeInitializeFlag> _initFlagStash;
-        private Stash<NodeInputDataComponent> _inputDataStash;
         private Request<NodeInitializeRequest> _initRequests;
 
         public void OnAwake()
         {
             _initFlagStash = World.GetStash<NodeInitializeFlag>();
-            _inputDataStash = World.GetStash<NodeInputDataComponent>();
-            
             _initRequests = World.GetRequest<NodeInitializeRequest>();
         }
 
@@ -36,12 +33,6 @@ namespace EscapeRooms.Systems
                 {
                     _initFlagStash.Remove(request.NodeProvider.Entity);
                 });
-                
-                ref var inputData = ref _inputDataStash.Get(request.NodeProvider.Entity, out bool isInputExist);
-                if (isInputExist)
-                {
-                    inputData.Data = request.Data;
-                }
             }
         }
 

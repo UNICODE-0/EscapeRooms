@@ -13,7 +13,5 @@ namespace EscapeRooms.Requests
     public struct NodeInitializeRequest : IRequestData
     {
         public EntityProvider NodeProvider;
-        
-        public INodeInputData Data;
     }
 }

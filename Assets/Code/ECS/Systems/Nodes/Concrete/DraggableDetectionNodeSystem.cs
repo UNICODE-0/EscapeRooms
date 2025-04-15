@@ -18,7 +18,6 @@ namespace EscapeRooms.Systems
 
         private Stash<DraggableDetectionNodeComponent> _nodeStash;
         private Stash<NodeInitializeFlag> _nodeInitFlagStash;
-        private Stash<NodeInputDataComponent> _nodeInputStash;
         private Stash<ColliderTriggerEventsHolderComponent> _colliderTriggerEventsStash;
 
         private Request<NodeCompleteRequest> _completeRequests;
@@ -28,13 +27,11 @@ namespace EscapeRooms.Systems
             _filter = World.Filter
                 .With<DraggableDetectionNodeComponent>()
                 .With<ColliderTriggerEventsHolderComponent>()
-                .With<NodeInputDataComponent>()
                 .Build();
 
             _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
             _colliderTriggerEventsStash = World.GetStash<ColliderTriggerEventsHolderComponent>();
             _nodeInitFlagStash = World.GetStash<NodeInitializeFlag>();
-            _nodeInputStash = World.GetStash<NodeInputDataComponent>();
                 
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
         }
@@ -45,14 +42,6 @@ namespace EscapeRooms.Systems
             {
                 ref var eventsHolderComponent = ref _colliderTriggerEventsStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
-                ref var nodeInput = ref _nodeInputStash.Get(entity);
-
-                if (_nodeInitFlagStash.Has(entity))
-                {
-                    nodeComponent.Data = (NodeDraggableInputData)nodeInput.Data;
-                }
-
-                Debug.LogError(nodeComponent.Data.Draggable.MaxVelocity);
                 
                 if (eventsHolderComponent.EventsHolder.IsAnyTriggerInProgress.GetValue())
                 {
@@ -60,13 +49,6 @@ namespace EscapeRooms.Systems
                     {
                         CurrentNodeEntity = entity,
                         NextNodeProvider = nodeComponent.NextNodeProvider,
-                        OutputData = new NodeDraggableInputData()
-                        {
-                            Draggable = new DraggableComponent()
-                            {
-                                MaxVelocity = 10
-                            }
-                        }
                     });
                 }
             }

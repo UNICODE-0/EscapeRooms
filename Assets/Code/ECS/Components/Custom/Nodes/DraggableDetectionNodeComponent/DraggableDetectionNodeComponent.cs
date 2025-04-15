@@ -13,7 +13,5 @@ namespace EscapeRooms.Components
     {
         [field: SerializeField]
         public EntityProvider NextNodeProvider { get; set; }
-
-        public NodeDraggableInputData Data;
     }
 }
