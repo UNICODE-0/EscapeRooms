@@ -14,5 +14,7 @@ namespace EscapeRooms.Requests
     {
         public Entity CurrentNodeEntity;
         public EntityProvider NextNodeProvider;
+
+        public bool NeedInitialize;
     }
 }
