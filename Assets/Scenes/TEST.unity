@@ -6650,6 +6650,7 @@ GameObject:
   - component: {fileID: 546837161}
   - component: {fileID: 546837166}
   - component: {fileID: 546837165}
+  - component: {fileID: 546837167}
   m_Layer: 0
   m_Name: DraggableDetection
   m_TagString: Untagged
@@ -6685,9 +6686,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    <NextNodeProvider>k__BackingField: {fileID: 1162321700}
+    <NextNodeProvider>k__BackingField: {fileID: 1162321701}
     <OutputDataProvider>k__BackingField: {fileID: 1458748296}
-    <InputDataProvider>k__BackingField: {fileID: 0}
 --- !u!114 &546837161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6766,6 +6766,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     EventsHolder: {fileID: 546837165}
+--- !u!114 &546837167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 546837158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a17cae0f7994d509b82e44d0cc47099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &559848704
 GameObject:
   m_ObjectHideFlags: 0
@@ -15488,6 +15500,7 @@ GameObject:
   - component: {fileID: 1162321698}
   - component: {fileID: 1162321697}
   - component: {fileID: 1162321696}
+  - component: {fileID: 1162321701}
   m_Layer: 0
   m_Name: DraggableDetection (1)
   m_TagString: Untagged
@@ -15603,7 +15616,18 @@ MonoBehaviour:
   serializedData:
     <NextNodeProvider>k__BackingField: {fileID: 0}
     <OutputDataProvider>k__BackingField: {fileID: 1458748296}
-    <InputDataProvider>k__BackingField: {fileID: 1458748296}
+--- !u!114 &1162321701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162321694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a17cae0f7994d509b82e44d0cc47099, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1183646867
 GameObject:
   m_ObjectHideFlags: 0

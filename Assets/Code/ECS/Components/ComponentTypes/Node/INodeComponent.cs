@@ -1,11 +1,12 @@
-﻿using Scellecs.Morpeh;
+﻿using EscapeRooms.Providers;
+using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace EscapeRooms.Components
 {
     public interface INodeComponent : IComponent
     {
-        public EntityProvider NextNodeProvider { get; set; }
+        public NodeTagProvider NextNodeProvider { get; set; }
     }
 }
