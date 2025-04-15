@@ -1,6 +1,5 @@
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Providers;
-using UnityEngine;
 
 namespace EscapeRooms.Components
 {

@@ -1,7 +1,4 @@
-﻿using EscapeRooms.Providers;
-using Scellecs.Morpeh;
-using Scellecs.Morpeh.Providers;
-using Sirenix.OdinInspector;
+﻿using Scellecs.Morpeh;
 
 namespace EscapeRooms.Components
 {
