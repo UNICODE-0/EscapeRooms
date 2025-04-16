@@ -1,7 +1,6 @@
 using EscapeRooms.Data;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Components
 {

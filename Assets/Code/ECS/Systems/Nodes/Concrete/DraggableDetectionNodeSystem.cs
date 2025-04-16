@@ -20,7 +20,7 @@ namespace EscapeRooms.Systems
         private Stash<ColliderUniqueTriggerEventsHolderComponent> _colliderTriggerEventsStash;
         private Request<NodeCompleteRequest> _completeRequests;
 
-        private NodeIO<DraggableDetectionNodeOutputDataComponent> _io;
+        private NodeOutputHelper<DraggableDetectionNodeOutputDataComponent> _nodeOutput;
         
         public void OnAwake()
         {
@@ -33,8 +33,8 @@ namespace EscapeRooms.Systems
             _colliderTriggerEventsStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
 
-            _io = new();
-            _io.Initialize(World);
+            _nodeOutput = new();
+            _nodeOutput.Initialize(World);
         }
 
         public void OnUpdate(float deltaTime)
@@ -43,11 +43,10 @@ namespace EscapeRooms.Systems
             {
                 ref var eventsHolderComponent = ref _colliderTriggerEventsStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
-
                 
                 if (eventsHolderComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
                 {
-                    ref var output = ref _io.TryGet(nodeComponent.OutputDataProvider, out bool exist);
+                    ref var output = ref _nodeOutput.TryGet(nodeComponent, out bool exist);
 
                     if (exist)
                     {

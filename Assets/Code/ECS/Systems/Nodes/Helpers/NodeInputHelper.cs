@@ -1,10 +1,9 @@
 using EscapeRooms.Components;
-using EscapeRooms.Providers;
 using Scellecs.Morpeh;
 
 namespace EscapeRooms.Systems
 {
-    public class NodeIO<I> where I : struct, INodeDataComponent
+    public class NodeInputHelper<I> where I : struct, INodeDataComponent
     {
         private Stash<I> _inputStash;
 
@@ -15,15 +14,15 @@ namespace EscapeRooms.Systems
             _inputStash = world.GetStash<I>();
         }
 
-        public ref I TryGet(NodeDataProvider<I> data, out bool exist)
+        public ref I TryGet(IInputNodeComponent<I> node, out bool exist)
         {
-            if (data is null)
+            if (node is null)
             {
                 exist = false;
                 return ref _empty;
             }
             
-            ref I inputComponent = ref _inputStash.Get(data.Entity);
+            ref I inputComponent = ref _inputStash.Get(node.InputDataProvider.Entity);
             
             exist = true;
             return ref inputComponent;
