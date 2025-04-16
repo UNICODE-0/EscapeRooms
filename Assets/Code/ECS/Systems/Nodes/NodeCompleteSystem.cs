@@ -35,13 +35,10 @@ namespace EscapeRooms.Systems
                 if(request.NextNodeProvider == null) continue;
                 request.NextNodeProvider.gameObject.SetActive(true);
 
-                if (request.NeedInitialize)
+                _initRequests.Publish(new NodeInitializeRequest()
                 {
-                    _initRequests.Publish(new NodeInitializeRequest()
-                    {
-                        NodeProvider = request.NextNodeProvider,
-                    }, allowNextFrame: true);
-                }
+                    NodeProvider = request.NextNodeProvider,
+                }, allowNextFrame: true);
             }
         }
 

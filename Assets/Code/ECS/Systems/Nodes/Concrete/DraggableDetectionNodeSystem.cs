@@ -20,13 +20,14 @@ namespace EscapeRooms.Systems
         private Stash<ColliderUniqueTriggerEventsHolderComponent> _colliderTriggerEventsStash;
         private Request<NodeCompleteRequest> _completeRequests;
 
-        private NodeOutputHelper<DraggableDetectionNodeOutputDataComponent> _nodeOutput;
+        private NodeOutputHelper<EntityNodeIOComponent> _nodeOutput;
         
         public void OnAwake()
         {
             _filter = World.Filter
                 .With<DraggableDetectionNodeComponent>()
                 .With<ColliderUniqueTriggerEventsHolderComponent>()
+                .With<NodeTag>()
                 .Build();
 
             _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
@@ -52,7 +53,7 @@ namespace EscapeRooms.Systems
                     {
                         int draggableGameObject =
                             eventsHolderComponent.EventsHolder.TriggeredGameObjects.GetKeyByIndex(0);
-                        output.DraggableEntity = EntityProvider.map.GetValueByKey(draggableGameObject).entity;
+                        output.Entity = EntityProvider.map.GetValueByKey(draggableGameObject).entity;
                     }
                     
                     _completeRequests.Publish(new NodeCompleteRequest()

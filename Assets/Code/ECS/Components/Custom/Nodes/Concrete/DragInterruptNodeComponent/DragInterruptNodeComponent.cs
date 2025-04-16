@@ -8,12 +8,12 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct DraggableDetectionNodeComponent : IOutputNodeComponent<EntityNodeIOComponent>
+    public struct DragInterruptNodeComponent : IInputNodeComponent<EntityNodeIOComponent>
     {
         [field: SerializeField]
         public NodeTagProvider NextNodeProvider { get; set; }
-        
+
         [field: SerializeField]
-        public NodeDataProvider<EntityNodeIOComponent> OutputDataProvider { get; set; }
+        public NodeDataProvider<EntityNodeIOComponent> InputDataProvider { get; set; }
     }
 }

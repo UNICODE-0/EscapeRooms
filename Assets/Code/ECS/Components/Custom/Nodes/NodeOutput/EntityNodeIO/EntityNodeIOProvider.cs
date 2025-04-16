@@ -7,8 +7,8 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DraggableDetectionNodeOutputDataProvider : 
-        NodeDataProvider<DraggableDetectionNodeOutputDataComponent>
+    public sealed class EntityNodeIOProvider : 
+        NodeDataProvider<EntityNodeIOComponent>
     {
     }
 }

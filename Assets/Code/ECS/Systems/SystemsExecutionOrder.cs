@@ -9,8 +9,9 @@ namespace EscapeRooms.Systems
             InputRequestBlock(group);
             InputReadBlock(group);
             PhysicBlock(group);
+            PlayerInputBlock(group);
             LerpBlock(group);
-            PlayerBlock(group);
+            NodesBlock(group);
             CharacterControllerBlock(group);
             DragBlock(group);
             CameraBlock(group);
@@ -19,7 +20,6 @@ namespace EscapeRooms.Systems
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
-            NodesBlock(group);
 
             // Late systems
             
@@ -49,7 +49,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new FloatLerpSystem());
         }
         
-        private static void PlayerBlock(SystemsGroup group)
+        private static void PlayerInputBlock(SystemsGroup group)
         {
             group.AddSystem(new PlayerMovementInputSystem());
             group.AddSystem(new PlayerJumpInputSystem());
@@ -175,7 +175,9 @@ namespace EscapeRooms.Systems
             group.AddSystem(new NodeInitializeSystem());
             
             group.AddSystem(new DraggableDetectionNodeSystem());
-            
+            group.AddSystem(new TransformLerpNodeSystem());
+            group.AddSystem(new DragInterruptNodeSystem());
+
             group.AddSystem(new NodeCompleteSystem());
         }
         

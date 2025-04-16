@@ -1,9 +1,8 @@
 using EscapeRooms.Components;
 using EscapeRooms.Requests;
 using Scellecs.Morpeh;
-using Scellecs.Morpeh.Collections;
-using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -16,23 +15,31 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
 
-        private Stash<DraggableDetectionNodeComponent> _nodeStash;
-        private Stash<ColliderUniqueTriggerEventsHolderComponent> _colliderTriggerEventsStash;
+        private Stash<TransformLerpNodeComponent> _nodeStash;
+        private Stash<NodeInitializeFlag> _initFlagStash;
+        private Stash<TransformComponent> _transformStash;
+        private Stash<FloatLerpComponent> _lerpStash;
+        private Stash<RigidbodyComponent> _rigidbodyStash;
+
         private Request<NodeCompleteRequest> _completeRequests;
 
-        private NodeInputHelper<DraggableDetectionNodeOutputDataComponent> _nodeInput;
+        private NodeInputHelper<EntityNodeIOComponent> _nodeInput;
         
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<DraggableDetectionNodeComponent>()
-                .With<ColliderUniqueTriggerEventsHolderComponent>()
+                .With<TransformLerpNodeComponent>()
+                .With<NodeTag>()
                 .Build();
 
-            _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
-            _colliderTriggerEventsStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
+            _nodeStash = World.GetStash<TransformLerpNodeComponent>();
+            _initFlagStash = World.GetStash<NodeInitializeFlag>();
+            _lerpStash = World.GetStash<FloatLerpComponent>();
+            _transformStash = World.GetStash<TransformComponent>();
+            _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
-
+            
             _nodeInput = new();
             _nodeInput.Initialize(World);
         }
@@ -41,14 +48,41 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var eventsHolderComponent = ref _colliderTriggerEventsStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
                 
-                // _completeRequests.Publish(new NodeCompleteRequest()
-                // {
-                //     CurrentNodeEntity = entity,
-                //     NextNodeProvider = nodeComponent.NextNodeProvider,
-                // });
+                ref var input = ref _nodeInput.TryGet(nodeComponent, out _);
+                ref var transform = ref _transformStash.Get(input.Entity);
+
+                if (_initFlagStash.Has(entity))
+                {
+                    nodeComponent.StartPosition = transform.Transform.position;
+                    nodeComponent.StartRotation = transform.Transform.rotation;
+                }
+                
+                ref var lerpComponent = ref _lerpStash.Get(nodeComponent.LerpProvider.Entity);
+                lerpComponent.StartLerpInput = true;
+
+                if (lerpComponent.IsLerpInProgress)
+                {
+                    transform.Transform.position = Vector3.Lerp(nodeComponent.StartPosition,
+                        nodeComponent.Target.position, lerpComponent.CurrentValue);
+
+                    transform.Transform.rotation = Quaternion.Lerp(nodeComponent.StartRotation,
+                        nodeComponent.Target.rotation, lerpComponent.CurrentValue);
+
+                    if (lerpComponent.IsLerpTimeIsUp)
+                    {
+                        ref var r = ref _rigidbodyStash.Get(input.Entity);
+                        r.Rigidbody.angularVelocity = Vector3.zero;
+                        r.Rigidbody.linearVelocity = Vector3.zero;
+                        
+                        _completeRequests.Publish(new NodeCompleteRequest()
+                        {
+                            CurrentNodeEntity = entity,
+                            NextNodeProvider = nodeComponent.NextNodeProvider,
+                        });
+                    }
+                }
             }
         }
 
