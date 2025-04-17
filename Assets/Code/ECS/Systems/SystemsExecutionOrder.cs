@@ -42,6 +42,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new RaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
             group.AddSystem(new SphereCastSystem());
+            group.AddSystem(new OverlapBoxSystem());
         }
         
         private static void LerpBlock(SystemsGroup group)
@@ -177,6 +178,8 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DraggableDetectionNodeSystem());
             group.AddSystem(new TransformLerpNodeSystem());
             group.AddSystem(new DragInterruptNodeSystem());
+            group.AddSystem(new DraggablePhysicDisableNodeSystem());
+            group.AddSystem(new DraggablePhysicEnableNodeSystem());
 
             group.AddSystem(new NodeCompleteSystem());
         }

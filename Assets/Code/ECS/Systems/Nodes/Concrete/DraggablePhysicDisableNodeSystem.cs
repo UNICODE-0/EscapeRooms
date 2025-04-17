@@ -9,15 +9,15 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DragInterruptNodeSystem : ISystem
+    public sealed class DraggablePhysicDisableNodeSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
 
-        private Stash<DragInterruptNodeComponent> _nodeStash;
-        private Stash<OnDragFlag> _onDragStash;
-        private Stash<DragComponent> _dragStash;
+        private Stash<DraggablePhysicDisableNodeComponent> _nodeStash;
+        private Stash<RigidbodyComponent> _rigidbodyStash;
+        private Stash<DraggableComponent> _draggableStash;
 
         private Request<NodeCompleteRequest> _completeRequests;
 
@@ -26,13 +26,13 @@ namespace EscapeRooms.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<DragInterruptNodeComponent>()
+                .With<DraggablePhysicDisableNodeComponent>()
                 .With<NodeTag>()
                 .Build();
 
-            _nodeStash = World.GetStash<DragInterruptNodeComponent>();
-            _onDragStash = World.GetStash<OnDragFlag>();
-            _dragStash = World.GetStash<DragComponent>();
+            _nodeStash = World.GetStash<DraggablePhysicDisableNodeComponent>();
+            _rigidbodyStash = World.GetStash<RigidbodyComponent>();
+            _draggableStash = World.GetStash<DraggableComponent>();
             
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
             
@@ -46,12 +46,13 @@ namespace EscapeRooms.Systems
             {
                 ref var nodeComponent = ref _nodeStash.Get(entity);
                 ref var input = ref _nodeInput.TryGet(nodeComponent, out _);
-                ref var onDragFlag = ref _onDragStash.Get(input.Entity, out bool exist);
-                
-                if (exist)
+                ref var rigidbodyComponent = ref _rigidbodyStash.Get(input.Entity);
+                ref var draggableComponent = ref _draggableStash.Get(input.Entity);
+
+                rigidbodyComponent.Rigidbody.isKinematic = true;
+                foreach (var col in draggableComponent.Colliders)
                 {
-                    ref var dragComponent = ref _dragStash.Get(onDragFlag.Owner);
-                    dragComponent.DragStopInput = true;
+                    col.enabled = false;
                 }
                 
                 _completeRequests.Publish(new NodeCompleteRequest()
