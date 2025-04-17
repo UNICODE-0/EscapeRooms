@@ -38,7 +38,7 @@ namespace EscapeRooms.Systems
             
             _forceApplyRequest = World.GetRequest<RigidbodyForceApplyRequest>();
         }
-
+        
         public void OnUpdate(float deltaTime)
         {
             foreach (var entity in _filter)

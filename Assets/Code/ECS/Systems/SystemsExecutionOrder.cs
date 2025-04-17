@@ -9,8 +9,9 @@ namespace EscapeRooms.Systems
             InputRequestBlock(group);
             InputReadBlock(group);
             PhysicBlock(group);
+            PlayerInputBlock(group);
             LerpBlock(group);
-            PlayerBlock(group);
+            NodesBlock(group);
             CharacterControllerBlock(group);
             DragBlock(group);
             CameraBlock(group);
@@ -19,7 +20,7 @@ namespace EscapeRooms.Systems
             TransformBlock(group);
             ColliderBlock(group);
             RigidbodyBlock(group);
-            
+
             // Late systems
             
             ComponentEventsBlock(group);
@@ -41,6 +42,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new RaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
             group.AddSystem(new SphereCastSystem());
+            group.AddSystem(new OverlapBoxSystem());
         }
         
         private static void LerpBlock(SystemsGroup group)
@@ -48,7 +50,7 @@ namespace EscapeRooms.Systems
             group.AddSystem(new FloatLerpSystem());
         }
         
-        private static void PlayerBlock(SystemsGroup group)
+        private static void PlayerInputBlock(SystemsGroup group)
         {
             group.AddSystem(new PlayerMovementInputSystem());
             group.AddSystem(new PlayerJumpInputSystem());
@@ -167,6 +169,19 @@ namespace EscapeRooms.Systems
         private static void RigidbodyBlock(SystemsGroup group)
         {
             group.AddSystem(new RigidbodyForceApplySystem());
+        }
+        
+        private static void NodesBlock(SystemsGroup group)
+        {
+            group.AddSystem(new NodeInitializeSystem());
+            
+            group.AddSystem(new DraggableDetectionNodeSystem());
+            group.AddSystem(new TransformLerpNodeSystem());
+            group.AddSystem(new DragInterruptNodeSystem());
+            group.AddSystem(new DraggablePhysicDisableNodeSystem());
+            group.AddSystem(new DraggablePhysicEnableNodeSystem());
+
+            group.AddSystem(new NodeCompleteSystem());
         }
         
         // Late systems

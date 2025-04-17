@@ -9,8 +9,6 @@ namespace EscapeRooms.Components
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     
-    [RequireComponent(typeof(ColliderTriggerEventsHolder))]
-    
     public sealed class ColliderTriggerEventsHolderProvider : MonoProvider<ColliderTriggerEventsHolderComponent>
     {
     }
