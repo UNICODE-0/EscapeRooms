@@ -15705,7 +15705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1816795d2838f643acc6f6f815cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flattenFolder: 1
+  flattenFolder: 0
   flattenEvent: 1
   OnFlattenEvent:
     m_PersistentCalls:
@@ -18698,6 +18698,59 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &897809516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897809517}
+  - component: {fileID: 897809518}
+  m_Layer: 10
+  m_Name: ColliderForPlayer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &897809517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897809516}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.346, y: 7.151, z: 22.141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666535892}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &897809518
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897809516}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8490224, y: 4.679991, z: 1.4518871}
+  m_Center: {x: -2.0304215, y: 1.4210563, z: -0.018776894}
 --- !u!1 &909460045 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f4adbee21c2175f4fb27b67a4a9e0a01, type: 3}
@@ -19407,6 +19460,59 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &923229750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 923229751}
+  - component: {fileID: 923229752}
+  m_Layer: 10
+  m_Name: ColliderForPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &923229751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923229750}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.089, y: 7.074, z: 22.104}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1666535892}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &923229752
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923229750}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.623188, y: 4.679991, z: 1.4571228}
+  m_Center: {x: -1.1433387, y: 1.4210563, z: -0.016159058}
 --- !u!1 &987178653
 GameObject:
   m_ObjectHideFlags: 0
@@ -20482,7 +20588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1816795d2838f643acc6f6f815cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flattenFolder: 1
+  flattenFolder: 0
   flattenEvent: 1
   OnFlattenEvent:
     m_PersistentCalls:
@@ -23874,7 +23980,7 @@ Transform:
   m_GameObject: {fileID: 1166892140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.634, y: 8.191, z: 22.046}
+  m_LocalPosition: {x: 6.634, y: 8.191, z: 22.084}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -72978,6 +73084,8 @@ Transform:
   - {fileID: 43979252}
   - {fileID: 1008111253}
   - {fileID: 910699446}
+  - {fileID: 923229751}
+  - {fileID: 897809517}
   m_Father: {fileID: 1061401372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1666535893
@@ -72992,7 +73100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1816795d2838f643acc6f6f815cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flattenFolder: 1
+  flattenFolder: 0
   flattenEvent: 1
   OnFlattenEvent:
     m_PersistentCalls:
@@ -73402,7 +73510,7 @@ MonoBehaviour:
     MaxHitCollidersCount: 5
     LayerMask:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 1025
     IsSphereIntersect: 0
     HitCollidersCount: 0
 --- !u!1 &1746010992
@@ -78482,7 +78590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1816795d2838f643acc6f6f815cfff9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flattenFolder: 1
+  flattenFolder: 0
   flattenEvent: 1
   OnFlattenEvent:
     m_PersistentCalls:
