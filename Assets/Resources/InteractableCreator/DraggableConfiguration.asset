@@ -16,7 +16,7 @@ MonoBehaviour:
   SmoothingTriggerSizeScale: 1.2
   SmoothingExcludeLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 520
   DraggableComponentSample:
     Colliders: []
     MaterialOnDrag: {fileID: 13400000, guid: 119271eac23cbb04e895a595e13ef98d, type: 2}

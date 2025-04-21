@@ -61,6 +61,7 @@ namespace EscapeRooms.Editor
             rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
             
             var joint = Target.AddComponent<ConfigurableJoint>();
+            joint.autoConfigureConnectedAnchor = false;
             
             var triggerCollider = Target.AddComponent<BoxCollider>();
             triggerCollider.isTrigger = true;
