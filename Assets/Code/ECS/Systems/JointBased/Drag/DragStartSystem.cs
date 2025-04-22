@@ -5,7 +5,6 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -19,7 +18,7 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<DraggableComponent> _draggableStash;
         private Stash<DragComponent> _dragStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
         private Stash<OnDragFlag> _onDragStash;
@@ -35,7 +34,7 @@ namespace EscapeRooms.Systems
 
             _draggableStash = World.GetStash<DraggableComponent>();
             _dragStash = World.GetStash<DragComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
             _onDragStash = World.GetStash<OnDragFlag>();
@@ -53,8 +52,8 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(dragComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.HitsCount > 0 && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
+                    if (raycastComponent.IsRayHit && 
+                        EntityProvider.map.TryGetValue(raycastComponent.Hit.collider.gameObject.GetInstanceID(), out var item))
                     {
                         ref var draggableComponent = ref _draggableStash.Get(item.entity, out bool draggableExist);
                         if (draggableExist)

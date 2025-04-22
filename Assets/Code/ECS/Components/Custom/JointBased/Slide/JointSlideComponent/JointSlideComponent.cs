@@ -21,7 +21,7 @@ namespace EscapeRooms.Components
         [PropertySpace] 
         
         [NotNull]
-        public RaycastProvider DetectionRaycast;
+        public OneHitRaycastProvider DetectionRaycast;
         
         public bool InverseInput;
 

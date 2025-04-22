@@ -1,6 +1,4 @@
 using EscapeRooms.Components;
-using EscapeRooms.Events;
-using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -17,7 +15,7 @@ namespace EscapeRooms.Systems
         public World World { get; set; }
 
         private Filter _filter;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<HingeRotationComponent> _rotationStash;
         private Stash<HingeRotatableComponent> _rotatableStash;
         private Stash<ConfigurableJointComponent> _jointStash;
@@ -32,7 +30,7 @@ namespace EscapeRooms.Systems
                 .With<HingeRotationComponent>()
                 .Build();
 
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _rotationStash = World.GetStash<HingeRotationComponent>();
             _rotatableStash = World.GetStash<HingeRotatableComponent>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
@@ -51,8 +49,8 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(rotationComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.HitsCount > 0 && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
+                    if (raycastComponent.IsRayHit && 
+                        EntityProvider.map.TryGetValue(raycastComponent.Hit.collider.gameObject.GetInstanceID(), out var item))
                     {
                         ref var rotatableComponent = ref _rotatableStash.Get(item.entity, out bool rotatableExist);
                         if (rotatableExist)

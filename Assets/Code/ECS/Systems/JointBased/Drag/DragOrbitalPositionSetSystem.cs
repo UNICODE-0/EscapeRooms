@@ -16,7 +16,7 @@ namespace EscapeRooms.Systems
 
         private Stash<TransformComponent> _transformStash;
         private Stash<TransformOrbitalFollowComponent> _transformOrbitalFollowStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<DragComponent> _dragStash;
         private Stash<DraggableComponent> _draggableStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
@@ -27,7 +27,7 @@ namespace EscapeRooms.Systems
         {
             _transformStash = World.GetStash<TransformComponent>();
             _transformOrbitalFollowStash = World.GetStash<TransformOrbitalFollowComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _dragStash = World.GetStash<DragComponent>();
             _draggableStash = World.GetStash<DraggableComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
@@ -52,7 +52,7 @@ namespace EscapeRooms.Systems
                 Transform originalHandTf = transformOrbitalFollowComponent.Target;
                 
                 // Can't be null, because dragStartEvent guarantees the presence of hit
-                Vector3 hitPosition = dragStartRaycastComponent.Hits[0].point; 
+                Vector3 hitPosition = dragStartRaycastComponent.Hit.point; 
                 
                 float distToHitPosition = GetDistanceToDraggable(hitPosition, draggableComponent.Colliders,
                     dragRaycastStartTf.position, dragComponent.MinDragDistance);

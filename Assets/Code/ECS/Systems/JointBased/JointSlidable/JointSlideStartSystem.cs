@@ -1,6 +1,4 @@
 using EscapeRooms.Components;
-using EscapeRooms.Events;
-using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -18,7 +16,7 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<JointSlideComponent> _slideStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<JointSlidableComponent> _slidableStash;
         private Stash<OnJointSlideFlag> _onSlideStash;
         private Stash<ConfigurableJointComponent> _jointStash;
@@ -31,7 +29,7 @@ namespace EscapeRooms.Systems
                 .Build();
 
             _slideStash = World.GetStash<JointSlideComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _slidableStash = World.GetStash<JointSlidableComponent>();
             _onSlideStash = World.GetStash<OnJointSlideFlag>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
@@ -48,8 +46,8 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(slideComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.HitsCount > 0 && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
+                    if (raycastComponent.IsRayHit && 
+                        EntityProvider.map.TryGetValue(raycastComponent.Hit.collider.gameObject.GetInstanceID(), out var item))
                     {
                         ref var slidableComponent = ref _slidableStash.Get(item.entity, out bool slidableExist);
                         if (slidableExist)

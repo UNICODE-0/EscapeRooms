@@ -21,7 +21,7 @@ namespace EscapeRooms.Components
         [PropertySpace] 
         
         [NotNull]
-        public RaycastProvider DetectionRaycast;
+        public OneHitRaycastProvider DetectionRaycast;
 
         [MinMaxSlider(-5f, 5f, true)] 
         public Vector2 DeltaRange;

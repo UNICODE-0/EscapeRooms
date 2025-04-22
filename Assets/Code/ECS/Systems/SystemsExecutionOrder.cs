@@ -40,6 +40,7 @@ namespace EscapeRooms.Systems
         private static void PhysicBlock(SystemsGroup group)
         {
             group.AddSystem(new RaycastSystem());
+            group.AddSystem(new OneHitRaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
             group.AddSystem(new SphereCastSystem());
             group.AddSystem(new OverlapBoxSystem());
