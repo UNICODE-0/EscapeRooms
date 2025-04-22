@@ -16,7 +16,7 @@ TagManager:
   - JointSlidable
   - PhysicsNode
   - PlayerBarrier
-  - 
+  - NotInteractable
   - 
   - 
   - 
