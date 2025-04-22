@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -49,38 +50,37 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(rotationComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.IsRayHit && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hit.collider.gameObject.GetInstanceID(), out var item))
+                    if (!RaycastExtension.GetHitEntity(ref raycastComponent, out Entity hitEntity))
+                        continue;
+
+                    ref var rotatableComponent = ref _rotatableStash.Get(hitEntity, out bool rotatableExist);
+                    if (!rotatableExist)
+                        continue;
+                    
+                    ref var jointComponent = ref _jointStash.Get(hitEntity);
+                    ref var transformComponent = ref _transformStash.Get(hitEntity);
+                    ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(hitEntity);
+
+                    rotationComponent.IsRotating = true;
+                    rotationComponent.RotatableEntity = hitEntity;
+                    
+                    rotatableComponent.MassBeforeRotate = itemRigidbodyComponent.Rigidbody.mass;
+                    itemRigidbodyComponent.Rigidbody.mass = rotatableComponent.MassWhileRotate;
+
+                    jointComponent.ConfigurableJoint.targetRotation =
+                        Quaternion.Inverse(transformComponent.Transform.rotation);
+                    
+                    jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
                     {
-                        ref var rotatableComponent = ref _rotatableStash.Get(item.entity, out bool rotatableExist);
-                        if (rotatableExist)
-                        {
-                            ref var jointComponent = ref _jointStash.Get(item.entity);
-                            ref var transformComponent = ref _transformStash.Get(item.entity);
-                            ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(item.entity);
+                        positionSpring = rotatableComponent.Spring,
+                        positionDamper = rotatableComponent.Damper,
+                        maximumForce = float.MaxValue
+                    };
 
-                            rotationComponent.IsRotating = true;
-                            rotationComponent.RotatableEntity = item.entity;
-                            
-                            rotatableComponent.MassBeforeRotate = itemRigidbodyComponent.Rigidbody.mass;
-                            itemRigidbodyComponent.Rigidbody.mass = rotatableComponent.MassWhileRotate;
-
-                            jointComponent.ConfigurableJoint.targetRotation =
-                                Quaternion.Inverse(transformComponent.Transform.rotation);
-                            
-                            jointComponent.ConfigurableJoint.angularXDrive = new JointDrive()
-                            {
-                                positionSpring = rotatableComponent.Spring,
-                                positionDamper = rotatableComponent.Damper,
-                                maximumForce = float.MaxValue
-                            };
-
-                            _onRotateStash.Add(item.entity, new OnHingeRotationFlag()
-                            {
-                                Owner = entity,
-                            });
-                        }
-                    }
+                    _onRotateStash.Add(hitEntity, new OnHingeRotationFlag()
+                    {
+                        Owner = entity,
+                    });
                 }
             }
         }

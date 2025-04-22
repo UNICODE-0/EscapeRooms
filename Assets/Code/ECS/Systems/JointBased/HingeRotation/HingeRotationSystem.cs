@@ -79,7 +79,7 @@ namespace EscapeRooms.Systems
                 }
 #endif
 
-                if (min >= rotatableComponent.MinAngle || max >= rotatableComponent.MaxAngle)
+                if ((min <= rotatableComponent.MinAngle && min >= 0f) || max >= rotatableComponent.MaxAngle)
                     return;
 
                 jointComponent.ConfigurableJoint.targetRotation = result;

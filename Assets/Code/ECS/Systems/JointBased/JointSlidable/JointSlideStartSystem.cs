@@ -1,4 +1,5 @@
 using EscapeRooms.Components;
+using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
@@ -46,39 +47,38 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(slideComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.IsRayHit && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hit.collider.gameObject.GetInstanceID(), out var item))
+                    if(!RaycastExtension.GetHitEntity(ref raycastComponent, out Entity hitEntity))
+                        continue;
+                    
+                    ref var slidableComponent = ref _slidableStash.Get(hitEntity, out bool slidableExist);
+                    if (!slidableExist)
+                        continue;
+                        
+                    ref var transformComponent = ref _transformStash.Get(hitEntity);
+                    ref var jointComponent = ref _jointStash.Get(hitEntity);
+
+                    float distanceToOrigin =
+                        Vector3.Distance(
+                            transformComponent.Transform.localPosition + jointComponent.ConfigurableJoint.anchor,
+                            slidableComponent.Origin.localPosition);
+
+                    jointComponent.ConfigurableJoint.targetPosition =
+                        slidableComponent.SlideDirection * distanceToOrigin;
+                    
+                    jointComponent.ConfigurableJoint.xDrive = new JointDrive()
                     {
-                        ref var slidableComponent = ref _slidableStash.Get(item.entity, out bool slidableExist);
-                        if (slidableExist)
-                        {
-                            ref var transformComponent = ref _transformStash.Get(item.entity);
-                            ref var jointComponent = ref _jointStash.Get(item.entity);
-
-                            float distanceToOrigin =
-                                Vector3.Distance(
-                                    transformComponent.Transform.localPosition + jointComponent.ConfigurableJoint.anchor,
-                                    slidableComponent.Origin.localPosition);
-
-                            jointComponent.ConfigurableJoint.targetPosition =
-                                slidableComponent.SlideDirection * distanceToOrigin;
-                            
-                            jointComponent.ConfigurableJoint.xDrive = new JointDrive()
-                            {
-                                positionSpring = slidableComponent.Spring,
-                                positionDamper = slidableComponent.Damper,
-                                maximumForce = float.MaxValue
-                            };
-                            
-                            _onSlideStash.Add(item.entity, new OnJointSlideFlag()
-                            {
-                                Owner = entity
-                            });
-                            
-                            slideComponent.SlidableEntity = item.entity;
-                            slideComponent.IsSliding = true;
-                        }
-                    }
+                        positionSpring = slidableComponent.Spring,
+                        positionDamper = slidableComponent.Damper,
+                        maximumForce = float.MaxValue
+                    };
+                    
+                    _onSlideStash.Add(hitEntity, new OnJointSlideFlag()
+                    {
+                        Owner = entity
+                    });
+                    
+                    slideComponent.SlidableEntity = hitEntity;
+                    slideComponent.IsSliding = true;
                 }
             }
         }
