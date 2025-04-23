@@ -11,7 +11,8 @@ namespace EscapeRooms.Components
     
     [RequireComponent(typeof(GameObjectProvider))]
     [RequireComponent(typeof(NodeTagProvider))]
-    
+    [RequireComponent(typeof(OverlapBoxProvider))]
+
     public sealed class DraggableDetectionNodeProvider : MonoProvider<DraggableDetectionNodeComponent>
     {
     }

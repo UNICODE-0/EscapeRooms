@@ -181,6 +181,11 @@ namespace EscapeRooms.Systems
             group.AddSystem(new DragInterruptNodeSystem());
             group.AddSystem(new DraggablePhysicDisableNodeSystem());
             group.AddSystem(new DraggablePhysicEnableNodeSystem());
+            group.AddSystem(new EntitySetNodeSystem());
+            group.AddSystem(new InteractableInteractionDisableNodeSystem());
+            group.AddSystem(new InteractableInteractionEnableNodeSystem());
+            group.AddSystem(new TransformParentSetNodeSystem());
+            group.AddSystem(new AnimationPlayNodeSystem());
 
             group.AddSystem(new NodeCompleteSystem());
         }

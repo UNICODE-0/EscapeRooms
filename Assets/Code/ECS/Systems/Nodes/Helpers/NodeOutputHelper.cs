@@ -16,15 +16,14 @@ namespace EscapeRooms.Systems
 
         public ref O TryGet(IOutputNodeComponent<O> node, out bool exist)
         {
-            if (node is null)
+            if (node.OutputDataProvider is null)
             {
                 exist = false;
                 return ref _empty;
             }
             
-            ref O outputComponent = ref _outputStash.Get(node.OutputDataProvider.Entity);
+            ref O outputComponent = ref _outputStash.Get(node.OutputDataProvider.Entity, out exist);
             
-            exist = true;
             return ref outputComponent;
         }
     }

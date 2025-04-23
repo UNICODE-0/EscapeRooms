@@ -1,3 +1,4 @@
+using System.Linq;
 using EscapeRooms.Components;
 using EscapeRooms.Requests;
 using Scellecs.Morpeh;
@@ -17,7 +18,7 @@ namespace EscapeRooms.Systems
         private Filter _filter;
 
         private Stash<DraggableDetectionNodeComponent> _nodeStash;
-        private Stash<ColliderUniqueTriggerEventsHolderComponent> _colliderTriggerEventsStash;
+        private Stash<OverlapBoxComponent> _overlapStash;
         private Request<NodeCompleteRequest> _completeRequests;
 
         private NodeOutputHelper<EntityNodeIOComponent> _nodeOutput;
@@ -26,12 +27,12 @@ namespace EscapeRooms.Systems
         {
             _filter = World.Filter
                 .With<DraggableDetectionNodeComponent>()
-                .With<ColliderUniqueTriggerEventsHolderComponent>()
+                .With<OverlapBoxComponent>()
                 .With<NodeTag>()
                 .Build();
 
             _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
-            _colliderTriggerEventsStash = World.GetStash<ColliderUniqueTriggerEventsHolderComponent>();
+            _overlapStash = World.GetStash<OverlapBoxComponent>();
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
 
             _nodeOutput = new();
@@ -42,17 +43,16 @@ namespace EscapeRooms.Systems
         {
             foreach (var entity in _filter)
             {
-                ref var eventsHolderComponent = ref _colliderTriggerEventsStash.Get(entity);
+                ref var overlapComponent = ref _overlapStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
                 
-                if (eventsHolderComponent.EventsHolder.IsAnyUniqueTriggerInProgress)
+                if (overlapComponent.IsBoxIntersect)
                 {
                     ref var output = ref _nodeOutput.TryGet(nodeComponent, out bool exist);
 
                     if (exist)
                     {
-                        int draggableGameObject =
-                            eventsHolderComponent.EventsHolder.TriggeredGameObjects.GetKeyByIndex(0);
+                        int draggableGameObject = overlapComponent.HitColliders.First().gameObject.GetInstanceID();
                         output.Entity = EntityProvider.map.GetValueByKey(draggableGameObject).entity;
                     }
                     

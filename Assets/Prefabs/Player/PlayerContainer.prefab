@@ -368,7 +368,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 63
+    m_Bits: 3647
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    MaxStandingDraggableVelocity: 0.01
+    MaxStandingRigidbodyVelocity: 0
     IsGrounded: 0
 --- !u!114 &8483743025193121056
 MonoBehaviour:
@@ -1067,7 +1067,7 @@ MonoBehaviour:
     MaxHitsCount: 1
     LayerMask:
       serializedVersion: 2
-      m_Bits: 119
+      m_Bits: 3191
     IsSphereHit: 0
     HitsCount: 0
 --- !u!1 &8449110255881127080
@@ -1320,6 +1320,10 @@ PrefabInstance:
       propertyPath: serializedData.SpherePoint
       value: 
       objectReference: {fileID: 7874090436823871640}
+    - target: {fileID: 9219115193037663092, guid: 64e2a813f900ccc4188e9c8fa2edd427, type: 3}
+      propertyPath: serializedData.LayerMask.m_Bits
+      value: 3073
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
