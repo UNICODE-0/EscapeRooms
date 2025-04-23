@@ -11,14 +11,15 @@ namespace EscapeRooms.Systems
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public sealed class DraggableDetectionNodeSystem : ISystem
+    public sealed class QuestParticipantDetectionNodeSystem : ISystem
     {
         public World World { get; set; }
 
         private Filter _filter;
 
-        private Stash<DraggableDetectionNodeComponent> _nodeStash;
+        private Stash<QuestParticipantDetectionNodeComponent> _nodeStash;
         private Stash<OverlapBoxComponent> _overlapStash;
+        private Stash<QuestParticipantComponent> _participantStash;
         private Request<NodeCompleteRequest> _completeRequests;
 
         private NodeOutputHelper<EntityNodeIOComponent> _nodeOutput;
@@ -26,13 +27,14 @@ namespace EscapeRooms.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<DraggableDetectionNodeComponent>()
+                .With<QuestParticipantDetectionNodeComponent>()
                 .With<OverlapBoxComponent>()
                 .With<NodeTag>()
                 .Build();
 
-            _nodeStash = World.GetStash<DraggableDetectionNodeComponent>();
+            _nodeStash = World.GetStash<QuestParticipantDetectionNodeComponent>();
             _overlapStash = World.GetStash<OverlapBoxComponent>();
+            _participantStash = World.GetStash<QuestParticipantComponent>();
             _completeRequests = World.GetRequest<NodeCompleteRequest>();
 
             _nodeOutput = new();
@@ -45,22 +47,26 @@ namespace EscapeRooms.Systems
             {
                 ref var overlapComponent = ref _overlapStash.Get(entity);
                 ref var nodeComponent = ref _nodeStash.Get(entity);
-                
+
                 if (overlapComponent.IsBoxIntersect)
                 {
-                    ref var output = ref _nodeOutput.TryGet(nodeComponent, out bool exist);
-
-                    if (exist)
-                    {
-                        int draggableGameObject = overlapComponent.HitColliders.First().gameObject.GetInstanceID();
-                        output.Entity = EntityProvider.map.GetValueByKey(draggableGameObject).entity;
-                    }
+                    int id = overlapComponent.HitColliders.First().gameObject.GetInstanceID();
+                    Entity overlapEntity = EntityProvider.map.GetValueByKey(id).entity;
                     
-                    _completeRequests.Publish(new NodeCompleteRequest()
+                    ref var participantComponent = ref _participantStash.Get(overlapEntity, out bool participantExist);
+                    if (participantExist && participantComponent.Type == nodeComponent.ParticipantType)
                     {
-                        CurrentNodeEntity = entity,
-                        NextNodeProvider = nodeComponent.NextNodeProvider,
-                    });
+                        ref var output = ref _nodeOutput.TryGet(nodeComponent, out bool outputExist);
+
+                        if (outputExist)
+                            output.Entity = overlapEntity;
+                    
+                        _completeRequests.Publish(new NodeCompleteRequest()
+                        {
+                            CurrentNodeEntity = entity,
+                            NextNodeProvider = nodeComponent.NextNodeProvider,
+                        });
+                    }
                 }
             }
         }

@@ -176,7 +176,7 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new NodeInitializeSystem());
             
-            group.AddSystem(new DraggableDetectionNodeSystem());
+            group.AddSystem(new QuestParticipantDetectionNodeSystem());
             group.AddSystem(new TransformLerpNodeSystem());
             group.AddSystem(new DragInterruptNodeSystem());
             group.AddSystem(new DraggablePhysicDisableNodeSystem());

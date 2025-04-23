@@ -14098,7 +14098,7 @@ GameObject:
   - component: {fileID: 602582864}
   - component: {fileID: 602582867}
   m_Layer: 0
-  m_Name: DraggableDetection
+  m_Name: QuestParticipantDetection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14132,6 +14132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    ParticipantType: 0
     <NextNodeProvider>k__BackingField: {fileID: 1544946092}
     <OutputDataProvider>k__BackingField: {fileID: 228675997}
 --- !u!114 &602582865
@@ -29116,8 +29117,8 @@ Transform:
   m_Children:
   - {fileID: 1061401372}
   - {fileID: 981493274}
-  - {fileID: 339987395}
   - {fileID: 2024343952}
+  - {fileID: 339987395}
   - {fileID: 1674106185}
   - {fileID: 317235159}
   - {fileID: 2129547899}
