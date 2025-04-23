@@ -718,7 +718,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
-    MaxStandingRigidbodyVelocity: 0
+    MaxStandingRigidbodyVelocity: 0.01
     IsGrounded: 0
 --- !u!114 &8483743025193121056
 MonoBehaviour:
@@ -952,7 +952,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5568832662697379582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 239396be48aa4567abf0ea6d8962e706, type: 3}
   m_Name: 
@@ -976,7 +976,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5568832662697379582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0139efa05fe24b17a92c90f5185e6a47, type: 3}
   m_Name: 
