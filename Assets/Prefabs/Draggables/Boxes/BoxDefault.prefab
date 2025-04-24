@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 4620541238805988069}
   - component: {fileID: 6766124732095953006}
   m_Layer: 6
-  m_Name: Box
+  m_Name: BoxDefault
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,8 +604,8 @@ MonoBehaviour:
     BodyLinearDamping: 5
     BodyAngularDamping: 1
     MassWhileDrag: 1
-    MaxVelocity: 4.75
-    MaxAngularVelocity: 4.75
+    MaxVelocity: 4.1
+    MaxAngularVelocity: 4.1
     MassBeforeDrag: 0
 --- !u!114 &5487377569701832946
 MonoBehaviour:
