@@ -5950,6 +5950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializedData:
+    ParticipantType: 0
     <NextNodeProvider>k__BackingField: {fileID: 1620445046}
     <OutputDataProvider>k__BackingField: {fileID: 1458748296}
 --- !u!114 &546837161
@@ -62727,6 +62728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializedData:
     InteractableLayer: 6
+    DisableKinematic: 0
     <NextNodeProvider>k__BackingField: {fileID: 546837167}
     <InputDataProvider>k__BackingField: {fileID: 1458748296}
 --- !u!114 &2026949782
