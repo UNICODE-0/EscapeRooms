@@ -5,14 +5,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "8eecc3bf9440af87ef3c66bf7a1ff210ff361c03"
+      "hash": "a33c92ad9b4ce07f2f41d100785c4a3fe6dac60c"
     },
     "com.scellecs.morpeh": {
       "version": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "3a3bc510bc2f8f1698a49e69414bd70b9b106e1a"
+      "hash": "98bc8b5564962ca1d39816d70f91ed003544581a"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

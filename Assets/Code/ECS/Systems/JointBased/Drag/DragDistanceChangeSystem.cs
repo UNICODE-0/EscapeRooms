@@ -17,7 +17,7 @@ namespace EscapeRooms.Systems
         private Stash<DragComponent> _dragStash;
         private Stash<DraggableComponent> _draggableStash;
         private Stash<DragRadiusChangeComponent> _dragRadiusChangeStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<TransformOrbitalFollowComponent> _orbitalFollowStash;
 
         public void OnAwake()
@@ -29,7 +29,7 @@ namespace EscapeRooms.Systems
 
             _dragStash = World.GetStash<DragComponent>();
             _draggableStash = World.GetStash<DraggableComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _dragRadiusChangeStash = World.GetStash<DragRadiusChangeComponent>();
             _orbitalFollowStash = World.GetStash<TransformOrbitalFollowComponent>();
         }

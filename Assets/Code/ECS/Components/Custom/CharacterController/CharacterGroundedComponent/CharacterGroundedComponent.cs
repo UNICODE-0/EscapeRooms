@@ -2,6 +2,7 @@ using EscapeRooms.Data;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine.Serialization;
 
 namespace EscapeRooms.Components
 {
@@ -12,7 +13,7 @@ namespace EscapeRooms.Components
     public struct CharacterGroundedComponent : IComponent
     {
         [MinValue(0.000001f)]
-        public float MaxStandingDraggableVelocity;
+        public float MaxStandingRigidbodyVelocity;
         
         [FoldoutGroup(Consts.COMPONENT_RUNTIME_FOLDOUT_NAME)] 
         [ReadOnly] public bool IsGrounded;

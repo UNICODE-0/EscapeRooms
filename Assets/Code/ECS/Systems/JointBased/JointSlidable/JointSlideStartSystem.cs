@@ -1,5 +1,4 @@
 using EscapeRooms.Components;
-using EscapeRooms.Events;
 using EscapeRooms.Helpers;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
@@ -18,7 +17,7 @@ namespace EscapeRooms.Systems
 
         private Filter _filter;
         private Stash<JointSlideComponent> _slideStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<JointSlidableComponent> _slidableStash;
         private Stash<OnJointSlideFlag> _onSlideStash;
         private Stash<ConfigurableJointComponent> _jointStash;
@@ -31,7 +30,7 @@ namespace EscapeRooms.Systems
                 .Build();
 
             _slideStash = World.GetStash<JointSlideComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _slidableStash = World.GetStash<JointSlidableComponent>();
             _onSlideStash = World.GetStash<OnJointSlideFlag>();
             _jointStash = World.GetStash<ConfigurableJointComponent>();
@@ -48,39 +47,38 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(slideComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.HitsCount > 0 && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
+                    if(!RaycastExtension.GetHitEntity(ref raycastComponent, out Entity hitEntity))
+                        continue;
+                    
+                    ref var slidableComponent = ref _slidableStash.Get(hitEntity, out bool slidableExist);
+                    if (!slidableExist)
+                        continue;
+                        
+                    ref var transformComponent = ref _transformStash.Get(hitEntity);
+                    ref var jointComponent = ref _jointStash.Get(hitEntity);
+
+                    float distanceToOrigin =
+                        Vector3.Distance(
+                            transformComponent.Transform.localPosition + jointComponent.ConfigurableJoint.anchor,
+                            slidableComponent.Origin.localPosition);
+
+                    jointComponent.ConfigurableJoint.targetPosition =
+                        slidableComponent.SlideDirection * distanceToOrigin;
+                    
+                    jointComponent.ConfigurableJoint.xDrive = new JointDrive()
                     {
-                        ref var slidableComponent = ref _slidableStash.Get(item.entity, out bool slidableExist);
-                        if (slidableExist)
-                        {
-                            ref var transformComponent = ref _transformStash.Get(item.entity);
-                            ref var jointComponent = ref _jointStash.Get(item.entity);
-
-                            float distanceToOrigin =
-                                Vector3.Distance(
-                                    transformComponent.Transform.localPosition + jointComponent.ConfigurableJoint.anchor,
-                                    slidableComponent.Origin.localPosition);
-
-                            jointComponent.ConfigurableJoint.targetPosition =
-                                slidableComponent.SlideDirection * distanceToOrigin;
-                            
-                            jointComponent.ConfigurableJoint.xDrive = new JointDrive()
-                            {
-                                positionSpring = slidableComponent.Spring,
-                                positionDamper = slidableComponent.Damper,
-                                maximumForce = float.MaxValue
-                            };
-                            
-                            _onSlideStash.Add(item.entity, new OnJointSlideFlag()
-                            {
-                                Owner = entity
-                            });
-                            
-                            slideComponent.SlidableEntity = item.entity;
-                            slideComponent.IsSliding = true;
-                        }
-                    }
+                        positionSpring = slidableComponent.Spring,
+                        positionDamper = slidableComponent.Damper,
+                        maximumForce = float.MaxValue
+                    };
+                    
+                    _onSlideStash.Add(hitEntity, new OnJointSlideFlag()
+                    {
+                        Owner = entity
+                    });
+                    
+                    slideComponent.SlidableEntity = hitEntity;
+                    slideComponent.IsSliding = true;
                 }
             }
         }

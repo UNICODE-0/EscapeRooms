@@ -40,6 +40,7 @@ namespace EscapeRooms.Systems
         private static void PhysicBlock(SystemsGroup group)
         {
             group.AddSystem(new RaycastSystem());
+            group.AddSystem(new OneHitRaycastSystem());
             group.AddSystem(new OverlapSphereSystem());
             group.AddSystem(new SphereCastSystem());
             group.AddSystem(new OverlapBoxSystem());
@@ -175,11 +176,16 @@ namespace EscapeRooms.Systems
         {
             group.AddSystem(new NodeInitializeSystem());
             
-            group.AddSystem(new DraggableDetectionNodeSystem());
+            group.AddSystem(new QuestParticipantDetectionNodeSystem());
             group.AddSystem(new TransformLerpNodeSystem());
             group.AddSystem(new DragInterruptNodeSystem());
             group.AddSystem(new DraggablePhysicDisableNodeSystem());
             group.AddSystem(new DraggablePhysicEnableNodeSystem());
+            group.AddSystem(new EntitySetNodeSystem());
+            group.AddSystem(new InteractableInteractionDisableNodeSystem());
+            group.AddSystem(new InteractableInteractionEnableNodeSystem());
+            group.AddSystem(new TransformParentSetNodeSystem());
+            group.AddSystem(new AnimationPlayNodeSystem());
 
             group.AddSystem(new NodeCompleteSystem());
         }

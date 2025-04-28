@@ -43,13 +43,16 @@ namespace EscapeRooms.Systems
                 if (characterComponent.CharacterController.isGrounded)
                 {
                     ref var characterHitComponent = ref _characterHitStash.Get(entity);
+                    
                     if (EntityProvider.map.TryGetValue(characterHitComponent.HitHolder.Hit.gameObject.GetInstanceID(), 
                             out var otherEntityItem))
                     {
                         ref var rigidbodyComponent = ref _rigidbodyStash.Get(otherEntityItem.entity);
                         
-                        groundedComponent.IsGrounded = !rigidbodyComponent.Rigidbody.isKinematic && 
-                        rigidbodyComponent.Rigidbody.linearVelocity.sqrMagnitude < groundedComponent.MaxStandingDraggableVelocity;
+                        groundedComponent.IsGrounded = rigidbodyComponent.Rigidbody.isKinematic ||
+                                                       (!rigidbodyComponent.Rigidbody.isKinematic &&
+                                                        rigidbodyComponent.Rigidbody.linearVelocity.sqrMagnitude <
+                                                        groundedComponent.MaxStandingRigidbodyVelocity);
                     }
                     else
                         groundedComponent.IsGrounded = true;

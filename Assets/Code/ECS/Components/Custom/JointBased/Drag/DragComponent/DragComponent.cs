@@ -1,4 +1,5 @@
 using EscapeRooms.Data;
+using EscapeRooms.Systems;
 using JetBrains.Annotations;
 using Scellecs.Morpeh;
 using Sirenix.OdinInspector;
@@ -19,7 +20,7 @@ namespace EscapeRooms.Components
         [PropertySpace] 
         
         [NotNull]
-        public RaycastProvider DetectionRaycast;
+        public OneHitRaycastProvider DetectionRaycast;
 
         [MinValue(0.001f)] 
         public float MinDragDistance;

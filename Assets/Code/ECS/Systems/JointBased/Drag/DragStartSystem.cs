@@ -5,7 +5,6 @@ using Scellecs.Morpeh;
 using Scellecs.Morpeh.Collections;
 using Scellecs.Morpeh.Providers;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace EscapeRooms.Systems
 {
@@ -19,7 +18,7 @@ namespace EscapeRooms.Systems
         private Filter _filter;
         private Stash<DraggableComponent> _draggableStash;
         private Stash<DragComponent> _dragStash;
-        private Stash<RaycastComponent> _raycastStash;
+        private Stash<OneHitRaycastComponent> _raycastStash;
         private Stash<ConfigurableJointComponent> _configurableJointStash;
         private Stash<RigidbodyComponent> _rigidbodyStash;
         private Stash<OnDragFlag> _onDragStash;
@@ -35,7 +34,7 @@ namespace EscapeRooms.Systems
 
             _draggableStash = World.GetStash<DraggableComponent>();
             _dragStash = World.GetStash<DragComponent>();
-            _raycastStash = World.GetStash<RaycastComponent>();
+            _raycastStash = World.GetStash<OneHitRaycastComponent>();
             _configurableJointStash = World.GetStash<ConfigurableJointComponent>();
             _rigidbodyStash = World.GetStash<RigidbodyComponent>();
             _onDragStash = World.GetStash<OnDragFlag>();
@@ -53,49 +52,48 @@ namespace EscapeRooms.Systems
                 {
                     ref var raycastComponent = ref _raycastStash.Get(dragComponent.DetectionRaycast.Entity);
                     
-                    if (raycastComponent.HitsCount > 0 && 
-                        EntityProvider.map.TryGetValue(raycastComponent.Hits[0].collider.gameObject.GetInstanceID(), out var item))
+                    if (!RaycastExtension.GetHitEntity(ref raycastComponent, out Entity hitEntity))
+                        continue;
+                    
+                    ref var draggableComponent = ref _draggableStash.Get(hitEntity, out bool draggableExist);
+                    if (!draggableExist)
+                        continue;
+                    
+                    ref var handRigidbodyComponent = ref _rigidbodyStash.Get(entity);
+                    ref var jointComponent = ref _configurableJointStash.Get(hitEntity);
+                    ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(hitEntity);
+
+                    jointComponent.ConfigurableJoint.connectedBody = handRigidbodyComponent.Rigidbody;
+                    
+                    jointComponent.ConfigurableJoint.SetJointDriveData(
+                        draggableComponent.DragDriveSpring, 
+                        draggableComponent.DragDriveDamper, 
+                        draggableComponent.DragAngularDriveSpring, 
+                        draggableComponent.DragAngularDriveDamper);
+
+                    draggableComponent.MassBeforeDrag = itemRigidbodyComponent.Rigidbody.mass;
+                    itemRigidbodyComponent.Rigidbody.mass = draggableComponent.MassWhileDrag;
+                    itemRigidbodyComponent.Rigidbody.linearDamping = draggableComponent.BodyLinearDamping;
+                    itemRigidbodyComponent.Rigidbody.angularDamping = draggableComponent.BodyAngularDamping;
+
+                    foreach (var collider in draggableComponent.Colliders)
                     {
-                        ref var draggableComponent = ref _draggableStash.Get(item.entity, out bool draggableExist);
-                        if (draggableExist)
-                        {
-                            ref var handRigidbodyComponent = ref _rigidbodyStash.Get(entity);
-                            ref var jointComponent = ref _configurableJointStash.Get(item.entity);
-                            ref var itemRigidbodyComponent = ref _rigidbodyStash.Get(item.entity);
-
-                            jointComponent.ConfigurableJoint.connectedBody = handRigidbodyComponent.Rigidbody;
-                            
-                            jointComponent.ConfigurableJoint.SetJointDriveData(
-                                draggableComponent.DragDriveSpring, 
-                                draggableComponent.DragDriveDamper, 
-                                draggableComponent.DragAngularDriveSpring, 
-                                draggableComponent.DragAngularDriveDamper);
-
-                            draggableComponent.MassBeforeDrag = itemRigidbodyComponent.Rigidbody.mass;
-                            itemRigidbodyComponent.Rigidbody.mass = draggableComponent.MassWhileDrag;
-                            itemRigidbodyComponent.Rigidbody.linearDamping = draggableComponent.BodyLinearDamping;
-                            itemRigidbodyComponent.Rigidbody.angularDamping = draggableComponent.BodyAngularDamping;
-
-                            foreach (var collider in draggableComponent.Colliders)
-                            {
-                                collider.sharedMaterial = draggableComponent.MaterialOnDrag;
-                            }
-                            
-                            dragComponent.DraggableEntity = item.entity;
-                            dragComponent.IsDragging = true;
-
-                            _onDragStash.Add(item.entity, new OnDragFlag()
-                            {
-                                Owner = entity
-                            });
-                            
-                            _dragStartEvent.ThisFrame(new DragStartEvent()
-                            {
-                                Draggable = item.entity,
-                                Owner = entity
-                            });
-                        }
+                        collider.sharedMaterial = draggableComponent.MaterialOnDrag;
                     }
+                    
+                    dragComponent.DraggableEntity = hitEntity;
+                    dragComponent.IsDragging = true;
+
+                    _onDragStash.Add(hitEntity, new OnDragFlag()
+                    {
+                        Owner = entity
+                    });
+                    
+                    _dragStartEvent.ThisFrame(new DragStartEvent()
+                    {
+                        Draggable = hitEntity,
+                        Owner = entity
+                    });
                 }
             }
         }

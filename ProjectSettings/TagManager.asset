@@ -15,8 +15,8 @@ TagManager:
   - HingeRotatable
   - JointSlidable
   - PhysicsNode
-  - 
-  - 
+  - PlayerBarrier
+  - NotInteractable
   - 
   - 
   - 
