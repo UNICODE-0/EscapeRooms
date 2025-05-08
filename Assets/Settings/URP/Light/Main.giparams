@@ -12,15 +12,15 @@ LightmapParameters:
   clusterResolution: 0.5
   irradianceBudget: 128
   irradianceQuality: 8192
-  backFaceTolerance: 0.1
+  backFaceTolerance: 0.9
   isTransparent: 0
   modellingTolerance: 0.01
   systemTag: -1
   edgeStitching: 1
   blurRadius: 2
   directLightQuality: 64
-  antiAliasingSamples: 4
-  pushoff: 0.001
+  antiAliasingSamples: 2
+  pushoff: 0.0001
   bakedLightmapTag: -1
   limitLightmapCount: 0
   maxLightmapCount: 1
