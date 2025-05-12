@@ -28831,36 +28831,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 1711986024}
     m_Modifications:
     - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.063
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1373
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
+      value: -0.135
       objectReference: {fileID: 0}
     - target: {fileID: 2552517756969197411, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
       propertyPath: m_LocalPosition.x
@@ -29141,6 +29113,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1711986024}
     m_Modifications:
+    - target: {fileID: 1204962937751276631, guid: e0654cf8e7b90f94e9847999cdcfde12, type: 3}
+      propertyPath: m_Name
+      value: TableDrawerV1
+      objectReference: {fileID: 0}
     - target: {fileID: 8139291084237277665, guid: e0654cf8e7b90f94e9847999cdcfde12, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11.924
