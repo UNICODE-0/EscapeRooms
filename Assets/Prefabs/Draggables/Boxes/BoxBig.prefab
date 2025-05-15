@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2867704956347243050, guid: 320ac2bb31f531742ae042e7674918e2, type: 3}
+      propertyPath: serializedData.MaxVelocity
+      value: 3.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867704956347243050, guid: 320ac2bb31f531742ae042e7674918e2, type: 3}
+      propertyPath: serializedData.MaxAngularVelocity
+      value: 3.85
+      objectReference: {fileID: 0}
     - target: {fileID: 4843620863497157238, guid: 320ac2bb31f531742ae042e7674918e2, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2

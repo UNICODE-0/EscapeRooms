@@ -379,8 +379,8 @@ MonoBehaviour:
     BodyLinearDamping: 5
     BodyAngularDamping: 1
     MassWhileDrag: 1
-    MaxVelocity: 4.1
-    MaxAngularVelocity: 4.1
+    MaxVelocity: 4.2
+    MaxAngularVelocity: 4.2
     MassBeforeDrag: 0
 --- !u!114 &4039773646975443272
 MonoBehaviour:
