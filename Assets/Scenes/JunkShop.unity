@@ -19812,10 +19812,10 @@ Transform:
   - {fileID: 1227655131}
   - {fileID: 1937238910}
   - {fileID: 410652126}
-  - {fileID: 1402966747}
   - {fileID: 1996335834}
   - {fileID: 940315207}
   - {fileID: 1856322404}
+  - {fileID: 1402966747}
   m_Father: {fileID: 315593531}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1711986025
@@ -24734,6 +24734,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1711986024}
     m_Modifications:
+    - target: {fileID: 722465704500665486, guid: 2e298747b2b641341a85991c58e68395, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 1226750183329873243, guid: 2e298747b2b641341a85991c58e68395, type: 3}
       propertyPath: m_Name
       value: Big
@@ -25578,10 +25582,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1711986024}
     m_Modifications:
-    - target: {fileID: 1883462065954069920, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.135
-      objectReference: {fileID: 0}
     - target: {fileID: 2552517756969197411, guid: 79c8b894fafb32e44ac26784f4d57872, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.152
@@ -26035,6 +26035,10 @@ PrefabInstance:
     - target: {fileID: 1204962937751276631, guid: e0654cf8e7b90f94e9847999cdcfde12, type: 3}
       propertyPath: m_Name
       value: TableDrawerV1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971500491501499022, guid: e0654cf8e7b90f94e9847999cdcfde12, type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 8139291084237277665, guid: e0654cf8e7b90f94e9847999cdcfde12, type: 3}
       propertyPath: m_LocalPosition.x
