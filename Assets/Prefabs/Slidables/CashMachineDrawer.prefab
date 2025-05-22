@@ -56,6 +56,7 @@ GameObject:
   - component: {fileID: 87424311698277311}
   - component: {fileID: 2468356333295767364}
   - component: {fileID: 4178525033115517496}
+  - component: {fileID: 7073280253981630552}
   m_Layer: 8
   m_Name: CashMachineDrawer
   m_TagString: Untagged
@@ -475,6 +476,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4595545, y: 0.12622905, z: 0.01590344}
   m_Center: {x: -0.015470386, y: 0.03194976, z: 0.13827495}
+--- !u!65 &7073280253981630552
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4611620654614868165}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.51927936, y: 0.015968772, z: 0.7921177}
+  m_Center: {x: -0.0055402517, y: -0.029083148, z: -0.00018373132}
 --- !u!1 &4870179135130612588
 GameObject:
   m_ObjectHideFlags: 0
